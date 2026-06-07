@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Home</title>
+</head>
+
+<body class="login">
+    <div class="login-wrapper">
+        <section class="login-intro">
+
+            <div class="title-desc">
+                <div class="archerfind-logo">
+                    <h1>ArcherFind</h1>
+                    <img src="LOGOS/AF-ORIGINAL.png" alt="">
+                </div>
+                <p>
+                    An extended platform to report or recover your lost items on campus.<br>
+                    By Lasallians, For Lasallians.
+                </p>
+            </div>
+
+        </section>
+
+        <section class="login-page">
+            <div class="login-box">
+                <h1>WELCOME!</h1>
+                <section class="login-details">
+                    <form action="student_home.html"> <!-- SHOULD BE CHANGED SOON DEPENDING ON LOGIN CREDENTIALS -->
+
+                        <!-- ID Number -->
+                        <div class="id-number">
+                            <label for="id-num">ID Number:</label>
+                            <input type="text" id="id-num" inputmode="numeric" placeholder="xxxxxxxx" maxlength="12"
+                                name="id-num">
+                        </div>
+
+                        <!-- Password -->
+                        <div class="password">
+                            <label for="pass">Password:</label>
+                            <input type="password" id="pass" name="pass" maxlength="20">
+
+                            <!-- See password -->
+                            <div class="see-pass">
+                                <input type="checkbox" onclick="seePassword()">
+                                Show password
+                            </div>
+                        </div>
+
+                        <!-- Login -->
+                        <input type="submit" id="login-submit" value="Login">
+                    </form>
+                </section>
+            </div>
+    </div>
+
+
+    <footer>
+        De La Salle University - College of Computer Studies - Department of Information Technology<br>
+        2026 © AY2526T3. CCDEVAP - Web Application and Development. All Rights Reserved.
+    </footer>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

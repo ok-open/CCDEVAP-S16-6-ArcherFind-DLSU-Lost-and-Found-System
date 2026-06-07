@@ -1,0 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+    /* Colors */
+    --color-primary: #3d5741;
+    --color-primary-dark: #0c2100;
+    --color-primary-deeper: #2f6627;
+    --color-secondary: #fffeed;
+    --color-secondary-hover: #e6e3c1;
+    --color-secondary-glass: color-mix(in srgb, var(--color-secondary) 80%, transparent);
+
+    --darkmode-primary: #ffffff;
+    --darkmode-secondary: #0b131a;
+
+    /* Typography */
+    --font-base: "DM Sans", sans-serif;
+
+    /* Fluid font sizes */
+    /* login page logo */
+    --text-logo-lg: clamp(2.5rem, 7vw + 1rem, 9rem);
+    /* nav logo */
+    --text-logo-sm: 2.5rem;
+    /* subtitle/desc paragraphs */
+    --text-desc: clamp(1rem, 2vw + 0.5rem, 1.75rem);
+    /* nav links */
+    --text-nav: 1.2em;
+    /* login box body */
+    --text-body: 1.2em;
+    --text-footer: clamp(0.55rem, 0.7vw, 0.80rem);
+    /* button */
+    --text-login-btn: clamp(0.9rem, 1.2vw + 0.3rem, 1.1rem);
+    --text-btn: clamp(1.3rem, 1.5vw + 0.6rem, 1.7rem);
+
+    /* Fluid spacing */
+    --space-tiny: clamp(0.25rem, 0.5vw + 0.1rem, 0.5rem);
+    --space-small: clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
+    --space-medium: clamp(1rem, 3vw + 0.25rem, 2.5rem);
+    --space-large: clamp(1.5rem, 6vw + 0.5rem, 6rem);
+
+    /* Border radius */
+    --radius-small: 14px;
+    --radius-medium: 21px;
+    --radius-large: 28px;
+
+    /* Background shorthand */
+    --bg-cover: center / cover no-repeat;
+
+    /* Logo image sizes */
+    /* nav */
+    --logo-img-small: 3.125rem;
+    /* login page */
+    --logo-img-large: clamp(3rem, 14vw + 1rem, 13rem);
+
+    /* Input field width */
+    --login-input-width: clamp(14rem, 30vw + 2rem, 22rem);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-base);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    box-sizing: border-box;
+    color: var(--color-primary);
+    /* outline: 1.3px solid limegreen !important; */
+}
+
+body {
+    background-color: var(--color-secondary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    font-weight: 950;
+}
+
+/**************** ArcherFind Logo ****************/
+.archerfind-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & h1 {
+        font-size: var(--text-logo-lg);
+        font-weight: 950;
+        margin-right: 2vh;
+    }
+
+    & img {
+        width: var(--logo-img-large);
+        height: auto;
+    }
+}
+
+.title-desc {
+    text-align: center;
+
+    & p {
+        font-size: var(--text-desc);
+        letter-spacing: 0px;
+    }
+}
+
+/**************** LOGIN ****************/
+.login-wrapper {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    height: 100dvh;
+    background: url('BACKGROUNDS/Login.png') var(--bg-cover);
+}
+
+@media (max-width: 600px) {
+    .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.login-intro {
+    align-content: center;
+}
+
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: var(--space-large) clamp(1rem, 4vw + 0.5rem, 4rem);
+    margin-right: clamp(0rem, 5vw, 10rem);
+    font-size: var(--text-body);
+    background-color: var(--color-secondary-glass);
+    border-radius: var(--radius-small);
+
+    & h1 {
+        margin-bottom: var(--space-medium);
+    }
+}
+
+.id-number,
+.password {
+    display: flex;
+    flex-direction: column;
+    margin: var(--space-tiny);
+    width: var(--login-input-width);
+}
+
+.id-number input,
+.password input {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    padding: clamp(0.4rem, 0.8vw + 0.1rem, 0.75rem) clamp(0.5rem, 1.2vw + 0.1rem, 1rem);
+}
+
+.see-pass {
+    margin: var(--space-small) 0;
+}
+
+#login-submit {
+    width: 100%;
+    background-color: var(--color-primary);
+    border-radius: var(--radius-large);
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: var(--text-login-btn);
+    padding: clamp(0.7rem, 1.5vw + 0.2rem, 1.1rem) clamp(1.2rem, 3vw + 0.5rem, 2rem);
+    text-shadow: 0px 1px 0px var(--color-primary-deeper);
+    transition: 0.1s ease-in;
+}
+
+#login-submit:hover {
+    background-color: var(--color-primary-dark);
+}
+
+footer {
+
+    color: var(--color-primary-dark);
+    font-size: var(--text-footer);
+    text-align: center;
+    width: 100%;
+    opacity: 45%;
+}
+
+.login footer {
+    position: absolute;
+    bottom: 0.2vw;
+}
+
+/****************** NAVIGATION BAR ******************/
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px;
+    z-index: 10;
+
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+header .archerfind-logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    & h1 {
+        font-size: var(--text-logo-sm);
+    }
+
+    & img {
+        width: var(--logo-img-small);
+    }
+
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+}
+
+.nav-links li a {
+    position: relative;
+    font-size: var(--text-nav);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-primary);
+    padding: 0.5em 0.8em;
+    transition: 0.3s ease;
+    border-radius: var(--radius-large);
+}
+
+.nav-links li a:hover {
+    font-weight: 600;
+    text-shadow: 0 0 10px white;
+    background-color: var(--color-secondary-hover);
+}
+
+.nav-links li input {
+    width: clamp(10px, 1.8vw, 20px);
+    height: clamp(10px, 1.8vw, px);
+}
+
+
+@media (max-width: 600px) {
+    .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+/****************** HOME ******************/
+
+.home-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh;
+    justify-content: center;
+}
+
+.intro {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: 100dvh;
+    background: url('BACKGROUNDS/Home.png') var(--bg-cover);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-buttons {
+    display: flex;
+    flex-direction: row;
+    padding: var(--space-medium);
+    gap: var(--space-medium);
+}
+
+.intro-buttons input[type="button"] {
+    font-size: var(--text-btn);
+    background-color: var(--color-primary);
+    border-radius: var(--radius-medium);
+    color: #ffffff;
+    padding: clamp(0.7rem, 1.5vw + 0.2rem, 1.1rem) clamp(1.2rem, 3vw + 0.5rem, 2rem);
+    text-shadow: 0px 1px 0px var(--color-primary-deeper);
+    transition: background-color 0.1s ease-in;
+}
+
+.intro-buttons input[type="button"]:hover {
+    background-color: var(--color-primary-dark);
+}
