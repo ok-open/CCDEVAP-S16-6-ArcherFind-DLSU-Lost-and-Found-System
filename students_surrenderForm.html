@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcherFind - Surrender Found Item</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="archerfind-logo">
+            <h1>ArcherFind</h1>
+            <img src="LOGOS/AF-ORIGINAL.png" alt="">
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="student_home.html">Home</a></li>
+                <li><a href="#">About</a></li>
+
+                <li class="dropdown">
+                    <a class="active" href="#">Lost and Found</a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="students_itemView.html">
+                                Find Your Item
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="students_surrenderForm.html">
+                                Report Found Item
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Contact Us</a></li>
+
+                <li>
+                    <img src="LOGOS/user-icon.png" alt="User" class="user-icon">
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="surrender-wrapper">
+        <h2 class="form-title">Report an Item that You Found!</h2>
+
+        <form class="surrender-form">
+            <div class="form-left">
+                <label>
+                    What item was lost?
+                    <span class="required">required field</span>
+                </label>
+                <input type="text" class="input-box">
+
+                <label>
+                    Category
+                    <span class="required">required field</span>
+                </label>
+                <select class="input-box">
+                    <option>Select Category</option>
+                    <option>Electronics</option>
+                    <option>Identity Documents</option>
+                    <option>Watch / Jewelry</option>
+                    <option>Miscellaneous</option>
+                </select>
+
+                <label>
+                    Brand
+                    <span class="required">required field</span>
+                </label>
+                <input type="text" class="input-box">
+
+                <h3 class="form-section-title">Where was this lost?</h3>
+
+                <div class="building-room-row">
+                    <div>
+                        <label>
+                            Building
+                            <span class="required">required field</span>
+                        </label>
+
+                        <select class="input-box">
+                            <option>Select Building</option>
+                            <option>Gokongwei Hall</option>
+                            <option>Andrew Gonzales Hall</option>
+                            <option>St. La Salle Hall</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>
+                            Room No.
+                            <span class="required">number only</span>
+                        </label>
+                        <input type="number" class="input-box">
+                    </div>
+                </div>
+
+                <label>
+                    Area
+                    <span class="required">at least one required</span>
+                </label>
+                <input type="text" class="input-box">
+
+                <h3 class="form-section-title">When was this lost?</h3>
+
+                <div class="date-time-row">
+                    <div>
+                        <label>
+                            Date Lost
+                            <span class="required">required field</span>
+                        </label>
+                        <input type="date" class="input-box">
+                    </div>
+
+                    <div>
+                        <label>
+                            Time Lost
+                            <span class="required">required field</span>
+                        </label>
+                        <input type="time" class="input-box">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-right">
+                <div class="upload-box">
+                    <span>Upload Image</span>
+                </div>
+
+                <label>Description</label>
+                <textarea class="description-box"></textarea>
+
+                <button type="submit" class="submit-btn">
+                    Submit Item
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

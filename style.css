@@ -313,3 +313,386 @@ header .archerfind-logo {
 .intro-buttons input[type="button"]:hover {
     background-color: var(--color-primary-dark);
 }
+
+/**************** STUDENTS_ITEM VIEW ****************/
+.itemview-wrapper{
+    display: flex;
+    flex-direction: row;
+    min-height: 100dvh;
+    padding-top: 80px;
+}
+
+.itemview-sidebar{
+    width: 20%;
+    padding: var(--space-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.report-btn{
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-medium);
+    padding: var(--space-small);
+    font-size: var(--text-body);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.report-btn:hover{
+    background-color: var(--color-primary-dark);
+}
+
+.stats-box{
+    padding: var(--space-medium);
+    border-radius: var(--radius-medium);
+    background-color: var(--color-secondary-hover);
+    text-align: center;
+}
+
+.itemview-main{
+    width: 80%;
+    padding: var(--space-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.itemview-controls{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    align-items: center;
+}
+
+.search-bar{
+    flex: 1;
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.sort-dropdown,
+.filter-dropdown{
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.item-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-medium);
+}
+
+.item-card{
+    height: 200px;
+    border-radius: var(--radius-medium);
+    background-color: var(--color-secondary-hover);
+    transition: transform 0.2s ease;
+}
+
+.item-card{
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.item-card:hover{
+    transform: scale(1.03);
+}
+
+.user-icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.nav-links li a.active{
+    font-weight: 700;
+    background-color: var(--color-secondary-hover);
+}
+
+.dropdown{
+    position: relative;
+}
+
+.dropdown-menu{
+    display: none;
+    position: absolute;
+
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    min-width: 220px;
+
+    list-style: none;
+
+    padding: var(--space-small);
+    border-radius: var(--radius-medium);
+
+    background-color: var(--color-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+    z-index: 100;
+}
+
+.dropdown:hover .dropdown-menu{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
+}
+
+.dropdown-menu li a{
+    display: block;
+    text-decoration: none;
+    color: var(--color-primary);
+
+    padding: 0.7em 1em;
+    border-radius: var(--radius-large);
+
+    transition: 0.2s ease;
+}
+
+.dropdown-menu li a:hover{
+    background-color: var(--color-secondary-hover);
+    font-weight: 600;
+}
+
+/**************** STUDENTS_CLAIM REQUEST FORM ****************/
+.claim-wrapper{
+    min-height: 100dvh;
+    padding-top: 90px;
+    padding-left: var(--space-medium);
+    padding-right: var(--space-medium);
+}
+
+.claim-toolbar{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    align-items: center;
+    margin-bottom: var(--space-large);
+}
+
+.claim-toolbar .search-bar{
+    flex: 1;
+}
+
+
+.claim-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-large);
+    align-items: start;
+}
+
+
+.claim-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 400px;
+
+    background-color: var(--color-secondary-hover);
+    border-radius: var(--radius-medium);
+
+    text-align: center;
+    font-size: var(--text-desc);
+}
+
+
+.claim-details{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.claim-block{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-tiny);
+}
+
+.claim-block h3{
+    font-weight: 700;
+    margin: 0;
+}
+
+.claim-block p{
+    margin: 0;
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+    background-color: var(--color-secondary);
+}
+
+.claim-btn{
+    align-self: center;
+
+    background-color: var(--color-primary);
+    color: white;
+
+    border: none;
+    border-radius: var(--radius-medium);
+
+    padding: var(--space-small) var(--space-large);
+
+    font-size: var(--text-btn);
+
+    cursor: pointer;
+    transition: 0.15s ease-in;
+}
+
+.claim-btn:hover{
+    background-color: var(--color-primary-dark);
+}
+
+@media(max-width: 900px){
+
+    .claim-content{
+        grid-template-columns: 1fr;
+    }
+
+    .claim-image{
+        min-height: 300px;
+    }
+}
+
+/**************** STUDENTS_SURRENDER FORM ****************/
+.surrender-wrapper{
+    min-height: 100dvh;
+    padding-top: 90px;
+    padding-left: var(--space-medium);
+    padding-right: var(--space-medium);
+}
+
+.form-title{
+    text-align: left;
+    margin-bottom: var(--space-large);
+    font-size: var(--text-btn);
+    font-weight: 800;
+}
+
+.surrender-form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-large);
+}
+
+.form-left,
+.form-right{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-left{
+    gap: var(--space-small);
+}
+
+.form-right{
+    gap: var(--space-medium);
+}
+
+.input-box{
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.required{
+    background-color: #ffe08a;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    margin-left: 5px;
+}
+
+.form-section-title{
+    margin-top: var(--space-medium);
+    margin-bottom: var(--space-small);
+    font-weight: 700;
+}
+
+.building-room-row,
+.date-time-row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-medium);
+}
+
+.date-time-row input[type="date"],
+.date-time-row input[type="time"]{
+    width: 100%;
+}
+
+.upload-box{
+    width: 100%;
+    min-height: 320px;
+
+    border-radius: var(--radius-medium);
+    background-color: var(--color-secondary-hover);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description-box{
+    min-height: 220px;
+    padding: var(--space-small);
+    border-radius: var(--radius-medium);
+    border: 1px solid var(--color-primary-dark);
+    resize: vertical;
+}
+
+.submit-btn{
+    width: 100%;
+
+    background-color: var(--color-primary);
+    color: white;
+
+    border: none;
+    border-radius: var(--radius-medium);
+
+    padding: var(--space-small) var(--space-large);
+    font-size: var(--text-btn);
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.submit-btn:hover{
+    background-color: var(--color-primary-dark);
+}
+
+
+@media(max-width: 900px){
+
+    .surrender-form{
+        grid-template-columns: 1fr;
+    }
+
+    .building-room-row,
+    .date-time-row{
+        grid-template-columns: 1fr;
+    }
+
+    .upload-box{
+        min-height: 250px;
+    }
+
+    .description-box{
+        min-height: 180px;
+    }
+
+    .submit-btn{
+        width: 100%;
+    }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcherFind - Claim Request</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="archerfind-logo">
+            <h1>ArcherFind</h1>
+            <img src="LOGOS/AF-ORIGINAL.png" alt="">
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="student_home.html">Home</a></li>
+                <li><a href="#">About</a></li>
+
+                <li class="dropdown">
+                    <a class="active" href="#">Lost and Found</a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="students_itemView.html">Find Your Item</a>
+                        </li>
+                        <li>
+                            <a href="students_surrenderForm.html">Report Found Item</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Contact Us</a></li>
+                <li>
+                    <img src="LOGOS/user-icon.png" alt="User" class="user-icon">
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="claim-wrapper">
+        <section class="claim-toolbar">
+
+            <button class="report-btn">
+                REPORT YOUR LOST ITEM
+            </button>
+
+            <input
+                type="text"
+                class="search-bar"
+                placeholder="Search for item..."
+            >
+
+            <select class="sort-dropdown">
+                <option>SORT</option>
+                <option>Name</option>
+                <option>Recent</option>
+            </select>
+
+            <select class="filter-dropdown">
+                <option>FILTER</option>
+                <option>Electronics</option>
+                <option>Miscellaneous</option>
+                <option>Identity Documents</option>
+                <option>Watch / Jewelry</option>
+                <option>Tumbler</option>
+            </select>
+        </section>
+
+        <section class="claim-content">
+
+            <div class="claim-image">
+                <span>*pic of charger*</span>
+            </div>
+
+        <div class="claim-details">
+
+            <div class="claim-block">
+                <h3>Item Name</h3>
+                <p>Charger</p>
+            </div>
+
+            <div class="claim-block">
+                <h3>Category</h3>
+                <p>Electronics</p>
+            </div>
+
+            <div class="claim-block">
+                <h3>Description</h3>
+                <p>
+                    Black charging cable found near a classroom.
+                    Item appears to be in good condition with no visible damage.
+                </p>
+            </div>
+
+            <button class="claim-btn">
+                Send Claim Request
+            </button>
+        </div>
+        </section>
+    </div>
+</body>
+</html>

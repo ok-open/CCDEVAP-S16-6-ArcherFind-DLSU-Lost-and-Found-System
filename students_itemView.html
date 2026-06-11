@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcherFind - Lost and Found</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="archerfind-logo">
+            <h1>ArcherFind</h1>
+            <img src="LOGOS/AF-ORIGINAL.png" alt="">
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="student_home.html">Home</a></li>
+                <li><a href="#">About</a></li>
+
+                <li class="dropdown">
+                    <a class="active" href="#">Lost and Found</a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="students_itemView.html">
+                                Find Your Item
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="students_surrenderForm.html">
+                                Report Found Item
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li><a href="#">Contact Us</a></li>
+
+                <li>
+                    <img src="LOGOS/user-icon.png" alt="User" class="user-icon">
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="itemview-wrapper">
+
+        <aside class="itemview-sidebar">
+            <button class="report-btn">
+                REPORT YOUR LOST ITEM
+            </button>
+
+            <div class="stats-box">
+                <h3>Total Items Added</h3>
+                <h2>10</h2>
+            </div>
+        </aside>
+
+        <main class="itemview-main">
+            <div class="itemview-controls">
+                <input type="text" placeholder="Search for item..." class="search-bar">
+
+                <select class="sort-dropdown">
+                    <option>Sort: Name</option>
+                    <option>Sort: Recent</option>
+                </select>
+
+                <select class="filter-dropdown">
+                    <option>Filter: All</option>
+                    <option>Electronics</option>
+                    <option>Miscellaneous</option>
+                    <option>Identity Documents</option>
+                    <option>Watch / Jewelry</option>
+                </select>
+            </div>
+
+            <div class="item-list">
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+                <a href="students_claimForm.html" class="item-card"></a>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
