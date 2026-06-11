@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+:root {
+    /* Colors */
+    --color-primary: #3d5741;
+    --color-primary-dark: #0c2100;
+    --color-primary-deeper: #2f6627;
+    --color-secondary: #fffeed;
+    --color-secondary-hover: #e6e3c1;
+    --color-secondary-glass: color-mix(in srgb, var(--color-secondary) 80%, transparent);
+
+    --darkmode-primary: #ffffff;
+    --darkmode-secondary: #0b131a;
+
+    /* Typography */
+    --font-base: "DM Sans", sans-serif;
+
+    /* Fluid font sizes */
+    /* login page logo */
+    --text-logo-lg: clamp(2.5rem, 7vw + 1rem, 9rem);
+    /* nav logo */
+    --text-logo-sm: 2.5rem;
+    /* subtitle/desc paragraphs */
+    --text-desc: clamp(1rem, 2vw + 0.5rem, 1.75rem);
+    /* nav links */
+    --text-nav: 1.2em;
+    /* login box body */
+    --text-body: 1.2em;
+    --text-footer: clamp(0.55rem, 0.7vw, 0.80rem);
+    /* button */
+    --text-login-btn: clamp(0.9rem, 1.2vw + 0.3rem, 1.1rem);
+    --text-btn: clamp(1.3rem, 1.5vw + 0.6rem, 1.7rem);
+
+    /* Fluid spacing */
+    --space-tiny: clamp(0.25rem, 0.5vw + 0.1rem, 0.5rem);
+    --space-small: clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
+    --space-medium: clamp(1rem, 3vw + 0.25rem, 2.5rem);
+    --space-large: clamp(1.5rem, 6vw + 0.5rem, 6rem);
+
+    /* Border radius */
+    --radius-small: 14px;
+    --radius-medium: 21px;
+    --radius-large: 28px;
+
+    /* Background shorthand */
+    --bg-cover: center / cover no-repeat;
+
+    /* Logo image sizes */
+    /* nav */
+    --logo-img-small: 3.125rem;
+    /* login page */
+    --logo-img-large: clamp(3rem, 14vw + 1rem, 13rem);
+
+    /* Input field width */
+    --login-input-width: clamp(14rem, 30vw + 2rem, 22rem);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-base);
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    box-sizing: border-box;
+    color: var(--color-primary);
+    /* outline: 1.3px solid limegreen !important; */
+}
+
+body {
+    background-color: var(--color-secondary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-weight: 950;
+}
+
+/**************** ArcherFind Logo ****************/
+.archerfind-logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    & h1 {
+        font-size: var(--text-logo-lg);
+        font-weight: 950;
+        margin-right: 2vh;
+    }
+
+    & img {
+        width: var(--logo-img-large);
+        height: auto;
+    }
+}
+
+.title-desc {
+    text-align: center;
+
+    & p {
+        font-size: var(--text-desc);
+        letter-spacing: 0px;
+    }
+}
+
+footer {
+    color: var(--color-primary-dark);
+    font-size: var(--text-footer);
+    text-align: center;
+    width: 100%;
+    opacity: 45%;
+}
+
+/* TODO */
+
+/**************** STUDENTS_CLAIM REQUEST FORM ****************/
+.claim-wrapper {
+    min-height: 100dvh;
+    padding-top: 90px;
+    padding-left: var(--space-medium);
+    padding-right: var(--space-medium);
+}
+
+.claim-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    align-items: center;
+    margin-bottom: var(--space-large);
+}
+
+.claim-toolbar .search-bar {
+    flex: 1;
+}
+
+
+.claim-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-large);
+    align-items: start;
+}
+
+
+.claim-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 400px;
+
+    background-color: var(--color-secondary-hover);
+    border-radius: var(--radius-medium);
+
+    text-align: center;
+    font-size: var(--text-desc);
+}
+
+
+.claim-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.claim-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-tiny);
+}
+
+.claim-block h3 {
+    font-weight: 700;
+    margin: 0;
+}
+
+.claim-block p {
+    margin: 0;
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+    background-color: var(--color-secondary);
+}
+
+.claim-btn {
+    align-self: center;
+
+    background-color: var(--color-primary);
+    color: white;
+
+    border: none;
+    border-radius: var(--radius-medium);
+
+    padding: var(--space-small) var(--space-large);
+
+    font-size: var(--text-btn);
+
+    cursor: pointer;
+    transition: 0.15s ease-in;
+}
+
+.claim-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+@media(max-width: 900px) {
+
+    .claim-content {
+        grid-template-columns: 1fr;
+    }
+
+    .claim-image {
+        min-height: 300px;
+    }
+}

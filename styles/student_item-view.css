@@ -1,0 +1,98 @@
+
+/**************** STUDENTS_ITEM VIEW ****************/
+.itemview-wrapper {
+    display: flex;
+    flex-direction: row;
+    min-height: 100dvh;
+    padding-top: 80px;
+}
+
+.itemview-sidebar {
+    width: 20%;
+    padding: var(--space-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.report-btn {
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-medium);
+    padding: var(--space-small);
+    font-size: var(--text-body);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.report-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.stats-box {
+    padding: var(--space-medium);
+    border-radius: var(--radius-medium);
+    background-color: var(--color-secondary-hover);
+    text-align: center;
+}
+
+.itemview-main {
+    width: 80%;
+    padding: var(--space-medium);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.itemview-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    align-items: center;
+}
+
+.search-bar {
+    flex: 1;
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.sort-dropdown,
+.filter-dropdown {
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--space-medium);
+}
+
+.item-card {
+    height: 200px;
+    border-radius: var(--radius-medium);
+    background-color: var(--color-secondary-hover);
+    transition: transform 0.2s ease;
+}
+
+.item-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.item-card:hover {
+    transform: scale(1.03);
+}
+
+.user-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
