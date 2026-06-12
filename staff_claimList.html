@@ -9,56 +9,121 @@
 </head>
 <body>
     <!-- Nav bar will be inserted here after Nathan makes it -->
-     <div id="MainHeader">
+    <div id="MainHeader">
         <h1>Verify Claim Request</h1>
-        <input type="text">
-        <button>Sort by</button>
-     </div>
-
-     <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-     <div class="ListOfRequests">
-        <img alt="ImageItem" src="styles/ITEMS/1.png">
-
-        <div class="LostDetails">
-            <h2>Black Oversize Hoodie</h2> 
-            <!-- Item name -->
-            <h3>Date Lost:</h3> <p>4-12-25</p>
-            <h3>Time Lost:</h3> <p>4:15pm</p>
-            <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+        <input type="text" placeholder="Search">
+    </div>
+    <div id="MainContainer">
+        <div id="SortBy">
+            <h2>Sort by</h2>
+            <form>
+                <input type="radio" id="mostRecent" value="mostRecent">
+                <label for="mostRecent">Most Recent first</label><br>
+                <input type="radio" id="leastRecent" value="leastRecent">
+                <label for="mostRecent">Least Recent first</label><br>
+                <input type="radio" id="itemA-Z" value="itemA-Z">
+                <label for="itemA-Z">Item name A-Z</label><br>
+                <input type="radio" id="itemZ-A" value="itemZ-A">
+                <label for="itemZ-A">Item name Z-A</label><br>
+                <input class="SortBtn" type="submit" value="Submit">
+                <button class="SortBtn">Reset</button>
+            </form>
         </div>
 
-        <div class="UserDetails">
-            <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
-            <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+        <div id="RequestsContainer">
+            <div class="RequestRecord">
+                <img alt="ImageItem" src="styles/ITEMS/1.png">
+
+                <div class="LostDetails">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button>
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button>
+                    <button>
+                        <img src="styles/ICONS/Icon_accept.png">
+                    </button>
+                    <button>
+                        <img src="styles/ICONS/Icon_reject.png">
+                    </button>
+                </div>
+            </div>
+
+            <div class="RequestRecord">
+                <img alt="ImageItem" src="styles/ITEMS/1.png">
+
+                <div class="LostDetails">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button>
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button>
+                    <button>
+                        <img src="styles/ICONS/Icon_accept.png">
+                    </button>
+                    <button>
+                        <img src="styles/ICONS/Icon_reject.png">
+                    </button>
+                </div>
+            </div>
+
+            <div class="RequestRecord">
+                <img alt="ImageItem" src="styles/ITEMS/1.png">
+
+                <div class="LostDetails">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button>
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button>
+                    <button>
+                        <img src="styles/ICONS/Icon_accept.png">
+                    </button>
+                    <button>
+                        <img src="styles/ICONS/Icon_reject.png">
+                    </button>
+                </div>
+            </div>
+
         </div>
+
+        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
         
-        <div class="RequestButtons">
-            <button>
-                <img src="styles/ICONS/Icon_see.png">
-            </button>
-            <button>
-                <img src="styles/ICONS/Icon_accept.png">
-            </button>
-            <button>
-                <img src="styles/ICONS/Icon_reject.png">
-            </button>
-        </div>
-     </div>
-
-     <div id="SidePanel_Sortby">
-        <h1>Sort by</h1>
-        <form>
-            <input type="radio" id="mostRecent" value="mostRecent">
-            <label for="mostRecent">Most Recent first</label><br>
-            <input type="radio" id="leastRecent" value="leastRecent">
-            <label for="mostRecent">Least Recent first</label><br>
-            <input type="radio" id="itemA-Z" value="itemA-Z">
-            <label for="itemA-Z">Item name A-Z</label><br>
-            <input type="radio" id="itemZ-A" value="itemZ-A">
-            <label for="itemZ-A">Item name Z-A</label><br>
-            <input type="submit" value="Submit">
-        </form>
-     </div>
+    </div>
+    
 
      <div id="SidePanel_Iconsee">
         <h3>Information retrieved from database</h3>

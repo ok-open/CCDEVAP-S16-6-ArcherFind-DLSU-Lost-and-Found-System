@@ -1,10 +1,44 @@
 #MainHeader {
     display: flex;
     align-items: center;
+    padding: var(--space-small);
+    gap: var(--space-small);
+
+    & input {
+        padding: 15px 20px;
+        font-size: 20px;
+        margin-left:auto;
+    }
+}
+
+#MainContainer {
+    display: flex;
+    align-items: top;
+    padding: var(--space-small);
     gap: var(--space-small);
 }
 
-.ListOfRequests {
+#SortBy {
+    padding: 15px 20px;
+}
+
+.SortBtn {
+    color: white;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+
+    padding: 10px 10px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#RequestsContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.RequestRecord {
     border: 2px solid #ccc;
     border-radius: var(--radius-medium);
     padding: var(--space-small);
