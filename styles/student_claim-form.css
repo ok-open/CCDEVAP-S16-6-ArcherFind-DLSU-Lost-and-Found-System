@@ -1,0 +1,127 @@
+/**************** STUDENTS_CLAIM REQUEST FORM ****************/
+.claim-wrapper{
+    min-height: 100dvh;
+    padding-top: 90px;
+    padding-left: var(--space-medium);
+    padding-right: var(--space-medium);
+}
+
+.claim-toolbar{
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    align-items: center;
+    margin-bottom: var(--space-large);
+}
+
+.claim-toolbar .search-bar{
+    flex: 1;
+}
+
+.claim-content{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-large);
+    align-items: start;
+}
+
+.claim-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 400px;
+
+    background-color: var(--color-secondary-hover);
+    border-radius: var(--radius-medium);
+
+    text-align: center;
+    font-size: var(--text-desc);
+}
+
+.claim-details{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.claim-block{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-tiny);
+}
+
+.claim-block h3{
+    font-weight: 700;
+    margin: 0;
+}
+
+.claim-block p{
+    margin: 0;
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+    background-color: var(--color-secondary);
+}
+
+.claim-btn{
+    align-self: center;
+
+    background-color: var(--color-primary);
+    color: white;
+
+    border: none;
+    border-radius: var(--radius-medium);
+
+    padding: var(--space-small) var(--space-large);
+
+    font-size: var(--text-btn);
+
+    cursor: pointer;
+    transition: 0.15s ease-in;
+}
+
+.report-btn{
+    width: 100%;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-medium);
+    padding: var(--space-small);
+    font-size: var(--text-body);
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.report-btn:hover{
+    background-color: var(--color-primary-dark);
+}
+
+.sort-dropdown,
+.filter-dropdown{
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.search-bar{
+    flex: 1;
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.claim-btn:hover{
+    background-color: var(--color-primary-dark);
+}
+
+@media(max-width: 900px){
+
+    .claim-content{
+        grid-template-columns: 1fr;
+    }
+
+    .claim-image{
+        min-height: 300px;
+    }
+}
