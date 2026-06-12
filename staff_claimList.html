@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Claim Requests</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/staffadmin_lists.css">
 </head>
 <body>
     <!-- Nav bar will be inserted here after Nathan makes it -->
@@ -12,21 +14,62 @@
         <input type="text">
         <button>Sort by</button>
      </div>
+
+     <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
      <div class="ListOfRequests">
+        <img alt="ImageItem" src="styles/ITEMS/1.png">
+
+        <div class="LostDetails">
+            <h2>Black Oversize Hoodie</h2> 
+            <!-- Item name -->
+            <h3>Date Lost:</h3> <p>4-12-25</p>
+            <h3>Time Lost:</h3> <p>4:15pm</p>
+            <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+        </div>
+
+        <div class="UserDetails">
+            <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+            <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+        </div>
+        
+        <div class="RequestButtons">
+            <button>
+                <img src="styles/ICONS/Icon_see.png">
+            </button>
+            <button>
+                <img src="styles/ICONS/Icon_accept.png">
+            </button>
+            <button>
+                <img src="styles/ICONS/Icon_reject.png">
+            </button>
+        </div>
+     </div>
+
+     <div id="SidePanel_Sortby">
+        <h1>Sort by</h1>
+        <form>
+            <input type="radio" id="mostRecent" value="mostRecent">
+            <label for="mostRecent">Most Recent first</label><br>
+            <input type="radio" id="leastRecent" value="leastRecent">
+            <label for="mostRecent">Least Recent first</label><br>
+            <input type="radio" id="itemA-Z" value="itemA-Z">
+            <label for="itemA-Z">Item name A-Z</label><br>
+            <input type="radio" id="itemZ-A" value="itemZ-A">
+            <label for="itemZ-A">Item name Z-A</label><br>
+            <input type="submit" value="Submit">
+        </form>
+     </div>
+
+     <div id="SidePanel_Iconsee">
+        <h3>Information retrieved from database</h3>
         <img alt="ImageItem">
         <h2>Black Oversize Hoodie</h2> 
         <!-- Item name -->
-        <h3>Date Lost:</h3> <body>4-12-25</body>
-        <h3>Time Lost:</h3> <body>4:15pm</body>
-        <h3>Location:</h3> <body>Yuchengco Building, Y403</body>
-        <h3>Request from:</h3> <body>Marc Lesley E. Quizon</body>
-        <h3>Email:</h3> <body>marc_lesley_quizon@dlsu.edu.ph</body>
-        <div class="RequestButtons">
-            <img src="styles/ICONS/Icon_see.png">
-            <img src="styles/ICONS/Icon_accept.png">
-            <img src="styles/ICONS/Icon_reject.png">
-        </div>
-
+        <h3>Date Lost:</h3> <p>4-12-25</p>
+        <h3>Time Lost:</h3> <p>4:15pm</p>
+        <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+        <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+        <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
      </div>
     
 </body>

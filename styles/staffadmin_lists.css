@@ -1,0 +1,37 @@
+#MainHeader {
+    display: flex;
+    align-items: center;
+    gap: var(--space-small);
+}
+
+.ListOfRequests {
+    border: 2px solid #ccc;
+    border-radius: var(--radius-medium);
+    padding: var(--space-small);
+    background-color: var(--color-secondary-hover);
+
+    display:flex;
+    align-items:center;
+    gap: 20px;
+
+    & img {
+        width: var(--logo-img-large);
+    }
+}
+
+.RequestButtons button{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+}
+
+.RequestButtons button:active{
+    transform:scale(0.95);
+}
+
+.RequestButtons button:hover{
+    filter: brightness(0.85);
+    transition: all 0.2s ease;
+}
