@@ -135,11 +135,14 @@
 #SidePanel_ImgContainer {
     display:flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-small);
 }
 
 #SidePanel_ImgContainer .ImgMatches {
-    width: clamp(140px, 20vw, 225px);
+    width: calc(45% - 5px);
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    cursor: pointer;
 }
 
 /* modal background for expanded image */
