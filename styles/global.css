@@ -14,24 +14,33 @@
     /***** Typography *****/
     --font-base: "DM Sans", sans-serif;
 
-    /***** Font sizes *****/
-    --text-logo-large: clamp(2.5rem, 7vw + 1rem, 10rem); /* login page logo */
-    --text-desc: clamp(1rem, 2vw + 0.5rem, 1.75rem);  /* subtitle/desc paragraphs */
-    --text-body: 1.2em; /* login box body */
-    --text-footer: clamp(0.55rem, 0.7vw, 0.80rem); /* footer */
-    --text-login-btn: clamp(0.9rem, 1.2vw + 0.3rem, 1.1rem);     /* log-in button */
-    --text-btn: clamp(1.3rem, 1.5vw + 0.6rem, 1.7rem); /* button */
+    /***** Specific font sizes *****/
+    --text-logo-large:  clamp(2.5rem, 7vw + 1rem, 10rem);      /* login page logo */
+    --text-desc:        clamp(1rem, 2vw + 0.5rem, 1.75rem);    /* subtitle/desc paragraphs */
+    --text-body:        1.2em;  /* login box body */
+    --text-footer:      clamp(0.55rem, 0.7vw, 0.80rem);        /* footer */
+    --text-login-btn:   clamp(0.9rem, 1.2vw + 0.3rem, 1.1rem); /* log-in button */
+    --text-btn:         clamp(1.3rem, 1.5vw + 0.6rem, 1.7rem); /* button */
+
+    /***** General font sizes *****/ 
+
+    --text-tiny:       clamp(0.75rem,  1vw + 0.1rem,   1rem);       /* captions, footnotes  for h6 */
+    --text-small:      clamp(0.875rem, 1.2vw + 0.1rem,  1.25rem);   /* labels, tags         for h5 */
+    --text-medium:     clamp(1rem,     1.5vw + 0.2rem,  1.5rem);    /* body text            for h4 */
+    --text-large:      clamp(1.25rem,  2.5vw + 0.3rem,  2rem);      /* subheadings          for h3 */
+    --text-xlarge:     clamp(1.5rem,   4vw + 0.4rem,    2.75rem);   /* headings             for h2 */
+    --text-xxlarge:    clamp(2rem,     6vw + 1rem,      4.5rem);    /* banners              for h1 */
 
     /***** Fluid spacing *****/
-    --space-tiny: clamp(0.25rem, 0.5vw + 0.1rem, 0.5rem);
-    --space-small: clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
+    --space-tiny:   clamp(0.25rem, 0.5vw + 0.1rem, 0.5rem);
+    --space-small:  clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
     --space-medium: clamp(1rem, 3vw + 0.25rem, 2.5rem);
-    --space-large: clamp(1.5rem, 6vw + 0.5rem, 6rem);
+    --space-large:  clamp(1.5rem, 6vw + 0.5rem, 6rem);
 
     /***** Border radius *****/
-    --radius-small: 14px;
-    --radius-medium: 21px;
-    --radius-large: 28px;
+    --radius-small:     14px;
+    --radius-medium:    21px;
+    --radius-large:     28px;
 
     /***** Background shorthand *****/
     --bg-cover: center / cover no-repeat;
@@ -44,7 +53,7 @@
 
     /**************** BACKGROUND IMAGES ****************/
     --BACKGROUND-login: url('BACKGROUNDS/Login.png');
-    --BACKGROUND-home: url('BACKGROUNDS/Home.png');
+    --BACKGROUND-home:  url('BACKGROUNDS/Home.png');
 }
 
 .darkmode {
@@ -83,6 +92,13 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     font-weight: 950;
 }
+
+h1 { font-size: var(--text-xxlarge); }
+h2 { font-size: var(--text-xlarge); }
+h3 { font-size: var(--text-large); }
+h4 { font-size: var(--text-medium); }
+h5 { font-size: var(--text-small); }
+h6 { font-size: var(--text-tiny); }
 
 /**************** ArcherFind Logo ****************/
 .archerfind-logo {

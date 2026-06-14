@@ -36,3 +36,10 @@ themeSwitch.addEventListener("click", (e) => {
     darkmode = localStorage.getItem('darkmode');
     darkmode !== "active" ? enableDarkmode() : disableDarkmode();
 });
+
+// MORE FUNCTIONS
+const logOut = document.querySelector(".log-out")
+
+logOut.addEventListener("click", () => {
+    window.location.href = 'login.html';
+})
