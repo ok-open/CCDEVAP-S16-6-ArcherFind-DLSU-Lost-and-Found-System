@@ -1,6 +1,7 @@
 /****************** NAVIGATION BAR ******************/
 header {
-    position: fixed;
+    /* Hi Marc changed this to sticky, so that elements wont go under the navbar */
+    position: sticky; 
     top: 0;
     width: 100%;
     height: 60px;

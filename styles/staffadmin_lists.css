@@ -22,7 +22,7 @@
 
 /* The small Sort by Panel on the left of the "boxes" of records */
 #SortBy {
-    padding: var(--space-small);
+    padding: var(--space-medium);
 }
 
 /* design the buttons */
