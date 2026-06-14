@@ -25,20 +25,6 @@
     color: #555;
 }
 
-.about-image{
-    min-height: 400px;
-
-    background-color: var(--color-secondary-hover);
-
-    border-radius: var(--radius-medium);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
-}
-
 /**************** COVER SECTION ****************/
 .about-cover{
     padding: 0 0 8rem 0;
@@ -113,7 +99,7 @@
 
 /**************** MISSION & VISION ****************/
 .about-values{
-    max-width: 1200px;
+    max-width: 100%;
     margin: 0 auto;
 
     padding: 6rem var(--space-large);
@@ -122,6 +108,8 @@
     grid-template-columns: 1fr 1fr;
 
     gap: 2rem;
+
+    background-color: var(--color-secondary-hover);
 }
 
 .mission-box,

@@ -8,6 +8,7 @@
     --color-secondary: #fffeed;
     --color-secondary-hover: #e6e3c1;
     --color-secondary-glass: color-mix(in srgb, var(--color-secondary) 80%, transparent);
+    --color-complement: #ffffff;
     --color-navbar: #f9f7d2;
     --color-navbar-hover: #d4d2aa;
 
@@ -23,7 +24,6 @@
     --text-btn:         clamp(1.3rem, 1.5vw + 0.6rem, 1.7rem); /* button */
 
     /***** General font sizes *****/ 
-
     --text-tiny:       clamp(0.75rem,  1vw + 0.1rem,   1rem);       /* captions, footnotes  for h6 */
     --text-small:      clamp(0.875rem, 1.2vw + 0.1rem,  1.25rem);   /* labels, tags         for h5 */
     --text-medium:     clamp(1rem,     1.5vw + 0.2rem,  1.5rem);    /* body text            for h4 */
@@ -58,7 +58,7 @@
 
 .darkmode {
     /**************** COLORS (DARK MODE) ****************/
-    --color-primary: #ffffff;
+    --color-primary: #fffeed;
     --color-primary-dark: #787878;
     --color-primary-deeper: #cccccc;
     --color-secondary: #0b131a;
@@ -66,6 +66,7 @@
     --color-secondary-glass: color-mix(in srgb, var(--color-secondary) 80%, transparent);
     --color-navbar: #080e14;
     --color-navbar-hover: #101b27;
+    --color-complement: #000000;
 
     /**************** BACKGROUND IMAGES (DARK MODE) ****************/
     --BACKGROUND-login: url('BACKGROUNDS/LoginDark.png');
