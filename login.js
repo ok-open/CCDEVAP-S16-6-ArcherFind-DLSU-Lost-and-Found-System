@@ -16,3 +16,13 @@ function seePassword() {
     x.type = "password";
   }
 }
+
+function toggleAccountPassword(id) {
+  const field = document.getElementById(id);
+
+  if (field.type === "password") {
+    field.type = "text";
+  } else {
+    field.type = "password";
+  }
+}

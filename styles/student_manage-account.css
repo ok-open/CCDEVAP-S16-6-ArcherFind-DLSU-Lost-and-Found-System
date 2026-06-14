@@ -1,0 +1,130 @@
+/**************** WRAPPER ****************/
+.account-wrapper{
+    min-height: 100dvh;
+    padding-top: 100px;
+
+    display: flex;
+    justify-content: center;
+
+    padding-left: var(--space-medium);
+    padding-right: var(--space-medium);
+}
+
+/**************** LAYOUT ****************/
+.account-layout{
+    width: 100%;
+    max-width: 1100px;
+
+    display: grid;
+    grid-template-columns: 350px 1fr;
+
+    gap: 3rem;
+
+    align-items: start;
+}
+
+/**************** IMAGE ****************/
+.profile-image{
+    width: 100%;
+    height: 350px;
+
+    background-color: var(--color-secondary-hover);
+    border-radius: var(--radius-medium);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 600;
+
+    margin-top: 5.3rem;
+}
+
+/**************** FORM ****************/
+.account-form{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+}
+
+.account-form h2{
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+/**************** NAME ROW ****************/
+.row.two-cols{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-medium);
+}
+
+/**************** INPUTS ****************/
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-tiny);
+}
+
+.form-group input{
+    padding: var(--space-small);
+    border-radius: var(--radius-small);
+    border: 1px solid var(--color-primary-dark);
+}
+
+.form-group label{
+    font-weight: 600;
+}
+
+.tag{
+    font-size: 0.7rem;
+    background: gold;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: 8px;
+}
+
+.full{
+    width: 100%;
+}
+
+/**************** BUTTONS ****************/
+.button-stack{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
+}
+
+.save-btn{
+    background-color: var(--color-primary);
+    color: white;
+
+    border: none;
+    padding: var(--space-small);
+
+    border-radius: var(--radius-medium);
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.save-btn:hover{
+    background-color: var(--color-primary-dark);
+}
+
+.disable-btn{
+    background-color: #d9534f;
+    color: white;
+
+    border: none;
+    padding: var(--space-small);
+
+    border-radius: var(--radius-medium);
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.disable-btn:hover{
+    background-color: #c9302c;
+}
