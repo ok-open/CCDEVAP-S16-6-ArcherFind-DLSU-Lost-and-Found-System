@@ -57,7 +57,7 @@
     <!-- END OF NAVIGATION BAR / HEADER -->
     
     <div id="MainHeader">
-        <h1>Verify Claim Request</h1>
+        <h1>Verify Claim Requests</h1>
         <input type="text" placeholder="Search">
     </div>
     <div id="MainContainer">
@@ -79,7 +79,7 @@
 
         <div id="RequestsContainer">
             <div class="RequestRecord">
-                <img alt="ImageItem" src="styles/ITEMS/1.png">
+                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/1.png">
 
                 <div class="LostDetails">
                     <h2>Black Oversize Hoodie</h2> 
@@ -90,28 +90,28 @@
                 </div>
 
                 <div class="UserDetails">
-                    <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
                 
                 <div class="RequestButtons">
-                    <button id="openPanelBtn">
+                    <button class="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
-                    </button>
+                    </button><br>
                     <button>
                         <img src="styles/ICONS/Icon_accept.png">
-                    </button>
+                    </button><br>
                     <button>
                         <img src="styles/ICONS/Icon_reject.png">
-                    </button>
+                    </button><br>
                 </div>
             </div>
 
             <div class="RequestRecord">
-                <img alt="ImageItem" src="styles/ITEMS/1.png">
+                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/2.png">
 
                 <div class="LostDetails">
-                    <h2>Black Oversize Hoodie</h2> 
+                    <h2>Apple Charger</h2> 
                     <!-- Item name -->
                     <h3>Date Lost:</h3> <p>4-12-25</p>
                     <h3>Time Lost:</h3> <p>4:15pm</p>
@@ -119,28 +119,28 @@
                 </div>
 
                 <div class="UserDetails">
-                    <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
                 
                 <div class="RequestButtons">
-                    <button>
+                    <button class="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
-                    </button>
+                    </button><br>
                     <button>
                         <img src="styles/ICONS/Icon_accept.png">
-                    </button>
+                    </button><br>
                     <button>
                         <img src="styles/ICONS/Icon_reject.png">
-                    </button>
+                    </button><br>
                 </div>
             </div>
 
             <div class="RequestRecord">
-                <img alt="ImageItem" src="styles/ITEMS/1.png">
+                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/3.png">
 
                 <div class="LostDetails">
-                    <h2>Black Oversize Hoodie</h2> 
+                    <h2>Sony WH-00XM4</h2> 
                     <!-- Item name -->
                     <h3>Date Lost:</h3> <p>4-12-25</p>
                     <h3>Time Lost:</h3> <p>4:15pm</p>
@@ -148,20 +148,20 @@
                 </div>
 
                 <div class="UserDetails">
-                    <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
                 
                 <div class="RequestButtons">
-                    <button>
+                    <button class="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
-                    </button>
+                    </button><br>
                     <button>
                         <img src="styles/ICONS/Icon_accept.png">
-                    </button>
+                    </button><br>
                     <button>
                         <img src="styles/ICONS/Icon_reject.png">
-                    </button>
+                    </button><br>
                 </div>
             </div>
 
@@ -171,31 +171,58 @@
     </div>
     
 
-     <div id="SidePanel_Iconsee">
+    <div id="SidePanel_Iconsee">
         <button id="closePanelBtn">close</button>
-        <h2>Information retrieved from database</h2>
+        <h3>Information retrieved from database</h3>
 
         <div id="SidePanel_ImgContainer">
-            <img alt="ImageItem" src="styles/ITEMS/1.png">
+            <img class="ImgFromDB" alt="ImageItem" src="styles/ITEMS/1.png">
         </div>
-
+         <!-- 🤔 FOR BACKEND: should show item details retrieved from database. Based on item ID in the claim request -->
         <div class="LostDetails">
-            <h2>Black Oversize Hoodie</h2> 
+            <h3>Black Oversize Hoodie</h3> 
             <!-- Item name -->
             <h3>Date Lost:</h3> <p>4-12-25</p>
             <h3>Time Lost:</h3> <p>4:15pm</p>
             <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
         </div>
      </div>
+
+    <div id="ExpandPanel_ImgItem" class="modal">
+        <img class="modal-content" id="imgExpand">
+    </div>
     
 </body>
 </html>
 
+<!-- Javascript for toggling the side panel when clicking Icon_see -->
 <script>
     const sidePanel = document.getElementById('SidePanel_Iconsee');
-    const openBtn = document.getElementById('openPanelBtn');
-    const closeBtn = document.getElementById('closePanelBtn');
+    const openButtons = document.querySelectorAll('.openPanelBtn'); //we use querySelectorAll because I used 'class', not 'id'
+    const closePanelBtn = document.getElementById('closePanelBtn');
 
-    openBtn.addEventListener('click', () => {sidePanel.classList.add('open')});
-    closeBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
+    openButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {sidePanel.classList.add('open')});
+    });
+    closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
+</script>
+
+<script>
+    const modal = document.getElementById("ExpandPanel_ImgItem");
+    const largeImg = document.getElementById("imgExpand");
+    const allImages = document.querySelectorAll(".ImgItem");
+
+    allImages.forEach(function(img){
+        img.onclick = function() {
+            modal.style.display = "flex";
+            largeImg.src = this.src;
+        }
+    })
+
+
+    modal.onclick = function(event) {
+        if (event.target === modal){
+            modal.style.display = "none";
+        }
+    }
 </script>

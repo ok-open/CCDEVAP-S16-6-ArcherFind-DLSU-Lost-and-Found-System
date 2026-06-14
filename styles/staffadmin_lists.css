@@ -1,3 +1,4 @@
+/* The Verify Claim List message and search bar */
 #MainHeader {
     display: flex;
     align-items: center;
@@ -11,6 +12,7 @@
     }
 }
 
+/* This contains everything below the header */
 #MainContainer {
     display: flex;
     align-items: top;
@@ -18,11 +20,13 @@
     gap: var(--space-small);
 }
 
+/* The small Sort by Panel on the left of the "boxes" of records */
 #SortBy {
     padding: var(--space-small);
 }
 
-.SortBtn , #closePanelBtn{
+/* design the buttons */
+.SortBtn , #closePanelBtn, .close{
     color: white;
     background-color: var(--color-primary);
     border: none;
@@ -33,6 +37,7 @@
     cursor: pointer;
 }
 
+/* Contains all of the "boxes" of records of claim request, lost reports, surrender forms */
 #RequestsContainer {
     display: flex;
     flex-direction: column;
@@ -46,6 +51,7 @@
     font-size: clamp(1rem, 2vw + 0.5rem, 2rem);
 }
 
+/* A class. This is the styling for each "box" */
 .RequestRecord {
     border: 2px solid #ccc;
     border-radius: var(--radius-medium);
@@ -58,7 +64,20 @@
 
     & img {
          width: var(--logo-img-large);
+         cursor: pointer;
     }
+}
+
+.LostDetails {
+  width: 35%; 
+}
+
+.UserDetails {
+  width: 40%;
+}
+
+.RequestButtons {
+    margin-left:auto;
 }
 
 .RequestButtons button{
@@ -82,6 +101,9 @@
     transition: all 0.2s ease;
 }
 
+
+
+/* Hidden at first. Only shows when the Icon_see button is clicked */
 #SidePanel_Iconsee {
     position: fixed;
     top:0;
@@ -95,13 +117,48 @@
 
     transition: right 0.3s ease-in-out;
     z-index: 1000;
+
+    & .LostDetails{
+            width: clamp(280px, 40vw, 450px);
+    }
 }
 
 #SidePanel_Iconsee.open {
     right: 0;
+    /* it opens the side panel */
 }
 
-#SidePanel_ImgContainer img{
+#SidePanel_ImgContainer .ImgFromDB {
     width: clamp(280px, 40vw, 450px);
+}
+
+#SidePanel_ImgContainer {
+    display:flex;
+    flex-direction: row;
+}
+
+#SidePanel_ImgContainer .ImgMatches {
+    width: clamp(140px, 20vw, 225px);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+/* modal background for expanded image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
 }
 

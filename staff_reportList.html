@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Lost Item Reports</title>
+    <title>Verify Lost Item Reports Requests</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/staffadmin_lists.css">
 </head>
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
@@ -53,6 +55,170 @@
         </nav>
     </header>
     <!-- END OF NAVIGATION BAR / HEADER -->
+    <!-- Nav bar will be inserted here after Nathan makes it -->
+    <div id="MainHeader">
+        <h1>Verify Lost Items Reports</h1>
+        <input type="text" placeholder="Search">
+    </div>
+    <div id="MainContainer">
+        <div id="SortBy">
+            <h2>Sort by</h2>
+            <form>
+                <input type="radio" name="SortOptions" value="mostRecent">
+                <label for="mostRecent">Most Recent first</label><br>
+                <input type="radio" name="SortOptions" value="leastRecent">
+                <label for="mostRecent">Least Recent first</label><br>
+                <input type="radio" name="SortOptions" value="itemA-Z">
+                <label for="itemA-Z">Item name A-Z</label><br>
+                <input type="radio" name="SortOptions" value="itemZ-A">
+                <label for="itemZ-A">Item name Z-A</label><br>
+                <input class="SortBtn" type="submit" value="Submit">
+                <button class="SortBtn">Reset</button>
+            </form>
+        </div>
+
+        <div id="RequestsContainer">
+            <div class="RequestRecord">
+                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/1.png">
+
+                <div class="LostDetails">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button class="openPanelBtn">
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button><br>
+                    <button>
+                        <img src="styles/ICONS/Icon_accept.png">
+                    </button><br>
+                    <button>
+                        <img src="styles/ICONS/Icon_reject.png">
+                    </button><br>
+                </div>
+            </div>
+
+            <div class="RequestRecord">
+                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/2.png">
+
+                <div class="LostDetails">
+                    <h2>Apple Charger</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button class="openPanelBtn">
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button><br>
+                    <button>
+                        <img src="styles/ICONS/Icon_accept.png">
+                    </button><br>
+                    <button>
+                        <img src="styles/ICONS/Icon_reject.png">
+                    </button><br>
+                </div>
+            </div>
+
+            <div class="RequestRecord">
+                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/3.png">
+
+                <div class="LostDetails">
+                    <h2>Sony WH-00XM4</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button class="openPanelBtn">
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button><br>
+                    <button>
+                        <img src="styles/ICONS/Icon_accept.png">
+                    </button><br>
+                    <button>
+                        <img src="styles/ICONS/Icon_reject.png">
+                    </button><br>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    </div>
+    
+
+    <div id="SidePanel_Iconsee">
+        <button class="close" id="closePanelBtn">close</button>
+        <h2>Possible Matches Found</h2>
+
+        <div id="SidePanel_ImgContainer">
+            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
+            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/2.png">
+            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/3.png">
+            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/4.png">   
+            <!-- 🤔 FOR BACKEND: should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
+        </div>
+    </div>
+
+    <div id="ExpandPanel_ImgItem" class="modal">
+        <img class="modal-content" id="imgExpand">
+    </div>
     
 </body>
 </html>
+
+<!-- Javascript for toggling the side panel when clicking Icon_see -->
+<script>
+    const sidePanel = document.getElementById('SidePanel_Iconsee');
+    const openButtons = document.querySelectorAll('.openPanelBtn'); //we use querySelectorAll because I used 'class', not 'id'
+    const closePanelBtn = document.getElementById('closePanelBtn');
+
+    openButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {sidePanel.classList.add('open')});
+    });
+    closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
+</script>
+
+<script>
+    const modal = document.getElementById("ExpandPanel_ImgItem");
+    const largeImg = document.getElementById("imgExpand");
+    const allImages = document.querySelectorAll(".ImgItem");
+
+    allImages.forEach(function(img){
+        img.onclick = function() {
+            modal.style.display = "flex";
+            largeImg.src = this.src;
+        }
+    })
+
+
+    modal.onclick = function(event) {
+        if (event.target === modal){
+            modal.style.display = "none";
+        }
+    }
+</script>
