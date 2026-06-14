@@ -117,6 +117,10 @@
 
     transition: right 0.3s ease-in-out;
     z-index: 1000;
+
+    & .LostDetails{
+            width: clamp(280px, 40vw, 450px);
+    }
 }
 
 #SidePanel_Iconsee.open {
@@ -124,8 +128,18 @@
     /* it opens the side panel */
 }
 
-#SidePanel_ImgContainer img{
+#SidePanel_ImgContainer .ImgFromDB {
     width: clamp(280px, 40vw, 450px);
+}
+
+#SidePanel_ImgContainer {
+    display:flex;
+    flex-direction: row;
+}
+
+#SidePanel_ImgContainer .ImgMatches {
+    width: clamp(140px, 20vw, 225px);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
 }
 
 /* modal background for expanded image */
