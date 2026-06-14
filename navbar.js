@@ -1,43 +1,38 @@
-// -------------------------- DROPDOWN MENU  -------------------------- //
-const dropdown = document.querySelector('.dropdown');
-const menu = document.querySelector('.dropdown-menu');
-const header = document.querySelector('header');
-
-let hideTimeout; // stores the setTimeout so we can cancel it if needed
-
-// when cursor enters .dropdown, position and show the menu
-dropdown.addEventListener('mouseenter', () => {
-    clearTimeout(hideTimeout); // cancel any pending hide
-    const rect = dropdown.getBoundingClientRect();
-    const headerBottom = header.getBoundingClientRect().bottom;
-
-    menu.style.top = headerBottom + 'px'; // flush below header
-    menu.style.left = rect.left + 'px';   // aligned with .dropdown
-    menu.classList.add('active');
-});
-
-// when cursor leaves .dropdown, wait a bit before hiding
-// (this gives time for cursor to reach the menu across the gap)
-dropdown.addEventListener('mouseleave', () => {
-    hideTimeout = setTimeout(() => {
-        if (!menu.matches(':hover')) { // only hide if cursor isn't on the menu
-            menu.classList.remove('active');
-        }
-    }, 250);
-});
-
-// if cursor reaches the menu in time, cancel the hide
-menu.addEventListener('mouseenter', () => {
-    clearTimeout(hideTimeout);
-});
-
-// hide when cursor leaves the menu
-menu.addEventListener('mouseleave', () => {
-    menu.classList.remove('active');
-});
-
 // -------------------------- USER BUTTON -------------------------- //
-const user = document.getElementById("user-button");
-user.addEventListener("click", function() {
-    alert("TEST if the button works. it should work");
+const userButton = document.querySelector(".user-button");
+const userProfile = document.querySelector(".user-profile");
+
+userButton.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevents the click from bubbling up to document
+    userProfile.classList.toggle("active");
+});
+
+// close when clicking anywhere outside
+document.addEventListener("click", () => {
+    userProfile.classList.remove("active");
+});
+
+// ---------------------------- DARK MODE --------------------
+let darkmode = localStorage.getItem('darkmode');
+const themeSwitch = document.querySelector(".day-night button");
+const logos = document.querySelectorAll(".logo");
+
+const enableDarkmode = () => {
+    document.body.classList.add('darkmode');
+    localStorage.setItem('darkmode', 'active');
+    logos.forEach(logo => logo.src = "LOGOS/AF-DARKMODE.png");
+}
+
+const disableDarkmode = () => {
+    document.body.classList.remove('darkmode');
+    localStorage.setItem('darkmode', null);
+    logos.forEach(logo => logo.src = "LOGOS/AF-ORIGINAL.png");
+}
+
+if (darkmode === "active") enableDarkmode();
+
+themeSwitch.addEventListener("click", (e) => {
+    e.stopPropagation(); // keeps panel open
+    darkmode = localStorage.getItem('darkmode');
+    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
 });

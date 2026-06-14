@@ -4,7 +4,7 @@ header {
     top: 0;
     width: 100%;
     height: 60px;
-    background-color: #f9f7d2;
+    background-color: var(--color-navbar);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +21,7 @@ header .archerfind-logo {
     align-items: center;
 
     & h1 {
-        font-size: var(--text-logo-sm);
+        font-size: 2.5rem;
     }
 
     & img {
@@ -44,7 +44,7 @@ header .archerfind-logo {
 
 .nav-links li a {
     position: relative;
-    font-size: var(--text-nav);
+    font-size: 1.2em;
     font-weight: 500;
     text-decoration: none;
     color: var(--color-primary);
@@ -56,7 +56,7 @@ header .archerfind-logo {
 .nav-links li a:hover {
     font-weight: 600;
     text-shadow: 0 0 10px white;
-    background-color: #d4d2aa;
+    background-color: var(--color-navbar-hover);
 }
 
 .nav-links li input {
@@ -64,50 +64,74 @@ header .archerfind-logo {
     height: clamp(10px, 1.8vw, px);
 }
 
+/* arrow down icon */
+.arrow {
+  border: solid var(--color-primary);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
 /* DROPDOWN PORTION */
 .dropdown {
     position: relative;
 }
 
-.dropdown-menu {
-    display: none;
-    position: fixed;
+/* invisible bridge fills the gap between trigger and menu */
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 8px;
+}
 
+.dropdown > a {
+    display: flex;
+    gap: var(--space-tiny);
+    align-items: center;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
     min-width: 220px;
-    list-style: none;
     padding: var(--space-small);
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: var(--color-secondary-glass);
     z-index: 100;
 
+    /* hidden state */
     max-height: 0;
     overflow: hidden;
     opacity: 0;
-    transition: max-height 0.3s ease-out, opacity 0.2s ease;
+    transition: max-height 0.1s ease-out, opacity 0.2s ease;
+    pointer-events: none;
 }
 
-.dropdown-menu.active {
-    display: flex;
-    flex-direction: column;
-    max-height: 200px;
-    opacity: 1;
-}
-
+/* shown state — triggered by hovering anywhere in .dropdown (including bridge) */
 .dropdown:hover .dropdown-menu {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .dropdown-menu li a {
     display: block;
     text-decoration: none;
     color: var(--color-primary);
-
     padding: 0.7em 1em;
     border-radius: var(--radius-large);
-
     transition: 0.2s ease;
 }
 
@@ -117,36 +141,170 @@ header .archerfind-logo {
 }
 
 /*user icon and dashboard*/
-#user-button {
+.user-button {
+    position: relative;
     background: none;
     border: none;
     padding: 0;
     cursor: pointer;
     outline: none;
+}
 
-    & img {
-        display: block;
+/* invisible bridge */
+.user-button::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 11px;
+}
+
+.user-button button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-button svg {
+    fill: var(--color-primary);
+    width: 32px;
+    height: auto;
+}
+
+/* user profile panel */
+.user-profile {
+    position: absolute;
+    top: calc(100% + 11px);
+    right: 0; /* align to right edge of the button */
+    min-width: 240px;
+    padding: var(--space-small);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-color: var(--color-secondary);
+    z-index: 101;
+    
+    /* hidden state */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.1s ease-out, opacity 0.2s ease;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-small);
+
+    /* content */
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.2s ease;
+}
+
+
+/* shown state */
+.user-profile { /*add .active for the div to be toggleable */
+    max-height: 300px;
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-small);
+}
+
+.user-greeting {
+    font-size: var(--text-login-btn);
+    & span {
+        font-weight: 600;
     }
 }
 
-#user-button:hover img {
-    opacity: 0.8;
+/* user profile inner grid */
+.user-profile-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
 }
 
-#user-button:focus-visible {
-    outline: 2px solid #007bff;
-    outline-offset: 4px;
+button.manage-account {
+    border-radius: 7px;
 }
 
-#user-button:active img {
-    transform: scale(0.98);
+button.manage-account,
+.day-night button,
+.log-out button,
+.view-dashboard button {
+    width: 100%;
+    background-color: var(--color-primary);
+    border: 0.8px solid var(--color-primary-dark);
+    width: 100%;
+    height: 100%;
+    color: var(--color-secondary);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    text-shadow: 0px 1px 0px var(--color-primary-deeper);
+    transition: background-color 0.1s ease;
+    padding: 10px;
 }
 
-@media (max-width: 600px) {
-    .login-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.day-night button {
+    border-top-left-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.log-out button {
+    border-top-right-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.view-dashboard button {
+    border-radius: 0px 0px 7px 7px;
+}
+
+.manage-account:hover,
+.day-night button:hover,
+.log-out button:hover,
+.view-dashboard button:hover {
+    background-color: var(--color-primary-dark);
+}
+
+/* grid for day/night + log out side by side */
+.user-profile-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.view-dashboard {
+    grid-column: span 2;
+}
+
+.day-night svg,
+.log-out svg {
+    fill: var(--color-secondary);
+    width: 24px;
+    height: auto;
+}
+
+.day-night svg:last-child {
+    display: none;
+}
+
+.darkmode .day-night svg:first-child {
+    display: none;
+}
+
+.darkmode .day-night svg:last-child {
+    display: flex;
+    align-items: center;
 }

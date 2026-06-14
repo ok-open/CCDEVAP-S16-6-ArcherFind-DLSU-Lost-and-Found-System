@@ -3,7 +3,7 @@
     display: grid;
     grid-template-columns: 60% 40%;
     height: 100dvh;
-    background: url('BACKGROUNDS/Login.png') var(--bg-cover);
+    background: var(--BACKGROUND-login) var(--bg-cover);
 }
 
 @media (max-width: 600px) {
@@ -45,7 +45,7 @@
     display: flex;
     flex-direction: column;
     margin: var(--space-tiny);
-    width: var(--login-input-width);
+    width: clamp(14rem, 30vw + 2rem, 22rem);
 }
 
 .id-number input,
@@ -79,4 +79,14 @@
 .login footer {
     position: absolute;
     bottom: 0.2vw;
+}
+
+/* mobile responsive view */
+@media (max-width: 600px) {
+    .login-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
