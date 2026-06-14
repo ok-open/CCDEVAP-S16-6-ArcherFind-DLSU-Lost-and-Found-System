@@ -17,13 +17,13 @@
         <div id="SortBy">
             <h2>Sort by</h2>
             <form>
-                <input type="radio" id="mostRecent" value="mostRecent">
+                <input type="radio" name="SortOptions" value="mostRecent">
                 <label for="mostRecent">Most Recent first</label><br>
-                <input type="radio" id="leastRecent" value="leastRecent">
+                <input type="radio" name="SortOptions" value="leastRecent">
                 <label for="mostRecent">Least Recent first</label><br>
-                <input type="radio" id="itemA-Z" value="itemA-Z">
+                <input type="radio" name="SortOptions" value="itemA-Z">
                 <label for="itemA-Z">Item name A-Z</label><br>
-                <input type="radio" id="itemZ-A" value="itemZ-A">
+                <input type="radio" name="SortOptions" value="itemZ-A">
                 <label for="itemZ-A">Item name Z-A</label><br>
                 <input class="SortBtn" type="submit" value="Submit">
                 <button class="SortBtn">Reset</button>
@@ -48,7 +48,7 @@
                 </div>
                 
                 <div class="RequestButtons">
-                    <button>
+                    <button id="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
                     </button>
                     <button>
@@ -121,21 +121,34 @@
         </div>
 
         <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-        
     </div>
     
 
      <div id="SidePanel_Iconsee">
-        <h3>Information retrieved from database</h3>
-        <img alt="ImageItem">
-        <h2>Black Oversize Hoodie</h2> 
-        <!-- Item name -->
-        <h3>Date Lost:</h3> <p>4-12-25</p>
-        <h3>Time Lost:</h3> <p>4:15pm</p>
-        <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-        <h3>Request from:</h3> <p>Marc Lesley E. Quizon</p>
-        <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+        <button id="closePanelBtn">close</button>
+        <h2>Information retrieved from database</h2>
+
+        <div id="SidePanel_ImgContainer">
+            <img alt="ImageItem" src="styles/ITEMS/1.png">
+        </div>
+
+        <div class="LostDetails">
+            <h2>Black Oversize Hoodie</h2> 
+            <!-- Item name -->
+            <h3>Date Lost:</h3> <p>4-12-25</p>
+            <h3>Time Lost:</h3> <p>4:15pm</p>
+            <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+        </div>
      </div>
     
 </body>
 </html>
+
+<script>
+    const sidePanel = document.getElementById('SidePanel_Iconsee');
+    const openBtn = document.getElementById('openPanelBtn');
+    const closeBtn = document.getElementById('closePanelBtn');
+
+    openBtn.addEventListener('click', () => {sidePanel.classList.add('open')});
+    closeBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
+</script>
