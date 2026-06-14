@@ -19,25 +19,33 @@
 }
 
 #SortBy {
-    padding: 15px 20px;
+    padding: var(--space-small);
 }
 
-.SortBtn {
+.SortBtn , #closePanelBtn{
     color: white;
     background-color: var(--color-primary);
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius-small);
 
-    padding: 10px 10px;
-    font-size: 16px;
+    padding: var(--space-small);
+    font-size: clamp(0.2rem, 0.5vw + 0.4rem, 2rem);
     cursor: pointer;
 }
 
 #RequestsContainer {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--space-small);
 }
+
+#RequestsContainer h2{
+    font-size: clamp(2rem, 4vw + 1rem, 3rem);
+}
+#RequestsContainer h3, p{
+    font-size: clamp(1rem, 2vw + 0.5rem, 2rem);
+}
+
 .RequestRecord {
     border: 2px solid #ccc;
     border-radius: var(--radius-medium);
@@ -46,10 +54,10 @@
 
     display:flex;
     align-items:center;
-    gap: 20px;
+    gap: var(--space-small);
 
     & img {
-        width: var(--logo-img-large);
+         width: var(--logo-img-large);
     }
 }
 
@@ -59,6 +67,10 @@
     padding: 0;
     cursor: pointer;
     display: inline-flex;
+
+    & img {
+        width: var(--logo-img-small);
+    }
 }
 
 .RequestButtons button:active{
@@ -69,3 +81,27 @@
     filter: brightness(0.85);
     transition: all 0.2s ease;
 }
+
+#SidePanel_Iconsee {
+    position: fixed;
+    top:0;
+    right: -450px;
+    width: clamp(280px, 40vw, 450px);
+    height: 100vh;
+    background-color: var(--color-secondary-glass);
+    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+    padding: var(--space-small);
+    box-sizing: border-box;
+
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+}
+
+#SidePanel_Iconsee.open {
+    right: 0;
+}
+
+#SidePanel_ImgContainer img{
+    width: clamp(280px, 40vw, 450px);
+}
+
