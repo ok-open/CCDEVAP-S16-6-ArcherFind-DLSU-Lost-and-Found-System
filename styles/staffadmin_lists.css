@@ -117,6 +117,8 @@
 
     transition: right 0.3s ease-in-out;
     z-index: 1000;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     & .LostDetails{
             width: clamp(280px, 40vw, 450px);
