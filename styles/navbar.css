@@ -206,7 +206,7 @@ header .archerfind-logo {
 
 
 /* shown state */
-.user-profile { /*add .active for the div to be toggleable */
+.user-profile.active { /*add .active for the div to be toggleable */
     max-height: 300px;
     opacity: 1;
     pointer-events: auto;
