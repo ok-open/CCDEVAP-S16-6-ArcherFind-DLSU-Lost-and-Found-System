@@ -68,7 +68,7 @@
     align-self: center;
 
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-complement);
 
     border: none;
     border-radius: var(--radius-medium);
@@ -84,7 +84,7 @@
 .report-btn{
     width: 100%;
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-complement);
     border: none;
     border-radius: var(--radius-medium);
     padding: var(--space-small);

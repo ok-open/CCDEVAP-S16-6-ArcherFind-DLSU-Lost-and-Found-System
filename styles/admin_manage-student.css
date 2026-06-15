@@ -112,7 +112,7 @@
 .remove-btn{
     border: none;
     background: #d9534f;
-    color: white;
+    color: var(--color-complement);
 
     padding: 12px 20px;
     border-radius: var(--radius-small);

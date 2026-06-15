@@ -8,7 +8,7 @@
 
 .form-title {
     text-align: left;
-    margin-bottom: var(--space-large);
+    margin-bottom: var(--space-medium);
     font-size: var(--text-btn);
     font-weight: 800;
 }
@@ -40,7 +40,7 @@
 }
 
 .required {
-    background-color: #ffe08a;
+    background-color: var(--color-required);
     padding: 2px 6px;
     border-radius: 6px;
     font-size: 0.75rem;
@@ -89,7 +89,7 @@
     width: 100%;
 
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-complement);
 
     border: none;
     border-radius: var(--radius-medium);
@@ -107,7 +107,6 @@
 
 
 @media(max-width: 900px) {
-
     .surrender-form {
         grid-template-columns: 1fr;
     }

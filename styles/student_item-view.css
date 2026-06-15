@@ -8,6 +8,7 @@
 }
 
 .itemview-sidebar {
+    position: fixed;
     width: 20%;
     padding: var(--space-medium);
     display: flex;
@@ -18,11 +19,11 @@
 .report-btn {
     width: 100%;
     background-color: var(--color-primary);
-    color: white;
+    color: var(--color-complement);
     border: none;
     border-radius: var(--radius-medium);
     padding: var(--space-small);
-    font-size: var(--text-body);
+    font-size: var(--text-btn);
     cursor: pointer;
     transition: 0.2s ease;
 }
@@ -40,6 +41,7 @@
 
 .itemview-main {
     width: 80%;
+    margin-left: 20%; 
     padding: var(--space-medium);
     display: flex;
     flex-direction: column;
@@ -65,6 +67,7 @@
     padding: var(--space-small);
     border-radius: var(--radius-small);
     border: 1px solid var(--color-primary-dark);
+    background-color: var(--color-complement);
 }
 
 .item-list {
@@ -95,4 +98,51 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+    .itemview-sidebar {
+        position: fixed;
+        
+        z-index: 8;
+    }
+
+    .itemview-main {
+        width: 100%;
+        margin-top: 200px;
+        margin-left: 0;
+    }
+
+    .itemview-controls {
+        position: fixed;
+        width: 93%;
+        z-index: 8;
+    }
+
+    .item-list {
+        margin-top: 100px;
+    }
+
+    .itemview-wrapper {
+        flex-direction: column;
+        padding-top: 0;
+    }
+
+    .itemview-sidebar,
+    .itemview-main {
+        width: 100%;
+    }
+
+    .itemview-sidebar {
+        flex-direction: row;
+
+    }
+    .itemview-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .itemview-controls input[type="text"] {
+        grid-column: 1 / -1;
+    }
 }

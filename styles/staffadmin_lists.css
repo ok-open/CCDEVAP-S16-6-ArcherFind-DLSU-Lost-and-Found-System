@@ -27,7 +27,7 @@
 
 /* design the buttons */
 .SortBtn , #closePanelBtn, .close{
-    color: white;
+    color: var(--color-complement);
     background-color: var(--color-primary);
     border: none;
     border-radius: var(--radius-small);
