@@ -1,93 +1,75 @@
 /**************** STUDENT ABOUT PAGE ****************/
-
+p {
+    line-height: 1.8;
+    color: color-mix(in srgb, var(--color-primary) 70%, gray 30%);
+}
 /**************** ABOUT ARCHERFIND ****************/
-.about-info{
+.about-archerfind{
     max-width: 100%;
-    margin: 100px auto 0;
-
-    padding: 0 var(--space-large);
-
+    padding: var(--space-large);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
-
+    align-items: stretch;
     gap: 5rem;
+    text-align: justify;
 }
 
-.about-text{
+.about-archerfind > div {
     display: flex;
     flex-direction: column;
     gap: var(--space-medium);
 }
 
-.about-text p{
-    line-height: 1.8;
-    color: #555;
+.about-archerfind > img {
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.241);
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+/*  IMAGE BANNER  */
+#banner {
+    width: 100%;
+    height: auto;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 /**************** COVER SECTION ****************/
-.about-cover{
-    padding: 0 0 8rem 0;
-
+.cover{
+    padding: var(--space-large);
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 2rem;
-
     text-align: center;
-
-    margin-top: 4rem;
-}
-
-.cover{
-    width: 100vw;
-    height: 600px;
-
-    margin-left: calc(50% - 50vw);
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    background-image: url("BACKGROUNDS/About.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.cover-title{
-    max-width: 800px;
-
-    font-size: 3.5rem;
-    font-weight: 800;
-    line-height: 1.2;
-}
-
-.cover-description{
-    max-width: 700px;
-
-    font-size: 1.1rem;
-    line-height: 1.8;
-
-    color: #666;
+    & h2 { font-size: calc(var(--text-xlarge) + 0.7rem); }
+    & p {
+        font-size: 1.2rem;
+        max-width: 50%;
+    }
 }
 
 .team-btn{
     text-decoration: none;
-
     background-color: var(--color-primary);
-    color: white;
-
+    color: var(--color-secondary);
     padding: 1rem 2rem;
-
+    border: none;
     border-radius: 12px;
-
     font-weight: 600;
     letter-spacing: .5px;
-
     transition: .25s ease;
-
     box-shadow: 0 8px 20px rgba(0,0,0,.12);
 }
 
@@ -98,7 +80,7 @@
 }
 
 /**************** MISSION & VISION ****************/
-.about-values{
+.mission-vision{
     max-width: 100%;
     margin: 0 auto;
 
@@ -112,78 +94,50 @@
     background-color: var(--color-secondary-hover);
 }
 
-.mission-box,
-.vision-box{
+.mission-box, .vision-box{
     padding: 2.5rem;
-
     background: white;
-
     border-radius: 20px;
-
     display: flex;
     flex-direction: column;
-
     gap: 1rem;
-
     box-shadow: 0 10px 25px rgba(0,0,0,.08);
-}
 
-.mission-box h2,
-.vision-box h2{
+    & h2 {
     font-size: 2rem;
     font-weight: 700;
+    }
 }
-
-.mission-box p,
-.vision-box p{
-    line-height: 1.8;
-    color: #555;
-}
-
 
 /**************** TEAM SECTION ****************/
 .team-section{
-    max-width: 1200px;
     margin: auto;
-
     padding: 6rem var(--space-large);
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     gap: 3rem;
 }
 
-.team-section h1{
-    font-size: 3rem;
-    font-weight: 800;
-}
-
 .team-grid{
-    width: 100%;
-
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-
-    gap: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }
 
 .team-card{
     background: white;
-
-    padding: 2rem;
-
+    padding: 30px;
     border-radius: 20px;
-
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
-
+    width: 240px;
+    height: auto;
     gap: 1rem;
-
-    text-align: center;
-
     box-shadow: 0 10px 25px rgba(0,0,0,.08);
 
     transition: .25s ease;
@@ -198,79 +152,20 @@
     height: 140px;
 
     border-radius: 50%;
-
     background-color: var(--color-secondary-hover);
+
+    & img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+    }
 }
 
-.team-card p{
+.team-card p {
     font-weight: 600;
-}
-
-
-/**************** FOOTER ****************/
-.footer{
-    background-color: var(--color-secondary-hover);
-
-    padding: 5rem var(--space-large);
-}
-
-.footer h2{
-    margin-bottom: 2rem;
-    text-align: left;
-}
-
-.footer-columns{
-    display: flex;
-    justify-content: space-between;
-
-    gap: 4rem;
-
-    align-items: flex-start;
-}
-
-.footer-links,
-.footer-support{
-    display: flex;
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: 1rem;
-}
-
-.footer-links a,
-.footer-support h3,
-.footer-support p{
-    text-align: left;
-}
-
-.footer-links a{
-    text-decoration: none;
-    color: inherit;
-
-    transition: .2s ease;
-}
-
-.footer-links a:hover{
-    color: var(--color-primary);
-}
-
-.footer hr{
-    margin: 3rem 0;
-}
-
-.footer-bottom{
-    display: flex;
-    flex-direction: column;
-
-    align-items: flex-start;
-
-    gap: .75rem;
-
-    color: #666;
-    line-height: 1.7;
-
-    text-align: left;
+    text-align: center;
 }
 
 /**************** RESPONSIVE ****************/

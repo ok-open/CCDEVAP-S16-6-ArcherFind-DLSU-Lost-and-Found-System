@@ -16,17 +16,20 @@ document.addEventListener("click", () => {
 let darkmode = localStorage.getItem('darkmode');
 const themeSwitch = document.querySelector(".day-night button");
 const logos = document.querySelectorAll(".logo");
+const aboutImg = document.querySelector('#banner img');
 
 const enableDarkmode = () => {
     document.body.classList.add('darkmode');
     localStorage.setItem('darkmode', 'active');
     logos.forEach(logo => logo.src = "LOGOS/AF-DARKMODE.png");
+    aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
 }
 
 const disableDarkmode = () => {
     document.body.classList.remove('darkmode');
     localStorage.setItem('darkmode', null);
     logos.forEach(logo => logo.src = "LOGOS/AF-ORIGINAL.png");
+    aboutImg.src = "styles/BACKGROUNDS/About.png";
 }
 
 if (darkmode === "active") enableDarkmode();

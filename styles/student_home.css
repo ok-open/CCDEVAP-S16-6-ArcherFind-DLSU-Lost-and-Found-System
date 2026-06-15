@@ -1,4 +1,4 @@
-.home-wrapper {
+.wrapper {
     display: flex;
     flex-direction: column;
     min-height: 100dvh;
@@ -32,19 +32,23 @@
     border: none;
     border-radius: var(--radius-medium);
     color: var(--color-secondary);
+    cursor: pointer;
     padding: clamp(0.7rem, 1.5vw + 0.2rem, 1.1rem) clamp(1.2rem, 3vw + 0.5rem, 2rem);
     text-shadow: 0px 1px 0px var(--color-primary-deeper);
-    transition: background-color 0.1s ease-in;
+    transition: 0.1s ease-in;
+    transition: transform 0.25 ease;
 }
 
 .intro-buttons input[type="button"]:hover {
     background-color: var(--color-primary-dark);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-3px);
 }
 
 .intro-learn-more {
     position: absolute;
     font-size: var(--text-small);
-    bottom: 70px;
+    bottom: 100px;
     border: 2px solid var(--color-complement);
     background-color: transparent;
     color: var(--color-complement);
@@ -55,13 +59,13 @@
     flex-direction: row;
     justify-content: center; 
     align-items: center;
-    transition: 0.1s ease-in;
+    transition: 0.1s ease-out;
 }
 
 .intro-learn-more svg {
     fill: var(--color-complement);
     width: 30px;
-    transition: 0.1s ease-in;
+    transition: 0.1s ease-out;
 }
 
 .intro-learn-more:hover {
@@ -75,7 +79,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--space-large);
+    padding: var(--space-large) var(--space-large) var(--space-medium) var(--space-large);
 
     & h1 {
         padding-bottom: var(--space-medium);
@@ -99,15 +103,15 @@
     border-radius: var(--radius-medium);
     padding: var(--space-medium);
 
-    & h3 {
-        padding-bottom: var(--space-small);
+    & h4 {
+        padding-bottom: var(--space-tiny);
     }
 }
 
 .about_button {
     display: flex;
     justify-content: center;
-    padding: 2rem;
+    margin-bottom: var(--space-medium);
 }
 
 .about_button button {
@@ -118,8 +122,10 @@
     font-size: var(--text-tiny);
     font-family: inherit;
     cursor: pointer;
+    transition: 0.1s ease-out;
 }
 
-.connections {
-    margin: 0px var(--space-large) ;
+.about_button button:hover {
+    background-color: var(--color-primary);  
+    color: var(--color-complement);
 }

@@ -14,8 +14,12 @@ header {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     overflow: visible;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+#home-header {
+    position: fixed;
+}
 header .archerfind-logo {
     display: flex;
     flex-direction: row;
@@ -58,11 +62,6 @@ header .archerfind-logo {
     font-weight: 600;
     text-shadow: 0 0 10px white;
     background-color: var(--color-navbar-hover);
-}
-
-.nav-links li input {
-    width: clamp(10px, 1.8vw, 20px);
-    height: clamp(10px, 1.8vw, px);
 }
 
 /* arrow down icon */
@@ -109,6 +108,7 @@ header .archerfind-logo {
     border-bottom-right-radius: 15px;
     background-color: var(--color-secondary-glass);
     z-index: 100;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
     /* hidden state */
     max-height: 0;
@@ -147,7 +147,6 @@ header .archerfind-logo {
     background: none;
     border: none;
     padding: 0;
-    cursor: pointer;
     outline: none;
 }
 
@@ -162,6 +161,7 @@ header .archerfind-logo {
 }
 
 .user-button button {
+    cursor: pointer;
     background: none;
     border: none;
     padding: 0;
@@ -203,6 +203,8 @@ header .archerfind-logo {
     pointer-events: none;
     overflow: hidden;
     transition: max-height 0.3s ease-out, opacity 0.2s ease;
+
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -222,6 +224,8 @@ header .archerfind-logo {
     & span {
         font-weight: 600;
     }
+
+    text-align: center;
 }
 
 /* user profile inner grid */
