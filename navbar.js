@@ -1,48 +1,85 @@
 // -------------------------- USER BUTTON -------------------------- //
-const userButton = document.querySelector(".user-button");
-const userProfile = document.querySelector(".user-profile");
+// Support multiple `.user-button` instances (navbar + sidebar)
+const userButtons = document.querySelectorAll(".user-button");
 
-userButton.addEventListener("click", (e) => {
-    e.stopPropagation(); // prevents the click from bubbling up to document
-    userProfile.classList.toggle("active");
+// Helper to close all open profiles
+function closeAllProfiles() {
+    document.querySelectorAll(".user-profile.active").forEach(p => p.classList.remove("active"));
+}
+
+userButtons.forEach((wrapper) => {
+    const button = wrapper.querySelector("button") || wrapper;
+    const profile = wrapper.querySelector(".user-profile");
+    if (!profile) return;
+
+    // toggle profile for this wrapper
+    button.addEventListener("click", (e) => {
+        e.stopPropagation(); // prevents the click from bubbling up to document
+        document.querySelectorAll(".user-profile.active").forEach(p => {
+            if (p !== profile) p.classList.remove("active");
+        });
+        profile.classList.toggle("active");
+    });
+
+    // attach the internal buttons for this profile specifically
+    const logOutButton = profile.querySelector(".log-out button") || profile.querySelector(".log-out");
+    const manageAccountButton = profile.querySelector(".manage-account");
+    const viewDashboardButton = profile.querySelector(".view-dashboard button") || profile.querySelector(".view-dashboard");
+    const dayNightButton = profile.querySelector(".day-night button");
+
+    if (logOutButton) {
+        logOutButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            window.location.href = 'login.html';
+        });
+    }
+
+    if (manageAccountButton) {
+        manageAccountButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            window.location.href = 'student_manage-account.html';
+        });
+    }
+
+    if (viewDashboardButton) {
+        viewDashboardButton.addEventListener("click", (e) => {
+            e.stopPropagation();
+            alert('Views Dashboard');
+            window.location.href = ''; // view dashboard html
+        });
+    }
+
+    if (dayNightButton) {
+        dayNightButton.addEventListener("click", (e) => {
+            e.stopPropagation(); // keeps panel open
+            let darkmode = localStorage.getItem('darkmode');
+            darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+        });
+    }
 });
 
 // close when clicking anywhere outside
 document.addEventListener("click", () => {
-    userProfile.classList.remove("active");
+    closeAllProfiles();
 });
 
 // ---------------------------- DARK MODE --------------------
 let darkmode = localStorage.getItem('darkmode');
-const themeSwitch = document.querySelector(".day-night button");
 const logos = document.querySelectorAll(".logo");
 const aboutImg = document.querySelector('#banner img');
 
 const enableDarkmode = () => {
     document.body.classList.add('darkmode');
     localStorage.setItem('darkmode', 'active');
-    logos.forEach(logo => logo.src = "LOGOS/AF-DARKMODE.png");
-    aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
+    if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-DARKMODE.png"; });
+    if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
 }
 
 const disableDarkmode = () => {
     document.body.classList.remove('darkmode');
     localStorage.setItem('darkmode', null);
-    logos.forEach(logo => logo.src = "LOGOS/AF-ORIGINAL.png");
-    aboutImg.src = "styles/BACKGROUNDS/About.png";
+    if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-ORIGINAL.png"; });
+    if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/About.png";
 }
 
 if (darkmode === "active") enableDarkmode();
-
-themeSwitch.addEventListener("click", (e) => {
-    e.stopPropagation(); // keeps panel open
-    darkmode = localStorage.getItem('darkmode');
-    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
-});
-
-// MORE FUNCTIONS
-const logOut = document.querySelector(".log-out")
-
-logOut.addEventListener("click", () => {
-    window.location.href = 'login.html';
-})

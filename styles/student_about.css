@@ -3,6 +3,7 @@ p {
     line-height: 1.8;
     color: color-mix(in srgb, var(--color-primary) 70%, gray 30%);
 }
+
 /**************** ABOUT ARCHERFIND ****************/
 .about-archerfind{
     max-width: 100%;
@@ -57,6 +58,8 @@ p {
     & p {
         font-size: 1.2rem;
         max-width: 50%;
+        text-align: justify;
+        text-align-last: center;
     }
 }
 
@@ -81,22 +84,16 @@ p {
 
 /**************** MISSION & VISION ****************/
 .mission-vision{
-    max-width: 100%;
-    margin: 0 auto;
-
     padding: 6rem var(--space-large);
-
     display: grid;
     grid-template-columns: 1fr 1fr;
-
     gap: 2rem;
-
     background-color: var(--color-secondary-hover);
 }
 
 .mission-box, .vision-box{
     padding: 2.5rem;
-    background: white;
+    background: var(--color-secondary-glass);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -128,13 +125,14 @@ p {
 }
 
 .team-card{
-    background: white;
+    background-color: var(--color-complement);
     padding: 30px;
     border-radius: 20px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     width: 240px;
     height: auto;
     gap: 1rem;
@@ -168,7 +166,48 @@ p {
     text-align: center;
 }
 
-/**************** RESPONSIVE ****************/
+/* RESPONSIVE: MOBILE VIEW */
+@media (max-width: 576px) {
+    .about-archerfind {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    #banner {
+        height: 200px;
+    }
+
+    .cover p {
+        max-width: 90%;
+    }
+
+    .mission-vision {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .team-grid {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .team-card {
+        padding: 0;
+        width: 150px;
+        height: 200px;
+        font-size: var(--text-small);
+    }
+
+    .team-photo {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+
+/* RESPONSIVE: MOBILE VIEW
 @media (max-width: 900px){
 
     .about-info,
@@ -215,4 +254,4 @@ p {
     .vision-box h2{
         font-size: 2rem;
     }
-}
+} */
