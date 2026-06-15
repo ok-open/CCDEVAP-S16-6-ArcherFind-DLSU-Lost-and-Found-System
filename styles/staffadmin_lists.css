@@ -142,9 +142,49 @@
 }
 
 #SidePanel_ImgContainer .ImgMatches {
-    width: calc(45% - 5px);
     box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+}
+
+.ImgCard {
+    position: relative;
+    width: calc(45% - 5px);
+}
+
+.ImgCard h2{
+    font-size: clamp(14px, 1.2vw + 0.5rem, 18px);
+}
+
+.ImgCard h3{
+   font-size: clamp(11px, 0.8vw + 0.4rem, 13px);
+}
+
+.ImgCard p{
+    font-size: clamp(11px, 0.8vw + 0.4rem, 13px);
+}
+
+
+.ImgCard .ImgMatches {
+    width: 100%;
     cursor: pointer;
+    display:block;
+}
+
+.LostDetailsImgMatch {
+    position: absolute;
+    top:100%;
+    left:0;
+    width:100%;
+    z-index:10;
+
+    background-color: var(--color-secondary-hover);
+    border: 1px solid #ccc;
+    border-radius: var(--radius-medium);
+    padding: var(--space-small);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.hidden {
+    display: none;
 }
 
 /* modal background for expanded image */

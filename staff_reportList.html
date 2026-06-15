@@ -177,18 +177,46 @@
         <h2>Possible Matches Found</h2>
 
         <div id="SidePanel_ImgContainer">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/2.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/3.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/4.png"> 
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/2.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/3.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/4.png"> 
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/2.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/3.png">
-            <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/4.png">   
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/2.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Apple Charger</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/3.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Sony WH-00XM4</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/4.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Laptop Bag</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
             <!-- 🤔 FOR BACKEND: should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
         </div>
     </div>
@@ -199,6 +227,18 @@
     
 </body>
 </html>
+
+<!-- Javascript for dropdown info in Image Matches -->
+ <script>
+    const images = document.querySelectorAll('.ImgMatches');
+
+    images.forEach((img) =>{
+        img.addEventListener('click', function(){
+            const detailsBox = this.parentElement.querySelector('.LostDetailsImgMatch');
+            detailsBox.classList.toggle('hidden');
+        })
+    })
+ </script>
 
 <!-- Javascript for toggling the side panel when clicking Icon_see -->
 <script>
@@ -212,6 +252,7 @@
     closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
 </script>
 
+<!-- Javascript for expanding the Image -->
 <script>
     const modal = document.getElementById("ExpandPanel_ImgItem");
     const largeImg = document.getElementById("imgExpand");
