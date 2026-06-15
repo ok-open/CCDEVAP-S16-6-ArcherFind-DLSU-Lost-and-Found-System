@@ -300,18 +300,12 @@ button.manage-account,
     height: auto;
 }
 
-.day-night svg:last-child {
-    display: none;
-}
-
-.darkmode .day-night svg:first-child {
-    display: none;
-}
-
-.darkmode .day-night svg:last-child {
-    display: flex;
-    align-items: center;
-}
+/* normal/light mode */
+.day-night svg:first-child { display: block; }
+.day-night svg:last-child { display: none; }
+/* night mode */
+.darkmode .day-night svg:first-child {  display: none;}
+.darkmode .day-night svg:last-child {  display: block; }
 
 .sidebar {
     display: none;
@@ -320,7 +314,7 @@ button.manage-account,
 /******** SIDEBAR (RESPONSIVE MOBILE VIEW) ********/
 /* RESPONSIVE: MOBILE VIEW */
 @media (max-width: 576px) {
-   .navbar .nav-links {
+    .navbar .nav-links {
         display: none;
     }
 
@@ -328,24 +322,52 @@ button.manage-account,
         & h1 { font-size: var(--text-xlarge); }
     }
     
+
+    .sidebar-open-close button {
+        cursor: pointer;
+    }
+
+    .sidebar-open-close svg {
+        display: block;
+        position: fixed;
+        top: 12px;
+        right: calc(var(--space-small) + 40px);
+        fill: var(--color-primary);
+        width: 32px;
+        height: auto;
+    }
+
+    /* closed: show hamburger, hide X */
+    .sidebar-open-close svg:first-child { display: block; }
+    .sidebar-open-close svg:last-child { display: none; }
+
+    /* open: hide hamburger, show X */
+    .sidebar.open .sidebar-open-close svg:first-child { display: none; }
+    .sidebar.open .sidebar-open-close svg:last-child { display: block; }
+
     .sidebar {
         all: unset;
         position: fixed;
         top: 0px;
-        left: 0;
+        left: -70%; /* sidebar is hidden off-screen when closed*/
         width: 70%;
         height: 100vh;
         background-color: color-mix(in srgb, var(--color-navbar) 90%, transparent);
         z-index: -1; /* so it is behind header */
+        transition: 0.2s ease-out;
     }
-    
+
+    .sidebar.open {
+        left: 0; /* sidebar slides in */
+    }
+
     .sidebar .nav-links {
-        margin-top: 70px;
+        margin-top: 60px;
         flex-direction: column;
         justify-content: flex-start;
         gap: 0;
     }
-    
+
     .sidebar .nav-links li a {
         border-radius: 0;
         width: 100%;
@@ -382,6 +404,6 @@ button.manage-account,
     }
 
     .sidebar .user-profile {
-        min-width: 95vw;
+        min-width: 94vw;
     }
 }

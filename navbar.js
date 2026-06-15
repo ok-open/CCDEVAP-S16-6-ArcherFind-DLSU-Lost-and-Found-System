@@ -1,5 +1,4 @@
 // -------------------------- USER BUTTON -------------------------- //
-// Support multiple `.user-button` instances (navbar + sidebar)
 const userButtons = document.querySelectorAll(".user-button");
 
 // Helper to close all open profiles
@@ -63,7 +62,7 @@ document.addEventListener("click", () => {
     closeAllProfiles();
 });
 
-// ---------------------------- DARK MODE --------------------
+// ---------------------------- DARK MODE ------------------------------ 
 let darkmode = localStorage.getItem('darkmode');
 const logos = document.querySelectorAll(".logo");
 const aboutImg = document.querySelector('#banner img');
@@ -83,3 +82,14 @@ const disableDarkmode = () => {
 }
 
 if (darkmode === "active") enableDarkmode();
+
+
+// ------------------------------ SIDEBAR ------------------------------ 
+const sidebarOpenCloseButton = document.querySelector(".sidebar-open-close button");
+const sidebar = document.querySelector(".sidebar");
+
+if (sidebarOpenCloseButton) {
+    sidebarOpenCloseButton.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+    });
+}
