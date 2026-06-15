@@ -220,11 +220,11 @@ header .archerfind-logo {
 
 .user-greeting {
     font-size: var(--text-login-btn);
+    text-align: center;
+
     & span {
         font-weight: 600;
     }
-
-    text-align: center;
 }
 
 /* user profile inner grid */
@@ -312,6 +312,109 @@ button.manage-account,
 }
 
 /******** SIDEBAR (RESPONSIVE MOBILE VIEW) ********/
+/* RESPONSIVE: THE NAVBAR */
+@media (max-width: 1000px) {
+    .nav-links li a { font-size: 1em; }
+    .dropdown::after { height: 11px; }
+    .dropdown-menu { top: calc(100% + 11px) };
+}
+
+/* RESPONSIVE: TABLET VIEW */
+@media (max-width: 880px) {
+    .navbar .nav-links {
+        display: none;
+    }
+
+    header .archerfind-logo {
+        & h1 { font-size: var(--text-xlarge); }
+    }
+    
+
+    .sidebar-open-close button {
+        cursor: pointer;
+    }
+
+    .sidebar-open-close svg {
+        display: block;
+        position: fixed;
+        top: 12px;
+        right: calc(var(--space-small) + 40px);
+        fill: var(--color-primary);
+        width: 32px;
+        height: auto;
+    }
+
+    /* closed: show hamburger, hide X */
+    .sidebar-open-close svg:first-child { display: block; }
+    .sidebar-open-close svg:last-child { display: none; }
+
+    /* open: hide hamburger, show X */
+    .sidebar.open .sidebar-open-close svg:first-child { display: none; }
+    .sidebar.open .sidebar-open-close svg:last-child { display: block; }
+
+    .sidebar {
+        all: unset;
+        position: fixed;
+        top: 0px;
+        left: -30%; /* sidebar is hidden off-screen when closed*/
+        width: 30%;
+        height: 100vh;
+        background-color: color-mix(in srgb, var(--color-navbar) 90%, transparent);
+        z-index: -1; /* so it is behind header */
+        transition: 0.2s ease-out;
+    }
+
+    .sidebar.open {
+        left: 0; /* sidebar slides in */
+    }
+
+    .sidebar .nav-links {
+        margin-top: 60px;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 0;
+    }
+
+    .sidebar .nav-links li a {
+        border-radius: 0;
+        width: 100%;
+        padding: 2vh;
+    }
+    
+    .sidebar .dropdown {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar .down {
+        display: none;
+    }
+    
+    .sidebar .dropdown-menu {
+        all: unset;
+        position: relative;
+        display: block;
+        width: 100%;
+    }
+    
+    .sidebar .dropdown-menu li {
+        display: block;
+        padding-left: 2vh;
+    }
+    
+    .sidebar .user-button {
+        display: block;
+        position: fixed;
+        top: 12px;
+        right: var(--space-small);
+        z-index: 101; /* above header z-index of 10 */
+    }
+
+    .sidebar .user-profile {
+        min-width: 94vw;
+    }
+}
+
 /* RESPONSIVE: MOBILE VIEW */
 @media (max-width: 576px) {
     .navbar .nav-links {
