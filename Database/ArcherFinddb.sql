@@ -102,6 +102,7 @@ CREATE TABLE items (
     ) ;
 
 CREATE TABLE reports (
+    -- to be added IMAGE FILE PATH
     report_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
     item_description TEXT NOT NULL,
