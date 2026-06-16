@@ -29,21 +29,21 @@
     --text-btn:         clamp(1.3rem, 1.5vw + 0.6rem, 1.7rem); /* button */
 
     /***** General font sizes *****/ 
-    --text-tiny:       clamp(0.75rem,  1vw + 0.1rem,   1rem);       /* captions, footnotes  for h6 */
-    --text-small:      clamp(0.875rem, 1.2vw + 0.1rem,  1.25rem);   /* labels, tags         for h5 */
-    --text-medium:     clamp(1rem,     1.5vw + 0.2rem,  1.5rem);    /* body text            for h4 */
-    --text-large:      clamp(1.25rem,  2.5vw + 0.3rem,  2rem);      /* subheadings          for h3 */
-    --text-xlarge:     clamp(1.5rem,   4vw + 0.4rem,    2.75rem);   /* headings             for h2 */
-    --text-xxlarge:    clamp(2rem,     6vw + 1rem,      4.5rem);    /* banners              for h1 */
+    --text-tiny:        clamp(0.75rem,  1vw + 0.1rem,   1rem);       /* captions, footnotes  for h6 */
+    --text-small:       clamp(0.875rem, 1.2vw + 0.1rem,  1.25rem);   /* labels, tags         for h5 */
+    --text-medium:      clamp(1rem,     1.5vw + 0.2rem,  1.5rem);    /* body text            for h4 */
+    --text-large:       clamp(1.25rem,  2.5vw + 0.3rem,  2rem);      /* subheadings          for h3 */
+    --text-xlarge:      clamp(1.5rem,   4vw + 0.4rem,    2.75rem);   /* headings             for h2 */
+    --text-xxlarge:     clamp(2rem,     6vw + 1rem,      4.5rem);    /* banners              for h1 */
 
     /***** Fluid spacing *****/
-    --space-tiny:   clamp(0.25rem, 0.5vw + 0.1rem, 0.5rem);
-    --space-small:  clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
-    --space-medium: clamp(1rem, 3vw + 0.25rem, 2.5rem);
-    --space-large:  clamp(1.5rem, 6vw + 0.5rem, 6rem);
-    --space-xlarge: clamp(2rem, 10vw + 1rem, 9.5rem);
-    --space-xxlarge: clamp(3rem, 15vw + 1.5rem, 15rem);
-    --space-xxxlarge: clamp(6rem, 25vw + 2rem, 21rem);
+    --space-tiny:       clamp(0.25rem, 0.5vw + 0.1rem, 0.5rem);
+    --space-small:      clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
+    --space-medium:     clamp(1rem, 3vw + 0.25rem, 2.5rem);
+    --space-large:      clamp(1.5rem, 6vw + 0.5rem, 6rem);
+    --space-xlarge:     clamp(2rem, 10vw + 1rem, 9.5rem);
+    --space-xxlarge:    clamp(3rem, 15vw + 1.5rem, 15rem);
+    --space-xxxlarge:   clamp(6rem, 25vw + 2rem, 21rem);
 
     /***** Border radius *****/
     --radius-small:     14px;
@@ -83,6 +83,10 @@
     --color-navbar-hover: #101b27;
     --color-complement: #000000;
     --color-required: #8d732c;
+    --color-fadeBG: #ffffffcc;
+    --color-lightfadeBG: rgba(255,255,255,0.1);
+    --color-successMsg: #447746;
+    --color-errorMsg: #873b35;
 
     /**************** BACKGROUND IMAGES (DARK MODE) ****************/
     --BACKGROUND-login: url('BACKGROUNDS/LoginDark.png');
@@ -142,7 +146,7 @@ h6 { font-size: var(--text-tiny); }
     text-align: center;
 
     & p {
-        font-size: var(--text-desc);
+        font-size: var(--text-medium);
         letter-spacing: 0px;
     }
 }

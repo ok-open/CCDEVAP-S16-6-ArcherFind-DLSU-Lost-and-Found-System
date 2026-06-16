@@ -8,6 +8,11 @@ p {
     color: color-mix(in srgb, var(--color-primary) 70%, gray 30%);
 }
 
+.archerfind-logo img {
+    width: calc(var(--logo-img-large) - 20px);
+    height: auto;
+}
+
 /****************** INTRO SECTION ******************/
 .intro {
     position: relative;
