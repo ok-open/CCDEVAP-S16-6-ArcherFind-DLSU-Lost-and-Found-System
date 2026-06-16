@@ -12,6 +12,10 @@
     --color-navbar: #f9f7d2;
     --color-navbar-hover: #d4d2aa;
     --color-required: #ffe08a;
+    --color-fadeBG: #000000cc;
+    --color-lightfadeBG: rgba(0,0,0,0.1);
+    --color-successMsg: #4CAF50;
+    --color-errorMsg: #F44336;
 
     /***** Typography *****/
     --font-base: "DM Sans", sans-serif;
@@ -60,7 +64,11 @@
     /**************** BACKGROUND IMAGES ****************/
     --BACKGROUND-login: url('BACKGROUNDS/Login.png');
     --BACKGROUND-home:  url('BACKGROUNDS/Home.png');
-    --BACKGROUND-itemview: url('BACKGROUNDS/ItemView.png')
+    --BACKGROUND-itemview: url('BACKGROUNDS/ItemView.png');
+
+    /**************** SIDE PANEL WIDTH ****************/
+    --width-inner: clamp(280px, 40vw, 420px);
+    --width-main: clamp(280px, 40vw, 450px);
 }
 
 .darkmode {
