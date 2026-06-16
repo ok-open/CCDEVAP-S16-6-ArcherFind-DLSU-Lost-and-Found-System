@@ -2,20 +2,25 @@
 #MainHeader {
     display: flex;
     align-items: center;
+    flex-wrap:wrap;
     padding: var(--space-small);
     gap: var(--space-small);
 
     & input {
+        min-width: 250px;
         padding: var(--space-small) var(--space-small);
         font-size: var(--text-small);
-        margin-left:auto;
     }
+}
+
+.SearchContainer{
+    margin-left:auto;
 }
 
 /* This contains everything below the header */
 #MainContainer {
     display: flex;
-    align-items: top;
+    align-items: flex-start;
     padding: var(--space-small);
     gap: var(--space-small);
 }
@@ -41,13 +46,15 @@
 #RequestsContainer {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    min-width: 0;
     gap: var(--space-small);
 }
 
 #RequestsRecord h2{
     font-size: var(--text-xlarge);
 }
-#RequestsRecord h3, p{
+#RequestsContainer h3, p{
     font-size: var(--text-large);
 }
 
@@ -63,7 +70,8 @@
     gap: var(--space-small);
 
     & img {
-         width: var(--logo-img-large);
+         width: clamp(80px, 15vw, 120px);
+         height: auto;
          cursor: pointer;
     }
 }
@@ -236,15 +244,15 @@
     background-color: var(--color-secondary-hover);
     color: #fff;
     padding: 16px;
-    border-radius: 8 px;
+    border-radius: 8px;
     font-size: 14px;
     box-shadow: 0 4px 12px var(--color-fadeBG);
 
-    transform: transalatex(100%);
-    animation: slideIn 0.4secs each powerfull;
+    transform: transalateX(100%);
+    animation: slideIn 0.4secs ease forwards;
 }
 
-.toats.success {
+.toast.success {
     border-left-color: var(--color-successMsg);
 }
 
@@ -254,4 +262,95 @@
 
 @keyframes slideIn {
     to { transform: translateX(0); }
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+@media (max-width: 768px){
+
+    #MainHeader {
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    #MainHeader {
+        text-align:center;
+    }
+
+    #MainHeader input {
+        width:100%;
+        margin-left:0;
+    }
+
+    #MainContainer {
+        flex-direction:column;
+    }
+
+    #SortBy{
+        width:100%;
+    }
+
+    #MainContainer {
+        display: grid;
+        place-items: center;
+        height: 100vh;
+    }
+
+    .RequestRecord{
+        flex-direction:column;
+        align-items:flex-start;
+        text-align:left;
+    }
+
+    .RequestRecord img{
+        align-self:center;
+        width:120px;
+    }
+
+    .LostDetails,
+    .UserDetails{
+        width:100%;
+    }
+
+    .RequestButtons{
+        margin-left:0;
+        width:100%;
+
+        display:flex;
+        justify-content:center;
+        gap:15px;
+    }
+
+    .RequestButtons br{
+        display:none;
+    }
+
+    .RequestButtons button img{
+        width:40px;
+    }
+
+    #SidePanel_Iconsee{
+        width:100%;
+        right:-100%;
+    }
+
+    .ImgCard{
+        width:100%;
+    }
+
+    .LostDetailsImgMatch{
+        position:static;
+        margin-top:10px;
+    }
+
+    .SearchContainer{
+        width:100%;
+    }
+
+    .SearchContainer input{
+        width:100%;
+    }
+
 }

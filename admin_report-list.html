@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Surrender Forms</title>
+    <title>Verify Lost Item Reports Requests</title>
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/navbar-staff.css">
@@ -27,9 +27,9 @@
                 <li class="dropdown">
                     <a class="active">Lost and Found <i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="staff_claim-list.html">Verify Claim Request</a></li>
-                        <li><a href="staff_report-list.html">View Student Lost Reports</a></li>
-                        <li><a href="staff_surrender-list.html">View Surrender List</a></li>
+                        <li><a href="admin_claim-list.html">Verify Claim Request</a></li>
+                        <li><a href="admin_report-list.html">View Student Lost Reports</a></li>
+                        <li><a href="admin_surrender-list.html">View Surrender List</a></li>
                     </ul>
                 </li>
                 <li>
@@ -63,9 +63,9 @@
                 <li class="dropdown">
                     <a class="active">Lost and Found <i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="staff_claim-list.html">Verify Claim Request</a></li>
-                        <li><a href="staff_report-list.html">View Student Lost Reports</a></li>
-                        <li><a href="staff_surrender-list.html">View Surrender List</a></li>
+                        <li><a href="admin_claim-list.html">Verify Claim Request</a></li>
+                        <li><a href="admin_report-list.html">View Student Lost Reports</a></li>
+                        <li><a href="admin_surrender-list.html">View Surrender List</a></li>
                     </ul>
                 </li>
             </ul>
@@ -98,7 +98,7 @@
 <!-- END OF NAVIGATION BAR / HEADER -->
 
     <div id="MainHeader">
-        <h1>Verify Surrender Forms</h1>
+        <h1>Verify Lost Items Reports</h1>
         <div class="SearchContainer">
             <input type="text" placeholder="Search">
         </div>
@@ -127,22 +127,25 @@
                 <div class="LostDetails">
                     <h2>Black Oversize Hoodie</h2> 
                     <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
                     <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
                 </div>
 
                 <div class="UserDetails">
                     <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Surrenderd by:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
                 
                 <div class="RequestButtons">
-                    <button onclick="onAcceptSurrender()">
+                    <button class="openPanelBtn">
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button><br>
+                    <button onclick="onResolveLostReport()">
                         <img src="styles/ICONS/Icon_accept.png">
                     </button><br>
-                    <button onclick="onRejectSurrender()">
+                    <button onclick="onCloseLostReport()">
                         <img src="styles/ICONS/Icon_reject.png">
                     </button><br>
                 </div>
@@ -154,22 +157,25 @@
                 <div class="LostDetails">
                     <h2>Apple Charger</h2> 
                     <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
                     <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
                 </div>
 
                 <div class="UserDetails">
                     <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Surrenderd by:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
                 
                 <div class="RequestButtons">
-                    <button onclick="onAcceptSurrender()">
+                    <button class="openPanelBtn">
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button><br>
+                    <button onclick="onResolveLostReport()">
                         <img src="styles/ICONS/Icon_accept.png">
                     </button><br>
-                    <button onclick="onRejectSurrender()">
+                    <button onclick="onCloseLostReport()">
                         <img src="styles/ICONS/Icon_reject.png">
                     </button><br>
                 </div>
@@ -181,34 +187,90 @@
                 <div class="LostDetails">
                     <h2>Sony WH-00XM4</h2> 
                     <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
                     <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
                 </div>
 
                 <div class="UserDetails">
                     <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Surrenderd by:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
                 
                 <div class="RequestButtons">
-                    <button onclick="onAcceptSurrender()">
+                    <button class="openPanelBtn">
+                        <img src="styles/ICONS/Icon_see.png">
+                    </button><br>
+                    <button onclick="onResolveLostReport()">
                         <img src="styles/ICONS/Icon_accept.png">
                     </button><br>
-                    <button onclick="onRejectSurrender()">
+                    <button onclick="onCloseLostReport()">
                         <img src="styles/ICONS/Icon_reject.png">
                     </button><br>
                 </div>
             </div>
-        </div>
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
 
-        <div id="ExpandPanel_ImgItem" class="modal">
-            <img class="modal-content" id="imgExpand">
         </div>
 
         <div id="toastBox"></div>
+
+        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
     </div>
+    
+
+    <div id="SidePanel_Iconsee">
+        <button class="close" id="closePanelBtn">close</button>
+        <h2>Possible Matches</h2>
+
+        <div id="SidePanel_ImgContainer">
+            <!-- 🤔 FOR BACKEND: ImgCard should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/5.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie w/ Details</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/6.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie Straight Cut</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/7.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Plain Black Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ExpandPanel_ImgItem" class="modal">
+        <img class="modal-content" id="imgExpand">
+    </div>
+    
 </body>
 </html>
