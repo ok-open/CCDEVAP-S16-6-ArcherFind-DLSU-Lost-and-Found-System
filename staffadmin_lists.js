@@ -1,12 +1,16 @@
 // JAVASCRIPT FOR TOGGLING THE SIDE PANEL WHEN ICON_SEE IS CLICKED
-const sidePanel = document.getElementById('SidePanel_Iconsee');
-const openButtons = document.querySelectorAll('.openPanelBtn'); //we use querySelectorAll because I used 'class', not 'id'
-const closePanelBtn = document.getElementById('closePanelBtn');
+if (document.getElementById('SidePanel_Iconsee')) { 
+    //This is needed for surrenderList.html toast message to work
+    //It doesn't have a side panel, so we check first if there is a side panel to avoid null object
+    const sidePanel = document.getElementById('SidePanel_Iconsee');
+    const openButtons = document.querySelectorAll('.openPanelBtn'); //we use querySelectorAll because I used 'class', not 'id'
+    const closePanelBtn = document.getElementById('closePanelBtn');
 
-openButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {sidePanel.classList.add('open')});
-});
-closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
+    openButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {sidePanel.classList.add('open')});
+    });
+    closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
+}
 // JAVASCRIPT FOR TOGGLING THE SIDE PANEL WHEN ICON_SEE IS CLICKED
 
 //JAVASCRIPT FOR EXPANDING THE IMAGE
