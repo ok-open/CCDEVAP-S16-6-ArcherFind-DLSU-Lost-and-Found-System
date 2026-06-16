@@ -1,3 +1,7 @@
+body {
+    overflow-x: hidden;
+}
+
 .contact-wrapper {
     position: relative;
     width: 100%;
@@ -6,11 +10,18 @@
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
         'contact-us contact-form';
-    flex-direction: column;
-    justify-content: center;
-    
     font-size: var(--text-tiny);
     padding: 0 10vh 0 10vh;
+}
+
+@media (max-width: 900px) {
+    .contact-wrapper {
+        padding: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .contact-us {
@@ -78,6 +89,7 @@
     gap: var(--space-tiny);
     width: 90%;
 }
+
 
 /* design the buttons */
 .input-box {

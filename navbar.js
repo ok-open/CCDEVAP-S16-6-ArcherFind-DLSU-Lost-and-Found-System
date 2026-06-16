@@ -64,20 +64,22 @@ document.addEventListener("click", () => {
 
 // ---------------------------- DARK MODE ------------------------------ 
 let darkmode = localStorage.getItem('darkmode');
-const logos = document.querySelectorAll(".logo");
-const aboutImg = document.querySelector('#banner img');
 
 const enableDarkmode = () => {
     document.body.classList.add('darkmode');
     localStorage.setItem('darkmode', 'active');
+    const logos = document.querySelectorAll(".logo");
     if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-DARKMODE.png"; });
+    const aboutImg = document.querySelector('#banner img');
     if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
 }
 
 const disableDarkmode = () => {
     document.body.classList.remove('darkmode');
     localStorage.setItem('darkmode', null);
+    const logos = document.querySelectorAll(".logo");
     if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-ORIGINAL.png"; });
+    const aboutImg = document.querySelector('#banner img');
     if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/About.png";
 }
 
