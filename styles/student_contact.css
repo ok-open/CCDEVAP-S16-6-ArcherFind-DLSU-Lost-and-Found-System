@@ -20,9 +20,6 @@
     align-items: center;
     justify-content: center;
     padding: var(--space-large);
-}
-
-.title {
     display: flex;
     flex-direction: column;
 }
@@ -36,21 +33,27 @@
     letter-spacing: 4px;
 }
 
-#loc-address {
-    font-weight: 600;
-}
-
-.location {
+.contact-details {
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    margin-bottom: 10px;
     & svg {
-        width: 18px;
+        width: 28px;
         margin-right: 6px;
     }
 
-    margin-bottom: var(--space-small);
+    & p {
+        font-weight: 600;
+    }
+
+    & u {
+        font-weight: 450;
+    }
+}
+
+.contact-description {
+    font-size: var(--text-small);
 }
 
 /* CONTACT FORM */
@@ -64,14 +67,14 @@
 
 .contact-form-details {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 3fr 1fr;
     grid-template-areas:
-        'firstname firstname'
-        'lastname lastname'
-        'phonenum phonenum'
-        'comment comment'
-        'sendmsg faq';
+        'firstname firstname lastname lastname'
+        'address address address address'
+        'phonenum phonenum phonenum phonenum'
+        'comment comment comment comment'
+        'sendmsg sendmsg sendmsg faq';
     gap: var(--space-tiny);
     width: 90%;
 }
@@ -89,6 +92,10 @@
 
 .last-name {
     grid-area: lastname;
+}
+
+.address {
+    grid-area: address;
 }
 
 .phone-num {
@@ -112,7 +119,6 @@
     background-color: var(--color-primary);
     border-radius: var(--radius-large);
     border: none;
-    display: inline-block;
     cursor: pointer;
     color: var(--color-secondary);
     font-size: var(--text-login-btn);
