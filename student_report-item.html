@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/student_report-item.css">
     <script src="navbar.js" defer></script>
+    <script src="image.js" defer></script>
 </head>
 
 <body>
@@ -186,8 +187,11 @@
 
             <div class="form-right">
                 <label class="upload-box">
-                    <input type="file" class="file-input" hidden>
-                    <span>Click to Upload Image</span>
+                    <input type="file" accept="image/*">
+
+                    <span class="upload-text">Click to Upload Image</span>
+
+                    <img class="preview-image" alt="">
                 </label>
                 
                 <label>Description</label>

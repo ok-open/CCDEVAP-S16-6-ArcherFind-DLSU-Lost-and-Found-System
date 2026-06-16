@@ -128,3 +128,38 @@
 .disable-btn:hover{
     background-color: #c9302c;
 }
+
+@media (max-width: 900px) {
+
+    .account-wrapper{
+        padding-top: 80px;
+    }
+
+    .account-layout{
+        grid-template-columns: 1fr;
+        gap: var(--space-medium);
+    }
+
+    .profile-image{
+        height: 280px;
+        margin-top: 0;
+    }
+
+    .row.two-cols{
+        grid-template-columns: 1fr;
+    }
+
+    .account-form h2{
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    .button-stack{
+        width: 100%;
+    }
+
+    .save-btn,
+    .disable-btn{
+        width: 100%;
+    }
+}
