@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcherFind - Surrender Found Item</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/admin_home.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="navbar.js" defer></script>
+    <script src="admin_home.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <div class="archerfind-logo">
+            <h1>ArcherFind</h1>
+            <img src="LOGOS/AF-ORIGINAL.png" alt="">
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="admin_home.html">Home</a></li>
+                <li class="dropdown">
+                    <a class="active" href="#">Lost and Found</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="">Verify Claim Request</a></li>
+                        <li><a href="">View Student Lost Reports</a></li>
+                        <li><a href="">Post Lost/Found Items</a></li>
+                        <li><a href="">Admin Report</a></li>
+                        <li><a href="">Manage Account</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <button type="button" id="user-button">
+                        <img src="LOGOS/user-icon.png" height="30px" alt="User" class="user-icon">
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>   
+
+    <div class="dashboard-wrapper">
+
+        <h1 class="greeting">Hello! <span id="username"> [ADMIN]</span></h1>
+
+        <div class="top-row">
+            <div class="card graph-card">
+                <h2>USER GRAPH</h2>
+                <canvas id="userChart"> </canvas>
+                <p><span class="stat-number">115 </span> Total Users</p>
+                </div>
+                <div class="card info-card">
+                <h2>Item Information (Current)</h2>
+
+                <div class="info-header">
+                    <span>Report Count </span>
+                    <span> Category </span>
+                </div>
+
+                    <div class="info-row">
+                        <span class="stat-number">162</span>
+                        <span> Total Item Listings </span>
+                    </div>
+
+                     <div class="info-row">
+                        <span class="stat-number">85</span>
+                        <span> Loss Reports </span>
+                    </div>
+
+                     <div class="info-row">
+                        <span class="stat-number">68</span>
+                        <span>Total Claim Requests </span> 
+                    </div>
+
+                     <div class="info-row">
+                        <span class="stat-number">67</span>
+                        <span> Total Found Item Reports </span>
+                    </div>
+
+            </div>
+        
+        </div>
+
+        <div class = "bottom-row-left">
+
+            <div class = "card stat-card">
+                <span class="stat-number"> 4 </span>
+                <span class="stat-label"> Staff Active </span>
+            </div>
+             <div class = "card stat-card">
+                <span class="stat-number"> 21 </span>
+                <span class="stat-label"> Students Active </span>
+             </div>
+             <div class="card generate">
+                <button class="generate-button"> Generate Report </button>
+             </div>
+             
+        </div>
+
+    </div>
+ 
+</body>
+</html>
