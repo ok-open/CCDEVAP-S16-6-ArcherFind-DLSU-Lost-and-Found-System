@@ -56,6 +56,7 @@
     /**************** BACKGROUND IMAGES ****************/
     --BACKGROUND-login: url('BACKGROUNDS/Login.png');
     --BACKGROUND-home:  url('BACKGROUNDS/Home.png');
+    --BACKGROUND-itemview: url('BACKGROUNDS/ItemView.png')
 }
 
 .darkmode {
@@ -74,6 +75,7 @@
     /**************** BACKGROUND IMAGES (DARK MODE) ****************/
     --BACKGROUND-login: url('BACKGROUNDS/LoginDark.png');
     --BACKGROUND-home: url('BACKGROUNDS/HomeDark.png');
+    --BACKGROUND-itemview: url('BACKGROUNDS/ItemViewDark.png')
 }
 
 * {
@@ -90,8 +92,8 @@
 
 body {
     background-color: var(--color-secondary);
-    overflow-x: hidden;
     max-width: 100%;
+    height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
