@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/staffadmin_lists.css">
+    <script src="staffadmin_lists.js" defer></script>
 </head>
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
@@ -91,6 +92,7 @@
                 </div>
 
                 <div class="UserDetails">
+                    <h3>Submitted on:</h3> <p>4-20-25</p>
                     <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
@@ -99,10 +101,10 @@
                     <button class="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
                     </button><br>
-                    <button>
+                    <button onclick="onResolveLostReport()">
                         <img src="styles/ICONS/Icon_accept.png">
                     </button><br>
-                    <button>
+                    <button onclick="onCloseLostReport()">
                         <img src="styles/ICONS/Icon_reject.png">
                     </button><br>
                 </div>
@@ -120,6 +122,7 @@
                 </div>
 
                 <div class="UserDetails">
+                    <h3>Submitted on:</h3> <p>4-20-25</p>
                     <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
@@ -128,10 +131,10 @@
                     <button class="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
                     </button><br>
-                    <button>
+                    <button onclick="onResolveLostReport()">
                         <img src="styles/ICONS/Icon_accept.png">
                     </button><br>
-                    <button>
+                    <button onclick="onCloseLostReport()">
                         <img src="styles/ICONS/Icon_reject.png">
                     </button><br>
                 </div>
@@ -149,6 +152,7 @@
                 </div>
 
                 <div class="UserDetails">
+                    <h3>Submitted on:</h3> <p>4-20-25</p>
                     <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
                     <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
                 </div>
@@ -157,16 +161,18 @@
                     <button class="openPanelBtn">
                         <img src="styles/ICONS/Icon_see.png">
                     </button><br>
-                    <button>
+                    <button onclick="onResolveLostReport()">
                         <img src="styles/ICONS/Icon_accept.png">
                     </button><br>
-                    <button>
+                    <button onclick="onCloseLostReport()">
                         <img src="styles/ICONS/Icon_reject.png">
                     </button><br>
                 </div>
             </div>
 
         </div>
+
+        <div id="toastBox"></div>
 
         <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
     </div>
@@ -227,48 +233,3 @@
     
 </body>
 </html>
-
-<!-- Javascript for dropdown info in Image Matches -->
- <script>
-    const images = document.querySelectorAll('.ImgMatches');
-
-    images.forEach((img) =>{
-        img.addEventListener('click', function(){
-            const detailsBox = this.parentElement.querySelector('.LostDetailsImgMatch');
-            detailsBox.classList.toggle('hidden');
-        })
-    })
- </script>
-
-<!-- Javascript for toggling the side panel when clicking Icon_see -->
-<script>
-    const sidePanel = document.getElementById('SidePanel_Iconsee');
-    const openButtons = document.querySelectorAll('.openPanelBtn'); //we use querySelectorAll because I used 'class', not 'id'
-    const closePanelBtn = document.getElementById('closePanelBtn');
-
-    openButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {sidePanel.classList.add('open')});
-    });
-    closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
-</script>
-
-<!-- Javascript for expanding the Image -->
-<script>
-    const modal = document.getElementById("ExpandPanel_ImgItem");
-    const largeImg = document.getElementById("imgExpand");
-    const allImages = document.querySelectorAll(".ImgItem");
-
-    allImages.forEach(function(img){
-        img.onclick = function() {
-            modal.style.display = "flex";
-            largeImg.src = this.src;
-        }
-    })
-
-
-    modal.onclick = function(event) {
-        if (event.target === modal){
-            modal.style.display = "none";
-        }
-    }
-</script>

@@ -207,3 +207,37 @@
     border-radius: 8px;
 }
 
+#toastBox {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
+    z-index: 3000;
+}
+
+.toast {
+    width: 300px;
+    background-color: var(--color-secondary-hover);
+    color: #fff;
+    padding: 16px;
+    border-radius: 8 px;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+    transform: transalatex(100%);
+    animation: slideIn 0.4secs each powerfull;
+}
+
+.toats.success {
+    border-left-color: #4CAF50; /* Green border */
+}
+
+.toast.error {
+    border-left-color: #F44336; /* Red border */
+}
+
+@keyframes slideIn {
+    to { transform: translateX(0); }
+}
