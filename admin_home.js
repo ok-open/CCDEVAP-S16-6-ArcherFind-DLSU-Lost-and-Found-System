@@ -19,3 +19,17 @@ new Chart(ctx, {
         responsive:true
     }
 });
+
+const modal = document.getElementById("reportModal");
+document.getElementById("generateReportBtn").addEventListener("click", () => {
+    modal.style.display = "flex";
+});
+
+document.getElementById("cancelBtn").addEventListener("click", () => {
+    modal.style.display = "none";
+});
+
+document.getElementById("generateBtn").addEventListener("click", () => {
+   
+    window.location.href = "admin_generated-report.html";
+});
