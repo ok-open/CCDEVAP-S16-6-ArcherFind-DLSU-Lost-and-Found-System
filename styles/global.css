@@ -37,7 +37,9 @@
     --space-small:  clamp(0.5rem, 1vw + 0.1rem, 0.9rem);
     --space-medium: clamp(1rem, 3vw + 0.25rem, 2.5rem);
     --space-large:  clamp(1.5rem, 6vw + 0.5rem, 6rem);
-    --space-xlarge: clamp(2rem, 10vw + 1rem, 9.5rem)
+    --space-xlarge: clamp(2rem, 10vw + 1rem, 9.5rem);
+    --space-xxlarge: clamp(3rem, 15vw + 1.5rem, 15rem);
+    --space-xxxlarge: clamp(6rem, 25vw + 2rem, 21rem);
 
     /***** Border radius *****/
     --radius-small:     14px;
@@ -48,8 +50,10 @@
     --bg-cover: center / cover no-repeat;
 
     /***** Logo image sizes *****/
-    --logo-img-small: clamp(2.5rem, 3vw + 1rem, 3.125rem);; /* used for the navbar */
-    --logo-img-large: clamp(3rem, 14vw + 1rem, 13rem); /* used for login page */
+    --logo-img-tiny:   clamp(1.5rem, 2vw + 0.5rem, 2rem);
+    --logo-img-small:  clamp(2.5rem, 3vw + 1rem, 3.125rem);
+    --logo-img-medium: clamp(3.125rem, 6vw + 1rem, 6rem);
+    --logo-img-large:  clamp(6rem, 14vw + 1rem, 13rem);
 
     /**************** LOGO IMAGES ****************/
 
@@ -107,7 +111,6 @@ h3 { font-size: var(--text-large); }
 h4 { font-size: var(--text-medium); }
 h5 { font-size: var(--text-small); }
 h6 { font-size: var(--text-tiny); }
-
 /**************** ArcherFind Logo ****************/
 .archerfind-logo {
     display: flex;

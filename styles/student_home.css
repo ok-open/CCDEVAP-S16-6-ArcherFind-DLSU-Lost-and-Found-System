@@ -2,6 +2,12 @@
     position: fixed;
 }
 
+p {
+    line-height: 1.4;
+    font-size: var(--text-tiny);
+    color: color-mix(in srgb, var(--color-primary) 70%, gray 30%);
+}
+
 /****************** INTRO SECTION ******************/
 .intro {
     position: relative;
