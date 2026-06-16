@@ -1,0 +1,103 @@
+.report-wrapper {
+    min-height: 100vh;
+    padding-top: 90px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.report-top-row {
+    display: flex;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.graph-card, .info-card {
+    min-height: 450px;
+    flex: 1;
+}
+
+#userChart, 
+#locationChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.graph-card canvas {
+    max-height: 250px;
+}
+
+.graph-card h2, .info-card h2 {
+    margin-bottom: 20px;
+}
+
+.graph-total {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.info-header, .info-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    align-items: center;
+}
+
+.info-header {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    margin-bottom: 20px;
+}
+
+.stat-number {
+    color: red;
+    font-size: bold;
+    font-size: 1.5rem;
+}
+
+.report-table-card {
+    margin-top: 30px;
+}
+
+.report-top-row {
+    display: flex;
+    gap: 25px;  
+    margin-top: 25px;
+    align-items: stretch;
+}
+
+.card {
+    background-color: white;
+    border: 2px solid #d4d2aa;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 10px;
+}
+
+#reportTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#reportTable th, #reportTable td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.back-btn {
+    text-decoration: none;
+    font-weight: bold;
+}
