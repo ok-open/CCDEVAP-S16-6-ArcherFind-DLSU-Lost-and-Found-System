@@ -216,7 +216,10 @@ footer {
 }
 
 /* for input boxes */
-input[type="text"], .input-box, textarea {
+input[type="text"],
+input[type="password"],
+.input-box,
+textarea {
     background-color: var(--color-complement);
 }
 
