@@ -44,10 +44,10 @@
     gap: var(--space-small);
 }
 
-#RequestsContainer h2{
+#RequestsRecord h2{
     font-size: clamp(2rem, 4vw + 1rem, 3rem);
 }
-#RequestsContainer h3, p{
+#RequestsRecord h3, p{
     font-size: clamp(1rem, 2vw + 0.5rem, 2rem);
 }
 
@@ -121,8 +121,17 @@
     overflow-x: hidden;
 
     & .LostDetails{
-            width: clamp(280px, 40vw, 450px);
+            width: clamp(280px, 40vw, 420px);
     }
+
+}
+
+#SidePanel_Iconsee h5 {
+       display: inline-block;
+}
+#SidePanel_Iconsee p{
+       font-size: clamp(15px, 0.8vw + 0.4rem, 20px);
+       display: inline-block;
 }
 
 #SidePanel_Iconsee.open {
@@ -131,7 +140,7 @@
 }
 
 #SidePanel_ImgContainer .ImgFromDB {
-    width: clamp(280px, 40vw, 450px);
+    width: clamp(140px, 40vw, 225px);
 }
 
 #SidePanel_ImgContainer {
@@ -139,6 +148,7 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: var(--space-small);
+    justify-content: center;
 }
 
 #SidePanel_ImgContainer .ImgMatches {
@@ -182,6 +192,8 @@
     padding: var(--space-small);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
+
+
 
 .hidden {
     display: none;
