@@ -123,6 +123,28 @@
     background-color: var(--color-primary-dark);
 }
 
+#toast {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    background: #198754;
+    color: white;
+    padding: 14px 20px;
+    border-radius: var(--radius-medium);
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+
+#toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
 
 @media(max-width: 900px) {
 
@@ -145,5 +167,25 @@
 
     .submit-btn {
         width: 100%;
+    }
+}
+
+@media (max-width: 600px){
+
+    #toast{
+        top: 80px;
+        left: 50%;
+        right: auto;
+
+        transform: translate(-50%, -10px);
+
+        width: calc(100% - 40px);
+        max-width: none;
+
+        text-align: center;
+    }
+
+    #toast.show{
+        transform: translate(-50%, 0);
     }
 }

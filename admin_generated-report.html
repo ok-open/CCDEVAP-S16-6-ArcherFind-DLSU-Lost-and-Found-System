@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ArcherFind - Generated Report</title>
+
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/admin_generated-report.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="admin_generated-report.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <div class="archerfind-logo">
+            <h1>ArcherFind</h1>
+            <img src="LOGOS/AF-ORIGINAL.png" alt="">
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="admin_home.html">Home</a></li>
+
+                <li class="dropdown">
+                    <a class="active" href="#">Lost and Found</a>
+
+                    <ul class="dropdown-menu">
+                        <li><a href="">Verify Claim Request</a></li>
+                        <li><a href="">View Student Lost Reports</a></li>
+                        <li><a href="">Post Lost/Found Items</a></li>
+                        <li><a href="">Admin Report</a></li>
+                        <li><a href="admin_manage-student.html">Manage Account</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <button type="button" id="user-button">
+                        <img src="LOGOS/user-icon.png"
+                             height="30"
+                             alt="User"
+                             class="user-icon">
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="report-wrapper">
+
+        <div class="report-header">
+
+            <a href="admin_home.html" class="back-btn">
+                Back to Dashboard
+            </a>
+
+            <h1>Generated Report</h1>
+
+            <p id="reportRange">
+                January 1, 2025 - January 31, 2025 (sample date)
+            </p>
+
+        </div>
+
+        <div class="report-top-row">
+
+    <div class="card graph-card">
+
+        <h2>User Distribution</h2>
+
+        <canvas id="userChart"></canvas>
+
+        <p class="graph-total">
+            <span class="stat-number">115</span>
+            Total Users
+        </p>
+
+    </div>
+
+    <div class="card graph-card">
+
+        <h2>Lost Item Frequency</h2>
+
+        <canvas id="locationChart"></canvas>
+
+    </div>
+
+    <div class="card info-card">
+
+        <h2>Item Information</h2>
+
+        <div class="info-header">
+            <span>Count</span>
+            <span>Category</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">162</span>
+            <span>Total Item Listings</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">85</span>
+            <span>Loss Reports</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">68</span>
+            <span>Claim Requests</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">67</span>
+            <span>Found Item Reports</span>
+        </div>
+
+    </div>
+
+</div>
+
+       
+
+        <div class="card report-table-card">
+
+            <div class="table-header">
+
+                <h2>Items Included in Report</h2>
+
+                <div class="filter-row">
+
+                    <select id="categoryFilter">
+                        <option>All Categories</option>
+                        <option>Electronics</option>
+                        <option>Identity Documents</option>
+                        <option>Watch / Jewelry</option>
+                        <option>Miscellaneous</option>
+                    </select>
+
+                    <select id="statusFilter">
+                        <option>All Statuses</option>
+                        <option>Listed</option>
+                        <option>Claimed</option>
+                        <option>Disposed</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <table id="reportTable">
+
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>UNIQLO Yellow Sweater</td>
+                        <td>Clothes</td>
+                        <td>Disposed</td>
+                    </tr>
+
+                    <tr>
+                        <td>DLSU Student ID</td>
+                        <td>Identity Documents</td>
+                        <td>Listed</td>
+                    </tr>
+
+                    <tr>
+                        <td>iPad Air</td>
+                        <td>Electronics</td>
+                        <td>Claimed</td>
+                    </tr>
+
+                    <tr>
+                        <td>Aqua Flask</td>
+                        <td>Miscellaneous</td>
+                        <td>Listed</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

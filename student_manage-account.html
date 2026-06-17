@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/student_manage-account.css">
     <script src="navbar.js" defer></script>
     <script src="login.js" defer></script>
+    <script src="manage-account.js" defer></script>
 </head>
 
 <body>
@@ -40,7 +41,7 @@
                         </button>
                         <div class="user-profile">
                             <p class="user-greeting">Welcome back,<br>
-                                <span class="name_of_user">[superlongname]</span>!  <!-- TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                                <span class="name_of_user">[superlongname]</span>!  <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                             </p>
                             <button type="button" class="manage-account">Manage Account</button>
                             <div class="user-profile-container">
@@ -80,7 +81,7 @@
                 </button>
                 <div class="user-profile">
                     <p class="user-greeting">Welcome back,<br>
-                        <span class="name_of_user">[superlongname]</span>!  <!-- TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                        <span class="name_of_user">[superlongname]</span>!  <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                     </p>
                     <button type="button" class="manage-account">Manage Account</button>
                     <div class="user-profile-container">
@@ -106,10 +107,6 @@
     <!-- ACCOUNT PAGE -->
     <div class="account-wrapper">
         <section class="account-layout">
-            <!-- IMAGE -->
-            <div class="profile-image">
-                <span>IMAGE</span>
-            </div>
 
             <!-- FORM -->
             <div class="account-form">
@@ -159,11 +156,17 @@
 
                 <!-- BUTTONS -->
                 <div class="button-stack">
-                    <button class="save-btn">Confirm New Password</button>
-                    <button class="disable-btn">Disable Account</button>
+                    <button id="saveBtn" class="save-btn">
+                        Confirm New Password
+                    </button>
+
+                    <button id="disableBtn" class="disable-btn">
+                        Disable Account
+                    </button>
                 </div>
             </div>
         </section>
     </div>
+    <div id="toast"></div>
 </body>
 </html>
