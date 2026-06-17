@@ -3,43 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Surrender Found Item</title>
+    <title>ArcherFind - Manage Staff</title>
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/navbar-admin.css">
-    <link rel="stylesheet" href="styles/admin_dashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles/admin_manage-staff.css">
     <script src="navbar.js" defer></script>
-    <script src="admin_dashboard.js" defer></script>
+
+
 </head>
-
-<div id="reportModal" class="modal">
-
-    <div class="modal-content">
-
-        <h2>Select Time Frame</h2>
-
-        <label for="fromDate">From</label>
-        <input type="date" id="fromDate">
-
-        <label for="toDate">To</label>
-        <input type="date" id="toDate">
-
-        <div class="modal-buttons">
-
-            <button id="generateBtn">
-                Generate
-            </button>
-
-            <button id="cancelBtn">
-                Cancel
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
 
 <body>
     <header>
@@ -59,7 +31,6 @@
                         <li><a href="admin_claim-list.html">Verify Claim Request</a></li>
                         <li><a href="admin_report-list.html">Verify Lost Reports</a></li>
                         <li><a href="admin_surrender-list.html">Verify Surrender Forms</a></li>
-                        <li><a href="admin_dashboard.html">Admin Report</a></li>
                         <li><a href="admin_manage-student.html">Manage Students</a></li>
                         <li><a href="admin_manage-staff.html">Manage Staffs</a></li>
                     </ul>
@@ -93,66 +64,73 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FFFEED"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
             </button></div>
         </nav>
-    </header>   
+    </header>
+    
+    <div class="itemview-wrapper">
+        <aside class="itemview-sidebar">
+            <div class="stats-box">
+                <h3>Total Staff</h3>
+                <h2>7</h2> <!-- Total Staff number-->
+            </div>
+        </aside>
 
-    <div class="dashboard-wrapper">
-        <h1 class="greeting">Hello, <span id="username"> [ADMIN]</span>!</h1>
+        <main class="itemview-main">
+            <h1 class="manage-title">MANAGE STAFF</h1>
 
-        <div class="top-row">
-            <div class="card graph-card">
-                <h2>USER GRAPH</h2>
-                <canvas id="userChart"> </canvas>
-                <p><span class="stat-number">115 </span> Total Users</p>
+            <div class="itemview-controls">
+                <input type="text" placeholder="Search for staff..." class="search-bar">
+
+                <select class="sort-dropdown">
+                    <option>Sort: Name</option>
+                    <option>Sort: ID Number</option>
+                </select>
+            </div>
+
+            <div class="staff-list">
+                <div class="staff-card">
+                    <div><strong>Name:</strong> Robin Dela Cruz</div>
+                    <div><strong>ID Number:</strong> 12345678</div>
+                    <button class="remove-btn">Remove</button>
                 </div>
-                <div class="card info-card">
-                <h2>Item Information (Current)</h2>
 
-                <div class="info-header">
-                    <span>Report Count </span>
-                    <span> Category </span>
+                <div class="staff-card">
+                    <div><strong>Name:</strong> Carl Crespo</div>
+                    <div><strong>ID Number:</strong> 12479144</div>
+                    <button class="remove-btn">Remove</button>
                 </div>
 
-                    <div class="info-row">
-                        <span class="stat-number">162</span>
-                        <span> Total Item Listings </span>
-                    </div>
+                <div class="staff-card">
+                    <div><strong>Name:</strong> Lebron James</div>
+                    <div><strong>ID Number:</strong> 66666666</div>
+                    <button class="remove-btn">Remove</button>
+                </div>
 
-                     <div class="info-row">
-                        <span class="stat-number">85</span>
-                        <span> Loss Reports </span>
-                    </div>
+                <div class="staff-card">
+                    <div><strong>Name:</strong> Michael Jordan</div>
+                    <div><strong>ID Number:</strong> 676767676</div>
+                    <button class="remove-btn">Remove</button>
+                </div>
 
-                     <div class="info-row">
-                        <span class="stat-number">68</span>
-                        <span>Total Claim Requests </span> 
-                    </div>
+                <div class="staff-card">
+                    <div><strong>Name:</strong> Michael Jackson</div>
+                    <div><strong>ID Number:</strong> 231231231</div>
+                    <button class="remove-btn">Remove</button>
+                </div>
 
-                     <div class="info-row">
-                        <span class="stat-number">67</span>
-                        <span> Total Found Item Reports </span>
-                    </div>
+                <div class="staff-card">
+                    <div><strong>Name:</strong> Paul </div>
+                    <div><strong>ID Number:</strong> 121231212 </div>
+                    <button class="remove-btn">Remove</button>
+                </div>
+
+                <div class="staff-card">
+                    <div><strong>Name:</strong> John </div>
+                    <div><strong>ID Number:</strong> 236125426</div>
+                    <button class="remove-btn">Remove</button>
+                </div>
 
             </div>
-        
-        </div>
-
-        <div class = "bottom-row-left">
-
-            <div class = "card stat-card">
-                <span class="stat-number"> 4 </span>
-                <span class="stat-label"> Staff Active </span>
-            </div>
-             <div class = "card stat-card">
-                <span class="stat-number"> 21 </span>
-                <span class="stat-label"> Students Active </span>
-             </div>
-             <div class="card generate">
-                <button id="generateReportBtn" class="generate-button"> Generate Report </button>
-             </div>
-             
-        </div>
-
+        </main>
     </div>
- 
 </body>
 </html>
