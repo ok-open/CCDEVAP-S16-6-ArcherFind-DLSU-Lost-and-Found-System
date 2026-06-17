@@ -1,16 +1,14 @@
 .wrapper {
-    padding: var(--space-medium);
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     background-color: color-mix(in srgb, var(--color-secondary) 60%, var(--color-complement));
 }
 
 .dashboard-wrapper {
     display: flex;
     flex-direction: column;
+    padding: var(--space-medium);
     gap: var(--space-medium);
-
 }
 
 .content {
@@ -53,32 +51,37 @@
     flex-direction: row;
     flex-wrap: wrap;
     gap: var(--space-medium);
-    width: 100%;
+}
+
+@media (max-width: 1000px) {
+    .bottom-wrapper {
+        flex-direction: column;
+    }
 }
 
 .lost-item-freq {
     flex: 1;
+    min-width: 0;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: clamp(250px, 40vh, 450px);
 }
 
 .report-notif-wrapper {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     gap: var(--space-medium);
 }
 
 .report {
-    flex: 1;
+    flex: 3;
     padding: var(--space-medium);
     min-height: 250px;
     overflow-y: auto;
-}
-
-.report hr {
-    border: none;
-    height: 1px;
-    background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
-    margin-bottom: var(--space-medium);
 }
 
 #report-table {
@@ -88,7 +91,7 @@
 }
 
 #report-table thead {
-    background-color: var(--color-secondary-hover);
+    background-color: color-mix(in srgb, var(--color-secondary-hover) 60%, var(--color-complement));
 }
 
 #report-table th {
@@ -114,22 +117,10 @@
     border-radius: var(--radius-medium);
     background-color: var(--color-secondary);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    min-height: 200px;
-}
-
-.notif h4 {
-    font-size: var(--text-small);
-    color: var(--color-primary-dark);
-    margin-bottom: var(--space-small);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .notif p {
     font-size: var(--text-small);
-    color: var(--color-primary);
-    margin-bottom: var(--space-small);
-    padding-left: var(--space-small);
 }
 
 @media (max-width: 1024px) {

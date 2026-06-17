@@ -1,13 +1,9 @@
 /**************** WRAPPER ****************/
 .account-wrapper{
-    min-height: 100dvh;
-    padding-top: 100px;
-
+    min-height: calc(100dvh - 60px);
+    padding: var(--space-xlarge);
     display: flex;
     justify-content: center;
-
-    padding-left: var(--space-medium);
-    padding-right: var(--space-medium);
 }
 
 /**************** LAYOUT ****************/

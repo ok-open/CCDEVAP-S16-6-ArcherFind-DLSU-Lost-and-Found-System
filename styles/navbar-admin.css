@@ -41,3 +41,8 @@
           drop-shadow(0 0 15px #ffffff) 
           drop-shadow(0 0 30px #ffffff);
 }
+
+.dropdown-menu {
+    top: calc(100% + 0px);
+    min-width: 300px;
+}

@@ -31,6 +31,8 @@ new Chart(ctx, {
     }]
   },
   options: {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       y: {
         beginAtZero: true
@@ -42,10 +44,11 @@ new Chart(ctx, {
 // FOR LATEST REPORTS
 const dummyReports = [
   { id: 1, date: "June 03, 2026", type: "Loss Report", status: "Pending" },
-  { id: 2, date: "June 05, 2026", type: "Found Report", status: "Verified" },
-  { id: 3, date: "June 08, 2026", type: "Loss Report", status: "Claimed" },
+  { id: 2, date: "June 05, 2026", type: "Claim Request", status: "Verified" },
+  { id: 3, date: "June 08, 2026", type: "Found Item Request", status: "Claimed" },
   { id: 4, date: "June 11, 2026", type: "Found Report", status: "Pending" },
-  { id: 5, date: "June 15, 2026", type: "Loss Report", status: "Rejected" },
+  { id: 5, date: "June 15, 2026", type: "Claim Request", status: "Rejected" },
+  { id: 6, date: "June 17, 2026", type: "Found Report", status: "Pending" },
 ];
 
 function renderReports(reports) {
