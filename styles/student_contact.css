@@ -143,9 +143,60 @@ body {
     background-color: var(--color-primary-dark);
 }
 
-
-@media (max-width: 1300px) {
+/* RESPONSIVE: MOBILE VIEW */
+@media (max-width: 576px) {
     .contact-wrapper {
-        margin: var(--space-large) var(--space-xlarge);
+        padding: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+
+    .contact-us,
+    .contact-form {
+        width: 100%;
+        padding: var(--space-medium);
+    }
+
+    .contact-form-details {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'firstname lastname'
+            'address address'
+            'phonenum phonenum'
+            'comment comment'
+            'sendmsg faq';
+    }
+}
+
+/* RESPONSIVE: TABLET VIEW */
+@media (max-width: 768px) {
+    .contact-wrapper {
+        padding: unset;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: auto;
+    }
+
+    .contact-us,
+    .contact-form {
+        width: 100%;
+        padding: var(--space-medium);
+    }
+
+    .contact-form-details {
+        width: 100%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+            'firstname lastname'
+            'address address'
+            'phonenum phonenum'
+            'comment comment'
+            'sendmsg faq';
     }
 }
