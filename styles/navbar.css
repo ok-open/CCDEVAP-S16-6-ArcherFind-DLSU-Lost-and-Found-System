@@ -96,6 +96,7 @@ header .archerfind-logo {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     background-color: var(--color-secondary-glass);
+    backdrop-filter: blur(3px);
     z-index: 100;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
@@ -446,6 +447,7 @@ button.manage-account,
         width: 70%;
         height: 100vh;
         background-color: color-mix(in srgb, var(--color-navbar) 90%, transparent);
+        backdrop-filter: blur(1px);
         z-index: -1; /* so it is behind header */
         transition: 0.2s ease-out;
     }

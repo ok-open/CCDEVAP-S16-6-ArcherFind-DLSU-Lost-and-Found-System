@@ -33,6 +33,7 @@
     margin-right: clamp(0rem, 5vw, 10rem);
     font-size: var(--text-body);
     background-color: var(--color-secondary-glass);
+    backdrop-filter: blur(5px);
     border-radius: var(--radius-small);
 
     & h1 {
