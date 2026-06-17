@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/navbar.css">
     <link rel="stylesheet" href="styles/navbar-staff.css">
-    <link rel="stylesheet" href="styles/staffadmin_lists.css">
+    <link rel="stylesheet" href="styles/admin_dashboard.css">
     <script src="navbar.js" defer></script>
-    <script src="staffadmin_lists.js" defer></script>
+    <script src="admin_dashboard.js" defer></script>
 </head>
 <body>
 <!------------------------ NAVIGATION BAR / HEADER ------------------------>
@@ -97,180 +97,88 @@
     </header>
 <!-- END OF NAVIGATION BAR / HEADER -->
 
-    <div id="MainHeader">
-        <h1>Verify Lost Items Reports</h1>
-        <div class="SearchContainer">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-    <div id="MainContainer">
-        <div id="SortBy">
-            <h2>Sort by</h2>
-            <form>
-                <input type="radio" name="SortOptions" value="mostRecent">
-                <label for="mostRecent">Most Recent first</label><br>
-                <input type="radio" name="SortOptions" value="leastRecent">
-                <label for="mostRecent">Least Recent first</label><br>
-                <input type="radio" name="SortOptions" value="itemA-Z">
-                <label for="itemA-Z">Item name A-Z</label><br>
-                <input type="radio" name="SortOptions" value="itemZ-A">
-                <label for="itemZ-A">Item name Z-A</label><br>
-                <input class="SortBtn" type="submit" value="Submit">
-                <button class="SortBtn">Reset</button>
-            </form>
+<div class="dashboard-wrapper">
+    <!-- GREETING HEADER -->
+    <h1 class="greeting">Hello, <span id="username">Staff name</span>!</h1>
+
+    <!-- TOP SECTION: Row of Summary Stat Cards -->
+    <div class="bottom-row-left" style="margin-top: 20px;">
+        <!-- Claim Requests Approved Card -->
+        <div class="card stat-card">
+            <span class="stat-number">14</span>
+            <div class="stat-label" style="font-size: 1rem; text-align: left;">
+                Claim Requests<br>Approved
+            </div>
         </div>
 
-        <div id="RequestsContainer">
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/1.png">
-
-                <div class="LostDetails">
-                    <h2>Black Oversize Hoodie</h2> 
-                    <!-- Item name -->
-                    <h3>Date Lost:</h3> <p>4-12-25</p>
-                    <h3>Time Lost:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
-
-                <div class="UserDetails">
-                    <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
-                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
-                </div>
-                
-                <div class="RequestButtons">
-                    <button class="openPanelBtn">
-                        <img src="styles/ICONS/Icon_see.png">
-                    </button><br>
-                    <button onclick="onResolveLostReport()">
-                        <img src="styles/ICONS/Icon_accept.png">
-                    </button><br>
-                    <button onclick="onCloseLostReport()">
-                        <img src="styles/ICONS/Icon_reject.png">
-                    </button><br>
-                </div>
+        <!-- Surrender Forms Approved Card -->
+        <div class="card stat-card">
+            <span class="stat-number">20</span>
+            <div class="stat-label" style="font-size: 1rem; text-align: left;">
+                Surrender Forms<br>Approved
             </div>
-
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/2.png">
-
-                <div class="LostDetails">
-                    <h2>Apple Charger</h2> 
-                    <!-- Item name -->
-                    <h3>Date Lost:</h3> <p>4-12-25</p>
-                    <h3>Time Lost:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
-
-                <div class="UserDetails">
-                    <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
-                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
-                </div>
-                
-                <div class="RequestButtons">
-                    <button class="openPanelBtn">
-                        <img src="styles/ICONS/Icon_see.png">
-                    </button><br>
-                    <button onclick="onResolveLostReport()">
-                        <img src="styles/ICONS/Icon_accept.png">
-                    </button><br>
-                    <button onclick="onCloseLostReport()">
-                        <img src="styles/ICONS/Icon_reject.png">
-                    </button><br>
-                </div>
-            </div>
-
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/3.png">
-
-                <div class="LostDetails">
-                    <h2>Sony WH-00XM4</h2> 
-                    <!-- Item name -->
-                    <h3>Date Lost:</h3> <p>4-12-25</p>
-                    <h3>Time Lost:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
-
-                <div class="UserDetails">
-                    <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
-                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
-                </div>
-                
-                <div class="RequestButtons">
-                    <button class="openPanelBtn">
-                        <img src="styles/ICONS/Icon_see.png">
-                    </button><br>
-                    <button onclick="onResolveLostReport()">
-                        <img src="styles/ICONS/Icon_accept.png">
-                    </button><br>
-                    <button onclick="onCloseLostReport()">
-                        <img src="styles/ICONS/Icon_reject.png">
-                    </button><br>
-                </div>
-            </div>
-
         </div>
 
-        <div id="toastBox"></div>
-
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-    </div>
-    
-
-    <div id="SidePanel_Iconsee">
-        <button class="close" id="closePanelBtn">close</button>
-        <h2>Possible Matches</h2>
-
-        <div id="SidePanel_ImgContainer">
-            <!-- 🤔 FOR BACKEND: ImgCard should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
-            <div class="ImgCard">
-                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/1.png">
-                <div class="LostDetailsImgMatch hidden">
-                    <h2>Black Oversize Hoodie</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
-            </div>
-            <div class="ImgCard">
-                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/5.png">
-                <div class="LostDetailsImgMatch hidden">
-                    <h2>Black Hoodie w/ Details</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
-            </div>
-            <div class="ImgCard">
-                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/6.png">
-                <div class="LostDetailsImgMatch hidden">
-                    <h2>Black Hoodie Straight Cut</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
-            </div>
-            <div class="ImgCard">
-                <img class="ImgMatches" alt="ImageItem" src="styles/ITEMS/7.png">
-                <div class="LostDetailsImgMatch hidden">
-                    <h2>Plain Black Hoodie</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
+        <!-- Loss Reports Resolved Card -->
+        <div class="card stat-card">
+            <span class="stat-number">10</span>
+            <div class="stat-label" style="font-size: 1rem; text-align: left;">
+                Loss Reports<br>Resolved
             </div>
         </div>
     </div>
 
-    <div id="ExpandPanel_ImgItem" class="modal">
-        <img class="modal-content" id="imgExpand">
+    <!-- MAIN DASHBOARD CONTENT GRID (Chart, Table, and Action Link Sidebar) -->
+    <div class="top-row" style="margin-top: 30px; display: flex; flex-wrap: wrap; width: 100%;">
+        
+        <!-- Left: Item Status Overview (Doughnut Chart Container) -->
+        <div class="card graph-card" style="box-sizing: border-box;">
+            <h3 class="form-section-title" style="margin-top: 0;">Item Status Overview</h3>
+            <canvas id="userChart" ></canvas>
+        </div>
+
+        <!-- Middle: Recent Items Added (Data List Table Container) -->
+        <div class="card info-card" style="box-sizing: border-box; display: flex; flex-direction: column;">
+            <h3 class="form-section-title" style="margin-top: 0;">Recent Items Added</h3>
+            <div style="width: 100%; border-collapse: collapse;">
+                <div class="info-header" style="border-bottom: 2px solid var(--color-primary-dark, #ccc); padding-bottom: 8px;">
+                    <div>Item</div>
+                    <div>Category</div>
+                </div>
+                <div class="info-row" style="font-size: 1rem; padding: 10px 0; border-bottom: 1px solid #eee;">
+                    <div>JBL Headphones</div>
+                    <div>Electronics</div>
+                </div>
+                <div class="info-row" style="font-size: 1rem; padding: 10px 0; border-bottom: 1px solid #eee;">
+                    <div>Sitala Necklace</div>
+                    <div>Jewelry</div>
+                </div>
+                <div class="info-row" style="font-size: 1rem; padding: 10px 0; border-bottom: 1px solid #eee;">
+                    <div>CASIO Watch</div>
+                    <div>Electronics</div>
+                </div>
+                <div class="info-row" style="font-size: 1rem; padding: 10px 0;">
+                    <div>Green Aquaflask</div>
+                    <div>Valuables</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right / Bottom: Navigation Action Buttons Links -->
+        <div class="generate-row" style="display: flex; flex-direction: column; gap: 15px; min-width: 200px; flex: 1;">
+            <button type="button" class="card submit-btn" onclick="window.location.href='staff_claim-list.html'" >
+                Verify Claim Request
+            </button>
+            <button type="button" class="card submit-btn" onclick="window.location.href='staff_report-list.html'">
+                View Student Lost Reports
+            </button>
+            <button type="button" class="card submit-btn" onclick="window.location.href='staff_surrender-list.html'">
+                View Surrender List
+            </button>
+        </div>
+        
     </div>
+</div>
 
 </body>
 </html>
