@@ -1,14 +1,26 @@
 .wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
     background-color: color-mix(in srgb, var(--color-secondary) 60%, var(--color-complement));
 }
 
 .dashboard-wrapper {
     display: flex;
     flex-direction: column;
+    flex: 1;
+    width: 100%;
+    min-height: 100vh;
     padding: var(--space-medium);
     gap: var(--space-medium);
+}
+
+.stats-buttons-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-medium);
+    width: 100%;
 }
 
 .content {
@@ -32,7 +44,14 @@
     transform: translateY(-2px);
 }
 
-.stat-wrapper {
+.stats-left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-medium);
+    flex: 5;
+}
+
+.top-stat-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -46,7 +65,7 @@
 }
 
 /* BOTTOM SECTION */
-.bottom-wrapper {
+.bottom-stat-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -59,42 +78,30 @@
     }
 }
 
-.lost-item-freq {
+.item-status-overview {
     flex: 1;
-    min-width: 0;
-}
-
-.chart-container {
-    position: relative;
-    width: 100%;
-    height: clamp(250px, 40vh, 450px);
-}
-
-.report-notif-wrapper {
-    flex: 2;
     display: flex;
     flex-direction: column;
-    gap: var(--space-medium);
 }
 
-.report {
-    flex: 3;
+.recent-items-added {
+    flex: 1;
     padding: var(--space-medium);
     min-height: 250px;
     overflow-y: auto;
 }
 
-#report-table {
+#staff-report-table {
     width: 100%;
     border-collapse: collapse;
     font-size: var(--text-small);
 }
 
-#report-table thead {
+#staff-report-table thead {
     background-color: color-mix(in srgb, var(--color-secondary-hover) 60%, var(--color-complement));
 }
 
-#report-table th {
+#staff-report-table th {
     padding: var(--space-small);
     text-align: left;
     color: var(--color-primary-dark);
@@ -102,43 +109,32 @@
     border-bottom: 2px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
 }
 
-#report-table td {
+#staff-report-table td {
     padding: var(--space-small);
     border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
-#report-table tbody tr:hover {
+#staff-report-table tbody tr:hover {
     background-color: color-mix(in srgb, var(--color-primary-deeper) 5%, transparent);
-}
-
-.notif {
-    flex: 1;
 }
 
 .notif p {
     font-size: var(--text-small);
 }
 
-@media (max-width: 1024px) {
-    .bottom-wrapper {
-        grid-template-columns: 1fr;
-    }
-
-    .lost-item-freq {
-        grid-column: 1 / -1;
-    }
-
-    .report-notif-wrapper {
-        grid-column: 1 / -1;
-    }
+/* RIGHT BUTTONS */
+.buttons-right {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-small);
+    flex: 1;
 }
 
-@media (max-width: 768px) {
-    .stat-wrapper {
-        flex-direction: column;
-    }
-
-    .stat-block {
-        min-width: auto;
-    }
+.action-button {
+    font-size: var(--text-large);
+    font-weight: 700;
+    flex: 1;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    border: none;
 }
