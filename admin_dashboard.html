@@ -13,6 +13,34 @@
     <script src="admin_dashboard.js" defer></script>
 </head>
 
+<div id="reportModal" class="modal">
+
+    <div class="modal-content">
+
+        <h2>Select Time Frame</h2>
+
+        <label for="fromDate">From</label>
+        <input type="date" id="fromDate">
+
+        <label for="toDate">To</label>
+        <input type="date" id="toDate">
+
+        <div class="modal-buttons">
+
+            <button id="generateBtn">
+                Generate
+            </button>
+
+            <button id="cancelBtn">
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
 <body>
     <header>
         <div class="archerfind-logo">
@@ -31,7 +59,7 @@
                         <li><a href="admin_claim-list.html">Verify Claim Request</a></li>
                         <li><a href="admin_report-list.html">Verify Lost Reports</a></li>
                         <li><a href="admin_surrender-list.html">Verify Surrender Forms</a></li>
-                        <li><a href="admin_generated-report.html">Admin Report</a></li>
+                        <li><a href="admin_dashboard.html">Admin Report</a></li>
                         <li><a href="admin_manage-student.html">Manage Accounts</a></li>
                     </ul>
                 </li>
@@ -118,7 +146,7 @@
                 <span class="stat-label"> Students Active </span>
              </div>
              <div class="card generate">
-                <button class="generate-button"> Generate Report </button>
+                <button id="generateReportBtn" class="generate-button"> Generate Report </button>
              </div>
              
         </div>
