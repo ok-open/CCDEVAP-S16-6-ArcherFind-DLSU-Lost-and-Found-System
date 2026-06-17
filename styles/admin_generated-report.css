@@ -1,8 +1,7 @@
 .report-wrapper {
     min-height: 100vh;
-    padding-top: 90px;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: var(--space-medium);
+    background-color: color-mix(in srgb, var(--color-secondary) 60%, var(--color-complement));
 }
 
 .report-top-row {
@@ -12,9 +11,11 @@
 }
 
 .graph-card, .info-card {
-    min-height: 450px;
     flex: 1;
+    border-bottom: 5px solid var(--color-primary-deeper);
 }
+
+
 
 #userChart, 
 #locationChart {
@@ -37,23 +38,26 @@
 
 .info-header, .info-row {
     display: grid;
-    grid-template-columns: 100px 1fr;
-    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-medium);
 }
 
 .info-header {
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-weight: 600;
+    margin-bottom: var(--space-small);
+    padding-bottom: var(--space-small);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 10%, transparent);
 }
 
 .info-row {
-    margin-bottom: 20px;
+    padding: var(--space-small) 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-primary) 5%, transparent);
 }
 
 .stat-number {
-    color: red;
-    font-size: bold;
-    font-size: 1.5rem;
+    font-size: var(--text-large);
+    font-weight: 700;
+    color: var(--color-primary-deeper);
 }
 
 .report-table-card {
@@ -68,10 +72,23 @@
 }
 
 .card {
-    background-color: white;
-    border: 2px solid #d4d2aa;
-    border-radius: 20px;
-    padding: 20px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+    background-color: var(--color-secondary);
+    transition: all 0.3s ease;
+    padding: var(--space-medium);
+    border-radius: var(--radius-medium);
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+.card hr {
+    border: none;
+    height: 1px;
+    background-color: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    margin-bottom: var(--space-medium);
 }
 
 .table-header {
@@ -97,9 +114,23 @@
     text-align: left;
 }
 
-.back-btn {
+.back-btn{
     text-decoration: none;
-    font-weight: bold;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    transition: .25s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    cursor: pointer;
+}
+
+.back-btn:hover{
+    background-color: var(--color-primary-dark);
+    transform: translateY(-3px);
 }
 
 /* MOBILE VIEW */

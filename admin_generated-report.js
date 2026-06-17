@@ -14,24 +14,5 @@ new Chart(userCtx, {
     }
 });
 
-const locationCtx = document.getElementById('locationChart');
-
-new Chart(locationCtx, {
-    type: 'bar',
-    data: {
-        labels: [
-            'Gokongwei Hall',
-            'Andrew Hall',
-            'LS Hall',
-            'Library'
-        ],
-        datasets: [{
-            label: 'Lost Items',
-            data: [25, 18, 12, 9]
-        }]
-    },
-    options: {
-        responsive: true,
-        maintainAspectRatio: false
-    }
-});
+// FOR LOST ITEM FREQUENCY BY LOCATION
+initLostItemChart('locationChart', 'Lost Items by Location');
