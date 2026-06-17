@@ -85,7 +85,7 @@
 }
 
 .recent-items-added {
-    flex: 1;
+    flex: 2;
     padding: var(--space-medium);
     min-height: 250px;
     overflow-y: auto;
