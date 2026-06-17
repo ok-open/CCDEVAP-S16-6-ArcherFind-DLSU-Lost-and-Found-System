@@ -41,7 +41,7 @@
                         </button>
                         <div class="user-profile">
                             <p class="user-greeting">Welcome back,<br>
-                                <span class="name_of_user">[superlongname]</span>!  <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                                <span class="name_of_user">[superlongname]</span>!
                             </p>
                             <button type="button" class="manage-account">Manage Account</button>
                             <div class="user-profile-container">
@@ -81,7 +81,7 @@
                 </button>
                 <div class="user-profile">
                     <p class="user-greeting">Welcome back,<br>
-                        <span class="name_of_user">[superlongname]</span>!  <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                        <span class="name_of_user">[superlongname]</span>!
                     </p>
                     <button type="button" class="manage-account">Manage Account</button>
                     <div class="user-profile-container">
@@ -102,14 +102,14 @@
             </button></div>
         </nav>
     </header>
-<!-- END OF NAVIGATION BAR / HEADER -->
-
+    <!-- END OF NAVIGATION BAR / HEADER -->
 
     <div class="surrender-wrapper">
         <h2 class="form-title">Report an Item that You Lost!</h2>
 
         <form class="surrender-form">
-            <div class="form-left">
+
+            <div class="form-left-top">
                 <label>
                     What item was lost?
                     <span class="required">required field</span>
@@ -133,7 +133,9 @@
                     <span class="required">required field</span>
                 </label>
                 <input type="text" class="input-box">
+            </div>
 
+            <div class="form-left-bottom">
                 <h3 class="form-section-title">Where was this lost?</h3>
 
                 <div class="building-room-row">
@@ -142,7 +144,6 @@
                             Building
                             <span class="required">required field</span>
                         </label>
-
                         <select class="input-box">
                             <option>Select Building</option>
                             <option>Gokongwei Hall</option>
@@ -190,12 +191,10 @@
             <div class="form-right">
                 <label class="upload-box">
                     <input type="file" accept="image/*">
-
                     <span class="upload-text">Click to Upload Image</span>
-
                     <img class="preview-image" alt="">
                 </label>
-                
+
                 <label>Description</label>
                 <textarea class="description-box"></textarea>
 
@@ -207,4 +206,5 @@
     </div>
     <div id="toast"></div>
 </body>
+</html>
 </html>
