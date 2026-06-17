@@ -43,8 +43,7 @@ userButtons.forEach((wrapper) => {
     if (viewDashboardButton) {
         viewDashboardButton.addEventListener("click", (e) => {
             e.stopPropagation();
-            alert('Views Dashboard');
-            window.location.href = ''; // view dashboard html
+            window.location.href = 'student_dashboard.html';
         });
     }
 
