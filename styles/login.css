@@ -100,14 +100,41 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: none;
+    border: none;
 }
+
+.day-night button:hover {
+    all: unset;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+}
+
 
 .day-night svg {
     width: 40px;
     height: auto;
     fill: white;
+    background: none;
+    border: none;
+    transition: 0.3s ease;
 }
 
+.day-night svg:hover {
+    width: 40px;
+    height: auto;
+    fill: gray;
+    filter: drop-shadow(0 0 5px var(--color-primary)) 
+          drop-shadow(0 0 15px #ffffff) 
+          drop-shadow(0 0 30px #ffffff);
+}
 
 /* mobile responsive view */
 @media (max-width: 768px) {

@@ -26,6 +26,7 @@ userButtons.forEach((wrapper) => {
     const viewDashboardButton = profile.querySelector(".view-dashboard button") || profile.querySelector(".view-dashboard");
     const dayNightButton = profile.querySelector(".day-night button");
 
+    // e.stopPropagation() will help keep the panel open
     if (logOutButton) {
         logOutButton.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -59,6 +60,18 @@ userButtons.forEach((wrapper) => {
 // close when clicking anywhere outside
 document.addEventListener("click", () => {
     closeAllProfiles();
+});
+
+// Attach day-night button listeners for standalone buttons (like in admin navbar)
+const allDayNightButtons = document.querySelectorAll(".day-night button");
+allDayNightButtons.forEach(btn => {
+    if (!btn.closest(".user-profile")) {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            let darkmode = localStorage.getItem('darkmode');
+            darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+        });
+    }
 });
 
 // ---------------------------- DARK MODE ------------------------------ 

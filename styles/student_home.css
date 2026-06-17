@@ -125,22 +125,6 @@ p {
     margin-bottom: var(--space-medium);
 }
 
-.about_button button {
-    border: 3px solid var(--color-primary);
-    background-color: transparent;
-    color: var(--color-primary);
-    padding: 0.6em 1.2em;
-    font-size: var(--text-tiny);
-    font-family: inherit;
-    cursor: pointer;
-    transition: 0.1s ease-out;
-}
-
-.about_button button:hover {
-    background-color: var(--color-primary);  
-    color: var(--color-complement);
-}
-
 /* RESPONSIVE: MOBILE VIEW */
 @media (max-width: 576px) {
     .intro {

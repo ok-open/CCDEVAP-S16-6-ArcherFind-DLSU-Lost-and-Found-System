@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // 1. Get the current page filename (e.g., "admin_home.html")
+    // 1. Get the current page filename (e.g., "admin_dashboard.html")
     const path = window.location.pathname;
     const page = path.split("/").pop();
 
@@ -7,11 +7,11 @@ document.addEventListener("DOMContentLoaded", function () {
     let navbarFile = "navbar-student.html"; // Default fallback
 
     if (page.startsWith("admin_")) {
-        navbarFile = "navbar-admin.html";
+        navbarFile = "NAVBAR-admin.html";
     } else if (page.startsWith("staff_")) {
-        navbarFile = "navbar-staff.html";
+        navbarFile = "NAVBAR-staff.html";
     } else if (page.startsWith("student_")) {
-        navbarFile = "navbar-student.html";
+        navbarFile = "NAVBAR-student.html";
     }
 
     // 3. Fetch and inject the correct navbar

@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () =>{
         }
 
         if(!valid){
-            showToast("⚠ Please complete all required fields.", "#d9534f");
+            showToast("⚠ Please complete all required fields.", "var(--color-errorMsg)");
             return;
         }
 

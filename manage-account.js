@@ -16,11 +16,11 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     const newPass = document.getElementById("new-pass").value.trim();
 
     if(!currentPass || !newPass){
-        showToast("⚠ Please fill in all password fields.", "#d9534f");
+        showToast("⚠ Please fill in all password fields.", "var(--color-errorMsg)");
         return;
     }
     if(newPass.length < 6){
-        showToast("⚠ Password must be at least 6 characters.", "#d9534f");
+        showToast("⚠ Password must be at least 6 characters.", "var(--color-errorMsg)");
         return;
     }
     showToast("✓ Password updated successfully.");
@@ -29,6 +29,6 @@ document.getElementById("saveBtn").addEventListener("click", () => {
 document.getElementById("disableBtn").addEventListener("click", () => {
     const confirmed = confirm("Are you sure you want to disable your account?");
     if(confirmed){
-        showToast("✓ Account disabled successfully.", "#d9534f");
+        showToast("✓ Account disabled successfully.", "var(--color-errorMsg)");
     }
 });
