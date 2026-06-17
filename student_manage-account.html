@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="styles/student_manage-account.css">
     <script src="navbar.js" defer></script>
     <script src="login.js" defer></script>
+    <script src="manage-account.js" defer></script>
 </head>
 
 <body>
-<!------------------------ NAVIGATION BAR / HEADER ------------------------>
+    <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
         <div class="archerfind-logo">
             <h1>ArcherFind</h1>
@@ -26,7 +27,7 @@
                  <li><a href="student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active">Lost and Found <i class="arrow down"></i></a>
+                    <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="student_item-view.html">Find Your Item</a></li>
                         <li><a href="student_surrender-form.html"> Report Found Item</a></li>
@@ -65,7 +66,7 @@
                 <li><a href="student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active">Lost and Found <i class="arrow down"></i></a>
+                    <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="student_item-view.html">> Find Your Item</a></li>
                         <li><a href="student_surrender-form.html">> Report Found Item</a></li>
@@ -103,13 +104,10 @@
     </header>
 <!-- END OF NAVIGATION BAR / HEADER -->
 
+
     <!-- ACCOUNT PAGE -->
     <div class="account-wrapper">
         <section class="account-layout">
-            <!-- IMAGE -->
-            <div class="profile-image">
-                <span>IMAGE</span>
-            </div>
 
             <!-- FORM -->
             <div class="account-form">
@@ -159,11 +157,17 @@
 
                 <!-- BUTTONS -->
                 <div class="button-stack">
-                    <button class="save-btn">Confirm New Password</button>
-                    <button class="disable-btn">Disable Account</button>
+                    <button id="saveBtn" class="save-btn">
+                        Confirm New Password
+                    </button>
+
+                    <button id="disableBtn" class="disable-btn">
+                        Disable Account
+                    </button>
                 </div>
             </div>
         </section>
     </div>
+    <div id="toast"></div>
 </body>
 </html>

@@ -26,6 +26,7 @@ userButtons.forEach((wrapper) => {
     const viewDashboardButton = profile.querySelector(".view-dashboard button") || profile.querySelector(".view-dashboard");
     const dayNightButton = profile.querySelector(".day-night button");
 
+    // e.stopPropagation() will help keep the panel open
     if (logOutButton) {
         logOutButton.addEventListener("click", (e) => {
             e.stopPropagation();
@@ -43,8 +44,7 @@ userButtons.forEach((wrapper) => {
     if (viewDashboardButton) {
         viewDashboardButton.addEventListener("click", (e) => {
             e.stopPropagation();
-            alert('Views Dashboard');
-            window.location.href = ''; // view dashboard html
+            window.location.href = 'student_dashboard.html';
         });
     }
 
@@ -62,22 +62,36 @@ document.addEventListener("click", () => {
     closeAllProfiles();
 });
 
+// Attach day-night button listeners for standalone buttons (like in admin navbar)
+const allDayNightButtons = document.querySelectorAll(".day-night button");
+allDayNightButtons.forEach(btn => {
+    if (!btn.closest(".user-profile")) {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            let darkmode = localStorage.getItem('darkmode');
+            darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+        });
+    }
+});
+
 // ---------------------------- DARK MODE ------------------------------ 
 let darkmode = localStorage.getItem('darkmode');
-const logos = document.querySelectorAll(".logo");
-const aboutImg = document.querySelector('#banner img');
 
 const enableDarkmode = () => {
     document.body.classList.add('darkmode');
     localStorage.setItem('darkmode', 'active');
+    const logos = document.querySelectorAll(".logo");
     if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-DARKMODE.png"; });
+    const aboutImg = document.querySelector('#banner img');
     if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
 }
 
 const disableDarkmode = () => {
     document.body.classList.remove('darkmode');
     localStorage.setItem('darkmode', null);
+    const logos = document.querySelectorAll(".logo");
     if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-ORIGINAL.png"; });
+    const aboutImg = document.querySelector('#banner img');
     if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/About.png";
 }
 

@@ -111,7 +111,7 @@
 
 .remove-btn{
     border: none;
-    background: #d9534f;
+    background: var(--color-errorMsg);
     color: var(--color-complement);
 
     padding: 12px 20px;

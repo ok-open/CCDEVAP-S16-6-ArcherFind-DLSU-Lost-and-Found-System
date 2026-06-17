@@ -6,10 +6,11 @@
     <title>ArcherFind - Surrender Found Item</title>
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/student_surrender-form.css">
+    <link rel="stylesheet" href="styles/navbar-admin.css">
+    <link rel="stylesheet" href="styles/admin_dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="navbar.js" defer></script>
-    <script src="image.js" defer></script>
-    <script src="submit-item.js" defer></script>
+    <script src="admin_dashboard.js" defer></script>
 </head>
 
 <body>
@@ -103,108 +104,67 @@
         </nav>
     </header>
 <!-- END OF NAVIGATION BAR / HEADER -->
+ 
 
+    <div class="dashboard-wrapper">
 
-    <div class="surrender-wrapper">
-        <h2 class="form-title">Report an Item that You Found!</h2>
+        <h1 class="greeting">Hello! <span id="username"> [ADMIN]</span></h1>
 
-        <form class="surrender-form">
-            <div class="form-left">
-                <label>
-                    What item was lost?
-                    <span class="required">required field</span>
-                </label>
-                <input type="text" class="input-box">
+        <div class="top-row">
+            <div class="card graph-card">
+                <h2>USER GRAPH</h2>
+                <canvas id="userChart"> </canvas>
+                <p><span class="stat-number">115 </span> Total Users</p>
+                </div>
+                <div class="card info-card">
+                <h2>Item Information (Current)</h2>
 
-                <label>
-                    Category
-                    <span class="required">required field</span>
-                </label>
-                <select class="input-box">
-                    <option>Select Category</option>
-                    <option>Electronics</option>
-                    <option>Identity Documents</option>
-                    <option>Watch / Jewelry</option>
-                    <option>Miscellaneous</option>
-                </select>
-
-                <label>
-                    Brand
-                    <span class="required">required field</span>
-                </label>
-                <input type="text" class="input-box">
-
-                <h3 class="form-section-title">Where was this lost?</h3>
-
-                <div class="building-room-row">
-                    <div>
-                        <label>
-                            Building
-                            <span class="required">required field</span>
-                        </label>
-
-                        <select class="input-box">
-                            <option>Select Building</option>
-                            <option>Gokongwei Hall</option>
-                            <option>Andrew Gonzales Hall</option>
-                            <option>St. La Salle Hall</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label>
-                            Room No.
-                            <span class="required">number only</span>
-                        </label>
-                        <input type="number" class="input-box">
-                    </div>
+                <div class="info-header">
+                    <span>Report Count </span>
+                    <span> Category </span>
                 </div>
 
-                <label>
-                    Area
-                    <span class="required">at least one required</span>
-                </label>
-                <input type="text" class="input-box">
-
-                <h3 class="form-section-title">When was this lost?</h3>
-
-                <div class="date-time-row">
-                    <div>
-                        <label>
-                            Date Lost
-                            <span class="required">required field</span>
-                        </label>
-                        <input type="date" class="input-box">
+                    <div class="info-row">
+                        <span class="stat-number">162</span>
+                        <span> Total Item Listings </span>
                     </div>
 
-                    <div>
-                        <label>
-                            Time Lost
-                            <span class="required">required field</span>
-                        </label>
-                        <input type="time" class="input-box">
+                     <div class="info-row">
+                        <span class="stat-number">85</span>
+                        <span> Loss Reports </span>
                     </div>
-                </div>
+
+                     <div class="info-row">
+                        <span class="stat-number">68</span>
+                        <span>Total Claim Requests </span> 
+                    </div>
+
+                     <div class="info-row">
+                        <span class="stat-number">67</span>
+                        <span> Total Found Item Reports </span>
+                    </div>
+
             </div>
+        
+        </div>
 
-            <div class="form-right">
-                <label class="upload-box">
-                    <input type="file" accept="image/*">
+        <div class = "bottom-row-left">
 
-                    <span class="upload-text">Click to Upload Image</span>
-
-                    <img class="preview-image" alt="">
-                </label>
-                
-                <label>Description</label>
-                <textarea class="description-box"></textarea>
-
-                <button type="submit" class="submit-btn">
-                    Submit Item
-                </button>
+            <div class = "card stat-card">
+                <span class="stat-number"> 4 </span>
+                <span class="stat-label"> Staff Active </span>
             </div>
-        </form>
+             <div class = "card stat-card">
+                <span class="stat-number"> 21 </span>
+                <span class="stat-label"> Students Active </span>
+             </div>
+             <div class="card generate">
+                <button class="generate-button"> Generate Report </button>
+             </div>
+             
+        </div>
+
     </div>
-    <div id="toast"></div>
+ 
 </body>
 </html>

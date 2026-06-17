@@ -26,12 +26,3 @@ function toggleAccountPassword(id) {
     field.type = "password";
   }
 }
-
-// Handle day-night button click (uses enableDarkmode/disableDarkmode from navbar.js)
-const dayNightButton = document.querySelector(".day-night button");
-if (dayNightButton) {
-  dayNightButton.addEventListener("click", () => {
-    let darkmode = localStorage.getItem('darkmode');
-    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
-  });
-}
