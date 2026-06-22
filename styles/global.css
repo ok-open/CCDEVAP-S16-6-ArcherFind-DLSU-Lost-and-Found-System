@@ -21,7 +21,6 @@
     --font-base: "DM Sans", sans-serif;
 
     /***** Specific font sizes *****/
-    --text-logo-large:  clamp(2.5rem, 7vw + 1rem, 10rem);      /* login page logo */
     --text-desc:        clamp(1rem, 2vw + 0.5rem, 1.75rem);    /* subtitle/desc paragraphs */
     --text-body:        1.2em;  /* login box body */
     --text-footer:      clamp(0.55rem, 0.7vw, 0.80rem);        /* footer */
@@ -54,11 +53,11 @@
     --bg-cover: center / cover no-repeat;
 
     /***** Logo image sizes *****/
-    --logo-img-tiny:   clamp(1.5rem, 2vw + 0.5rem, 2rem);
-    --logo-img-small:  clamp(2.5rem, 3vw + 1rem, 3.125rem);
-    --logo-img-medium: clamp(3.125rem, 6vw + 1rem, 6rem);
-    --logo-img-large:  clamp(6rem, 14vw + 1rem, 13rem);
-
+    --logo-img-tiny:   clamp(1.5rem,  1.5vw + 0.75rem, 2rem);
+    --logo-img-small:  clamp(2.5rem,  3vw + 1rem, 3.125rem);
+    --logo-img-medium: clamp(3.125rem, 4.5vw + 1rem, 4.5rem);
+    --logo-img-large:  clamp(4.5rem,  7vw + 1rem, 7.5rem);
+    --logo-img-xlarge: clamp(7.5rem,  10vw + 1.5rem, 13rem);
     /**************** LOGO IMAGES ****************/
 
     /**************** BACKGROUND IMAGES ****************/
@@ -123,6 +122,7 @@ h3 { font-size: var(--text-large); }
 h4 { font-size: var(--text-medium); }
 h5 { font-size: var(--text-small); }
 h6 { font-size: var(--text-tiny); }
+
 /**************** ArcherFind Logo ****************/
 .archerfind-logo {
     display: flex;
@@ -131,13 +131,9 @@ h6 { font-size: var(--text-tiny); }
     align-items: center;
     gap: var(--space-small);
 
-    & h1 {
-        font-size: var(--text-logo-large);
-        font-weight: 950;
-    }
-
+    & h1 { font-size: clamp(2rem, 6vw + 1rem, 8rem); }
     & img {
-        width: var(--logo-img-large);
+        width: var(--logo-img-xlarge);
         height: auto;
     }
 }
@@ -219,21 +215,36 @@ footer {
     }
 }
 
-/* for input boxes */
-input[type="text"],
-input[type="password"],
-.input-box,
-textarea {
+/* ----------------- INPUT BOXES ----------------- */
+input,
+textarea,
+.input-box {
     background-color: var(--color-complement);
+    color: var(--color-primary-dark);
+    border-radius: 3px;
+    border: 1px solid var(--color-primary-dark);
+    font-size: 1.1rem;
+    padding: clamp(0.4rem, 0.8vw + 0.1rem, 0.75rem) clamp(0.5rem, 1.2vw + 0.1rem, 1rem)
 }
 
-input[type="text"]::placeholder, 
-input.input-box::placeholder, 
-.input-box input::placeholder {
+input::placeholder,
+textarea::placeholder,
+.input-box::placeholder {
     color: color-mix(in srgb, var(--color-primary) 60%, transparent);
 }
 
-/* for buttons */
+input:focus, textarea:focus, .input-box:focus {
+    outline: none;
+}
+
+/* ----------------- CHECKBOXES & RADIOS ----------------- */
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"] {
+    accent-color: var(--color-primary-dark);
+}
+
+/* ----------------- BUTTONS ----------------- */
 .outline-button {
     border: 3px solid var(--color-primary);
     background-color: transparent;

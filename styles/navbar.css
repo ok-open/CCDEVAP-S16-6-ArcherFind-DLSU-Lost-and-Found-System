@@ -293,10 +293,10 @@ button.manage-account,
 
 /* normal/light mode */
 .day-night svg:first-child { display: block; }
-.day-night svg:last-child { display: none; }
+.day-night svg:nth-child(2) { display: none; }
 /* night mode */
 .darkmode .day-night svg:first-child {  display: none;}
-.darkmode .day-night svg:last-child {  display: block; }
+.darkmode .day-night svg:nth-child(2) {  display: block; }
 
 .sidebar {
     display: none;

@@ -25,7 +25,7 @@
     padding: var(--space-small);
     border-radius: var(--radius-small);
     border: 1px solid var(--color-primary-dark);
-    font-size: var(--text-body);
+    font-size: var(--text-small);
     box-sizing: border-box;
 }
 

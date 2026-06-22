@@ -24,7 +24,6 @@ userButtons.forEach((wrapper) => {
     const logOutButton = profile.querySelector(".log-out button") || profile.querySelector(".log-out");
     const manageAccountButton = profile.querySelector(".manage-account");
     const viewDashboardButton = profile.querySelector(".view-dashboard button") || profile.querySelector(".view-dashboard");
-    const dayNightButton = profile.querySelector(".day-night button");
 
     // e.stopPropagation() will help keep the panel open
     if (logOutButton) {
@@ -47,14 +46,6 @@ userButtons.forEach((wrapper) => {
             window.location.href = 'student_dashboard.html';
         });
     }
-
-    if (dayNightButton) {
-        dayNightButton.addEventListener("click", (e) => {
-            e.stopPropagation(); // keeps panel open
-            let darkmode = localStorage.getItem('darkmode');
-            darkmode !== "active" ? enableDarkmode() : disableDarkmode();
-        });
-    }
 });
 
 // close when clicking anywhere outside
@@ -62,43 +53,8 @@ document.addEventListener("click", () => {
     closeAllProfiles();
 });
 
-// Attach day-night button listeners for standalone buttons (like in admin navbar)
-const allDayNightButtons = document.querySelectorAll(".day-night button");
-allDayNightButtons.forEach(btn => {
-    if (!btn.closest(".user-profile")) {
-        btn.addEventListener("click", (e) => {
-            e.stopPropagation();
-            let darkmode = localStorage.getItem('darkmode');
-            darkmode !== "active" ? enableDarkmode() : disableDarkmode();
-        });
-    }
-});
 
-// ---------------------------- DARK MODE ------------------------------ 
-let darkmode = localStorage.getItem('darkmode');
-
-const enableDarkmode = () => {
-    document.body.classList.add('darkmode');
-    localStorage.setItem('darkmode', 'active');
-    const logos = document.querySelectorAll(".logo");
-    if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-DARKMODE.png"; });
-    const aboutImg = document.querySelector('#banner img');
-    if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
-}
-
-const disableDarkmode = () => {
-    document.body.classList.remove('darkmode');
-    localStorage.setItem('darkmode', null);
-    const logos = document.querySelectorAll(".logo");
-    if (logos && logos.length) logos.forEach(logo => { if (logo) logo.src = "LOGOS/AF-ORIGINAL.png"; });
-    const aboutImg = document.querySelector('#banner img');
-    if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/About.png";
-}
-
-if (darkmode === "active") enableDarkmode();
-
-
-// ------------------------------ SIDEBAR ------------------------------ 
+// ------------------------------ SIDEBAR ------------------------------ //
 const sidebarOpenCloseButton = document.querySelector(".sidebar-open-close button");
 const sidebar = document.querySelector(".sidebar");
 
@@ -106,4 +62,61 @@ if (sidebarOpenCloseButton) {
     sidebarOpenCloseButton.addEventListener("click", () => {
         sidebar.classList.toggle("open");
     });
+}
+
+
+// ---------------------------- DARK MODE ------------------------------ //
+// Self-contained: handles its own buttons, labels, logos, and images.
+// Works anywhere a ".day-night button" exists — navbar, profile panel, admin page, etc.
+
+const enableDarkmode = () => {
+    document.body.classList.add('darkmode');
+    localStorage.setItem('darkmode', 'active');
+
+    const logos = document.querySelectorAll(".logo");
+    if (logos.length) logos.forEach(logo => logo.src = "LOGOS/AF-DARKMODE.png");
+
+    const aboutImg = document.querySelector('#banner img');
+    if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/AboutDark.png";
+
+    updateDarkModeLabels();
+};
+
+const disableDarkmode = () => {
+    document.body.classList.remove('darkmode');
+    localStorage.setItem('darkmode', null);
+
+    const logos = document.querySelectorAll(".logo");
+    if (logos.length) logos.forEach(logo => logo.src = "LOGOS/AF-ORIGINAL.png");
+
+    const aboutImg = document.querySelector('#banner img');
+    if (aboutImg) aboutImg.src = "styles/BACKGROUNDS/About.png";
+
+    updateDarkModeLabels();
+};
+
+// Updates any "switch to X mode" label spans next to day-night buttons
+function updateDarkModeLabels() {
+    const isDark = document.body.classList.contains('darkmode');
+    document.querySelectorAll(".day-night span").forEach(label => {
+        label.textContent = isDark ? "Switch to light mode" : "Switch to dark mode";
+    });
+}
+
+function toggleDarkmode(e) {
+    if (e) e.stopPropagation(); // keeps any parent panel (like .user-profile) open
+    const darkmode = localStorage.getItem('darkmode');
+    darkmode !== "active" ? enableDarkmode() : disableDarkmode();
+}
+
+// Attach the toggle to every day-night button on the page, wherever it lives
+document.querySelectorAll(".day-night button").forEach(btn => {
+    btn.addEventListener("click", toggleDarkmode);
+});
+
+// Apply saved preference and set correct label text on page load
+if (localStorage.getItem('darkmode') === "active") {
+    enableDarkmode();
+} else {
+    updateDarkModeLabels();
 }

@@ -1,6 +1,6 @@
 const toast = document.getElementById("toast");
 
-function showToast(message, color = "#198754") {
+function showToast(message, color) {
     toast.textContent = message;
     toast.style.backgroundColor = color;
 
