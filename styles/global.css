@@ -258,6 +258,12 @@ select {
     height: clamp(2.2rem, 5vw, 2.8rem);
 }
 
+textarea {
+    min-height: 80px;
+    max-height: 160px;
+    resize: vertical;
+}
+
 input::placeholder,
 textarea::placeholder,
 .input-box::placeholder {

@@ -7,7 +7,7 @@
     <title>ArcherFind - Surrender Found Item</title>
     <link rel="stylesheet" href="styles/global.css">
     <link rel="stylesheet" href="styles/navbar.css">
-    <link rel="stylesheet" href="styles/student_surrender-form.css">
+    <link rel="stylesheet" href="styles/student_lost-and-found-form.css">
     <script src="navbar.js" defer></script>
     <script src="image.js" defer></script>
     <script src="submit-item.js" defer></script>
@@ -150,14 +150,15 @@
         </div>
 
         <!-- SURRENDER FORM -->
-        <form class="surrender-form">
+        <form class="form-wrapper">
             <!-- LEFT SIDE -->
             <section class="form-left">
                 <!-- QUESTION TITLE: What item was lost? -->
                 <div class="question-box-wrapper">
+                    <h4>What item was found?</h4>
                     <div class="question-box">
                         <label for="name">
-                            <h4>What item was found?</h4><span class="required">required field</span>
+                            Item Name<span class="required">required field</span>
                         </label>
                         <input type="text" id="name">
                     </div>
@@ -277,7 +278,5 @@
     </div>
     <div id="toast"></div>
 </body>
-
-</html>
 
 </html>
