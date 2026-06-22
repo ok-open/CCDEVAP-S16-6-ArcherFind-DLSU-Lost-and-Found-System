@@ -99,7 +99,7 @@ const disableDarkmode = () => {
 function updateDarkModeLabels() {
     const isDark = document.body.classList.contains('darkmode');
     document.querySelectorAll(".day-night span").forEach(label => {
-        label.textContent = isDark ? "Switch to light mode" : "Switch to dark mode";
+        label.textContent = isDark ? "Switch to Light" : "Switch to Dark";
     });
 }
 

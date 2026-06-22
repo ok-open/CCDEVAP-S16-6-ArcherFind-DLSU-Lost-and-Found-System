@@ -36,7 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--space-large) var(--space-medium) var(--space-small) var(--space-medium);
+    padding: var(--space-medium) var(--space-medium) var(--space-small) var(--space-medium);
     background-color: var(--color-secondary-glass);
     backdrop-filter: blur(5px);
     border-radius: var(--radius-small);
@@ -44,10 +44,6 @@
     & h2 {
         padding-bottom: var(--space-small);
     }
-}
-
-.register-box {
-    padding: var(--space-medium) var(--space-medium) var(--space-small) var(--space-medium);
 }
 
 .login-register-details {
@@ -119,23 +115,6 @@
 
 
 /* LOGIN BUTTON */
-#login-submit {
-    width: 100%;
-    background-color: var(--color-primary);
-    border-radius: var(--radius-large);
-    border: none;
-    display: inline-block;
-    cursor: pointer;
-    color: var(--color-secondary);
-    font-size: var(--text-login-btn);
-    padding: clamp(0.7rem, 1.5vw + 0.2rem, 1.1rem) clamp(1.2rem, 3vw + 0.5rem, 2rem);
-    text-shadow: 0px 1px 0px var(--color-primary-deeper);
-    transition: 0.1s ease-in;
-}
-
-#login-submit:hover {
-    background-color: var(--color-primary-dark);
-}
 
 /* DARK MODE */
 .day-night {
@@ -200,7 +179,7 @@ footer {
         align-items: center;
     }
 
-    p {
-        margin-bottom: 20px;
+    .login-register-details {
+        width: clamp(14rem, 65vw + 2rem, 22rem);
     }
 }

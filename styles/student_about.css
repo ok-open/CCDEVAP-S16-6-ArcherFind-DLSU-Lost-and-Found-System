@@ -8,7 +8,7 @@ p {
 .about-archerfind{
     padding: var(--space-large);
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
     align-items: stretch;
     gap: 5rem;
     text-align: justify;
@@ -177,6 +177,7 @@ p {
     .about-archerfind {
         display: flex;
         flex-direction: column-reverse;
+        gap: 1.2rem;
     }
 
     #banner {

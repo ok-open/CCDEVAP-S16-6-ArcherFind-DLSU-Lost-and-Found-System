@@ -1,95 +1,68 @@
 
 /**************** STUDENTS_ITEM VIEW ****************/
-html, body {
-    height: 100%;
-    overflow: hidden;
-}
-
-body {
-    overflow: hidden;
-}
-
-.itemview-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 6fr;
-    grid-template-rows: 1fr 9fr;
-    grid-template-areas:
-        'sidebar controls'
-        'sidebar main';
-    overflow: hidden; /* prevents the grid itself from scrolling */
-    height: 100dvh;
-}
-
-/* SIDEBAR */
-.itemview-sidebar {
-    grid-area: sidebar;
-    overflow: hidden; 
-
+/* REPORT AND CONTROLS */
+.report-and-controls {
+    position: sticky;
+    top: 60px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    z-index: 1;
     gap: var(--space-small);
     padding: var(--space-small);
-    padding-top: 24px;
-    background: var(--BACKGROUND-itemview);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.report-btn {
-    background-color: var(--color-primary);
-    color: var(--color-complement);
-    border: none;
-    border-radius: var(--radius-medium);
-    padding: var(--space-small);
-    font-size: var(--text-btn);
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.report-btn:hover {
-    background-color: var(--color-primary-dark);
-}
-
-.stats-box {
-    padding: var(--space-medium);
-    border-radius: var(--radius-medium);
-    background-color: var(--color-secondary-glass);
-    text-align: center;
-    & h3 { font-size: var(--text-medium);}
+    background-color: color-mix(in srgb, var(--color-secondary-hover) 80%, transparent);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    height: 135px;
 }
 
 /* CONTROLS */
-.itemview-controls {
-    grid-area: controls;
-    overflow: hidden; 
-
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-small);
-    align-items: center;
-    padding: var(--space-small);
-    background-color: color-mix(in srgb, var(--color-secondary-hover), 50% white);
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+.form-button {
+    flex: 1;
+    font-size: var(--text-medium);
+    font-weight: 600;
+    min-height: 100%;
 }
 
-.search-bar {
+.controls-wrapper {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100%;
+}
+
+.controls {
+    overflow: hidden; 
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-tiny);
+    align-items: center;
+}
+
+select.control-box {
+    padding-left: 2px;
+    padding-right: 0px;
+}
+
+.search-bar { flex: 9; }
+.sort-dropdown { flex: 1; }
+.filter-dropdown { flex: 1; }
+
+
+/* 
+.sort-dropdown,
+.filter-dropdown {
     flex: 1;
     padding: var(--space-small);
     border-radius: var(--radius-small);
     border: 1px solid var(--color-primary-dark);
-}
-
-.sort-dropdown,
-.filter-dropdown {
-    padding: var(--space-small);
-    border-radius: var(--radius-small);
-    border: 1px solid var(--color-primary-dark);
     background-color: var(--color-complement);
-}
+} */
 
 .itemview-main {
-    grid-area: main;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -97,7 +70,6 @@ body {
 }
 
 .item-list {
-    flex: 1;
     min-height: 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -138,53 +110,12 @@ body {
     border-radius: 50%;
 }
 
-@media (max-width: 1330px) {
-    .itemview-wrapper {
-        display: flex;
-        flex-direction: column;
+@media (max-width: 768px) {
+    .report-and-controls {
+        height: 140px;
     }
 
-    .itemview-sidebar {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        background: var(--color-secondary-hover);
-    }
-
-    .itemview-sidebar button,
-    .itemview-sidebar .stats-box {
-        flex-grow: 1;
-    }
-
-    .itemview-main {
-        flex: 1;
-        min-height: 0;
-        overflow-y: auto;
-    }
-
-    .item-list {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    }
-}
-
-@media (max-width: 576px) {
-    .itemview-wrapper {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .itemview-sidebar {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .itemview-sidebar button,
-    .itemview-sidebar .stats-box {
-        flex-grow: 1;
-    }
-
-    .itemview-controls {
+    .controls {
         display: grid;
         grid-template-columns: 2fr;
         grid-template-rows: 1fr 1fr;
