@@ -1,5 +1,5 @@
 /* The Verify Claim List message and search bar */
-#MainHeader {
+/* .MainHeader {
     display: flex;
     align-items: center;
     flex-wrap:wrap;
@@ -15,9 +15,41 @@
 
 .SearchContainer{
     margin-left:auto;
+} */
+
+/* CONTROLS */
+.controls-wrapper {
+    position: sticky;
+    top: 60px;
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: color-mix(in srgb, var(--color-secondary-hover) 80%, transparent);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    height: 135px;
 }
 
-/* This contains everything below the header */
+.controls {
+    overflow: hidden; 
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-tiny);
+    align-items: center;
+}
+
+select.control-box {
+    padding-left: 2px;
+    padding-right: 0px;
+}
+
+.search-bar { flex: 9; }
+.sort-dropdown { flex: 1; }
+.filter-dropdown { flex: 1; }
+
+
+/* This contains everything below the header
 #MainContainer {
     display: flex;
     align-items: flex-start;
@@ -40,25 +72,53 @@
     padding: var(--space-small);
     font-size: var(--text-small);
     cursor: pointer;
-}
+} */
+
 
 /* Contains all of the "boxes" of records of claim request, lost reports, surrender forms */
-#RequestsContainer {
+.requests-wrapper {
     display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
+    flex-direction: row;
+    margin: var(--space-large);
     gap: var(--space-small);
 }
 
-#RequestsRecord h2{
+/* REQUEST RECORD */
+.request-record {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    border-radius: var(--radius-small);
+    height: 375px;
+}
+
+/* REQUEST IMAGE DIV */
+.request-image {
+    flex: 1;
+    max-height: 375px;
+    max-width: 300px;
+
+}
+
+/* TODO: HAS TO BE A CAROUSEL */
+.request-image img {
+    width: 100%;
+    height: 100%;
+}
+
+
+.lost-details {
+    flex: 1;
+
+}
+
+.RequestsRecord h2{
     font-size: var(--text-xlarge);
 }
-#RequestsContainer h3, p{
+.RequestsContainer h3, p{
     font-size: var(--text-large);
 }
 
-/* A class. This is the styling for each "box" */
 .RequestRecord {
     border: 2px solid #ccc;
     border-radius: var(--radius-medium);
