@@ -29,7 +29,7 @@ userButtons.forEach((wrapper) => {
     if (logOutButton) {
         logOutButton.addEventListener("click", (e) => {
             e.stopPropagation();
-            window.location.href = '../../pages/auth/index.html';
+            window.location.href = '../../index.html';
         });
     }
 
