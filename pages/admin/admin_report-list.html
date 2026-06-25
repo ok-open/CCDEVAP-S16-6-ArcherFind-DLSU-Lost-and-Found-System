@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Lost Item Reports Requests</title>
+    <link rel="stylesheet" href="../../styles/global/global.css">
+    <link rel="stylesheet" href="../../styles/global/navbar.css">
+    <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
+    <link rel="stylesheet" href="../../styles/staff/staffadmin_lists.css">
+    <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="../../javascript/admin/staffadmin_lists.js" defer></script>
+</head>
+<body>
+    <!------------------------ NAVIGATION BAR / HEADER ------------------------>
+    <header>
+        <div class="archerfind-logo">
+            <h1>ArcherFind</h1>
+            <img src="../../assets/LOGOS/AF-ORIGINAL.png" alt="">
+        </div>
+
+        <!-- NAVBAR OPTIONS -->
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
+                <!-- DROPDOWN MENU -->
+                <li class="dropdown">
+                    <a class="active">Lost and Found <i class="arrow down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="../../pages/admin/admin_claim-list.html">Verify Claim Request</a></li>
+                        <li><a href="../../pages/admin/admin_report-list.html">Verify Lost Reports</a></li>
+                        <li><a href="../../pages/admin/admin_surrender-list.html">Verify Surrender Forms</a></li>
+                        <li><a href="../../pages/admin/admin_dashboard.html">Admin Report</a></li>
+                        <li><a href="../../pages/admin/admin_manage-student.html">Manage Students</a></li>
+                        <li><a href="../../pages/admin/admin_manage-staff.html">Manage Staffs</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <div class="day-night"><button type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                >
+                                <path
+                                    d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                >
+                                <path
+                                    d="M338.5-338.5Q280-397 280-480t58.5-141.5Q397-680 480-680t141.5 58.5Q680-563 680-480t-58.5 141.5Q563-280 480-280t-141.5-58.5ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z" />
+                            </svg>
+                        </button></div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- SIDEBAR OPTIONS -->
+        <nav class="sidebar">
+            <ul class="nav-links">
+                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
+                <!-- DROPDOWN MENU -->
+                <li class="dropdown">
+                    <a class="active">> Lost and Found</i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="admin_item-view.html">Verify Claim Request</a></li>
+                        <li><a href="admin_surrender-form.html">Report Found Item</a></li>
+                        <li><a href="#">Post Lost/Found Items</a></li>
+                        <li><a href="#">Admin Report</a></li>
+                        <li><a href="../../pages/admin/admin_manage-student.html">Manage Accounts</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="sidebar-open-close"><button type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        >
+                        <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                        >
+                        <path
+                            d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                    </svg>
+                </button></div>
+        </nav>
+    </header>
+
+    <!-- <div class="MainHeader">
+        <h1>Verify Lost Items Reports</h1>
+        <div class="SearchContainer">
+            <input type="text" placeholder="Search">
+        </div>
+    </div>
+    <div id="MainContainer">
+        <div id="SortBy">
+            <h2>Sort by</h2>
+            <form>
+                <input type="radio" name="SortOptions" value="mostRecent">
+                <label for="mostRecent">Most Recent first</label><br>
+                <input type="radio" name="SortOptions" value="leastRecent">
+                <label for="mostRecent">Least Recent first</label><br>
+                <input type="radio" name="SortOptions" value="itemA-Z">
+                <label for="itemA-Z">Item name A-Z</label><br>
+                <input type="radio" name="SortOptions" value="itemZ-A">
+                <label for="itemZ-A">Item name Z-A</label><br>
+                <input class="SortBtn" type="submit" value="Submit">
+                <button class="SortBtn">Reset</button>
+            </form>
+        </div> -->
+
+        <!-- CONTROLS -->
+        <div class="controls-wrapper">
+            <h2>Browse Surrendered Items</h2>
+            <div class="controls">
+                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+
+                <select class="control-box sort-dropdown">
+                    <option>Sort: Name</option>
+                    <option>Sort: Recent</option>
+                </select>
+
+                <select class="control-box filter-dropdown">
+                    <option>Filter: All</option>
+                    <option>Electronics</option>
+                    <option>Miscellaneous</option>
+                    <option>Identity Documents</option>
+                    <option>Watch / Jewelry</option>
+                </select>
+            </div>
+        </div>
+        
+        <!-- REQUESTS -->
+        <div class="requests-wrapper">
+            <!-- REQUEST RECORD -->
+            <div class="request-record">
+                <!-- Request Image ( TODO: MAKE THIS A CAROUSEL ) -->
+                <div class="request-image">
+                    <img src="../../assets/ITEMS/1.png" alt="../../assets/ITEMS/1.png">
+                </div>
+
+                <div class="details-wrapper">
+                    
+                </div>
+                <!-- COLUMN 1 -->
+                <div class="item-column">
+                    <!-- Item name -->
+                    <h2>Black Oversize Hoodie</h2> 
+
+                    <!-- DATE LOST -->
+                    <div class="item-detail">
+                        <h3>Date Lost:</h3> <p>4-12-25</p>
+                        <input type="date"
+                        id="date-lost"
+                        name="date-lost"
+                        value=""
+                        readonly>
+                    </div>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Submitted on:</h3> <p>4-20-25</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button class="openPanelBtn">
+                        <img src="../../assets/ICONS/Icon_see.png">
+                    </button><br>
+                    <button onclick="onResolveLostReport()">
+                        <img src="../../assets/ICONS/Icon_accept.png">
+                    </button><br>
+                    <button onclick="onCloseLostReport()">
+                        <img src="../../assets/ICONS/Icon_reject.png">
+                    </button><br>
+                </div>
+            </div>
+
+            <div class="RequestRecord">
+                <img class="ImgItem" alt="ImageItem" src="../../assets/ITEMS/2.png">
+
+                <div class="LostDetails">
+                    <h2>Apple Charger</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Submitted on:</h3> <p>4-20-25</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button class="openPanelBtn">
+                        <img src="../../assets/ICONS/Icon_see.png">
+                    </button><br>
+                    <button onclick="onResolveLostReport()">
+                        <img src="../../assets/ICONS/Icon_accept.png">
+                    </button><br>
+                    <button onclick="onCloseLostReport()">
+                        <img src="../../assets/ICONS/Icon_reject.png">
+                    </button><br>
+                </div>
+            </div>
+
+            <div class="RequestRecord">
+                <img class="ImgItem" alt="ImageItem" src="../../assets/ITEMS/3.png">
+
+                <div class="LostDetails">
+                    <h2>Sony WH-00XM4</h2> 
+                    <!-- Item name -->
+                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h3>Time Lost:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+
+                <div class="UserDetails">
+                    <h3>Submitted on:</h3> <p>4-20-25</p>
+                    <h3>Report from:</h3> <p>Marc Lesley E. Quizon</p>
+                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
+                </div>
+                
+                <div class="RequestButtons">
+                    <button class="openPanelBtn">
+                        <img src="../../assets/ICONS/Icon_see.png">
+                    </button><br>
+                    <button onclick="onResolveLostReport()">
+                        <img src="../../assets/ICONS/Icon_accept.png">
+                    </button><br>
+                    <button onclick="onCloseLostReport()">
+                        <img src="../../assets/ICONS/Icon_reject.png">
+                    </button><br>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="toastBox"></div>
+
+        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    </div>
+    
+
+    <div id="SidePanel_Iconsee">
+        <button class="close" id="closePanelBtn">close</button>
+        <h2>Possible Matches</h2>
+
+        <div id="SidePanel_ImgContainer">
+            <!-- 🤔 FOR BACKEND: ImgCard should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/1.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Oversize Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/5.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie w/ Details</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/6.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie Straight Cut</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/7.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Plain Black Hoodie</h2> 
+                    <!-- Item name -->
+                    <h3>Date Found:</h3> <p>4-12-25</p>
+                    <h3>Time Found:</h3> <p>4:15pm</p>
+                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ExpandPanel_ImgItem" class="modal">
+        <img class="modal-content" id="imgExpand">
+    </div>
+    
+</body>
+</html>
