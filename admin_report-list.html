@@ -82,7 +82,7 @@
         </nav>
     </header>
 
-    <div id="MainHeader">
+    <!-- <div class="MainHeader">
         <h1>Verify Lost Items Reports</h1>
         <div class="SearchContainer">
             <input type="text" placeholder="Search">
@@ -103,16 +103,55 @@
                 <input class="SortBtn" type="submit" value="Submit">
                 <button class="SortBtn">Reset</button>
             </form>
+        </div> -->
+
+        <!-- CONTROLS -->
+        <div class="controls-wrapper">
+            <h2>Browse Surrendered Items</h2>
+            <div class="controls">
+                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+
+                <select class="control-box sort-dropdown">
+                    <option>Sort: Name</option>
+                    <option>Sort: Recent</option>
+                </select>
+
+                <select class="control-box filter-dropdown">
+                    <option>Filter: All</option>
+                    <option>Electronics</option>
+                    <option>Miscellaneous</option>
+                    <option>Identity Documents</option>
+                    <option>Watch / Jewelry</option>
+                </select>
+            </div>
         </div>
+        
+        <!-- REQUESTS -->
+        <div class="requests-wrapper">
+            <!-- REQUEST RECORD -->
+            <div class="request-record">
+                <!-- Request Image ( TODO: MAKE THIS A CAROUSEL ) -->
+                <div class="request-image">
+                    <img src="styles/ITEMS/1.png" alt="styles/ITEMS/1.png">
+                </div>
 
-        <div id="RequestsContainer">
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="styles/ITEMS/1.png">
-
-                <div class="LostDetails">
-                    <h2>Black Oversize Hoodie</h2> 
+                <div class="details-wrapper">
+                    
+                </div>
+                <!-- COLUMN 1 -->
+                <div class="item-column">
                     <!-- Item name -->
-                    <h3>Date Lost:</h3> <p>4-12-25</p>
+                    <h2>Black Oversize Hoodie</h2> 
+
+                    <!-- DATE LOST -->
+                    <div class="item-detail">
+                        <h3>Date Lost:</h3> <p>4-12-25</p>
+                        <input type="date"
+                        id="date-lost"
+                        name="date-lost"
+                        value=""
+                        readonly>
+                    </div>
                     <h3>Time Lost:</h3> <p>4:15pm</p>
                     <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
                 </div>
