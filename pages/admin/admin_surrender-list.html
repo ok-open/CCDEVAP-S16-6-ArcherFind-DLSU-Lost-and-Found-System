@@ -82,7 +82,32 @@
         </nav>
     </header>
 
-    <div id="MainHeader">
+    <!-- CONTROLS -->
+    <div class="controls-wrapper">
+        <div class="title">
+            <h2>Review Surrender Forms</h2>
+            <p>Verify student-submitted surrender item forms before addingg the item to the database</p>
+        </div>
+
+        <div class="controls">
+            <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+
+            <select class="control-box sort-dropdown">
+                <option>Sort: Name</option>
+                <option>Sort: Recent</option>
+            </select>
+
+            <select class="control-box filter-dropdown">
+                <option>Filter: All</option>
+                <option>Electronics</option>
+                <option>Miscellaneous</option>
+                <option>Identity Documents</option>
+                <option>Watch / Jewelry</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- <div id="MainHeader">
         <h1>Verify Surrender Forms</h1>
         <div class="SearchContainer">
             <input type="text" placeholder="Search">
@@ -103,97 +128,94 @@
                 <input class="SortBtn" type="submit" value="Submit">
                 <button class="SortBtn">Reset</button>
             </form>
-        </div>
+        </div> -->
 
-        <div id="RequestsContainer">
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="../../assets/ITEMS/1.png">
-
-                <div class="LostDetails">
-                    <h2>Black Oversize Hoodie</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
+        <!-- REQUESTS -->
+        <div class="requests-wrapper">
+            <!-- REQUEST RECORD -->
+            <div class="request-record">
+                <!-------------------------------- REQUEST IMAGE ( TODO: MAKE THIS A CAROUSEL ) -------------------------------->
+                <div class="request-image">
+                    <img class="ImgItem" src="../../assets/ITEMS/1.png" alt="../../assets/ITEMS/1.png">
                 </div>
 
-                <div class="UserDetails">
-                    <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Surrenderd by:</h3> <p>Marc Lesley E. Quizon</p>
-                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
-                </div>
-                
-                <div class="RequestButtons">
-                    <button onclick="onAcceptSurrender()">
-                        <img src="../../assets/ICONS/Icon_accept.png">
-                    </button><br>
-                    <button onclick="onRejectSurrender()">
-                        <img src="../../assets/ICONS/Icon_reject.png">
-                    </button><br>
-                </div>
-            </div>
+                <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
+                <div class="request-item-details">
+                    <!-- ITEM NAME -->
+                    <div class="item-name">
+                        <h2>Black Oversize Hoodie</h2>
+                        <div class="request-buttons-panel">
+                            <!-- POSSIBLE MATCHES BUTTON -->
+                            <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
+                                Mark as Resolved
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
+                            </button><br>
+                            <button type="button" class="request-button reject-btn" onclick="onCloseLostReport()">
+                                Close Report
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
+                            </button><br>
+                        </div>
+                    </div>
 
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="../../assets/ITEMS/2.png">
+                    <hr>
 
-                <div class="LostDetails">
-                    <h2>Apple Charger</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
+                    <div class="item-column-wrapper">
+                        <!-- COLUMN 1: DATE, TIME, LOCATION -->
+                        <div class="item-column">
+                            <!-- DATE FOUND -->
+                            <div class="detail-box">
+                                <label for="date-found">Estimated Date Found</label>
+                                <input type="date" id="date-found" value="2026-04-12" readonly name="date-found">
+                            </div>
 
-                <div class="UserDetails">
-                    <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Surrenderd by:</h3> <p>Marc Lesley E. Quizon</p>
-                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
-                </div>
-                
-                <div class="RequestButtons">
-                    <button onclick="onAcceptSurrender()">
-                        <img src="../../assets/ICONS/Icon_accept.png">
-                    </button><br>
-                    <button onclick="onRejectSurrender()">
-                        <img src="../../assets/ICONS/Icon_reject.png">
-                    </button><br>
-                </div>
-            </div>
+                            <!-- TIME FOUND -->
+                            <div class="detail-box">
+                                <label for="time-found">Estimated Time Found</label>
+                                <input type="time" id="time-found" value="16:15" readonly name="time-found">
+                            </div>
 
-            <div class="RequestRecord">
-                <img class="ImgItem" alt="ImageItem" src="../../assets/ITEMS/3.png">
+                            <!-- LOCATION -->
+                            <div class="detail-box">
+                                <label for="location">Location Found</label>
+                                <input type="text" id="location" value="Yuchengco Building, Y403" readonly name="location">
+                            </div>
+                        </div>
 
-                <div class="LostDetails">
-                    <h2>Sony WH-00XM4</h2> 
-                    <!-- Item name -->
-                    <h3>Date Found:</h3> <p>4-12-25</p>
-                    <h3>Time Found:</h3> <p>4:15pm</p>
-                    <h3>Location:</h3> <p>Yuchengco Building, Y403</p>
-                </div>
+                        <!-- COLUMN 2: USER DETAILS --- SUBMITTED ON, REPORT FROM, EMAIL -->
+                        <div class="item-column">
+                            <!-- SUBMITTED BY -->
+                            <div class="detail-box">
+                                <label for="submitted-by">Submitted By</label>
+                                <input type="text" id="submitted-by" value="Marc Lesley Quizon (ID 12456783)" readonly
+                                    name="submitted-by"> <!-- ID: NAME OF STUDENT AND ID NUMBER-->
+                            </div>
 
-                <div class="UserDetails">
-                    <h3>Submitted on:</h3> <p>4-20-25</p>
-                    <h3>Surrenderd by:</h3> <p>Marc Lesley E. Quizon</p>
-                    <h3>Email:</h3> <p>marc_lesley_quizon@dlsu.edu.ph</p>
-                </div>
-                
-                <div class="RequestButtons">
-                    <button onclick="onAcceptSurrender()">
-                        <img src="../../assets/ICONS/Icon_accept.png">
-                    </button><br>
-                    <button onclick="onRejectSurrender()">
-                        <img src="../../assets/ICONS/Icon_reject.png">
-                    </button><br>
+                            <!-- CONTACT EMAIL -->
+                            <div class="detail-box">
+                                <label for="contact-email">Contact Email</label>
+                                <input type="email" id="contact-email" value="marc_lesley_quizon@dlsu.edu.ph" readonly
+                                    name="contact-email">
+                            </div>
+
+                            <!-- FILED ON -->
+                            <div class="detail-box">
+                                <label for="date-filed">Filed On</label>
+                                <input type="date" id="date-filed" value="2026-04-13" readonly name="date-filed">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+            <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
 
-        <div id="ExpandPanel_ImgItem" class="modal">
-            <img class="modal-content" id="imgExpand">
-        </div>
-
+            
         <div id="toastBox"></div>
+
+        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+        </div>
+
+    <div id="ExpandPanel_ImgItem" class="modal">
+        <img class="modal-content" id="imgExpand">
     </div>
 </body>
 </html>
