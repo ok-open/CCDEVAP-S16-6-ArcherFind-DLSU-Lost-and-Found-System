@@ -85,8 +85,8 @@
     <!-- CONTROLS -->
     <div class="controls-wrapper">
         <div class="title">
-            <h2>Review Surrender Forms</h2>
-            <p>Verify student-submitted surrender item forms before addingg the item to the database</p>
+            <h2>Verify Surrendered Items</h2>
+            <p>Inspect and validate items found on campus by the community before officially publishing them to the public catalog.</p>
         </div>
 
         <div class="controls">
@@ -134,10 +134,39 @@
         <div class="requests-wrapper">
             <!-- REQUEST RECORD -->
             <div class="request-record">
-                <!-------------------------------- REQUEST IMAGE ( TODO: MAKE THIS A CAROUSEL ) -------------------------------->
+                <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
                 <div class="request-image">
-                    <img class="ImgItem" src="../../assets/ITEMS/1.png" alt="../../assets/ITEMS/1.png">
+                    <!-- Full-width images with number and caption text -->
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/1.png">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/2.png">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/3.png">
+                    </div>
+
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/4.png">
+                    </div>
+
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                    <!-- The dots/circles -->
+                    <div style="text-align:center">
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                        <span class="dot" onclick="currentSlide(4)"></span>
+                    </div>
                 </div>
+
+
 
                 <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
                 <div class="request-item-details">
