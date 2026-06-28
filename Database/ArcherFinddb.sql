@@ -45,7 +45,7 @@ CREATE TABLE buildings (
     building_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) UNIQUE NOT NULL,       -- e.g., "Don Enrique T. Yuchengco Hall"
     max_level INT,
-    abbreviation ENUM('LS','HSSH', 'AG', 'Y', 'G', 'V', 'SJ', 'SM', 'BC', 'WH', 'ER') UNIQUE NOT NULL,
+    abbreviation ENUM('LS','HSSH', 'AG', 'Y', 'G', 'V', 'SJ', 'SM', 'BC', 'WH', 'ER', 'MM', 'STR', 'BH') UNIQUE NOT NULL,
     deleted ENUM('1','0') NOT NULL DEFAULT '0'
     
 ) ;
