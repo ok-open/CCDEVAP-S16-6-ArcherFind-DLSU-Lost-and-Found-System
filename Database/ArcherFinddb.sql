@@ -81,8 +81,7 @@ CREATE TABLE items (
     name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
     category_id INT,
-    brand_id INT, -- NEW: Relational Brand Link
-    img_filepath VARCHAR(255),
+    brand_id INT, 
     surrendered_by INT, -- Student finder
     claimed_by INT,     -- Student claimer
     room_id INT,
@@ -99,10 +98,18 @@ CREATE TABLE items (
     FOREIGN KEY (claimed_by) REFERENCES users(user_id) ON DELETE SET NULL,
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE SET NULL,
     FOREIGN KEY (area_id) REFERENCES areas(area_id) ON DELETE SET NULL
-    ) ;
+);
+
+CREATE TABLE items_images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    item_id INT NOT NULL,
+    img_filepath VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE
+);
 
 CREATE TABLE reports (
-    -- to be added IMAGE FILE PATH
     report_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
     item_description TEXT NOT NULL,
@@ -110,8 +117,8 @@ CREATE TABLE reports (
     brand_id INT, 
     room_id INT,
     area_id INT,
-    when_found DATETIME, -- Value is Null if record is a Loss Report. Only for Claim request and Surrender Form
-    when_lost DATETIME, -- Value is Null if record is Claim Request or Surrender Form. Only for Loss Report
+    when_found DATETIME, -- Null if Loss Report
+    when_lost DATETIME,  -- Null if Claim Request or Surrender Form
     extra_details TEXT,
     reviewed_by INT,    -- Linked to Staff User ID
     status ENUM('Active', 'Closed', 'Accepted', 'Resolved', 'Rejected') NOT NULL DEFAULT 'Active',
@@ -126,7 +133,16 @@ CREATE TABLE reports (
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE SET NULL,
     FOREIGN KEY (area_id) REFERENCES areas(area_id) ON DELETE SET NULL,
     FOREIGN KEY (reviewed_by) REFERENCES users(user_id) ON DELETE SET NULL
-) ;
+);
+
+CREATE TABLE reports_images (
+    image_id INT AUTO_INCREMENT PRIMARY KEY,
+    report_id INT NOT NULL,
+    img_filepath VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (report_id) REFERENCES reports(report_id) ON DELETE CASCADE
+);
 
 -- =========================================================================
 -- 4. AUDIT LOG TABLES
