@@ -101,6 +101,11 @@
     background-color: color-mix(in srgb, var(--color-secondary-hover) 60%, var(--color-complement));
 }
 
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
 #staff-report-table th {
     padding: var(--space-small);
     text-align: left;
