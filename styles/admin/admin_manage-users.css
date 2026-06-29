@@ -117,13 +117,6 @@ select.control-box {
 
 
 /* WRAPPER FOR EDIT/DELETE BUTTONS */
-.action-buttons {
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-tiny);
-    align-items: center;
-    justify-content: center;
-}
 
 /* EDIT AND DELETE BUTTON */
 .function-button {
@@ -132,8 +125,8 @@ select.control-box {
     gap: calc(var(--space-tiny) - 3px);
     font-size: calc(var(--text-tiny) - 4px);
     font-weight: 600;
-    text-transform: uppercase;
     padding: 0 var(--space-small);
+    margin-right: var(--space-tiny);
     border-radius: 3px;
     height: 30px;
 
