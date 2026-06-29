@@ -4,17 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ArcherFind - Generated Report</title>
-
+    <title>ArcherFind - Manage Users</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/admin/admin_generated-report.css">
+    <link rel="stylesheet" href="../../styles/admin/admin_manage-users.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../javascript/global/lost-item-chart.js" defer></script>
-    <script src="auth/../../javascript/admin/admin_generated-report.js" defer></script>
     <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js" defer></script>
+    <script src="../../javascript/admin/admin_manage-users.js" defer></script>
 </head>
 
 <body>
@@ -30,10 +29,11 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html" class="current-page">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <!-- DROPDOWN MENU -->
                 <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-student.html">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.html" class="current-page">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -88,11 +88,11 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
                 <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
-                <li><a href="../../pages/admin/admin_report-list.html" class="current-page">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-student.html">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -158,148 +158,54 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <div class="report-wrapper">
-
-        <div class="report-header">
-
-            <button class="back-btn" onclick="window.location.href='../../pages/admin/admin_dashboard.html'">BACK TO DASHBOARD</button>
-
-            <h1>Generated Report</h1>
-
-            <p id="reportRange">
-                January 1, 2025 - January 31, 2025 (sample date)
-            </p>
-
+    <!-- CONTROLS -->
+    <div class="controls-wrapper">
+        <div class="title">
+            <h2>Manage Users</h2>
         </div>
 
-        <div class="report-top-row">
+        <div class="controls">
+            <input type="text" placeholder="Search for user..." class="control-box search-bar">
 
-    <div class="card graph-card">
+            <div class="sort-group control-box">
+                <button id="sortDirection" type="button">
+                    ↑
+                </button>
 
-        <h3>User Distribution</h3>
-        <hr>
-        <canvas id="userChart"></canvas>
-
-        <p class="graph-total">
-            <span class="stat-number">115</span>
-            Total Users
-        </p>
-
-    </div>
-
-    <div class="card graph-card">
-
-        <h3>Lost Item Frequency</h3>
-        <hr>
-        <canvas id="locationChart"></canvas>
-
-    </div>
-
-    <div class="card info-card">
-
-        <h3>Item Information</h3>
-        <hr>
-        <div class="info-header">
-            <span>Count</span>
-            <span>Category</span>
-        </div>
-
-        <div class="info-row">
-            <span class="stat-number">162</span>
-            <span>Total Item Listings</span>
-        </div>
-
-        <div class="info-row">
-            <span class="stat-number">85</span>
-            <span>Loss Reports</span>
-        </div>
-
-        <div class="info-row">
-            <span class="stat-number">68</span>
-            <span>Claim Requests</span>
-        </div>
-
-        <div class="info-row">
-            <span class="stat-number">67</span>
-            <span>Found Item Reports</span>
-        </div>
-
-    </div>
-
-</div>
-
-       
-
-        <div class="card report-table-card">
-
-            <div class="table-header">
-
-                <h2>Items Included in Report</h2>
-
-                <div class="filter-row">
-
-                    <select id="categoryFilter">
-                        <option>All Categories</option>
-                        <option>Electronics</option>
-                        <option>Identity Documents</option>
-                        <option>Watch / Jewelry</option>
-                        <option>Miscellaneous</option>
-                    </select>
-
-                    <select id="statusFilter">
-                        <option>All Statuses</option>
-                        <option>Listed</option>
-                        <option>Claimed</option>
-                        <option>Disposed</option>
-                    </select>
-
-                </div>
-
+                <select id="sortField">
+                    <option value="firstname">First Name</option>
+                    <option value="lastname">Last Name</option>
+                    <option value="idnum">ID Number</option>
+                    <option value="userlevel">User Level</option>
+                </select>
             </div>
 
-            <table id="reportTable">
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Category</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>UNIQLO Yellow Sweater</td>
-                        <td>Clothes</td>
-                        <td>Disposed</td>
-                    </tr>
-
-                    <tr>
-                        <td>DLSU Student ID</td>
-                        <td>Identity Documents</td>
-                        <td>Listed</td>
-                    </tr>
-
-                    <tr>
-                        <td>iPad Air</td>
-                        <td>Electronics</td>
-                        <td>Claimed</td>
-                    </tr>
-
-                    <tr>
-                        <td>Aqua Flask</td>
-                        <td>Miscellaneous</td>
-                        <td>Listed</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+            <select class="control-box filter-dropdown">
+                <option>Filter: All</option>
+                <option>Student</option>
+                <option>Staff</option>
+                <option>Admin</option>
+            </select>
         </div>
-
     </div>
 
+    <div class="table-wrapper">
+        <table id="manageUsersTable" class="display">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>ID Number</th>
+                    <th>Email</th>
+                    <th>User Level</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DataTable will populate this automatically -->
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

@@ -93,7 +93,6 @@ select.control-box {
     cursor: pointer;
 }
 
-/* 0000000000000000000000000000000000000000000000000000000000000000000000000000000 */
 /* Contains all of the "boxes" of records of claim request, lost reports, surrender forms */
 .requests-wrapper {
     display: flex;
@@ -124,8 +123,7 @@ select.control-box {
     transform: translateY(-2px);
 }
 
-/* REQUEST IMAGE DIV */
-/* TODO: MAKE THIS A CAROUSEL */
+/* REQUEST IMAGE DIV (CAROUSEL) */
 .request-image {
     flex: 1;
     max-height: 400px;
@@ -161,7 +159,8 @@ select.control-box {
     width: auto;
     margin-top: -22px;
     padding: 16px;
-    color: black;
+    color: var(--color-primary);
+    background-color: var(--color-secondary-glass);
     font-weight: bold;
     font-size: 18px;
     transition: 0.6s ease;
@@ -175,7 +174,6 @@ select.control-box {
     border-radius: 3px 0 0 3px;
 }
 
-/* Position the "next button" to the right */
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
@@ -184,7 +182,7 @@ select.control-box {
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
+    background-color: var(--color-secondary-hover);
 }
 
 /* The dots/bullets/indicators */
@@ -199,7 +197,7 @@ select.control-box {
     transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.active-img, .dot:hover {
   background-color: #717171;
 }
 

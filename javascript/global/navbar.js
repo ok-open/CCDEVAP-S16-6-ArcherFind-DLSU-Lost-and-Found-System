@@ -22,8 +22,8 @@ userButtons.forEach((wrapper) => {
 
     // attach the internal buttons for this profile specifically
     const logOutButton = profile.querySelector(".log-out button") || profile.querySelector(".log-out");
-    const manageAccountButton = profile.querySelector(".manage-account");
-    const viewDashboardButton = profile.querySelector(".view-dashboard button") || profile.querySelector(".view-dashboard");
+    // const viewDashboardButton = profile.querySelector(".view-dashboard button") || profile.querySelector(".view-dashboard");
+    // const manageAccountButton = profile.querySelector(".manage-account");
 
     // e.stopPropagation() will help keep the panel open
     if (logOutButton) {
@@ -33,19 +33,19 @@ userButtons.forEach((wrapper) => {
         });
     }
 
-    if (manageAccountButton) {
-        manageAccountButton.addEventListener("click", (e) => {
-            e.stopPropagation();
-            window.location.href = 'student_manage-account.html';
-        });
-    }
+    // if (manageAccountButton) {
+    //     manageAccountButton.addEventListener("click", (e) => {
+    //         e.stopPropagation();
+    //         window.location.href = 'student_manage-account.html';
+    //     });
+    // }
 
-    if (viewDashboardButton) {
-        viewDashboardButton.addEventListener("click", (e) => {
-            e.stopPropagation();
-            window.location.href = 'student_dashboard.html';
-        });
-    }
+    // if (viewDashboardButton) {
+    //     viewDashboardButton.addEventListener("click", (e) => {
+    //         e.stopPropagation();
+    //         window.location.href = 'student_dashboard.html';
+    //     });
+    // }
 });
 
 // close when clicking anywhere outside

@@ -7,7 +7,12 @@ const currentUser = {
 document.getElementById("username").textContent =
     currentUser.first_name;
 
+const modal = document.getElementById("reportModal");
+const root = document.documentElement;
+const primaryColor = getComputedStyle(root).getPropertyValue('--color-primary').trim();
+const secondaryColor = getComputedStyle(root).getPropertyValue('--color-secondary').trim();
 
+// USER CHART
 const ctx = document.getElementById('userChart');
 new Chart(ctx, {
     type: 'doughnut',
@@ -20,11 +25,6 @@ new Chart(ctx, {
         responsive: true
     }
 });
-
-const modal = document.getElementById("reportModal");
-const root = document.documentElement;
-const primaryColor = getComputedStyle(root).getPropertyValue('--color-primary').trim();
-const secondaryColor = getComputedStyle(root).getPropertyValue('--color-secondary').trim();
 
 // ITEM REPORT PIE CHART
 const itemReportChart = document.getElementById('itemReportChart');
