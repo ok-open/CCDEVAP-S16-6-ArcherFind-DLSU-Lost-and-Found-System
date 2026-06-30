@@ -76,6 +76,7 @@ function showSlides(n) {
 //JAVASCRIPT FOR CAROUSELL IMAGE
 
 //JAVASCRIPT FOR TOAST MESSAGES
+/*
 const toastBox = document.getElementById('toastBox');
 
 function showToast(message, status) {
@@ -130,4 +131,40 @@ function onCloseLostReport() {
 //For Error checking
 function onSaveFailure() {
     showToast('Connection failed. Please try again.', 'error');
+// } */
+
+//JAVASCRIPT FOR TOAST MESSAGES (REVISED NOW REFLECTS TOAST.JS)
+//TO ACCEPT CLAIM REQUEST
+function onAcceptRequest() {
+    showToast("✓ Request accepted successfully", "var(--color-successMsg)");
+}
+
+//TO REJECT CLAIM REQUEST
+function onRejectRequest() {
+    showToast("✗ Request has been rejected", "var(--color-errorMsg)");
+}
+
+//TO ACCEPT SURRENDER FORM
+function onAcceptSurrender() {
+    showToast("✓ Item has been added to database", "var(--color-successMsg)");
+}
+
+//TO REJECT SURRENDER FORM
+function onRejectSurrender() {
+    showToast("✗ Form rejected, no item added to database", "var(--color-errorMsg)");
+}
+
+//TO RESOLVE LOST ITEM REPORT
+function onResolveLostReport() {
+    showToast("✓ Report is marked resolved", "var(--color-successMsg)");
+}
+
+//TO CLOSE LOST ITEM REPORT
+function onCloseLostReport() {
+    showToast("✗ Report closed", "var(--color-errorMsg)");
+}
+
+//For Error checking
+function onSaveFailure() {
+    showToast("✗ Connection failed. Please try again.", "var(--color-errorMsg)");
 }

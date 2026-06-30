@@ -2,8 +2,8 @@
 /**************** TOAST ****************/
 #toast{
     position: fixed;
-    top: 100px;
-    right: 30px;
+    bottom: 2rem;
+    right: 2rem;
     color: var(--color-complement);
     padding: 14px 20px;
     border-radius: var(--radius-medium);
