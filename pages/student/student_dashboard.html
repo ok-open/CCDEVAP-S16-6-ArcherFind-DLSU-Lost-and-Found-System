@@ -9,7 +9,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_dashboard.css">
+    <link rel="stylesheet" href="../../styles/global/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- JavaScript -->
@@ -122,53 +122,56 @@
 
     <div class="wrapper">
         <section class="dashboard-wrapper">
-            <h1>My Dashboard</h1>
-            <section class="stat-wrapper">
+            <h1 class="greeting">My Dashboard</h1>
+
+            <!-- TOP ROW: Summary Stat Cards -->
+            <div class="card-row">
                 <!-- Loss Reports -->
-                <div class="stat-block content" data-stat="loss-reports">
-                    <h4>Loss Reports</h4>
+                <div class="stat-block green-border card" data-stat="loss-reports">
+                    <h5>Loss Reports</h5>
                     <hr>
-                    <h2><span class="stat-count">0</span></h2>
+                    <h3><span class="stat-count">0</span></h3>
                 </div>
-        
+
                 <!-- Found Item Reports -->
-                <div class="stat-block content" data-stat="found-reports">
-                    <h4>Found Item Reports</h4>
+                <div class="stat-block green-border card" data-stat="found-reports">
+                    <h5>Found Item Reports</h5>
                     <hr>
-                    <h2><span class="stat-count">0</span></h2>
+                    <h3><span class="stat-count">0</span></h3>
                 </div>
-        
+
                 <!-- Approved Reports/Requests -->
-                <div class="stat-block content" data-stat="approved-reports">
-                    <h4>Approved Reports/Requests</h4>
+                <div class="stat-block green-border card" data-stat="approved-reports">
+                    <h5>Approved Reports/Requests</h5>
                     <hr>
-                    <h2><span class="stat-count">0</span></h2>
+                    <h3><span class="stat-count">0</span></h3>
                 </div>
-        
+
                 <!-- Pending Reports/Requests -->
-                <div class="stat-block content" data-stat="pending-reports">
-                    <h4>Pending Reports/Requests</h4>
+                <div class="stat-block green-border card" data-stat="pending-reports">
+                    <h5>Pending Reports/Requests</h5>
                     <hr>
-                    <h2><span class="stat-count">0</span></h2>
+                    <h3><span class="stat-count">0</span></h3>
                 </div>
-            </section>
-        
-            <section class="bottom-wrapper">
+            </div>
+
+            <!-- BOTTOM ROW: Chart + reports history / notifications -->
+            <div class="card-row">
                 <!-- Loss Item Frequency by Location -->
-                <section class="lost-item-freq content">
-                    <h4>Lost Item Frequency by Location</h4>
+                <div class="graph-card card">
+                    <h5>Lost Item Frequency by Location</h5>
                     <hr>
-                    <div class="chart-container">
+                    <div class="graph-card-wrapper">
                         <canvas id="ITEM"></canvas>
                     </div>
-                </section>
-            
-                <section class="report-notif-wrapper">
+                </div>
+
+                <div class="cards-wrapper">
                     <!-- User Reports History -->
-                    <div class="report content">
-                        <h4>User Reports History</h4>
+                    <div class="card">
+                        <h5>User Reports History</h5>
                         <hr>
-                        <table id="report-table">
+                        <table class="data-table" id="report-table">
                             <thead>
                                 <tr>
                                     <th>Date</th>
@@ -186,15 +189,18 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="notif content">
-                        <h4>Notifications</h4>
+
+                    <!-- Notifications -->
+                    <div class="card">
+                        <h5>Notifications</h5>
                         <hr>
                         <p>✓ Claim Request Approved</p>
                         <p>✖ Found Item Report Rejected</p>
                     </div>
-                </section>
-            </section>
+                </div>
+            </div>
         </section>
+    </div>
 
         <!------------------------ CONNECTIONS AND FOOTER ------------------------>
         <section class="connections">
