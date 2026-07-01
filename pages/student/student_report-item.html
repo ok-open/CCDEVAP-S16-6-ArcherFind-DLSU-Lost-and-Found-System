@@ -186,20 +186,35 @@
 
                         <!-- QUESTION: Room number -->
                         <div class="question-box">
-                            <label for="room-number">
-                                Room <span class="required">required field</span>
-                            </label>
-                            <input type="text">
+                            <label>Floor number <span class="required">required field</span></label>
+                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
+                            <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
+                            <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
                         </div>
                     </div>
 
-                    <!-- QUESTION: Area -->
-                    <div class="question-box">
-                        <label for="area">
-                            Area
-                            <span class="required">at least one required</span>
-                        </label>
-                        <input type="text">
+                    <div class="form-row">
+                        <!-- QUESTION: Area -->
+                        <div class="question-box">
+                            <label>Area <span class="required">at least one required</span></label>
+                            <select class="claim-input">
+                                <option>Select Area</option>
+                                <option>Pericos Canteen</option>
+                                <option>Study Lobby</option>
+                                <option>Hallway</option>
+                            </select>
+                        </div>
+
+                        <!-- QUESTION: Room number -->
+                        <div class="question-box">
+                            <label>Room <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Room</option>
+                            <option>G403</option>
+                            <option>G301</option>
+                            <option>G106</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
 

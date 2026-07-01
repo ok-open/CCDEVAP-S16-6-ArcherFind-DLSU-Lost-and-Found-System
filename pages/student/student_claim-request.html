@@ -144,14 +144,33 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Room No. <span class="required">number only</span></label>
-                        <input type="number" class="claim-input">
+                        <label>Floor number <span class="required">required field</span></label>
+                        <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
+                        <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
+                        <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Area <span class="required">at least one required</span></label>
-                    <input type="text" class="claim-input">
+                <div class="claim-location-row">
+                    <div class="form-group">
+                        <label>Area <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Area</option>
+                            <option>Pericos Canteen</option>
+                            <option>Study Lobby</option>
+                            <option>Hallway</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Room <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Room</option>
+                            <option>G403</option>
+                            <option>G301</option>
+                            <option>G106</option>
+                        </select>
+                    </div>
                 </div>
 
                 <h3 class="claim-section-title">When was this lost?</h3>

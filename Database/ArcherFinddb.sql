@@ -144,6 +144,15 @@ CREATE TABLE reports_images (
     FOREIGN KEY (report_id) REFERENCES reports(report_id) ON DELETE CASCADE
 );
 
+CREATE TABLE contacts_received (
+    message_id INT AUTO_INCREMENT PRIMARY KEY,
+    report_id INT NOT NULL,
+    student_id INT,
+    inquiry  ENUM('Issue with claiming an item', 'Issue with reporting an item', 'Account / Verification issues', 'General inquiry / Feedback') NOT NULL,
+    
+    FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE SET NULL
+) ;
+
 -- =========================================================================
 -- 4. AUDIT LOG TABLES
 -- =========================================================================
