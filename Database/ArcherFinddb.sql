@@ -149,7 +149,7 @@ CREATE TABLE contacts_received (
     report_id INT NOT NULL,
     student_id INT,
     inquiry  ENUM('Issue with claiming an item', 'Issue with reporting an item', 'Account / Verification issues', 'General inquiry / Feedback') NOT NULL,
-    
+    status ENUM('Active', 'Closed') NOT NULL DEFAULT 'Active',
     FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE SET NULL
 ) ;
 
