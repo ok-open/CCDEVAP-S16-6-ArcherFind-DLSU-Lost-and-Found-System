@@ -78,7 +78,8 @@ select.control-box {
 }
 
 .item-card {
-    height: 320px;
+    height: 322px;
+    /* Modified to 322 so that canva square size will cover full square */
     width: 100%;
     border-radius: var(--radius-medium);
     background-color: var(--color-secondary-hover);
@@ -95,7 +96,9 @@ select.control-box {
 .item-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    /* changed to contain to avoid cropping */
+    /* can change to cover if preferred */
     display: block;
     border-radius: var(--radius-medium);
 }

@@ -2,7 +2,7 @@ INSERT INTO users (first_name, last_name, email, password_hash, role) VALUES
 ('Marc', 'Quizon', 'marc_lesley_quizon@dlsu.edu.ph', '1234', 'Student'),
 ('Angelo', 'Almeda', 'angelo_almeda@dlsu.edu.ph', '1234', 'Student'),
 ('Carl', 'Crespo', 'carl_crespo@dlsu.edu.ph', '1234', 'Staff'),
-('Nathan', 'Saclolo', 'nathan_saclolo@dlsu.edu.ph', '1234', 'Staff').
+('Nathan', 'Saclolo', 'nathan_saclolo@dlsu.edu.ph', '1234', 'Staff'),
 ('Daniel', 'Pamintunuan', 'daniel_pamintunuan@dlsu.edu.ph', '1234', 'Admin');
 
 INSERT INTO categories (name) VALUES
@@ -51,13 +51,13 @@ INSERT INTO buildings (name, abbreviation, max_level) VALUES
 ('St. Joseph Hall', 'SJ', 6),
 ('St. Miguel Hall', 'SM', 5),
 ('St. Mutien Marie Hall', 'MM', 4),
-('William Hall', 'WH', 4)
+('William Hall', 'WH', 4),
 ('Henry Sy Sr. Hall', 'HSSH', 14),
 ('Velasco Hall', 'V', 5),
 ('Science and Technology Center', 'STR', 5),
 ('Gokongwei Hall', 'G', 4),
 ('Andrew Gonzalez Hall', 'AG', 21),
-('Enrique Razon Sports Center', 'ER', 10)
+('Enrique Razon Sports Center', 'ER', 10),
 ('Bloemen Hall', 'BH', 4);
 
 
@@ -393,3 +393,139 @@ INSERT INTO areas (name, building_id, level) VALUES
 
 -- Bloemen Hall (building_id: 14)
 ('Bloemen Cafeteria Seating Area', 14, 1);
+
+INSERT INTO items (name, description, category_id, brand_id, surrendered_by, claimed_by, room_id, area_id, when_found, status) VALUES
+-- =========================================================================
+-- BRAND: Apple (brand_id: 1, category_id: 1 - Electronics)
+-- =========================================================================
+('iPhone 15 Pro', 'Natural titanium finish with a clear silicone case.', 1, 1, 1, NULL, 6, NULL, '2026-06-15 09:30:00', 'In Storage'),
+('MacBook Air M2', 'Midnight blue color, left under a desk. Has a sticker on top.', 1, 1, 2, 1, NULL, 18, '2026-06-16 14:15:00', 'Claimed'),
+('AirPods Pro Gen 2', 'Found inside a white charging case with a custom knitted sleeve.', 1, 1, 1, NULL, 15, NULL, '2026-06-18 11:00:00', 'In Storage'),
+('Apple Pencil 2', 'Spotted rolling near the podium. No initials engraved.', 1, 1, 2, NULL, 48, NULL, '2026-06-19 16:45:00', 'In Storage'),
+('iPad Pro 11-inch', 'Space gray color with a black smart folio cover.', 1, 1, 1, NULL, NULL, 51, '2026-06-20 08:20:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Samsung (brand_id: 2, category_id: 1 - Electronics)
+-- =========================================================================
+('Galaxy S24 Ultra', 'Titanium yellow, has a small scratch on the bottom left corner.', 1, 2, 2, NULL, 11, NULL, '2026-06-14 10:00:00', 'In Storage'),
+('Galaxy Buds2 Pro', 'Purple charging case, found left on a student arm bench.', 1, 2, 1, 2, NULL, 2, '2026-06-15 13:00:00', 'Claimed'),
+('Samsung Power Bank', '10,000mAh capacity, metallic silver variant.', 1, 2, 2, NULL, 78, NULL, '2026-06-17 15:30:00', 'In Storage'),
+('Galaxy Watch 6', 'Black aluminum casing with a dark green sports band.', 1, 2, 1, NULL, NULL, 80, '2026-06-21 17:10:00', 'In Storage'),
+('Galaxy Tab S9', 'Left inside a classroom pouch with its S-Pen attached.', 1, 2, 2, NULL, 34, NULL, '2026-06-22 12:25:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Huawei (brand_id: 3, category_id: 1 - Electronics)
+-- =========================================================================
+('Huawei Mate 60 Pro', 'Black variant with a rugged carbon fiber protective case.', 1, 3, 1, NULL, 112, NULL, '2026-06-12 11:45:00', 'In Storage'),
+('FreeBuds 5i', 'Nebula black color variant, charging case feels slightly scuffed.', 1, 3, 2, NULL, NULL, 37, '2026-06-14 09:15:00', 'In Storage'),
+('Huawei MatePad', 'Grey tablet running HarmonyOS, found near the front blackboard.', 1, 3, 1, NULL, 27, NULL, '2026-06-18 14:00:00', 'In Storage'),
+('Huawei Watch Fit 3', 'Pink strap, metallic rose-gold buckle framework.', 1, 3, 2, 1, NULL, 64, '2026-06-20 10:30:00', 'Claimed'),
+('Huawei Portable Router', 'White pocket Wi-Fi device found slipped under a plastic chair.', 1, 3, 1, NULL, 115, NULL, '2026-06-23 16:00:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: JisuLife (brand_id: 4, category_id: 1 - Electronics)
+-- =========================================================================
+('JisuLife Handheld Fan Pro', 'Brown/tan color with a digital display showing battery levels.', 1, 4, 2, NULL, 1, NULL, '2026-06-15 12:00:00', 'In Storage'),
+('JisuLife Neck Fan', 'White flexible wearable neck fan, found near a table pillar.', 1, 4, 1, NULL, NULL, 3, '2026-06-16 11:20:00', 'In Storage'),
+('JisuLife Mini Fan Ultra', 'Dark blue handheld turbo fan with a metal carabiner base.', 1, 4, 2, 2, 45, NULL, '2026-06-19 14:55:00', 'Claimed'),
+('JisuLife Desk Fan', 'Small green oscillating desk fan left sitting on a corner desk.', 1, 4, 1, NULL, 86, NULL, '2026-06-21 09:40:00', 'In Storage'),
+('JisuLife Pocket Fan', 'Pink pocketable travel fan with integrated flashlight element.', 1, 4, 2, NULL, NULL, 68, '2026-06-24 15:10:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Goojodoq (brand_id: 5, category_id: 1 - Electronics)
+-- =========================================================================
+('Goojodoq Stylus Pen GD13', 'White iPad alternative active pencil, charges magnetically.', 1, 5, 1, NULL, 50, NULL, '2026-06-13 10:15:00', 'In Storage'),
+('Goojodoq Wireless Keyboard', 'Ultra-thin white Bluetooth keyboard with a built-in touchpad slot.', 1, 5, 2, NULL, NULL, 47, '2026-06-15 16:30:00', 'In Storage'),
+('Goojodoq Multiport Hub', 'Space grey USB-C hub adapter featuring 3 USB ports and an HDMI rail.', 1, 5, 1, 2, 60, NULL, '2026-06-17 13:10:00', 'Claimed'),
+('Goojodoq Stylus Pen GD12', 'Matte black digital pen with a replacement tip stored inside.', 1, 5, 2, NULL, 103, NULL, '2026-06-20 11:45:00', 'In Storage'),
+('Goojodoq Bluetooth Mouse', 'Slim ergonomic lavender clicker mouse, lightweight plastic body.', 1, 5, 1, NULL, NULL, 77, '2026-06-25 09:00:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Anker (brand_id: 6, category_id: 1 - Electronics)
+-- =========================================================================
+('Anker PowerCore 24K', 'Large brick power bank with built-in smart display screen tracking.', 1, 6, 2, NULL, 55, NULL, '2026-06-14 14:20:00', 'In Storage'),
+('Anker Soundcore Space One', 'Over-ear noise-cancelling headphones in matte black finish tier.', 1, 6, 1, NULL, NULL, 49, '2026-06-16 08:35:00', 'In Storage'),
+('Anker Nano USB-C Charger', 'Small mint green cube wall adapter plug module.', 1, 6, 2, 1, 91, NULL, '2026-06-18 12:50:00', 'Claimed'),
+('Anker Soundcore 2 Speaker', 'Black rectangular waterproof speaker with red branding print text.', 1, 6, 1, NULL, 116, NULL, '2026-06-21 16:15:00', 'In Storage'),
+('Anker 3-in-1 Charging Cable', 'Braided nylon multi-connector lead cord wire system wrapped tight.', 1, 6, 2, NULL, NULL, 90, '2026-06-24 10:40:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: AquaFlask (brand_id: 7, category_id: 2 - Tumblers & Bottles)
+-- =========================================================================
+('AquaFlask 22oz Marine Blue', 'Equipped with a teal silicone protective boot sleeve element.', 2, 7, 1, NULL, 2, NULL, '2026-06-14 11:00:00', 'In Storage'),
+('AquaFlask 32oz Arctic White', 'Features black paracord handle accessory strap locked securely.', 2, 7, 2, NULL, NULL, 21, '2026-06-15 15:40:00', 'In Storage'),
+('AquaFlask 40oz Onyx Black', 'Massive capacity flask bottle with noticeable silver surface scratch.', 2, 7, 1, 2, 70, NULL, '2026-06-18 09:30:00', 'Claimed'),
+('AquaFlask 18oz Sorbet Pink', 'Small slender personal drinking bottle profile config setting.', 2, 7, 2, NULL, 80, NULL, '2026-06-19 13:20:00', 'In Storage'),
+('AquaFlask 22oz Grape Purple', 'Fitted with a white replacement wide-mouth straw lid caps assembly.', 2, 7, 1, NULL, NULL, 5, '2026-06-22 10:10:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Hydro Flask (brand_id: 8, category_id: 2 - Tumblers & Bottles)
+-- =========================================================================
+('Hydro Flask 24oz Cobalt', 'Standard wide-mouth insulated drinking flask container component.', 2, 8, 2, NULL, 11, NULL, '2026-06-13 14:00:00', 'In Storage'),
+('Hydro Flask 32oz Pacific Blue', 'Features a prominent flex cap style handle system structure asset.', 2, 8, 1, NULL, NULL, 48, '2026-06-15 10:50:00', 'In Storage'),
+('Hydro Flask 18oz Olive', 'Earth-tone olive green aesthetic model, slightly dented baseline rim.', 2, 8, 2, 1, 110, NULL, '2026-06-17 11:15:00', 'Claimed'),
+('Hydro Flask 40oz Sunflower Yellow', 'Bright yellow paint color coating with a custom vinyl flower sticker.', 2, 8, 1, NULL, 102, NULL, '2026-06-20 15:00:00', 'In Storage'),
+('Hydro Flask 21oz Seagrass', 'Light pastel mint-green exterior shell with standard twist cap.', 2, 8, 2, NULL, NULL, 74, '2026-06-23 08:45:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Gucci (brand_id: 9, category_id: 3/5 - Wallets / Apparel & Bags)
+-- =========================================================================
+('Gucci GG Marmont Wallet', 'Black leather bi-fold layout sporting gold interlaced logo design.', 3, 9, 1, NULL, 21, NULL, '2026-06-14 16:30:00', 'In Storage'),
+('Gucci Ophidia Card Case', 'Signature beige canvas profile displaying red/green center canvas stripe.', 3, 9, 2, NULL, NULL, 4, '2026-06-16 11:00:00', 'In Storage'),
+('Gucci Canvas Backpack', 'Monogram print pattern luxury pack compartment build framework layout.', 5, 9, 1, 2, 115, NULL, '2026-06-17 14:25:00', 'Claimed'),
+('Gucci Black Leather Belt', 'Gold-plated interlocking double G logo buckle system attachment mechanism.', 5, 9, 2, NULL, NULL, 79, '2026-06-19 12:00:00', 'In Storage'),
+('Gucci Kingsnake Wallet', 'Features the classic iconic printed coral snake graphic layout artwork matrix.', 3, 9, 1, NULL, 111, NULL, '2026-06-21 15:40:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Louis Vuitton (brand_id: 10, category_id: 3/5 - Wallets / Apparel & Bags)
+-- =========================================================================
+('LV Monogram Pocket Organizer', 'Classic dark brown luxury checkerboard leather styling matrix pattern.', 3, 10, 2, NULL, 46, NULL, '2026-06-12 09:20:00', 'In Storage'),
+('LV Damier Ebene Cardholder', 'Distinct geometric brown gridded profile, contains ID card inside.', 3, 10, 1, NULL, NULL, 34, '2026-06-14 14:10:00', 'In Storage'),
+('LV Speedy 25 Handbag', 'Signature luxury purse handle piece, found tucked under cafeteria bench.', 5, 10, 2, 1, NULL, 92, '2026-06-16 13:50:00', 'Claimed'),
+('LV Zippy Coin Purse', 'Round zipper layout design enclosing inner multi-pocket accordion separator.', 3, 10, 1, NULL, 106, NULL, '2026-06-19 10:00:00', 'In Storage'),
+('LV Eclipse Key Pouch', 'Charcoal black and dark gray monogrammed canvas tool chain loop holder.', 5, 10, 2, NULL, NULL, 23, '2026-06-22 16:45:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Coach (brand_id: 11, category_id: 3/5 - Wallets / Apparel & Bags)
+-- =========================================================================
+('Coach Slim Accordion Zip', 'Crossgrain black premium leather outer skin configuration template tier.', 3, 11, 1, NULL, 3, NULL, '2026-06-13 11:30:00', 'In Storage'),
+('Coach Wyn Small Wallet', 'Envelope flap button closure utility format style casing profile.', 3, 11, 2, NULL, NULL, 35, '2026-06-15 15:20:00', 'In Storage'),
+('Coach Court Backpack', 'White pebble surface treatment style material print with brown trim borders.', 5, 11, 1, 2, NULL, 50, '2026-06-18 10:45:00', 'Claimed'),
+('Coach Signature Lanyard', 'Canvas neck loop badge module bracket fixture string accessory package.', 5, 11, 2, NULL, 76, NULL, '2026-06-20 12:15:00', 'In Storage'),
+('Coach Leather Card Slot', 'Dark navy blue dye coat tone premium finish wallet strip line block.', 3, 11, 1, NULL, NULL, 24, '2026-06-23 14:00:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Uniqlo (brand_id: 12, category_id: 5 - Apparel & Bags)
+-- =========================================================================
+('Uniqlo Round Mini Shoulder Bag', 'Cream colored crescent moon shape cross-body canvas sling bag.', 5, 12, 2, NULL, 5, NULL, '2026-06-14 12:15:00', 'In Storage'),
+('Uniqlo AIRism Mesh Jacket', 'Light grey athletic active hoodie jacket zip-up piece jacket.', 5, 12, 1, NULL, NULL, 67, '2026-06-15 16:40:00', 'In Storage'),
+('Uniqlo Utility Sling Bag', 'Dark olive green cargo tactical chest pack bundle setup assembly.', 5, 12, 2, 1, NULL, 7, '2026-06-17 11:30:00', 'Claimed'),
+('Uniqlo Flannel Shirt', 'Red and black checkered pattern button-up warm overshirt cloth.', 5, 12, 1, NULL, 111, NULL, '2026-06-19 14:20:00', 'In Storage'),
+('Uniqlo Foldable Umbrella', 'Black compact travel umbrella tube tucked inside its matching sheath pouch.', 5, 12, 2, NULL, NULL, 69, '2026-06-21 08:50:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: Zara (brand_id: 13, category_id: 5 - Apparel & Bags)
+-- =========================================================================
+('Zara Faux Leather Tote', 'Large brown open tote bag compartment structure frame system unit.', 5, 13, 1, NULL, 12, NULL, '2026-06-12 15:30:00', 'In Storage'),
+('Zara Puffer Jacket', 'Thick dark navy thermal insulation winter-style outer shell wear coat.', 5, 13, 2, NULL, NULL, 22, '2026-06-14 10:10:00', 'In Storage'),
+('Zara Quilted Crossbody Bag', 'Black stitched square pattern bag layout with heavy gold chain drop straps.', 5, 13, 1, 2, 45, NULL, '2026-06-16 13:00:00', 'Claimed'),
+('Zara Bomber Jacket', 'Khaki green satin surface aviator flight wear outfit uniform matrix.', 5, 13, 2, NULL, 64, NULL, '2026-06-19 11:45:00', 'In Storage'),
+('Zara Canvas Shopping Bag', 'Eco aesthetic natural cloth container canvas sack print layout banner.', 5, 13, 1, NULL, NULL, 52, '2026-06-22 16:10:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: H&M (brand_id: 14, category_id: 5 - Apparel & Bags)
+-- =========================================================================
+('H&M Canvas Backpack', 'Simple minimal school knapsack in light pink washed fabric weave texturize.', 5, 14, 2, NULL, 2, NULL, '2026-06-13 13:40:00', 'In Storage'),
+('H&M Denim Jacket', 'Classic blue vintage wash cotton button denim worker wear layout layer.', 5, 14, 1, NULL, NULL, 4, '2026-06-15 09:20:00', 'In Storage'),
+('H&M Ribbed Knit Beanie', 'Soft gray elastic winter cold-weather skull cap accessory block piece.', 5, 14, 2, 1, 104, NULL, '2026-06-17 15:55:00', 'Claimed'),
+('H&M Waist Bag Belt', 'Sporty neon yellow running pouch fanny pack container compartment.', 5, 14, 1, NULL, NULL, 6, '2026-06-20 11:10:00', 'In Storage'),
+('H&M Clear Tote Bag', 'Transparent see-through PVC plastic security screening stadium carry-all bag.', 5, 14, 2, NULL, 114, NULL, '2026-06-23 14:30:00', 'In Storage'),
+
+-- =========================================================================
+-- BRAND: none (brand_id: 15, category_id: 4/6 - Documents / Others)
+-- =========================================================================
+('DLSU ID Card', 'Found inside a generic clear plastic badge sleeve. Belongs to a student.', 4, 15, 1, NULL, 1, NULL, '2026-06-14 08:30:00', 'In Storage'),
+('Brown Leather Keyring', 'Holds three silver metal door entry keys and a mini flashlight fob item.', 6, 15, 2, NULL, NULL, 22, '2026-06-15 11:20:00', 'In Storage'),
+('Calculus Textbook', 'TC7 single variable math book edition volume, name page missing entirely.', 6, 15, 1, 2, 77, NULL, '2026-06-16 16:45:00', 'Claimed'),
+('Black Umbrella', 'Long standard long-stem umbrella with an elegant wooden J-hook handle end.', 6, 15, 2, NULL, NULL, 5, '2026-06-19 13:15:00', 'In Storage'),
+('Clear Long Envelope', 'Contains printed photocopied reading materials and loose leaf lecture papers.', 4, 15, 1, NULL, 62, NULL, '2026-06-21 10:05:00', 'In Storage');

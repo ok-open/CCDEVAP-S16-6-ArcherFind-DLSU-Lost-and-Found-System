@@ -150,7 +150,7 @@ CREATE TABLE contacts_received (
     student_id INT,
     inquiry  ENUM('Issue with claiming an item', 'Issue with reporting an item', 'Account / Verification issues', 'General inquiry / Feedback') NOT NULL,
     status ENUM('Active', 'Closed') NOT NULL DEFAULT 'Active',
-    FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE SET NULL
+    FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ;
 
 -- =========================================================================
@@ -159,24 +159,24 @@ CREATE TABLE contacts_received (
 
 CREATE TABLE items_update_log (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
-    item_id INT NOT NULL,
+    item_id INT,
     staff_id INT,
     old_status ENUM('In Storage', 'Claimed', 'Disposed') NOT NULL,
     new_status ENUM('In Storage', 'Claimed', 'Disposed') NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE SET NULL,
     FOREIGN KEY (staff_id) REFERENCES users(user_id) ON DELETE SET NULL
 ) ;
 
 CREATE TABLE reports_update_log (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
-    report_id INT NOT NULL,
+    report_id INT,
     staff_id INT,
-    old_status ENUM('Active', 'Closed', 'Accepted', 'Rejected') NOT NULL,
-    new_status ENUM('Active', 'Closed') NOT NULL,
+    old_status ENUM('Active', 'Closed', 'Accepted', 'Resolved', 'Rejected') NOT NULL,
+    new_status ENUM('Active', 'Closed', 'Accepted', 'Resolved', 'Rejected') NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (report_id) REFERENCES reports(report_id) ON DELETE CASCADE,
+    FOREIGN KEY (report_id) REFERENCES reports(report_id) ON DELETE SET NULL,
     FOREIGN KEY (staff_id) REFERENCES users(user_id) ON DELETE SET NULL
 ) ;
