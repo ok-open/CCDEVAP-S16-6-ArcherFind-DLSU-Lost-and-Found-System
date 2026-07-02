@@ -114,7 +114,8 @@ CREATE TABLE reports (
     student_id INT NOT NULL,
     item_description TEXT NOT NULL,
     category_id INT,
-    brand_id INT, 
+    brand_id INT,
+    item_id INT, 
     room_id INT,
     area_id INT,
     when_found DATETIME, -- Null if Loss Report
@@ -130,6 +131,7 @@ CREATE TABLE reports (
     FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL,
     FOREIGN KEY (brand_id) REFERENCES brands(brand_id) ON DELETE SET NULL,
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE SET NULL,
     FOREIGN KEY (area_id) REFERENCES areas(area_id) ON DELETE SET NULL,
     FOREIGN KEY (reviewed_by) REFERENCES users(user_id) ON DELETE SET NULL
