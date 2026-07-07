@@ -1,20 +1,24 @@
-// ID NUMBER: Digits Only
-const idNum = document.getElementById('id-num');
-if (idNum) {
-    idNum.onkeydown = (event) => {
-        // Only allow if the e.key value is a number or if it's 'Backspace'
-        if (isNaN(event.key) && event.key !== 'Backspace') {
-            event.preventDefault();
-            showToast("⚠ Only numeric digits are allowed.", "var(--color-errorMsg)");
- 
-            // Change border to red for 1500ms
-            idNum.style.border = "1px solid var(--color-errorMsg)";
-            clearTimeout(idNum._errorTimeout);
-            idNum._errorTimeout = setTimeout(() => {
-                idNum.style.border = "";
+// DLSU EMAIL VALIDATION
+const emailInput = document.getElementById("email");
+if (emailInput) {
+    emailInput.addEventListener("blur", () => {
+        const email = emailInput.value.trim().toLowerCase();
+
+        if (
+            email !== "" &&
+            !email.endsWith("@dlsu.edu.ph")
+        ) {
+            showToast(
+                "⚠ Please use your DLSU email address.",
+                "var(--color-errorMsg)"
+            );
+            emailInput.style.border = "1px solid var(--color-errorMsg)";
+            clearTimeout(emailInput._errorTimeout);
+            emailInput._errorTimeout = setTimeout(() => {
+                emailInput.style.border = "";
             }, 1500);
         }
-    };
+    });
 }
 
 // PASSWORD: Toggle Visibility
