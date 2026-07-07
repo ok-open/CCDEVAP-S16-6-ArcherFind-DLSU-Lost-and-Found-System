@@ -1,5 +1,5 @@
 -- CREATE DATABASE ArcherFinddb;
--- USE dlsu_lost_and_found;
+-- USE archerfinddb;
 
 -- =========================================================================
 -- 1. INDEPENDENT & LOOKUP TABLES
@@ -131,7 +131,7 @@ CREATE TABLE reports (
     FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE CASCADE,
     FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE SET NULL,
     FOREIGN KEY (brand_id) REFERENCES brands(brand_id) ON DELETE SET NULL,
-    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE CASCADE,
     FOREIGN KEY (room_id) REFERENCES rooms(room_id) ON DELETE SET NULL,
     FOREIGN KEY (area_id) REFERENCES areas(area_id) ON DELETE SET NULL,
     FOREIGN KEY (reviewed_by) REFERENCES users(user_id) ON DELETE SET NULL
