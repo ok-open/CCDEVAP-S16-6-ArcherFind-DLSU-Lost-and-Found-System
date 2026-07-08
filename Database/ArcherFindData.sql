@@ -529,3 +529,13 @@ INSERT INTO items (name, description, category_id, brand_id, surrendered_by, cla
 ('Calculus Textbook', 'TC7 single variable math book edition volume, name page missing entirely.', 6, 15, 1, 2, 77, NULL, '2026-06-16 16:45:00', 'Claimed'),
 ('Black Umbrella', 'Long standard long-stem umbrella with an elegant wooden J-hook handle end.', 6, 15, 2, NULL, NULL, 5, '2026-06-19 13:15:00', 'In Storage'),
 ('Clear Long Envelope', 'Contains printed photocopied reading materials and loose leaf lecture papers.', 4, 15, 1, NULL, 62, NULL, '2026-06-21 10:05:00', 'In Storage');
+
+-- =========================================================================
+-- IMAGE LINKS TO EACH ITEM IN THE ITEMS FOLDER
+-- =========================================================================
+INSERT INTO items_images (item_id, img_filepath) VALUES
+(1, '../../assets/ITEMS/1.png'),
+(1, '../../assets/ITEMS/2.png'),
+(1, '../../assets/ITEMS/3.png'),
+(1, '../../assets/ITEMS/4.png');
+
