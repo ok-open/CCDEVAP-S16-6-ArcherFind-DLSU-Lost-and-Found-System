@@ -1,16 +1,17 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Surrender Found Item</title>
+    <title>ArcherFind - About</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
+    <link rel="stylesheet" href="../../styles/student/student_about.css">
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/global/image.js" defer></script>
-    <script src="../../javascript/student/student_submit-item.js" defer></script>
 </head>
 
 <body>
@@ -25,12 +26,12 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_about.html" class="current-page">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html" class="current-page">Report Lost</a></li>
+                        <li><a href="../../pages/student/student_item-view.html">Report Lost</a></li>
                         <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
                     </ul>
                 </li>
@@ -67,12 +68,12 @@
         <nav class="sidebar">
             <ul class="nav-links">
                 <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_about.html" class="current-page">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html" class="current-page">> Report Lost</a></li>
+                        <li><a href="../../pages/student/student_item-view.html">> Report Lost</a></li>
                         <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
                     </ul>
                 </li>
@@ -114,156 +115,118 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
+    <!-- ABOUT ARCHERFIND -->
+    <section class="about-archerfind">
+        <div>
+            <h1>About ArcherFind</h1>
+            <p>
+                ArcherFind is a centralized lost-and-found platform designed to help Lasallians reconnect
+                with misplaced belongings quickly, securely, and conveniently.
+                Losing personal items can be stressful, especially when information is scattered across
+                group chats, social media posts, and office inquiries. ArcherFind simplifies this process
+                by providing a single, accessible platform where students can report lost items, browse
+                found-item listings, and submit ownership claims anytime and anywhere using their devices.
+                <br><br>
+                More than just a reporting system, ArcherFind promotes accountability, trust, and community
+                cooperation among Lasallians. Every lost-item report, found-item submission, and ownership request
+                undergoes staff verification to ensure accuracy and security throughout the retrieval process.
+                By combining technology with responsible oversight, ArcherFind creates a more efficient and reliable
+                way to return belongings to their rightful owners while fostering a more connected and supportive campus community.
 
-    <div class="surrender-wrapper">
-        <div class="form-title">
-            <h2>Can't Find Your Belonging? Submit a missing item report.</h2>
-            <p>If you didn't see your item in our gallery, log its details here. We will monitor incoming surrenders and
-                notify you if a match is found.</p>
+            </p>
         </div>
 
-        <!-- REPORT AN ITEM FORM -->
-        <form class="form-wrapper">
-            <!-- LEFT SIDE -->
-            <section class="form-left">
-                <!-- QUESTION TITLE: What item are you looking for? -->
-                <div class="question-box-wrapper">
-                    <div class="question-box">
-                        <label for="name">
-                            <h4>What item are you looking for?</h4><span class="required">required field</span>
-                        </label>
-                        <input type="text" id="name">
-                    </div>
+        <img src="..\..\assets\IMAGES\about_archerfind-img.jpg" alt="about_archerfind-img">
+    </section>
 
-                    <!-- FORM ROW: Category === Brand -->
-                    <div class="form-row">
-                        <!-- QUESTION: Category of Item (what type of item) -->
-                        <div class="question-box">
-                            <label for="category">
-                                Category<span class="required">required field</span>
-                            </label>
-                            <select id="category">
-                                <option>Select Category</option>
-                                <option>Electronics</option>
-                                <option>Identity Documents</option>
-                                <option>Watch / Jewelry</option>
-                                <option>Miscellaneous</option>
-                            </select>
-                        </div>
+    <!-- IMAGE BANNER -->
+    <section id="banner">
+        <img src="..\..\assets\BACKGROUNDS\About.png" alt="..\..\assets\BACKGROUNDS\About.png">
+    </section>
 
-                        <!-- QUESTION: Brand of the Item -->
-                        <div class="question-box">
-                            <label for="brand-id">
-                                Brand<span class="required">required field</span>
-                            </label>
-                            <input type="text">
-                        </div>
-                    </div>
+    <!-- COVER SECTION -->
+    <section class="cover">
+        <h2>
+            Bringing your lost items back to you,<br>
+            all in one place.
+        </h2>
 
-                    <!-- DESCRIPTION TEXT AREA -->
-                    <div class="question-box">
-                        <label for="description">Description</label>
-                        <textarea></textarea>
-                    </div>
+        <p>
+            ArcherFind provides a single, centralized hub
+            for the DLSU community to report, track, and
+            recover their belongings without the hassle.
+        </p>
+
+        <button type="button" class="green-button" onclick="document.querySelector('.team-section').scrollIntoView({behavior: 'smooth'});">
+            MEET OUR TEAM
+        </button>
+    </section>
+
+    <!-- MISSION / VISION -->
+    <section class="mission-vision">
+        <div class="mission-box">
+            <h2>Mission</h2>
+            <p>
+                To provide a secure and user-friendly platform that streamlines lost-and-found processes,
+                empowers students and staff to work together, and ensures that misplaced belongings can be
+                reported, tracked, and returned efficiently.
+            </p>
+        </div>
+
+        <div class="vision-box">
+            <h2>Vision</h2>
+            <p>
+                To become the trusted digital bridge that reconnects people with their belongings while
+                fostering a culture of honesty, responsibility, and cooperation within the DLSU community.
+            </p>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="team-section">
+        <h2>The Team Behind ArcherFind</h2>
+        <div class="team-grid">
+            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\Angelo.png" alt="Angelo.png"></div><p>ALMEDA, Angelo</p></div>
+            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\Carl.JPG" alt="Carl.JPG"></div><p>CRESPO, Carl</p></div>
+            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\dan.png" alt="dan.png"></div><p>PAMINTUAN, Daniel</p></div>
+            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\Marc.JPG" alt="Marc.JPG"></div><p>QUIZON, Marc</p></div>
+            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\lebron.png" alt="LEBRON.png"></div><p>SACLOLO, Nathan</p></div>
+        </div>
+    </section>
+
+    <section class="faq-button">
+        <button class="outline-green-button" type="button" onclick="location.href='student_faq.html'">Frequently Asked Questions</button>
+    </section>
+
+    <!------------------------ CONNECTIONS AND FOOTER ------------------------>
+    <section class="connections">
+        <h3>Connections</h3>
+        <div class="connections-container">
+            <ul>
+                <li><a href="../../pages/student/student_home.html">Home</a></li>
+                <li><a href="../../pages/student/student_contact.html">Contact</a></li>
+                <li><a href="../../pages/student/student_faq.html">F.A.Q</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_dashboard.html">Dashboard</a></li>
+                <li><a onclick="if(confirm('WARNING: Clicking this link will take you to an external website: https://www.dlsu.edu.ph. This will exit you out of the ArcherFind Website. Continue?')) return true;" href="https://www.dlsu.edu.ph">DLSU Website</a></li>
+            </ul>
+
+            <div>
+                <h5>Have a Question?</h5>
+                <div id="write-us">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" ><path d="M158.57-160q-32.52 0-56.21-23.69-23.69-23.7-23.69-56.21v-480.2q0-32.51 23.69-56.21Q126.05-800 158.57-800h642.86q32.52 0 56.21 23.69 23.69 23.7 23.69 56.21v480.2q0 32.51-23.69 56.21Q833.95-160 801.43-160H158.57ZM480-453.51 146.26-668.36v428.46q0 5.39 3.46 8.85t8.85 3.46h642.86q5.39 0 8.85-3.46t3.46-8.85v-428.46L480-453.51Zm0-67.57 331.03-211.33H149.64L480-521.08ZM140.92-668.36v-64.05 492.51q4 5.39 8.13 8.85 4.13 3.46 9.52 3.46h-17.65v-440.77Z"/></svg>
+                    <a href="../../pages/student/student_contact.html">Write us!</a>
                 </div>
-
-                <!-- QUESTION TITLE: Where was it last seen? -->
-                <div class="question-box-wrapper">
-                    <h4>Where was it last seen?</h4>
-
-                    <!-- FORM ROW: Building === Room Number -->
-                    <div class="form-row">
-                        <!-- QUESTION: Building -->
-                        <div class="question-box">
-                            <label>Building <span class="required">required field</span></label>
-                            <select>
-                                <option>Select Building</option>
-                                <option>Gokongwei Hall</option>
-                                <option>Andrew Gonzales Hall</option>
-                                <option>St. La Salle Hall</option>
-                            </select>
-                        </div>
-
-                        <!-- QUESTION: Room number -->
-                        <div class="question-box">
-                            <label>Floor number <span class="required">required field</span></label>
-                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
-                            <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
-                            <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <!-- QUESTION: Area -->
-                        <div class="question-box">
-                            <label>Area <span class="required">at least one required</span></label>
-                            <select class="claim-input">
-                                <option>Select Area</option>
-                                <option>Pericos Canteen</option>
-                                <option>Study Lobby</option>
-                                <option>Hallway</option>
-                            </select>
-                        </div>
-
-                        <!-- QUESTION: Room number -->
-                        <div class="question-box">
-                            <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Room</option>
-                            <option>G403</option>
-                            <option>G301</option>
-                            <option>G106</option>
-                        </select>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="question-box-wrapper">
-                    <!-- QUESTION TITLE: When did you last have it? -->
-                    <h4>When did you last have it?</h4>
-
-                    <!-- FORM ROW: Date Found === Time Found -->
-                    <div class="form-row">
-                        <!-- QUESTION: Date Last Seen -->
-                        <div class="question-box">
-                            <label>
-                                Date Last Seen
-                                <span class="required">required field</span>
-                            </label>
-                            <input type="date">
-                        </div>
-
-                        <!-- QUESTION: Estimated Time-->
-                        <div class="question-box">
-                            <label>
-                                Estimated Time
-                                <span class="required">required field</span>
-                            </label>
-                            <input type="time">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RIGHT SIDE -->
-            <section class="form-right">
-
-                <!-- UPLOAD AN IMAGE -->
-                <label class="upload-box">
-                    <input type="file" accept="image/*">
-                    <span class="upload-text">Click to Upload Image</span>
-                    <img class="preview-image" alt="">
-                </label>
-
-                <!-- SUBMIT BUTTON -->
-                <button type="submit" class="form-button submit-button">
-                    Submit Item
-                </button>
-            </section>
-        </form>
-    </div>
-    <div id="toast"></div>
-</body>
-
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <hr>
+        De La Salle University - College of Computer Studies - Department of Information Technology<br>
+        2026 © AY2526T3. CCDEVAP - Web Application and Development. All Rights Reserved.
+    </footer>
 </html>

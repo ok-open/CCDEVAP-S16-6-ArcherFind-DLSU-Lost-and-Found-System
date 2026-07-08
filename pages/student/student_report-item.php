@@ -1,14 +1,20 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Claim Request</title>
+    <title>ArcherFind - Surrender Found Item</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_claim-form.css">
+    <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="../../javascript/global/image.js" defer></script>
+    <script src="../../javascript/student/student_submit-item.js" defer></script>
 </head>
 
 <body>
@@ -113,89 +119,155 @@
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
 
-    <div class="report-and-controls">
-        <!-- SIDEBAR -->
-        <button class="form-button" onclick="location.href='student_report-item.html'">
-            Report Your Lost Item
-        </button>
-
-        <!-- CONTROLS -->
-        <div class="controls-wrapper">
-            <h2>Browse Surrendered Items</h2>
-            <div class="controls">
-                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
-
-                <select class="control-box sort-dropdown">
-                    <option>Sort: Name</option>
-                    <option>Sort: Recent</option>
-                </select>
-
-                <select class="control-box filter-dropdown">
-                    <option>Filter: All</option>
-                    <option>Electronics</option>
-                    <option>Miscellaneous</option>
-                    <option>Identity Documents</option>
-                    <option>Watch / Jewelry</option>
-                </select>
-            </div>
+    <div class="surrender-wrapper">
+        <div class="form-title">
+            <h2>Can't Find Your Belonging? Submit a missing item report.</h2>
+            <p>If you didn't see your item in our gallery, log its details here. We will monitor incoming surrenders and
+                notify you if a match is found.</p>
         </div>
-    </div>
 
-    <div class="claim-wrapper">
-        <!-- <section class="claim-toolbar">
+        <!-- REPORT AN ITEM FORM -->
+        <form class="form-wrapper">
+            <!-- LEFT SIDE -->
+            <section class="form-left">
+                <!-- QUESTION TITLE: What item are you looking for? -->
+                <div class="question-box-wrapper">
+                    <div class="question-box">
+                        <label for="name">
+                            <h4>What item are you looking for?</h4><span class="required">required field</span>
+                        </label>
+                        <input type="text" id="name">
+                    </div>
 
-            <button class="report-btn" onclick="location.href='student_report-item.html'">
-                Report Your Lost Item
-            </button>
+                    <!-- FORM ROW: Category === Brand -->
+                    <div class="form-row">
+                        <!-- QUESTION: Category of Item (what type of item) -->
+                        <div class="question-box">
+                            <label for="category">
+                                Category<span class="required">required field</span>
+                            </label>
+                            <select id="category">
+                                <option>Select Category</option>
+                                <option>Electronics</option>
+                                <option>Identity Documents</option>
+                                <option>Watch / Jewelry</option>
+                                <option>Miscellaneous</option>
+                            </select>
+                        </div>
 
-            <input type="text" placeholder="Search for item..." class="search-bar">
+                        <!-- QUESTION: Brand of the Item -->
+                        <div class="question-box">
+                            <label for="brand-id">
+                                Brand<span class="required">required field</span>
+                            </label>
+                            <input type="text">
+                        </div>
+                    </div>
 
-            <select class="sort-dropdown">
-                <option>Sort: Name</option>
-                <option>Sort: Recent</option>
-            </select>
-
-            <select class="filter-dropdown">
-                <option>Filter: All</option>
-                <option>Electronics</option>
-                <option>Miscellaneous</option>
-                <option>Identity Documents</option>
-                <option>Watch / Jewelry</option>
-            </select>
-        </section> -->
-
-        <section class="claim-content">
-
-            <div class="claim-image upload-box">
-                <img src="../../assets/ITEMS/Untitled design.png" class="preview-image" alt="Item Image">
-            </div>
-
-            <div class="claim-details">
-
-                <div class="claim-block">
-                    <h3>Item Name</h3>
-                    <p>Charger</p>
+                    <!-- DESCRIPTION TEXT AREA -->
+                    <div class="question-box">
+                        <label for="description">Description</label>
+                        <textarea></textarea>
+                    </div>
                 </div>
 
-                <div class="claim-block">
-                    <h3>Category</h3>
-                    <p>Electronics</p>
+                <!-- QUESTION TITLE: Where was it last seen? -->
+                <div class="question-box-wrapper">
+                    <h4>Where was it last seen?</h4>
+
+                    <!-- FORM ROW: Building === Room Number -->
+                    <div class="form-row">
+                        <!-- QUESTION: Building -->
+                        <div class="question-box">
+                            <label>Building <span class="required">required field</span></label>
+                            <select>
+                                <option>Select Building</option>
+                                <option>Gokongwei Hall</option>
+                                <option>Andrew Gonzales Hall</option>
+                                <option>St. La Salle Hall</option>
+                            </select>
+                        </div>
+
+                        <!-- QUESTION: Room number -->
+                        <div class="question-box">
+                            <label>Floor number <span class="required">required field</span></label>
+                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
+                            <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
+                            <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <!-- QUESTION: Area -->
+                        <div class="question-box">
+                            <label>Area <span class="required">at least one required</span></label>
+                            <select class="claim-input">
+                                <option>Select Area</option>
+                                <option>Pericos Canteen</option>
+                                <option>Study Lobby</option>
+                                <option>Hallway</option>
+                            </select>
+                        </div>
+
+                        <!-- QUESTION: Room number -->
+                        <div class="question-box">
+                            <label>Room <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Room</option>
+                            <option>G403</option>
+                            <option>G301</option>
+                            <option>G106</option>
+                        </select>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="claim-block">
-                    <h3>Description</h3>
-                    <p>
-                        White charging cable found near a classroom.
-                        Item appears to be in good condition with no visible damage.
-                    </p>
-                </div>
 
-                <button class="claim-btn" onclick="location.href='student_claim-request.html'">
-                    Send Claim Request
+                <div class="question-box-wrapper">
+                    <!-- QUESTION TITLE: When did you last have it? -->
+                    <h4>When did you last have it?</h4>
+
+                    <!-- FORM ROW: Date Found === Time Found -->
+                    <div class="form-row">
+                        <!-- QUESTION: Date Last Seen -->
+                        <div class="question-box">
+                            <label>
+                                Date Last Seen
+                                <span class="required">required field</span>
+                            </label>
+                            <input type="date">
+                        </div>
+
+                        <!-- QUESTION: Estimated Time-->
+                        <div class="question-box">
+                            <label>
+                                Estimated Time
+                                <span class="required">required field</span>
+                            </label>
+                            <input type="time">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT SIDE -->
+            <section class="form-right">
+
+                <!-- UPLOAD AN IMAGE -->
+                <label class="upload-box">
+                    <input type="file" accept="image/*">
+                    <span class="upload-text">Click to Upload Image</span>
+                    <img class="preview-image" alt="">
+                </label>
+
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" class="form-button submit-button">
+                    Submit Item
                 </button>
-            </div>
-        </section>
+            </section>
+        </form>
     </div>
+    <div id="toast"></div>
 </body>
 
 </html>

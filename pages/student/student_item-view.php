@@ -1,16 +1,18 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Surrender Found Item</title>
+    <title>ArcherFind - Lost and Found</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
+    <link rel="stylesheet" href="../../styles/student/student_item-view.css">
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/global/image.js" defer></script>
-    <script src="../../javascript/student/student_submit-item.js" defer></script>
 </head>
 
 <body>
@@ -30,8 +32,8 @@
                 <li class="dropdown">
                     <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html">Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html" class="current-page">Report Found</a></li>
+                        <li><a href="../../pages/student/student_item-view.html" class="current-page">Report Lost</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
                     </ul>
                 </li>
                 <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
@@ -72,8 +74,8 @@
                 <li class="dropdown">
                     <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html">> Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html" class="current-page">> Report Found</a></li>
+                        <li><a href="../../pages/student/student_item-view.html" class="current-page">> Report Lost</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
                     </ul>
                 </li>
                 <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
@@ -114,156 +116,80 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <div class="surrender-wrapper">
-        <div class="form-title">
-            <h2>Found an Item? Log the details below to safely surrender it.</h2>
-            <p>Thank you for your honesty! Filling out this form alerts our staff and helps return this item to its
-                rightful owner.</p>
+    <div class="report-and-controls">
+        <!-- SIDEBAR -->
+        <button class="form-button" onclick="location.href='student_report-item.html'">
+            Report Your Lost Item
+        </button>
+
+        <!-- CONTROLS -->
+        <div class="controls-wrapper">
+            <h2>Browse Surrendered Items</h2>
+            <div class="controls">
+                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+
+                <select class="control-box sort-dropdown">
+                    <option>Sort: Name</option>
+                    <option>Sort: Recent</option>
+                </select>
+
+                <select class="control-box filter-dropdown">
+                    <option>Filter: All</option>
+                    <option>Electronics</option>
+                    <option>Miscellaneous</option>
+                    <option>Identity Documents</option>
+                    <option>Watch / Jewelry</option>
+                </select>
+            </div>
         </div>
-
-        <!-- SURRENDER FORM -->
-        <form class="form-wrapper">
-            <!-- LEFT SIDE -->
-            <section class="form-left">
-                <!-- QUESTION TITLE: What item was lost? -->
-                <div class="question-box-wrapper">
-                    <h4>What item was found?</h4>
-                    <div class="question-box">
-                        <label for="name">
-                            Item Name<span class="required">required field</span>
-                        </label>
-                        <input type="text" id="name">
-                    </div>
-
-                    <!-- FORM ROW: Category === Brand -->
-                    <div class="form-row">
-                        <!-- QUESTION: Category of Item (what type of item) -->
-                        <div class="question-box">
-                            <label for="category">
-                                Category<span class="required">required field</span>
-                            </label>
-                            <select id="category">
-                                <option>Select Category</option>
-                                <option>Electronics</option>
-                                <option>Identity Documents</option>
-                                <option>Watch / Jewelry</option>
-                                <option>Miscellaneous</option>
-                            </select>
-                        </div>
-
-                        <!-- QUESTION: Brand of the Item -->
-                        <div class="question-box">
-                            <label for="brand-id">
-                                Brand<span class="required">required field</span>
-                            </label>
-                            <input type="text">
-                        </div>
-                    </div>
-
-                    <!-- DESCRIPTION TEXT AREA -->
-                    <div class="question-box">
-                        <label for="description">Description</label>
-                        <textarea></textarea>
-                    </div>
-                </div>
-
-                <!-- QUESTION TITLE: Where was this item found? -->
-                <div class="question-box-wrapper">
-                    <h4>Where was this item found?</h4>
-
-                    <!-- FORM ROW: Building === Room Number -->
-                    <div class="form-row">
-                        <!-- QUESTION: Building -->
-                        <div class="question-box">
-                            <label>Building <span class="required">required field</span></label>
-                            <select>
-                                <option>Select Building</option>
-                                <option>Gokongwei Hall</option>
-                                <option>Andrew Gonzales Hall</option>
-                                <option>St. La Salle Hall</option>
-                            </select>
-                        </div>
-
-                        <!-- QUESTION: Floor number -->
-                        <div class="question-box">
-                            <label>Floor number <span class="required">required field</span></label>
-                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
-                            <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
-                            <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <!-- QUESTION: Area -->
-                        <div class="question-box">
-                            <label>Area <span class="required">at least one required</span></label>
-                            <select class="claim-input">
-                                <option>Select Area</option>
-                                <option>Pericos Canteen</option>
-                                <option>Study Lobby</option>
-                                <option>Hallway</option>
-                            </select>
-                        </div>
-
-                        <!-- QUESTION: Room number -->
-                        <div class="question-box">
-                            <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Room</option>
-                            <option>G403</option>
-                            <option>G301</option>
-                            <option>G106</option>
-                        </select>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="question-box-wrapper">
-                    <!-- QUESTION TITLE: When did you find the item? -->
-                    <h4>When did you find the item?</h4>
-
-                    <!-- FORM ROW: Date Found === Time Found -->
-                    <div class="form-row">
-                        <!-- QUESTION: Date Lost -->
-                        <div class="question-box">
-                            <label>
-                                Date Lost
-                                <span class="required">required field</span>
-                            </label>
-                            <input type="date">
-                        </div>
-
-                        <!-- QUESTION: Time Lost-->
-                        <div class="question-box">
-                            <label>
-                                Time Lost
-                                <span class="required">required field</span>
-                            </label>
-                            <input type="time">
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- RIGHT SIDE -->
-            <section class="form-right">
-
-                <!-- UPLOAD AN IMAGE -->
-                <label class="upload-box">
-                    <input type="file" accept="image/*">
-                    <span class="upload-text">Click to Upload Image</span>
-                    <img class="preview-image" alt="">
-                </label>
-
-                <!-- SUBMIT BUTTON -->
-                <button type="submit" class="form-button submit-button">
-                    Submit Item
-                </button>
-            </section>
-        </form>
     </div>
-    <div id="toast"></div>
+
+
+    <!-- MAIN -->
+    <main class="itemview-main">
+        <div class="item-list">
+            <a href="../../pages/student/student_claim-form.html" class="item-card">
+                <img src="../../assets/ITEMS/2.png" alt="Item 1">
+            </a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card">
+                <img src="../../assets/ITEMS/1.png" alt="Item 2">
+            </a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card">
+                <img src="../../assets/ITEMS/Untitled design.png" alt="Item 2">
+            </a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+        </div>
+    </main>
+    </div>
 </body>
 
 </html>

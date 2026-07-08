@@ -1,3 +1,7 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,18 +9,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcherFind - Surrender Found Item</title>
-
-    <!-- CSS -->
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/global/dashboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- JavaScript -->
+    <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/global/lost-item-chart.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../../javascript/student/student_dashboard.js" defer></script>
+    <script src="../../javascript/global/image.js" defer></script>
+    <script src="../../javascript/student/student_submit-item.js" defer></script>
 </head>
 
 <body>
@@ -34,10 +32,10 @@
                 <li><a href="../../pages/student/student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="../../pages/student/student_item-view.html">Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.html" class="current-page">Report Found</a></li>
                     </ul>
                 </li>
                 <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
@@ -76,10 +74,10 @@
                 <li><a href="../../pages/student/student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="../../pages/student/student_item-view.html">> Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.html" class="current-page">> Report Found</a></li>
                     </ul>
                 </li>
                 <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
@@ -120,123 +118,156 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <div class="wrapper">
-        <section class="dashboard-wrapper">
-            <h1 class="greeting">My Dashboard</h1>
+    <div class="surrender-wrapper">
+        <div class="form-title">
+            <h2>Found an Item? Log the details below to safely surrender it.</h2>
+            <p>Thank you for your honesty! Filling out this form alerts our staff and helps return this item to its
+                rightful owner.</p>
+        </div>
 
-            <!-- TOP ROW: Summary Stat Cards -->
-            <div class="card-row">
-                <!-- Loss Reports -->
-                <div class="stat-block green-border card" data-stat="loss-reports">
-                    <h5>Loss Reports</h5>
-                    <hr>
-                    <h3><span class="stat-count">0</span></h3>
-                </div>
+        <!-- SURRENDER FORM -->
+        <form class="form-wrapper">
+            <!-- LEFT SIDE -->
+            <section class="form-left">
+                <!-- QUESTION TITLE: What item was lost? -->
+                <div class="question-box-wrapper">
+                    <h4>What item was found?</h4>
+                    <div class="question-box">
+                        <label for="name">
+                            Item Name<span class="required">required field</span>
+                        </label>
+                        <input type="text" id="name">
+                    </div>
 
-                <!-- Found Item Reports -->
-                <div class="stat-block green-border card" data-stat="found-reports">
-                    <h5>Found Item Reports</h5>
-                    <hr>
-                    <h3><span class="stat-count">0</span></h3>
-                </div>
+                    <!-- FORM ROW: Category === Brand -->
+                    <div class="form-row">
+                        <!-- QUESTION: Category of Item (what type of item) -->
+                        <div class="question-box">
+                            <label for="category">
+                                Category<span class="required">required field</span>
+                            </label>
+                            <select id="category">
+                                <option>Select Category</option>
+                                <option>Electronics</option>
+                                <option>Identity Documents</option>
+                                <option>Watch / Jewelry</option>
+                                <option>Miscellaneous</option>
+                            </select>
+                        </div>
 
-                <!-- Approved Reports/Requests -->
-                <div class="stat-block green-border card" data-stat="approved-reports">
-                    <h5>Approved Reports/Requests</h5>
-                    <hr>
-                    <h3><span class="stat-count">0</span></h3>
-                </div>
+                        <!-- QUESTION: Brand of the Item -->
+                        <div class="question-box">
+                            <label for="brand-id">
+                                Brand<span class="required">required field</span>
+                            </label>
+                            <input type="text">
+                        </div>
+                    </div>
 
-                <!-- Pending Reports/Requests -->
-                <div class="stat-block green-border card" data-stat="pending-reports">
-                    <h5>Pending Reports/Requests</h5>
-                    <hr>
-                    <h3><span class="stat-count">0</span></h3>
-                </div>
-            </div>
-
-            <!-- BOTTOM ROW: Chart + reports history / notifications -->
-            <div class="card-row">
-                <!-- Loss Item Frequency by Location -->
-                <div class="graph-card card">
-                    <h5>Lost Item Frequency by Location</h5>
-                    <hr>
-                    <div class="graph-card-wrapper">
-                        <canvas id="ITEM"></canvas>
+                    <!-- DESCRIPTION TEXT AREA -->
+                    <div class="question-box">
+                        <label for="description">Description</label>
+                        <textarea></textarea>
                     </div>
                 </div>
 
-                <div class="cards-wrapper">
-                    <!-- User Reports History -->
-                    <div class="card">
-                        <h5>User Reports History</h5>
-                        <hr>
-                        <table class="data-table" id="report-table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="report-body">
-                                <!-- Rows will be injected here by JS -->
-                                <tr class="report-row" data-report-id="">
-                                    <td class="report-date"></td>
-                                    <td class="report-type"></td>
-                                    <td class="report-status"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <!-- QUESTION TITLE: Where was this item found? -->
+                <div class="question-box-wrapper">
+                    <h4>Where was this item found?</h4>
+
+                    <!-- FORM ROW: Building === Room Number -->
+                    <div class="form-row">
+                        <!-- QUESTION: Building -->
+                        <div class="question-box">
+                            <label>Building <span class="required">required field</span></label>
+                            <select>
+                                <option>Select Building</option>
+                                <option>Gokongwei Hall</option>
+                                <option>Andrew Gonzales Hall</option>
+                                <option>St. La Salle Hall</option>
+                            </select>
+                        </div>
+
+                        <!-- QUESTION: Floor number -->
+                        <div class="question-box">
+                            <label>Floor number <span class="required">required field</span></label>
+                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
+                            <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
+                            <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
+                        </div>
                     </div>
 
-                    <!-- Notifications -->
-                    <div class="card">
-                        <h5>Notifications</h5>
-                        <hr>
-                        <p>✓ Claim Request Approved</p>
-                        <p>✖ Found Item Report Rejected</p>
+                    <div class="form-row">
+                        <!-- QUESTION: Area -->
+                        <div class="question-box">
+                            <label>Area <span class="required">at least one required</span></label>
+                            <select class="claim-input">
+                                <option>Select Area</option>
+                                <option>Pericos Canteen</option>
+                                <option>Study Lobby</option>
+                                <option>Hallway</option>
+                            </select>
+                        </div>
+
+                        <!-- QUESTION: Room number -->
+                        <div class="question-box">
+                            <label>Room <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Room</option>
+                            <option>G403</option>
+                            <option>G301</option>
+                            <option>G106</option>
+                        </select>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+
+
+                <div class="question-box-wrapper">
+                    <!-- QUESTION TITLE: When did you find the item? -->
+                    <h4>When did you find the item?</h4>
+
+                    <!-- FORM ROW: Date Found === Time Found -->
+                    <div class="form-row">
+                        <!-- QUESTION: Date Lost -->
+                        <div class="question-box">
+                            <label>
+                                Date Lost
+                                <span class="required">required field</span>
+                            </label>
+                            <input type="date">
+                        </div>
+
+                        <!-- QUESTION: Time Lost-->
+                        <div class="question-box">
+                            <label>
+                                Time Lost
+                                <span class="required">required field</span>
+                            </label>
+                            <input type="time">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIGHT SIDE -->
+            <section class="form-right">
+
+                <!-- UPLOAD AN IMAGE -->
+                <label class="upload-box">
+                    <input type="file" accept="image/*">
+                    <span class="upload-text">Click to Upload Image</span>
+                    <img class="preview-image" alt="">
+                </label>
+
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" class="form-button submit-button">
+                    Submit Item
+                </button>
+            </section>
+        </form>
     </div>
-
-        <!------------------------ CONNECTIONS AND FOOTER ------------------------>
-        <section class="connections">
-            <h3>Connections</h3>
-            <div class="connections-container">
-                <ul>
-                    <li><a href="../../pages/student/student_home.html">Home</a></li>
-                    <li><a href="../../pages/student/student_contact.html">Contact</a></li>
-                    <li><a href="../../pages/student/student_faq.html">F.A.Q</a></li>
-                </ul>
-        
-                <ul>
-                    <li><a href="../../pages/student/student_about.html">About</a></li>
-                    <li><a href="../../pages/student/student_dashboard.html">Dashboard</a></li>
-                    <li><a onclick="if(confirm('WARNING: Clicking this link will take you to an external website: https://www.dlsu.edu.ph. This will exit you out of the ArcherFind Website. Continue?')) return true;" href="https://www.dlsu.edu.ph">DLSU Website</a></li>
-                </ul>
-        
-                <div>
-                    <h5>Have a Question?</h5>
-                    <div id="write-us">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"
-                            >
-                            <path
-                                d="M158.57-160q-32.52 0-56.21-23.69-23.69-23.7-23.69-56.21v-480.2q0-32.51 23.69-56.21Q126.05-800 158.57-800h642.86q32.52 0 56.21 23.69 23.69 23.7 23.69 56.21v480.2q0 32.51-23.69 56.21Q833.95-160 801.43-160H158.57ZM480-453.51 146.26-668.36v428.46q0 5.39 3.46 8.85t8.85 3.46h642.86q5.39 0 8.85-3.46t3.46-8.85v-428.46L480-453.51Zm0-67.57 331.03-211.33H149.64L480-521.08ZM140.92-668.36v-64.05 492.51q4 5.39 8.13 8.85 4.13 3.46 9.52 3.46h-17.65v-440.77Z" />
-                        </svg>
-                        <a href="../../pages/student/student_contact.html">Write us!</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <footer>
-            <hr>
-            De La Salle University - College of Computer Studies - Department of Information Technology<br>
-            2026 © AY2526T3. CCDEVAP - Web Application and Development. All Rights Reserved.
-        </footer>
-    </div>
+    <div id="toast"></div>
 </body>
 
 </html>

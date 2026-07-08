@@ -1,16 +1,18 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArcherFind - Claim Request</title>
-
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_claim-request.css">
+    <link rel="stylesheet" href="../../styles/student/student_claim-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/global/image.js" defer></script>
-    <script src="../../javascript/student/student_claim-request.js" defer></script>
 </head>
 
 <body>
@@ -67,12 +69,12 @@
         <nav class="sidebar">
             <ul class="nav-links">
                 <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_about.html" class="current-page">About</a></li>
+                <li><a href="../../pages/student/student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html">> Report Lost</a></li>
+                        <li><a href="../../pages/student/student_item-view.html" class="current-page">> Report Lost</a></li>
                         <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
                     </ul>
                 </li>
@@ -114,108 +116,90 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
+
+    <div class="report-and-controls">
+        <!-- SIDEBAR -->
+        <button class="form-button" onclick="location.href='student_report-item.html'">
+            Report Your Lost Item
+        </button>
+
+        <!-- CONTROLS -->
+        <div class="controls-wrapper">
+            <h2>Browse Surrendered Items</h2>
+            <div class="controls">
+                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+
+                <select class="control-box sort-dropdown">
+                    <option>Sort: Name</option>
+                    <option>Sort: Recent</option>
+                </select>
+
+                <select class="control-box filter-dropdown">
+                    <option>Filter: All</option>
+                    <option>Electronics</option>
+                    <option>Miscellaneous</option>
+                    <option>Identity Documents</option>
+                    <option>Watch / Jewelry</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
     <div class="claim-wrapper">
-        <h2 class="claim-title">Request to Claim an Item</h2>
+        <!-- <section class="claim-toolbar">
 
-        <form class="claim-form">
-            <div class="claim-left">
-                <h3 class="claim-section-title">Student Information</h3>
+            <button class="report-btn" onclick="location.href='student_report-item.html'">
+                Report Your Lost Item
+            </button>
 
-                <div class="form-group">
-                    <label>Student Name</label>
-                    <input type="text" class="claim-input" value="Juan Dela Cruz" readonly>
-                </div>
+            <input type="text" placeholder="Search for item..." class="search-bar">
 
-                <div class="form-group">
-                    <label>Student Email</label>
-                    <input type="email" class="claim-input" value="juan_delacruz@dlsu.edu.ph" readonly>
-                </div>
+            <select class="sort-dropdown">
+                <option>Sort: Name</option>
+                <option>Sort: Recent</option>
+            </select>
 
-                <h3 class="claim-section-title">Where was this lost?</h3>
-                <div class="claim-location-row">
-                    <div class="form-group">
-                        <label>Building <span class="required">required field</span></label>
-                        <select class="claim-input">
-                            <option>Select Building</option>
-                            <option>Gokongwei Hall</option>
-                            <option>Andrew Gonzales Hall</option>
-                            <option>St. La Salle Hall</option>
-                        </select>
-                    </div>
+            <select class="filter-dropdown">
+                <option>Filter: All</option>
+                <option>Electronics</option>
+                <option>Miscellaneous</option>
+                <option>Identity Documents</option>
+                <option>Watch / Jewelry</option>
+            </select>
+        </section> -->
 
-                    <div class="form-group">
-                        <label>Floor number <span class="required">required field</span></label>
-                        <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
-                        <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
-                        <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
-                    </div>
-                </div>
+        <section class="claim-content">
 
-                <div class="claim-location-row">
-                    <div class="form-group">
-                        <label>Area <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Area</option>
-                            <option>Pericos Canteen</option>
-                            <option>Study Lobby</option>
-                            <option>Hallway</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Room</option>
-                            <option>G403</option>
-                            <option>G301</option>
-                            <option>G106</option>
-                        </select>
-                    </div>
-                </div>
-
-                <h3 class="claim-section-title">When was this lost?</h3>
-                <div class="claim-date-row">
-                    <div class="form-group">
-                        <label>Date Lost <span class="required">required field</span></label>
-                        <input type="date" class="claim-input">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Time Lost <span class="required">required field</span></label>
-                        <input type="time" class="claim-input">
-                    </div>
-                </div>
+            <div class="claim-image upload-box">
+                <img src="../../assets/ITEMS/Untitled design.png" class="preview-image" alt="Item Image">
             </div>
 
-            <div class="claim-right">
-                <h3 class="claim-section-title">Item Verification</h3>
-                <div class="form-group">
-                    <label>
-                        Upload Proof of Ownership <span class="optional">optional</span>
-                    </label>
+            <div class="claim-details">
 
-                <label class="upload-box">
-                    <input type="file" accept="image/*">
-
-                    <span class="upload-text">Click to Upload Image</span>
-
-                    <img class="preview-image" alt="">
-                </label>
+                <div class="claim-block">
+                    <h3>Item Name</h3>
+                    <p>Charger</p>
                 </div>
 
-                <div class="form-group">
-                    <label>
-                        Describe Features <span class="required">required</span>
-                    </label>
-                    <textarea class="claim-input claim-textarea" placeholder="Include details like scratches, stickers..."></textarea>
+                <div class="claim-block">
+                    <h3>Category</h3>
+                    <p>Electronics</p>
                 </div>
 
-                <button type="submit" class="claim-submit-btn">
-                    Submit Claim Request
+                <div class="claim-block">
+                    <h3>Description</h3>
+                    <p>
+                        White charging cable found near a classroom.
+                        Item appears to be in good condition with no visible damage.
+                    </p>
+                </div>
+
+                <button class="claim-btn" onclick="location.href='student_claim-request.html'">
+                    Send Claim Request
                 </button>
             </div>
-        </form>
+        </section>
     </div>
-    <div id="toast"></div>
 </body>
+
 </html>

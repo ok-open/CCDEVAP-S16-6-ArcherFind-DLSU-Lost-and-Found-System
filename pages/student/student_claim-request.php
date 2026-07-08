@@ -1,13 +1,20 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - About</title>
+    <title>ArcherFind - Claim Request</title>
+
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_about.css">
+    <link rel="stylesheet" href="../../styles/student/student_claim-request.css">
     <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="../../javascript/global/image.js" defer></script>
+    <script src="../../javascript/student/student_claim-request.js" defer></script>
 </head>
 
 <body>
@@ -22,12 +29,12 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_about.html" class="current-page">About</a></li>
+                <li><a href="../../pages/student/student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html">Report Lost</a></li>
+                        <li><a href="../../pages/student/student_item-view.html" class="current-page">Report Lost</a></li>
                         <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
                     </ul>
                 </li>
@@ -111,118 +118,108 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <!-- ABOUT ARCHERFIND -->
-    <section class="about-archerfind">
-        <div>
-            <h1>About ArcherFind</h1>
-            <p>
-                ArcherFind is a centralized lost-and-found platform designed to help Lasallians reconnect
-                with misplaced belongings quickly, securely, and conveniently.
-                Losing personal items can be stressful, especially when information is scattered across
-                group chats, social media posts, and office inquiries. ArcherFind simplifies this process
-                by providing a single, accessible platform where students can report lost items, browse
-                found-item listings, and submit ownership claims anytime and anywhere using their devices.
-                <br><br>
-                More than just a reporting system, ArcherFind promotes accountability, trust, and community
-                cooperation among Lasallians. Every lost-item report, found-item submission, and ownership request
-                undergoes staff verification to ensure accuracy and security throughout the retrieval process.
-                By combining technology with responsible oversight, ArcherFind creates a more efficient and reliable
-                way to return belongings to their rightful owners while fostering a more connected and supportive campus community.
+    <div class="claim-wrapper">
+        <h2 class="claim-title">Request to Claim an Item</h2>
 
-            </p>
-        </div>
+        <form class="claim-form">
+            <div class="claim-left">
+                <h3 class="claim-section-title">Student Information</h3>
 
-        <img src="..\..\assets\IMAGES\about_archerfind-img.jpg" alt="about_archerfind-img">
-    </section>
+                <div class="form-group">
+                    <label>Student Name</label>
+                    <input type="text" class="claim-input" value="Juan Dela Cruz" readonly>
+                </div>
 
-    <!-- IMAGE BANNER -->
-    <section id="banner">
-        <img src="..\..\assets\BACKGROUNDS\About.png" alt="..\..\assets\BACKGROUNDS\About.png">
-    </section>
+                <div class="form-group">
+                    <label>Student Email</label>
+                    <input type="email" class="claim-input" value="juan_delacruz@dlsu.edu.ph" readonly>
+                </div>
 
-    <!-- COVER SECTION -->
-    <section class="cover">
-        <h2>
-            Bringing your lost items back to you,<br>
-            all in one place.
-        </h2>
+                <h3 class="claim-section-title">Where was this lost?</h3>
+                <div class="claim-location-row">
+                    <div class="form-group">
+                        <label>Building <span class="required">required field</span></label>
+                        <select class="claim-input">
+                            <option>Select Building</option>
+                            <option>Gokongwei Hall</option>
+                            <option>Andrew Gonzales Hall</option>
+                            <option>St. La Salle Hall</option>
+                        </select>
+                    </div>
 
-        <p>
-            ArcherFind provides a single, centralized hub
-            for the DLSU community to report, track, and
-            recover their belongings without the hassle.
-        </p>
+                    <div class="form-group">
+                        <label>Floor number <span class="required">required field</span></label>
+                        <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
+                        <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
+                        <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
+                    </div>
+                </div>
 
-        <button type="button" class="green-button" onclick="document.querySelector('.team-section').scrollIntoView({behavior: 'smooth'});">
-            MEET OUR TEAM
-        </button>
-    </section>
+                <div class="claim-location-row">
+                    <div class="form-group">
+                        <label>Area <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Area</option>
+                            <option>Pericos Canteen</option>
+                            <option>Study Lobby</option>
+                            <option>Hallway</option>
+                        </select>
+                    </div>
 
-    <!-- MISSION / VISION -->
-    <section class="mission-vision">
-        <div class="mission-box">
-            <h2>Mission</h2>
-            <p>
-                To provide a secure and user-friendly platform that streamlines lost-and-found processes,
-                empowers students and staff to work together, and ensures that misplaced belongings can be
-                reported, tracked, and returned efficiently.
-            </p>
-        </div>
+                    <div class="form-group">
+                        <label>Room <span class="required">at least one required</span></label>
+                        <select class="claim-input">
+                            <option>Select Room</option>
+                            <option>G403</option>
+                            <option>G301</option>
+                            <option>G106</option>
+                        </select>
+                    </div>
+                </div>
 
-        <div class="vision-box">
-            <h2>Vision</h2>
-            <p>
-                To become the trusted digital bridge that reconnects people with their belongings while
-                fostering a culture of honesty, responsibility, and cooperation within the DLSU community.
-            </p>
-        </div>
-    </section>
+                <h3 class="claim-section-title">When was this lost?</h3>
+                <div class="claim-date-row">
+                    <div class="form-group">
+                        <label>Date Lost <span class="required">required field</span></label>
+                        <input type="date" class="claim-input">
+                    </div>
 
-    <!-- TEAM -->
-    <section class="team-section">
-        <h2>The Team Behind ArcherFind</h2>
-        <div class="team-grid">
-            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\Angelo.png" alt="Angelo.png"></div><p>ALMEDA, Angelo</p></div>
-            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\Carl.JPG" alt="Carl.JPG"></div><p>CRESPO, Carl</p></div>
-            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\dan.png" alt="dan.png"></div><p>PAMINTUAN, Daniel</p></div>
-            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\Marc.JPG" alt="Marc.JPG"></div><p>QUIZON, Marc</p></div>
-            <div class="team-card"><div class="team-photo"><img src="..\..\assets\IMAGES\lebron.png" alt="LEBRON.png"></div><p>SACLOLO, Nathan</p></div>
-        </div>
-    </section>
-
-    <section class="faq-button">
-        <button class="outline-green-button" type="button" onclick="location.href='student_faq.html'">Frequently Asked Questions</button>
-    </section>
-
-    <!------------------------ CONNECTIONS AND FOOTER ------------------------>
-    <section class="connections">
-        <h3>Connections</h3>
-        <div class="connections-container">
-            <ul>
-                <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_contact.html">Contact</a></li>
-                <li><a href="../../pages/student/student_faq.html">F.A.Q</a></li>
-            </ul>
-
-            <ul>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
-                <li><a href="../../pages/student/student_dashboard.html">Dashboard</a></li>
-                <li><a onclick="if(confirm('WARNING: Clicking this link will take you to an external website: https://www.dlsu.edu.ph. This will exit you out of the ArcherFind Website. Continue?')) return true;" href="https://www.dlsu.edu.ph">DLSU Website</a></li>
-            </ul>
-
-            <div>
-                <h5>Have a Question?</h5>
-                <div id="write-us">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" ><path d="M158.57-160q-32.52 0-56.21-23.69-23.69-23.7-23.69-56.21v-480.2q0-32.51 23.69-56.21Q126.05-800 158.57-800h642.86q32.52 0 56.21 23.69 23.69 23.7 23.69 56.21v480.2q0 32.51-23.69 56.21Q833.95-160 801.43-160H158.57ZM480-453.51 146.26-668.36v428.46q0 5.39 3.46 8.85t8.85 3.46h642.86q5.39 0 8.85-3.46t3.46-8.85v-428.46L480-453.51Zm0-67.57 331.03-211.33H149.64L480-521.08ZM140.92-668.36v-64.05 492.51q4 5.39 8.13 8.85 4.13 3.46 9.52 3.46h-17.65v-440.77Z"/></svg>
-                    <a href="../../pages/student/student_contact.html">Write us!</a>
+                    <div class="form-group">
+                        <label>Time Lost <span class="required">required field</span></label>
+                        <input type="time" class="claim-input">
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <footer>
-        <hr>
-        De La Salle University - College of Computer Studies - Department of Information Technology<br>
-        2026 © AY2526T3. CCDEVAP - Web Application and Development. All Rights Reserved.
-    </footer>
+
+            <div class="claim-right">
+                <h3 class="claim-section-title">Item Verification</h3>
+                <div class="form-group">
+                    <label>
+                        Upload Proof of Ownership <span class="optional">optional</span>
+                    </label>
+
+                <label class="upload-box">
+                    <input type="file" accept="image/*">
+
+                    <span class="upload-text">Click to Upload Image</span>
+
+                    <img class="preview-image" alt="">
+                </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Describe Features <span class="required">required</span>
+                    </label>
+                    <textarea class="claim-input claim-textarea" placeholder="Include details like scratches, stickers..."></textarea>
+                </div>
+
+                <button type="submit" class="claim-submit-btn">
+                    Submit Claim Request
+                </button>
+            </div>
+        </form>
+    </div>
+    <div id="toast"></div>
+</body>
 </html>

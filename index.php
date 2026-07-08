@@ -1,3 +1,9 @@
+<?php
+
+$error = $_GET['error'] ?? '';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,11 +17,11 @@
         <script src="javascript/global/navbar.js" defer></script>
         <script src="javascript/global/toast.js" defer></script>
         <script src="javascript/auth/auth_account.js" defer></script>
+        <script src="javascript/auth/login_toast.js" defer></script>
     <title>Login</title>
 </head>
 
-<body>
-    <!-- WRAPPER -->
+<body data-error="<?= htmlspecialchars($error) ?>">  
     <div class="wrapper">
         <!-- LEFT: LOGIN INTRO (this is where to insert title and description) -->
         <section class="logo-intro">

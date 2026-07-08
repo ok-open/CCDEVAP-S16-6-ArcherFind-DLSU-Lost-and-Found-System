@@ -1,14 +1,26 @@
+<?php
+    require_once "../../controllers/StudentAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Lost and Found</title>
+    <title>ArcherFind - Surrender Found Item</title>
+
+    <!-- CSS -->
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_item-view.css">
+    <link rel="stylesheet" href="../../styles/global/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- JavaScript -->
     <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="../../javascript/global/lost-item-chart.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../javascript/student/student_dashboard.js" defer></script>
 </head>
 
 <body>
@@ -26,9 +38,9 @@
                 <li><a href="../../pages/student/student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html" class="current-page">Report Lost</a></li>
+                        <li><a href="../../pages/student/student_item-view.html">Report Lost</a></li>
                         <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
                     </ul>
                 </li>
@@ -68,9 +80,9 @@
                 <li><a href="../../pages/student/student_about.html">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
-                    <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
+                    <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html" class="current-page">> Report Lost</a></li>
+                        <li><a href="../../pages/student/student_item-view.html">> Report Lost</a></li>
                         <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
                     </ul>
                 </li>
@@ -112,79 +124,122 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <div class="report-and-controls">
-        <!-- SIDEBAR -->
-        <button class="form-button" onclick="location.href='student_report-item.html'">
-            Report Your Lost Item
-        </button>
+    <div class="wrapper">
+        <section class="dashboard-wrapper">
+            <h1 class="greeting">My Dashboard</h1>
 
-        <!-- CONTROLS -->
-        <div class="controls-wrapper">
-            <h2>Browse Surrendered Items</h2>
-            <div class="controls">
-                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+            <!-- TOP ROW: Summary Stat Cards -->
+            <div class="card-row">
+                <!-- Loss Reports -->
+                <div class="stat-block green-border card" data-stat="loss-reports">
+                    <h5>Loss Reports</h5>
+                    <hr>
+                    <h3><span class="stat-count">0</span></h3>
+                </div>
 
-                <select class="control-box sort-dropdown">
-                    <option>Sort: Name</option>
-                    <option>Sort: Recent</option>
-                </select>
+                <!-- Found Item Reports -->
+                <div class="stat-block green-border card" data-stat="found-reports">
+                    <h5>Found Item Reports</h5>
+                    <hr>
+                    <h3><span class="stat-count">0</span></h3>
+                </div>
 
-                <select class="control-box filter-dropdown">
-                    <option>Filter: All</option>
-                    <option>Electronics</option>
-                    <option>Miscellaneous</option>
-                    <option>Identity Documents</option>
-                    <option>Watch / Jewelry</option>
-                </select>
+                <!-- Approved Reports/Requests -->
+                <div class="stat-block green-border card" data-stat="approved-reports">
+                    <h5>Approved Reports/Requests</h5>
+                    <hr>
+                    <h3><span class="stat-count">0</span></h3>
+                </div>
+
+                <!-- Pending Reports/Requests -->
+                <div class="stat-block green-border card" data-stat="pending-reports">
+                    <h5>Pending Reports/Requests</h5>
+                    <hr>
+                    <h3><span class="stat-count">0</span></h3>
+                </div>
             </div>
-        </div>
+
+            <!-- BOTTOM ROW: Chart + reports history / notifications -->
+            <div class="card-row">
+                <!-- Loss Item Frequency by Location -->
+                <div class="graph-card card">
+                    <h5>Lost Item Frequency by Location</h5>
+                    <hr>
+                    <div class="graph-card-wrapper">
+                        <canvas id="ITEM"></canvas>
+                    </div>
+                </div>
+
+                <div class="cards-wrapper">
+                    <!-- User Reports History -->
+                    <div class="card">
+                        <h5>User Reports History</h5>
+                        <hr>
+                        <table class="data-table" id="report-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="report-body">
+                                <!-- Rows will be injected here by JS -->
+                                <tr class="report-row" data-report-id="">
+                                    <td class="report-date"></td>
+                                    <td class="report-type"></td>
+                                    <td class="report-status"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Notifications -->
+                    <div class="card">
+                        <h5>Notifications</h5>
+                        <hr>
+                        <p>✓ Claim Request Approved</p>
+                        <p>✖ Found Item Report Rejected</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-
-    <!-- MAIN -->
-    <main class="itemview-main">
-        <div class="item-list">
-            <a href="../../pages/student/student_claim-form.html" class="item-card">
-                <img src="../../assets/ITEMS/2.png" alt="Item 1">
-            </a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card">
-                <img src="../../assets/ITEMS/1.png" alt="Item 2">
-            </a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card">
-                <img src="../../assets/ITEMS/Untitled design.png" alt="Item 2">
-            </a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-        </div>
-    </main>
+        <!------------------------ CONNECTIONS AND FOOTER ------------------------>
+        <section class="connections">
+            <h3>Connections</h3>
+            <div class="connections-container">
+                <ul>
+                    <li><a href="../../pages/student/student_home.html">Home</a></li>
+                    <li><a href="../../pages/student/student_contact.html">Contact</a></li>
+                    <li><a href="../../pages/student/student_faq.html">F.A.Q</a></li>
+                </ul>
+        
+                <ul>
+                    <li><a href="../../pages/student/student_about.html">About</a></li>
+                    <li><a href="../../pages/student/student_dashboard.html">Dashboard</a></li>
+                    <li><a onclick="if(confirm('WARNING: Clicking this link will take you to an external website: https://www.dlsu.edu.ph. This will exit you out of the ArcherFind Website. Continue?')) return true;" href="https://www.dlsu.edu.ph">DLSU Website</a></li>
+                </ul>
+        
+                <div>
+                    <h5>Have a Question?</h5>
+                    <div id="write-us">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px"
+                            >
+                            <path
+                                d="M158.57-160q-32.52 0-56.21-23.69-23.69-23.7-23.69-56.21v-480.2q0-32.51 23.69-56.21Q126.05-800 158.57-800h642.86q32.52 0 56.21 23.69 23.69 23.7 23.69 56.21v480.2q0 32.51-23.69 56.21Q833.95-160 801.43-160H158.57ZM480-453.51 146.26-668.36v428.46q0 5.39 3.46 8.85t8.85 3.46h642.86q5.39 0 8.85-3.46t3.46-8.85v-428.46L480-453.51Zm0-67.57 331.03-211.33H149.64L480-521.08ZM140.92-668.36v-64.05 492.51q4 5.39 8.13 8.85 4.13 3.46 9.52 3.46h-17.65v-440.77Z" />
+                        </svg>
+                        <a href="../../pages/student/student_contact.html">Write us!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            <hr>
+            De La Salle University - College of Computer Studies - Department of Information Technology<br>
+            2026 © AY2526T3. CCDEVAP - Web Application and Development. All Rights Reserved.
+        </footer>
     </div>
 </body>
 

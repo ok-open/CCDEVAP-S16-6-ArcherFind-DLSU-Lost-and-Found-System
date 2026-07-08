@@ -100,7 +100,7 @@ switch ($user["role"]) {
         break;
 
     case "Staff":
-        header("Location: ../pages/staff/staff_home.php");
+        header("Location: ../pages/staff/staff_dashboard.php");
         break;
 
     case "Admin":
