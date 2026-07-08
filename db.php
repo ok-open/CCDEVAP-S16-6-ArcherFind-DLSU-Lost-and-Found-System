@@ -1,8 +1,8 @@
 <?php
 $host = "localhost";
-$dbname = "archerfinddb";   // Replace with your database name
+$dbname = "ArcherFinddb";   // Replace with your database name
 $username = "root";
-$password = "22757205";           // Replace with your MySQL password if you have one
+$password = "";           // Replace with your MySQL password if you have one
 
 try {
     $conn = new PDO(
