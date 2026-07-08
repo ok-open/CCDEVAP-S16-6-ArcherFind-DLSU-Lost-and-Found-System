@@ -1,3 +1,7 @@
+<?php
+    require_once "../../controllers/AdminAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

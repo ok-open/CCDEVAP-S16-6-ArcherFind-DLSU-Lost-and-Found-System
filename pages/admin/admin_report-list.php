@@ -1,3 +1,7 @@
+<?php
+    require_once "../../controllers/AdminAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,17 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verify Lost Item Reports Requests</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
-    <!-- NAVIGATION BAR -->
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <script src="../../javascript/global/navbar.js" defer></script>
-
-    <!-- USE TOAST -->
+    <link rel="stylesheet" href="../../styles/global/staffadmin_lists.css">
     <link rel="stylesheet" href="../../styles/global/toast.css">
     <script src="../../javascript/global/toast.js" defer></script>
-
-    <link rel="stylesheet" href="../../styles/global/staffadmin_lists.css">
+    <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/admin/staffadmin_lists.js" defer></script>
-
 </head>
 
 <body>
@@ -32,8 +31,9 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html" class="current-page">Claim Requests</a></li>
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <!-- DROPDOWN MENU -->
+                <li><a href="../../pages/admin/admin_report-list.html" class="current-page">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
                 <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
                 <li>
@@ -91,9 +91,8 @@
         <nav class="sidebar">
             <ul class="nav-links">
                 <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html" class="current-page">Claim Requests</a></li>
-                <!-- DROPDOWN MENU -->
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_report-list.html" class="current-page">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
                 <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
                 <li>
@@ -187,9 +186,9 @@
     <!-- CONTROLS -->
     <div class="controls-wrapper">
         <div class="title">
-            <h2>Evaluate Claim Requests</h2>
-            <p>Review submitted ownership details and credentials to verify if a claimant is the rightful owner of a
-                found item.</p>
+            <h2>Review Lost Reports</h2>
+            <p>Cross-reference student-submitted missing item reports against current storage logs to find potential
+                matches.</p>
         </div>
 
         <div class="controls">
@@ -215,36 +214,37 @@
         <!-- REQUEST RECORD -->
         <div class="request-record">
             <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
-            <div class="request-image">
-                <!-- Full-width images with number and caption text -->
-                <div class="mySlides fade">
-                    <img class="ImgItem" src="../../assets/ITEMS/1.png">
-                </div>
+                <div class="request-image">
+                    <!-- Full-width images with number and caption text -->
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/1.png">
+                    </div>
 
-                <div class="mySlides fade">
-                    <img class="ImgItem" src="../../assets/ITEMS/2.png">
-                </div>
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/2.png">
+                    </div>
 
-                <div class="mySlides fade">
-                    <img class="ImgItem" src="../../assets/ITEMS/3.png">
-                </div>
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/3.png">
+                    </div>
 
-                <div class="mySlides fade">
-                    <img class="ImgItem" src="../../assets/ITEMS/4.png">
-                </div>
+                    <div class="mySlides fade">
+                        <img class="ImgItem" src="../../assets/ITEMS/4.png">
+                    </div>
 
-                <!-- Next and previous buttons -->
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-                <!-- The dots/circles -->
-                <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <!-- The dots/circles -->
+                    <div style="text-align:center">
+                        <span class="dot" onclick="currentSlide(1)"></span>
+                        <span class="dot" onclick="currentSlide(2)"></span>
+                        <span class="dot" onclick="currentSlide(3)"></span>
+                        <span class="dot" onclick="currentSlide(4)"></span>
+
+                    </div>
                 </div>
-            </div>
 
             <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
             <div class="request-item-details">
@@ -254,28 +254,16 @@
                     <div class="request-buttons-panel">
                         <!-- POSSIBLE MATCHES BUTTON -->
                         <button type="button" class="request-button openPanelBtn">
-                            Information and Proof
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                                fill="#e3e3e3">
-                                <path
-                                    d="M359.52-174.91q-84.11-33.44-138.88-104.21-54.77-70.77-65.77-160.88h91.76q8.76 51.8 38.16 94.49 29.41 42.68 74.73 69.68v100.92ZM503.11-71.87q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36v-236.41q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.19 15.3 8.2 24.49 22.87L671-384.3h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36Q848.35-71.87 820-71.87H503.11ZM140.24-515.22q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36V-820q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.2 15.3 8.19 24.49 22.86l19.61 29.42h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36-19.89 20.01-48.24 20.01H140.24ZM717.37-480q0-63.33-31.4-117.27-31.4-53.95-85.49-86.66v-100.68Q694.59-746.65 751.36-664q56.77 82.65 56.77 184h-90.76Z" />
-                            </svg>
+                            Possible Matches
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M359.52-174.91q-84.11-33.44-138.88-104.21-54.77-70.77-65.77-160.88h91.76q8.76 51.8 38.16 94.49 29.41 42.68 74.73 69.68v100.92ZM503.11-71.87q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36v-236.41q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.19 15.3 8.2 24.49 22.87L671-384.3h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36Q848.35-71.87 820-71.87H503.11ZM140.24-515.22q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36V-820q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.2 15.3 8.19 24.49 22.86l19.61 29.42h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36-19.89 20.01-48.24 20.01H140.24ZM717.37-480q0-63.33-31.4-117.27-31.4-53.95-85.49-86.66v-100.68Q694.59-746.65 751.36-664q56.77 82.65 56.77 184h-90.76Z"/></svg>
                         </button><br>
                         <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
                             Mark as Resolved
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                                fill="#e3e3e3">
-                                <path
-                                    d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z" />
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
                         </button><br>
                         <button type="button" class="request-button reject-btn" onclick="onCloseLostReport()">
                             Close Report
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                                fill="#e3e3e3">
-                                <path
-                                    d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z" />
-                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
                         </button><br>
                     </div>
                 </div>
@@ -331,39 +319,71 @@
         </div>
         <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
 
+        
+    <div id="toast"></div>
 
-        <div id="toast"></div>
-
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
     </div>
 
 
     <div id="SidePanel_Iconsee">
-        <button id="closePanelBtn">close</button>
-        <h3>Information retrieved from database</h3>
+        <button class="form-button" id="closePanelBtn">Close</button>
+        <h2>Possible Matches</h2>
 
         <div id="SidePanel_ImgContainer">
-            <img class="ImgFromDB" alt="ImageItem" src="../../assets/ITEMS/1.png">
-        </div>
-        <!-- 🤔 FOR BACKEND: should show item details retrieved from database. Based on item ID in the claim request -->
-        <div class="LostDetails">
-            <h4>Black Oversize Hoodie</h4>
-            <!-- Item name -->
-            <h5>Date Found:</h5>
-            <p>4-12-25</p> <br>
-            <h5>Time Found:</h5>
-            <p>4:15pm</p> <br>
-            <h5>Location:</h5>
-            <p>Yuchengco Building, Y403</p> <br>
-        </div>
-        <br>
-        <h3>Proof of Ownership</h3>
-        <div id="SidePanel_ImgContainer">
-            <img class="ImgFromDB" alt="ImageItem" src="../../assets/ITEMS_PROOF/hoodie_proof.png">
-        </div>
-        <div class="LostDetails">
-            <p>The hoodie is mine. I know that it is size XS and the brand is Gucci. The last perfume I used on the
-                hoodie is Bench Manny Pacquiao Power. You can smell the hoodie for extra proof</p>
+            <!-- 🤔 FOR BACKEND: ImgCard should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/1.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Oversize Hoodie</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/5.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie w/ Details</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/6.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie Straight Cut</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/7.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Plain Black Hoodie</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
         </div>
     </div>
 

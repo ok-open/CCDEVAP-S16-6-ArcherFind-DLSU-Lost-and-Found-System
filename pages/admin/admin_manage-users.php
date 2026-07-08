@@ -1,38 +1,24 @@
+<?php
+    require_once "../../controllers/AdminAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" card="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Surrender Found Item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArcherFind - Manage Users</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/global/dashboard.css">
+    <link rel="stylesheet" href="../../styles/admin/admin_manage-users.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
-    <script src="../../javascript/global/lost-item-chart.js" defer></script>
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/admin/admin_dashboard.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js" defer></script>
+    <script src="../../javascript/admin/admin_manage-users.js" defer></script>
 </head>
-
-<!-- <div id="reportModal" class="modal">
-    <div class="modal-card">
-        <h3>Select Time Frame</h3>
-        <label for="fromDate">From</label>
-        <input type="date" id="fromDate">
-        <label for="toDate">To</label>
-        <input type="date" id="toDate">
-        <div class="modal-buttons">
-            <button id="generateBtn">Generate</button>
-            <button id="cancelBtn">Cancel</button>
-
-        </div>
-
-    </div> -->
-
-</div>
 
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
@@ -46,12 +32,12 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
                 <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
                 <!-- DROPDOWN MENU -->
                 <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.html" class="current-page">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -176,180 +162,55 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <div class="wrapper">
-        <!-- GREETING HEADER -->
-        <section class="dashboard-wrapper">
-            <h1 class="greeting">Hello, <span id="username">Admin</span>!</h1>
+    <!-- CONTROLS -->
+    <div class="controls-wrapper">
+        <div class="title">
+            <h2>Manage Users</h2>
+        </div>
 
-            <div class="cards-wrapper">
-                <!-- ROW 1: USER DISTRIBUTION -->
-                <div class="card-row">
-                    <!-- Stat Block: Total Users -->
-                    <div class="stat-grid-wrapper">
-                        <div class="stat-grid green-border card">
-                            <h5>Total Users</h5>
-                            <hr>
-                            <h3><span class="stat-count">115</span></h3>
-                        </div>
+        <div class="controls">
+            <button class="form-button">Add User</button>
+            <input type="text" placeholder="Search for user..." class="control-box search-bar">
 
-                        <!-- Stat Block: Students Active Card -->
-                        <div class="stat-grid green-border card">
-                            <h5>Students Active</h5>
-                            <hr>
-                            <h3><span class="stat-count">86</span></h3>
-                        </div>
+            <div class="sort-group control-box">
+                <button id="sortDirection" type="button">
+                    ↑
+                </button>
 
-                        <!-- Stat Block: Staff Active Card -->
-                        <div class="stat-grid green-border card">
-                            <h5>Staff Active</h5>
-                            <hr>
-                            <h3><span class="stat-count">21</span></h3>
-                        </div>
-
-                        <div class="stat-block green-border card">
-                            <h5>Admin Active</h5>
-                            <hr>
-                            <h3><span class="stat-count">8</span></h3>
-                        </div>
-                    </div>
-
-                    <!-- Stat Block / GRAPH: User Distribution Graph -->
-                    <div class="graph-card card">
-                        <h5>User Graph</h5>
-                        <hr>
-                        <canvas id="userChart"></canvas>
-                    </div>
-
-                    <!-- Item and Reports Analytics -->
-                    <div class="info-card card">
-                        <h5>Item and Reports Analytics</h5>
-                        <hr>
-
-                        <div class="info-row">
-                            <span>Total Reports</span>
-                            <span class="info-number">315</span>
-                        </div>
-
-                        <div class="info-row info-row-margin">
-                            <span>Total Items</span>
-                            <span class="info-number">71</span>
-                        </div>
-
-                        <h5>FILTER BY DATE</h5>
-                        <div class="info-row">
-                            <form action="">
-                                <div class="time-frame">
-                                    <label for="from-date">From:</label>
-                                    <input type="date" name="from-date" id="from-date">
-
-                                    <label for="to-date">To:</label>
-                                    <input type="date" name="to-date" id="to-date">
-                                </div>
-                            </form>
-                        </div>
-                        <button class="green-button">RESET</button>
-                    </div>
-                </div>
+                <select id="sortField">
+                    <option value="firstname">First Name</option>
+                    <option value="lastname">Last Name</option>
+                    <option value="idnum">ID Number</option>
+                    <option value="userlevel">User Level</option>
+                </select>
             </div>
 
-            <!-- BUTTON ROW -->
-
-
-            <div class="cards-wrapper">
-                <!-- ROW 2: LIVE PLATFORM OPERATIONS -->
-                <div class="card-row">
-                    <!-- Graph Card: Item Reports -->
-                    <div class="graph-card card">
-                        <h5>Item Reports</h5>
-                        <hr>
-                        <div class="graph-card-wrapper">
-                            <canvas id="itemReportChart"></canvas>
-                            <p>Total Reports: <span id="totalReports">315</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Graph Card: Inventory Status -->
-                    <div class="graph-card card">
-                        <h5>Inventory Status</h5>
-                        <hr>
-                        <div class="graph-card-wrapper">
-                            <canvas id="inventoryChart"></canvas>
-                            <p>Total Items: <span id="totalItems">71</span></p>
-                        </div>
-                    </div>
-
-                    <!-- Info Card: Inventory Status -->
-                    <div class="info-card card">
-                        <h5>Average Resolution Time</h5>
-                        <hr>
-
-                        <div class="info-header">
-                            <span>Time</span>
-                            <span>Type</span>
-                        </div>
-
-                        <div class="info-row">
-                            <span class="info-number">4.2 days</span>
-                            <span>Loss Match Time</span>
-                        </div>
-
-                        <div class="info-row">
-                            <span class="info-number">1.5 days</span>
-                            <span>Surrender Approval</span>
-                        </div>
-
-                        <div class="info-row">
-                            <span class="info-number">0.8 days</span>
-                            <span>Claim Verification</span>
-                        </div>
-                    </div>
-
-                    <div class="stat-block-row">
-                        <div class="stat-block card">
-                            <h5>Claim Success Rate</h5>
-                            <hr>
-                            <h4><span class="stat-count">68% Success Rate</span></h4>
-                            <span class="stat-count"
-                                style="font-style: italic; font-size: calc(var(--text-small) - 4px);">
-                                37 / 53 Claim Requests Accepted</span>
-                        </div>
-
-                        <!-- Stat Block: Item Disposal Rate -->
-                        <div class="stat-block card">
-                            <h5>Item Disposal Rate</h5>
-                            <hr>
-                            <h4><span class="stat-count">23% Items Disposed</span></h4>
-                            <span class="stat-count"
-                                style="font-style: italic; font-size: calc(var(--text-small) - 4px);">
-                                34 / 162 Items in Storage</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ROW 3: ANALYTICS -->
-                <div class="card-row">
-                    <!-- Table: Top 5 Most Commonly Lost Categories -->
-                    <div class="graph-card card">
-                        <h5>Item Reports</h5>
-                        <hr>
-                        <div class="graph-card-wrapper">
-                            <canvas id="lineChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Loss Item Frequency by Location -->
-                    <div class="graph-card card">
-                        <h5>Lost Item Frequency by Location</h5>
-                        <hr>
-                        <div class="chart-container">
-                            <canvas id="lostItemFreqChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <select class="control-box filter-dropdown">
+                <option>Filter: All</option>
+                <option>Student</option>
+                <option>Staff</option>
+                <option>Admin</option>
+            </select>
+        </div>
     </div>
 
+    <div class="table-wrapper">
+        <table id="manageUsersTable" class="display">
+            <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>ID Number</th>
+                    <th>Email</th>
+                    <th>User Level</th>
+                    <th>Controls</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- DataTable will populate this automatically -->
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

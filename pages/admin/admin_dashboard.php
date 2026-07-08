@@ -1,17 +1,43 @@
+<?php
+    require_once "../../controllers/AdminAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Surrender Forms</title>
+    <meta name="viewport" card="width=device-width, initial-scale=1.0">
+    <title>ArcherFind - Surrender Found Item</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/global/staffadmin_lists.css">
-    <link rel="stylesheet" href="../../styles/global/toast.css">
-    <script src="../../javascript/global/toast.js" defer></script>
+    <link rel="stylesheet" href="../../styles/global/dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.2.0/chartjs-plugin-datalabels.min.js"></script>
+    <script src="../../javascript/global/lost-item-chart.js" defer></script>
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/admin/staffadmin_lists.js" defer></script>
+    <script src="../../javascript/admin/admin_dashboard.js" defer></script>
 </head>
+
+<!-- <div id="reportModal" class="modal">
+    <div class="modal-card">
+        <h3>Select Time Frame</h3>
+        <label for="fromDate">From</label>
+        <input type="date" id="fromDate">
+        <label for="toDate">To</label>
+        <input type="date" id="toDate">
+        <div class="modal-buttons">
+            <button id="generateBtn">Generate</button>
+            <button id="cancelBtn">Cancel</button>
+
+        </div>
+
+    </div> -->
+
+</div>
+
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
@@ -24,11 +50,11 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
                 <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
                 <!-- DROPDOWN MENU -->
                 <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/admin/admin_surrender-list.html" class="current-page">Surrender Forms</a></li>
+                <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
                 <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
@@ -84,10 +110,10 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
                 <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
                 <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/admin/admin_surrender-list.html" class="current-page">Surrender Forms</a></li>
+                <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
                 <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
@@ -154,169 +180,180 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <!-- CONTROLS -->
-    <div class="controls-wrapper">
-        <div class="title">
-            <h2>Verify Surrendered Items</h2>
-            <p>Inspect and validate items found on campus by the community before officially publishing them to the public catalog.</p>
-        </div>
+    <div class="wrapper">
+        <!-- GREETING HEADER -->
+        <section class="dashboard-wrapper">
+            <h1 class="greeting">Hello, <span id="username">Admin</span>!</h1>
 
-        <div class="controls">
-            <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+            <div class="cards-wrapper">
+                <!-- ROW 1: USER DISTRIBUTION -->
+                <div class="card-row">
+                    <!-- Stat Block: Total Users -->
+                    <div class="stat-grid-wrapper">
+                        <div class="stat-grid green-border card">
+                            <h5>Total Users</h5>
+                            <hr>
+                            <h3><span class="stat-count">115</span></h3>
+                        </div>
 
-            <select class="control-box sort-dropdown">
-                <option>Sort: Name</option>
-                <option>Sort: Recent</option>
-            </select>
+                        <!-- Stat Block: Students Active Card -->
+                        <div class="stat-grid green-border card">
+                            <h5>Students Active</h5>
+                            <hr>
+                            <h3><span class="stat-count">86</span></h3>
+                        </div>
 
-            <select class="control-box filter-dropdown">
-                <option>Filter: All</option>
-                <option>Electronics</option>
-                <option>Miscellaneous</option>
-                <option>Identity Documents</option>
-                <option>Watch / Jewelry</option>
-            </select>
-        </div>
-    </div>
+                        <!-- Stat Block: Staff Active Card -->
+                        <div class="stat-grid green-border card">
+                            <h5>Staff Active</h5>
+                            <hr>
+                            <h3><span class="stat-count">21</span></h3>
+                        </div>
 
-    <!-- <div id="MainHeader">
-        <h1>Verify Surrender Forms</h1>
-        <div class="SearchContainer">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-    <div id="MainContainer">
-        <div id="SortBy">
-            <h2>Sort by</h2>
-            <form>
-                <input type="radio" name="SortOptions" value="mostRecent">
-                <label for="mostRecent">Most Recent first</label><br>
-                <input type="radio" name="SortOptions" value="leastRecent">
-                <label for="mostRecent">Least Recent first</label><br>
-                <input type="radio" name="SortOptions" value="itemA-Z">
-                <label for="itemA-Z">Item name A-Z</label><br>
-                <input type="radio" name="SortOptions" value="itemZ-A">
-                <label for="itemZ-A">Item name Z-A</label><br>
-                <input class="SortBtn" type="submit" value="Submit">
-                <button class="SortBtn">Reset</button>
-            </form>
-        </div> -->
-
-        <!-- REQUESTS -->
-        <div class="requests-wrapper">
-            <!-- REQUEST RECORD -->
-            <div class="request-record">
-                <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
-                <div class="request-image">
-                    <!-- Full-width images with number and caption text -->
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/1.png">
+                        <div class="stat-block green-border card">
+                            <h5>Admin Active</h5>
+                            <hr>
+                            <h3><span class="stat-count">8</span></h3>
+                        </div>
                     </div>
 
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/2.png">
+                    <!-- Stat Block / GRAPH: User Distribution Graph -->
+                    <div class="graph-card card">
+                        <h5>User Graph</h5>
+                        <hr>
+                        <canvas id="userChart"></canvas>
                     </div>
 
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/3.png">
+                    <!-- Item and Reports Analytics -->
+                    <div class="info-card card">
+                        <h5>Item and Reports Analytics</h5>
+                        <hr>
+
+                        <div class="info-row">
+                            <span>Total Reports</span>
+                            <span class="info-number">315</span>
+                        </div>
+
+                        <div class="info-row info-row-margin">
+                            <span>Total Items</span>
+                            <span class="info-number">71</span>
+                        </div>
+
+                        <h5>FILTER BY DATE</h5>
+                        <div class="info-row">
+                            <form action="">
+                                <div class="time-frame">
+                                    <label for="from-date">From:</label>
+                                    <input type="date" name="from-date" id="from-date">
+
+                                    <label for="to-date">To:</label>
+                                    <input type="date" name="to-date" id="to-date">
+                                </div>
+                            </form>
+                        </div>
+                        <button class="green-button">RESET</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BUTTON ROW -->
+
+
+            <div class="cards-wrapper">
+                <!-- ROW 2: LIVE PLATFORM OPERATIONS -->
+                <div class="card-row">
+                    <!-- Graph Card: Item Reports -->
+                    <div class="graph-card card">
+                        <h5>Item Reports</h5>
+                        <hr>
+                        <div class="graph-card-wrapper">
+                            <canvas id="itemReportChart"></canvas>
+                            <p>Total Reports: <span id="totalReports">315</span></p>
+                        </div>
                     </div>
 
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/4.png">
+                    <!-- Graph Card: Inventory Status -->
+                    <div class="graph-card card">
+                        <h5>Inventory Status</h5>
+                        <hr>
+                        <div class="graph-card-wrapper">
+                            <canvas id="inventoryChart"></canvas>
+                            <p>Total Items: <span id="totalItems">71</span></p>
+                        </div>
                     </div>
 
-                    <!-- Next and previous buttons -->
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    <!-- Info Card: Inventory Status -->
+                    <div class="info-card card">
+                        <h5>Average Resolution Time</h5>
+                        <hr>
 
-                    <!-- The dots/circles -->
-                    <div style="text-align:center">
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
-                        <span class="dot" onclick="currentSlide(3)"></span>
-                        <span class="dot" onclick="currentSlide(4)"></span>
+                        <div class="info-header">
+                            <span>Time</span>
+                            <span>Type</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-number">4.2 days</span>
+                            <span>Loss Match Time</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-number">1.5 days</span>
+                            <span>Surrender Approval</span>
+                        </div>
+
+                        <div class="info-row">
+                            <span class="info-number">0.8 days</span>
+                            <span>Claim Verification</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-block-row">
+                        <div class="stat-block card">
+                            <h5>Claim Success Rate</h5>
+                            <hr>
+                            <h4><span class="stat-count">68% Success Rate</span></h4>
+                            <span class="stat-count"
+                                style="font-style: italic; font-size: calc(var(--text-small) - 4px);">
+                                37 / 53 Claim Requests Accepted</span>
+                        </div>
+
+                        <!-- Stat Block: Item Disposal Rate -->
+                        <div class="stat-block card">
+                            <h5>Item Disposal Rate</h5>
+                            <hr>
+                            <h4><span class="stat-count">23% Items Disposed</span></h4>
+                            <span class="stat-count"
+                                style="font-style: italic; font-size: calc(var(--text-small) - 4px);">
+                                34 / 162 Items in Storage</span>
+                        </div>
                     </div>
                 </div>
 
-
-
-                <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
-                <div class="request-item-details">
-                    <!-- ITEM NAME -->
-                    <div class="item-name">
-                        <h2>Black Oversize Hoodie</h2>
-                        <div class="request-buttons-panel">
-                            <!-- POSSIBLE MATCHES BUTTON -->
-                            <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
-                                Mark as Resolved
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
-                            </button><br>
-                            <button type="button" class="request-button reject-btn" onclick="onCloseLostReport()">
-                                Close Report
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
-                            </button><br>
+                <!-- ROW 3: ANALYTICS -->
+                <div class="card-row">
+                    <!-- Table: Top 5 Most Commonly Lost Categories -->
+                    <div class="graph-card card">
+                        <h5>Item Reports</h5>
+                        <hr>
+                        <div class="graph-card-wrapper">
+                            <canvas id="lineChart"></canvas>
                         </div>
                     </div>
 
-                    <hr>
-
-                    <div class="item-column-wrapper">
-                        <!-- COLUMN 1: DATE, TIME, LOCATION -->
-                        <div class="item-column">
-                            <!-- DATE FOUND -->
-                            <div class="detail-box">
-                                <label for="date-found">Estimated Date Found</label>
-                                <input type="date" id="date-found" value="2026-04-12" readonly name="date-found">
-                            </div>
-
-                            <!-- TIME FOUND -->
-                            <div class="detail-box">
-                                <label for="time-found">Estimated Time Found</label>
-                                <input type="time" id="time-found" value="16:15" readonly name="time-found">
-                            </div>
-
-                            <!-- LOCATION -->
-                            <div class="detail-box">
-                                <label for="location">Location Found</label>
-                                <input type="text" id="location" value="Yuchengco Building, Y403" readonly name="location">
-                            </div>
-                        </div>
-
-                        <!-- COLUMN 2: USER DETAILS --- SUBMITTED ON, REPORT FROM, EMAIL -->
-                        <div class="item-column">
-                            <!-- SUBMITTED BY -->
-                            <div class="detail-box">
-                                <label for="submitted-by">Submitted By</label>
-                                <input type="text" id="submitted-by" value="Marc Lesley Quizon (ID 12456783)" readonly
-                                    name="submitted-by"> <!-- ID: NAME OF STUDENT AND ID NUMBER-->
-                            </div>
-
-                            <!-- CONTACT EMAIL -->
-                            <div class="detail-box">
-                                <label for="contact-email">Contact Email</label>
-                                <input type="email" id="contact-email" value="marc_lesley_quizon@dlsu.edu.ph" readonly
-                                    name="contact-email">
-                            </div>
-
-                            <!-- FILED ON -->
-                            <div class="detail-box">
-                                <label for="date-filed">Filed On</label>
-                                <input type="date" id="date-filed" value="2026-04-13" readonly name="date-filed">
-                            </div>
+                    <!-- Loss Item Frequency by Location -->
+                    <div class="graph-card card">
+                        <h5>Lost Item Frequency by Location</h5>
+                        <hr>
+                        <div class="chart-container">
+                            <canvas id="lostItemFreqChart"></canvas>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-
-            
-        <div id="toast"></div>
-
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-        </div>
-
-    <div id="ExpandPanel_ImgItem" class="modal">
-        <img class="modal-content" id="imgExpand">
+        </section>
     </div>
+
 </body>
+
 </html>

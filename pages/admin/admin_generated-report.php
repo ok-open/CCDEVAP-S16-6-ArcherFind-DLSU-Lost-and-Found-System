@@ -1,16 +1,24 @@
+<?php
+    require_once "../../controllers/AdminAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArcherFind - Manage Staff</title>
+
+    <title>ArcherFind - Generated Report</title>
+
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
-    <link rel="stylesheet" href="../../styles/admin/admin_manage-staff.css">
+    <link rel="stylesheet" href="../../styles/admin/admin_generated-report.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../javascript/global/lost-item-chart.js" defer></script>
+    <script src="auth/../../javascript/admin/admin_generated-report.js" defer></script>
     <script src="../../javascript/global/navbar.js" defer></script>
-
-
 </head>
 
 <body>
@@ -26,7 +34,7 @@
         <nav class="navbar">
             <ul class="nav-links">
                 <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.html" class="current-page">Claim Requests</a></li>
                 <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
                 <li><a href="../../pages/admin/admin_manage-student.html">Manage Users</a></li>
@@ -85,9 +93,8 @@
         <nav class="sidebar">
             <ul class="nav-links">
                 <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html" class="current-page">Claim Requests</a></li>
-                <!-- DROPDOWN MENU -->
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_report-list.html" class="current-page">Lost Reports</a></li>
                 <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
                 <li><a href="../../pages/admin/admin_manage-student.html">Manage Users</a></li>
                 <li>
@@ -154,72 +161,149 @@
         </nav>
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
-    
-    <div class="itemview-wrapper">
-        <aside class="itemview-sidebar">
-            <div class="stats-box">
-                <h3>Total Staff</h3>
-                <h2>7</h2> <!-- Total Staff number-->
-            </div>
-        </aside>
 
-        <main class="itemview-main">
-            <h1 class="manage-title">MANAGE STAFF</h1>
+    <div class="report-wrapper">
 
-            <div class="itemview-controls">
-                <input type="text" placeholder="Search for staff..." class="search-bar">
+        <div class="report-header">
 
-                <select class="sort-dropdown">
-                    <option>Sort: Name</option>
-                    <option>Sort: ID Number</option>
-                </select>
-            </div>
+            <button class="back-btn" onclick="window.location.href='../../pages/admin/admin_dashboard.html'">BACK TO DASHBOARD</button>
 
-            <div class="staff-list">
-                <div class="staff-card">
-                    <div><strong>Name:</strong> Robin Dela Cruz</div>
-                    <div><strong>ID Number:</strong> 12345678</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+            <h1>Generated Report</h1>
 
-                <div class="staff-card">
-                    <div><strong>Name:</strong> Carl Crespo</div>
-                    <div><strong>ID Number:</strong> 12479144</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+            <p id="reportRange">
+                January 1, 2025 - January 31, 2025 (sample date)
+            </p>
 
-                <div class="staff-card">
-                    <div><strong>Name:</strong> Lebron James</div>
-                    <div><strong>ID Number:</strong> 66666666</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+        </div>
 
-                <div class="staff-card">
-                    <div><strong>Name:</strong> Michael Jordan</div>
-                    <div><strong>ID Number:</strong> 676767676</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+        <div class="report-top-row">
 
-                <div class="staff-card">
-                    <div><strong>Name:</strong> Michael Jackson</div>
-                    <div><strong>ID Number:</strong> 231231231</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+    <div class="card graph-card">
 
-                <div class="staff-card">
-                    <div><strong>Name:</strong> Paul </div>
-                    <div><strong>ID Number:</strong> 121231212 </div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+        <h3>User Distribution</h3>
+        <hr>
+        <canvas id="userChart"></canvas>
 
-                <div class="staff-card">
-                    <div><strong>Name:</strong> John </div>
-                    <div><strong>ID Number:</strong> 236125426</div>
-                    <button class="remove-btn">Remove</button>
-                </div>
+        <p class="graph-total">
+            <span class="stat-number">115</span>
+            Total Users
+        </p>
 
-            </div>
-        </main>
     </div>
+
+    <div class="card graph-card">
+
+        <h3>Lost Item Frequency</h3>
+        <hr>
+        <canvas id="locationChart"></canvas>
+
+    </div>
+
+    <div class="card info-card">
+
+        <h3>Item Information</h3>
+        <hr>
+        <div class="info-header">
+            <span>Count</span>
+            <span>Category</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">162</span>
+            <span>Total Item Listings</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">85</span>
+            <span>Loss Reports</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">68</span>
+            <span>Claim Requests</span>
+        </div>
+
+        <div class="info-row">
+            <span class="stat-number">67</span>
+            <span>Found Item Reports</span>
+        </div>
+
+    </div>
+
+</div>
+
+       
+
+        <div class="card report-table-card">
+
+            <div class="table-header">
+
+                <h2>Items Included in Report</h2>
+
+                <div class="filter-row">
+
+                    <select id="categoryFilter">
+                        <option>All Categories</option>
+                        <option>Electronics</option>
+                        <option>Identity Documents</option>
+                        <option>Watch / Jewelry</option>
+                        <option>Miscellaneous</option>
+                    </select>
+
+                    <select id="statusFilter">
+                        <option>All Statuses</option>
+                        <option>Listed</option>
+                        <option>Claimed</option>
+                        <option>Disposed</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <table id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>UNIQLO Yellow Sweater</td>
+                        <td>Clothes</td>
+                        <td>Disposed</td>
+                    </tr>
+
+                    <tr>
+                        <td>DLSU Student ID</td>
+                        <td>Identity Documents</td>
+                        <td>Listed</td>
+                    </tr>
+
+                    <tr>
+                        <td>iPad Air</td>
+                        <td>Electronics</td>
+                        <td>Claimed</td>
+                    </tr>
+
+                    <tr>
+                        <td>Aqua Flask</td>
+                        <td>Miscellaneous</td>
+                        <td>Listed</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
 </body>
+
 </html>
