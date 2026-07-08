@@ -3,7 +3,7 @@ INSERT INTO users (first_name, last_name, email, password_hash, role) VALUES
 ('Angelo', 'Almeda', 'angelo_almeda@dlsu.edu.ph', '1234', 'Student'),
 ('Carl', 'Crespo', 'carl_crespo@dlsu.edu.ph', '1234', 'Staff'),
 ('Nathan', 'Saclolo', 'nathan_saclolo@dlsu.edu.ph', '1234', 'Staff'),
-('Daniel', 'Pamintunuan', 'daniel_pamintunuan@dlsu.edu.ph', '1234', 'Admin');
+('Daniel', 'Pamintuan', 'daniel_pamintuan@dlsu.edu.ph', '1234', 'Admin');
 
 INSERT INTO categories (name) VALUES
 ('Electronics'),

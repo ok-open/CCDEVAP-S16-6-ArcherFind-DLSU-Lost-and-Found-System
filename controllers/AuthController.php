@@ -104,7 +104,7 @@ switch ($user["role"]) {
         break;
 
     case "Admin":
-        header("Location: ../pages/admin/admin_home.php");
+        header("Location: ../pages/admin/admin_dashboard.php");
         break;
 
     default:
