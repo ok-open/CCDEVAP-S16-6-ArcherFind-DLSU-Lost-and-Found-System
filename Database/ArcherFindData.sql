@@ -32,7 +32,7 @@ INSERT INTO brands (name) VALUES
 
 INSERT INTO category_brands (category_id, brand_id) VALUES
 -- Electronics (category_id: 1) -> Apple, Samsung, Huawei, JisuLife, Goojodoq, Anker
-(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6),
+(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (1, 6), (1,15),
 -- Tumblers & Bottles (category_id: 2) -> AquaFlask, Hydro Flask, none
 (2, 7), (2, 8), (2, 15),
 -- Wallets (category_id: 3) -> Gucci, Louis Vuitton, Coach, none
@@ -609,3 +609,92 @@ INSERT INTO items_images (item_id, img_filepath) VALUES
 (73, '../../assets/ITEMS/270.png'), (73, '../../assets/ITEMS/271.png'), (73, '../../assets/ITEMS/272.png'),
 (74, '../../assets/ITEMS/273.png'), (74, '../../assets/ITEMS/274.png'), (74, '../../assets/ITEMS/275.png'),
 (75, '../../assets/ITEMS/276.png'), (75, '../../assets/ITEMS/277.png'), (75, '../../assets/ITEMS/278.png');
+
+-- =========================================================================
+-- 1. CLAIM REQUESTS (5 Records)
+-- Mapped directly from the items table to ensure data consistency
+-- =========================================================================
+INSERT INTO reports (
+    student_id, item_name, item_description, category_id, 
+    brand_id, item_id, room_id, area_id, extra_details, when_found, 
+    when_lost, reviewed_by, status, type
+)
+SELECT 1, name, description, category_id, brand_id, item_id, room_id, area_id, 'The pink fan is mine. Here is a selfie with me wearing it', NULL, when_found, NULL, 'Active', 'Claim request' FROM items WHERE item_id = 20 UNION ALL
+SELECT 2, name, description, category_id, brand_id, item_id, room_id, area_id, 'I lost my Macbook because I went to the toilet, it is mine. I can unlock it with my password', NULL, when_found, NULL, 'Active', 'Claim request' FROM items WHERE item_id = 2 UNION ALL
+SELECT 1, name, description, category_id, brand_id, item_id, room_id, area_id, 'The color is the same it is mine, Give me back my bottle', NULL, when_found, NULL, 'Active', 'Claim request' FROM items WHERE item_id = 36 UNION ALL
+SELECT 2, name, description, category_id, brand_id, item_id, room_id, area_id, 'The umbrella is mine, here is apic of it with my bag. Check my personal keychains', NULL, when_found, NULL, 'Active', 'Claim request' FROM items WHERE item_id = 60 UNION ALL
+SELECT 1, name, description, category_id, brand_id, item_id, room_id, area_id, 'The bag is mine, I wore it on Animo Christmas day and left it in school', NULL, when_found, NULL, 'Active', 'Claim request' FROM items WHERE item_id = 56;
+
+
+-- =========================================================================
+-- 2. LOSS REPORTS (4 Records) & SURRENDER FORMS (5 Records)
+-- Text fields use '*'. ID fields use 0 to avoid numeric conflicts.
+-- =========================================================================
+INSERT INTO reports (
+    student_id, item_name, item_description, category_id, brand_id, 
+    item_id, room_id, area_id, extra_details, when_found, 
+    when_lost, reviewed_by, status, type
+) VALUES
+-- --- Loss Reports ---
+(1, 'BYD Seal 5 Car key', 'Black EV Car Key', 1, 15, NULL, 9, NULL, NULL, NULL, '2026-07-01 10:00:00', NULL, 'Active', 'Loss Report'),
+(2, 'Hua Mulan Comb', '15cm Peach Wood Comb in Case', 6, 15, NULL, NULL, 10, NULL, NULL, '2026-07-02 14:30:00', NULL, 'Active', 'Loss Report'),
+(1, 'Black Nike Shorts', '12 inch basketball shorts', 5, 15, NULL, 8, NULL, NULL, NULL, '2026-07-03 09:15:00', NULL, 'Active', 'Loss Report'),
+(2, 'Sunnies Glasses Pouch', 'Leather beige color soft pouch', 6, 15, NULL, NULL, 11, NULL, NULL, '2026-07-05 16:45:00', NULL, 'Active', 'Loss Report'),
+
+-- --- Surrender Forms ---
+(1, 'Airpods 2', 'White airpods with some scratches below', 1, 1, NULL, 1, NULL, NULL, '2026-07-06 08:00:00', NULL, NULL, 'Active', 'Surrender Form'),
+(2, 'Black Laptop case', 'Black case with 1 zipper, no pockets', 5, 15, NULL, 1, NULL, NULL, '2026-07-06 11:20:00', NULL, NULL, 'Active', 'Surrender Form'),
+(1, 'DLSU ID lace', 'Frosh id lace, some dirt and looks old', 5, 15, NULL, 3, NULL, NULL, '2026-07-07 13:10:00', NULL, NULL, 'Active', 'Surrender Form'),
+(2, 'Sunnies Eyeglasses', 'Black Square shaped glasses', 5, 15, NULL, NULL, 4, NULL, '2026-07-08 10:05:00', NULL, NULL, 'Active', 'Surrender Form'),
+(1, 'Student Beep Card', 'Beep Card for Juan De La Cruz', 4, 15, NULL, NULL, 9, NULL, '2026-07-08 15:50:00', NULL, NULL, 'Active', 'Surrender Form');
+
+-- Clear old image mapping data to prevent duplicates
+TRUNCATE TABLE reports_images;
+
+-- =========================================================================
+-- 1. CLAIM REQUESTS (1 picture per record)
+-- Dynamically matches the report_id based on the specific items requested
+-- =========================================================================
+INSERT INTO reports_images (report_id, img_filepath)
+SELECT report_id, '../../assets/IMG_ClaimRequest/1.png' FROM reports WHERE item_id = 20 AND type = 'Claim request' UNION ALL
+SELECT report_id, '../../assets/IMG_ClaimRequest/2.png' FROM reports WHERE item_id = 2  AND type = 'Claim request' UNION ALL
+SELECT report_id, '../../assets/IMG_ClaimRequest/3.png' FROM reports WHERE item_id = 36 AND type = 'Claim request' UNION ALL
+SELECT report_id, '../../assets/IMG_ClaimRequest/4.png' FROM reports WHERE item_id = 60 AND type = 'Claim request' UNION ALL
+SELECT report_id, '../../assets/IMG_ClaimRequest/5.png' FROM reports WHERE item_id = 56 AND type = 'Claim request';
+
+-- =========================================================================
+-- 2. LOSS REPORTS (2 pictures per record)
+-- Dynamically finds the right report_id using your unique item_names
+-- =========================================================================
+INSERT INTO reports_images (report_id, img_filepath)
+SELECT report_id, '../../assets/IMG_LostReport/1.png' FROM reports WHERE item_name = 'BYD Seal 5 Car key' UNION ALL
+SELECT report_id, '../../assets/IMG_LostReport/2.png' FROM reports WHERE item_name = 'BYD Seal 5 Car key' UNION ALL
+
+SELECT report_id, '../../assets/IMG_LostReport/3.png' FROM reports WHERE item_name = 'Hua Mulan Comb' UNION ALL
+SELECT report_id, '../../assets/IMG_LostReport/4.png' FROM reports WHERE item_name = 'Hua Mulan Comb' UNION ALL
+
+SELECT report_id, '../../assets/IMG_LostReport/5.png' FROM reports WHERE item_name = 'Black Nike Shorts' UNION ALL
+SELECT report_id, '../../assets/IMG_LostReport/6.png' FROM reports WHERE item_name = 'Black Nike Shorts' UNION ALL
+
+SELECT report_id, '../../assets/IMG_LostReport/7.png' FROM reports WHERE item_name = 'Sunnies Glasses Pouch' UNION ALL
+SELECT report_id, '../../assets/IMG_LostReport/8.png' FROM reports WHERE item_name = 'Sunnies Glasses Pouch';
+
+-- =========================================================================
+-- 3. SURRENDER FORMS (2 pictures per record)
+-- Dynamically finds the right report_id using your unique item_names
+-- =========================================================================
+INSERT INTO reports_images (report_id, img_filepath)
+SELECT report_id, '../../assets/IMG_SurrenderForm/1.png' FROM reports WHERE item_name = 'Airpods 2' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/2.png' FROM reports WHERE item_name = 'Airpods 2' UNION ALL
+
+SELECT report_id, '../../assets/IMG_SurrenderForm/3.png' FROM reports WHERE item_name = 'Black Laptop case' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/4.png' FROM reports WHERE item_name = 'Black Laptop case' UNION ALL
+
+SELECT report_id, '../../assets/IMG_SurrenderForm/5.png' FROM reports WHERE item_name = 'DLSU ID lace' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/6.png' FROM reports WHERE item_name = 'DLSU ID lace' UNION ALL
+
+SELECT report_id, '../../assets/IMG_SurrenderForm/7.png' FROM reports WHERE item_name = 'Sunnies Eyeglasses' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/8.png' FROM reports WHERE item_name = 'Sunnies Eyeglasses' UNION ALL
+
+SELECT report_id, '../../assets/IMG_SurrenderForm/9.png'  FROM reports WHERE item_name = 'Student Beep Card' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/10.png' FROM reports WHERE item_name = 'Student Beep Card';

@@ -112,14 +112,15 @@ CREATE TABLE items_images (
 CREATE TABLE reports (
     report_id INT AUTO_INCREMENT PRIMARY KEY,
     student_id INT NOT NULL,
+    item_name VARCHAR(100) NOT NULL,
     item_description TEXT NOT NULL,
     category_id INT,
     brand_id INT,
     item_id INT, 
     room_id INT,
     area_id INT,
-    when_found DATETIME, -- Null if Loss Report
-    when_lost DATETIME,  -- Null if Claim Request or Surrender Form
+    when_found DATETIME, -- For Surrender Form
+    when_lost DATETIME,  -- For Claim request or Lost Report
     extra_details TEXT,
     reviewed_by INT,    -- Linked to Staff User ID
     status ENUM('Active', 'Closed', 'Accepted', 'Resolved', 'Rejected') NOT NULL DEFAULT 'Active',
