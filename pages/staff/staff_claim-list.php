@@ -1,9 +1,14 @@
+<?php
+    require_once "../../controllers/StaffAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Surrender Forms</title>
+    <title>Verify Lost Item Reports Requests</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
     <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
@@ -13,6 +18,7 @@
     <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/admin/staffadmin_lists.js" defer></script>
 </head>
+
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
@@ -152,33 +158,8 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <!-- CONTROLS -->
-    <div class="controls-wrapper">
-        <div class="title">
-            <h2>Verify Surrendered Items</h2>
-            <p>Inspect and validate items found on campus by the community before officially publishing them to the public catalog.</p>
-        </div>
-
-        <div class="controls">
-            <input type="text" placeholder="Search for an item..." class="control-box search-bar">
-
-            <select class="control-box sort-dropdown">
-                <option>Sort: Name</option>
-                <option>Sort: Recent</option>
-            </select>
-
-            <select class="control-box filter-dropdown">
-                <option>Filter: All</option>
-                <option>Electronics</option>
-                <option>Miscellaneous</option>
-                <option>Identity Documents</option>
-                <option>Watch / Jewelry</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- <div id="MainHeader">
-        <h1>Verify Surrender Forms</h1>
+    <!-- <div class="MainHeader">
+        <h1>Verify Lost Items Reports</h1>
         <div class="SearchContainer">
             <input type="text" placeholder="Search">
         </div>
@@ -200,11 +181,36 @@
             </form>
         </div> -->
 
-        <!-- REQUESTS -->
-        <div class="requests-wrapper">
-            <!-- REQUEST RECORD -->
-            <div class="request-record">
-                <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
+    <!-- CONTROLS -->
+    <div class="controls-wrapper">
+        <div class="title">
+            <h2>Evaluate Claim Requests</h2>
+            <p>Review submitted ownership details and credentials to verify if a claimant is the rightful owner of a found item.</p>
+        </div>
+
+        <div class="controls">
+            <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+
+            <select class="control-box sort-dropdown">
+                <option>Sort: Name</option>
+                <option>Sort: Recent</option>
+            </select>
+
+            <select class="control-box filter-dropdown">
+                <option>Filter: All</option>
+                <option>Electronics</option>
+                <option>Miscellaneous</option>
+                <option>Identity Documents</option>
+                <option>Watch / Jewelry</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- REQUESTS -->
+    <div class="requests-wrapper">
+        <!-- REQUEST RECORD -->
+        <div class="request-record">
+            <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
                 <div class="request-image">
                     <!-- Full-width images with number and caption text -->
                     <div class="mySlides fade">
@@ -236,85 +242,119 @@
                     </div>
                 </div>
 
+            <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
+            <div class="request-item-details">
+                <!-- ITEM NAME -->
+                <div class="item-name">
+                    <h2>Black Oversize Hoodie</h2>
+                    <div class="request-buttons-panel">
+                        <!-- POSSIBLE MATCHES BUTTON -->
+                        <button type="button" class="request-button openPanelBtn">
+                            Information and Proof
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M359.52-174.91q-84.11-33.44-138.88-104.21-54.77-70.77-65.77-160.88h91.76q8.76 51.8 38.16 94.49 29.41 42.68 74.73 69.68v100.92ZM503.11-71.87q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36v-236.41q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.19 15.3 8.2 24.49 22.87L671-384.3h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36Q848.35-71.87 820-71.87H503.11ZM140.24-515.22q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36V-820q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.2 15.3 8.19 24.49 22.86l19.61 29.42h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36-19.89 20.01-48.24 20.01H140.24ZM717.37-480q0-63.33-31.4-117.27-31.4-53.95-85.49-86.66v-100.68Q694.59-746.65 751.36-664q56.77 82.65 56.77 184h-90.76Z"/></svg>
+                        </button><br>
+                        <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
+                            Mark as Resolved
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
+                        </button><br>
+                        <button type="button" class="request-button reject-btn" onclick="onCloseLostReport()">
+                            Close Report
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
+                        </button><br>
+                    </div>
+                </div>
 
+                <hr>
 
-                <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
-                <div class="request-item-details">
-                    <!-- ITEM NAME -->
-                    <div class="item-name">
-                        <h2>Black Oversize Hoodie</h2>
-                        <div class="request-buttons-panel">
-                            <!-- POSSIBLE MATCHES BUTTON -->
-                            <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
-                                Mark as Resolved
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
-                            </button><br>
-                            <button type="button" class="request-button reject-btn" onclick="onCloseLostReport()">
-                                Close Report
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
-                            </button><br>
+                <div class="item-column-wrapper">
+                    <!-- COLUMN 1: DATE, TIME, LOCATION -->
+                    <div class="item-column">
+                        <!-- DATE LOST -->
+                        <div class="detail-box">
+                            <label for="date-lost">Estimated Date Lost</label>
+                            <input type="date" id="date-lost" value="2026-04-12" readonly name="date-lost">
+                        </div>
+
+                        <!-- TIME LOST -->
+                        <div class="detail-box">
+                            <label for="time-lost">Estimated Time Lost</label>
+                            <input type="time" id="time-lost" value="16:15" readonly name="time-lost">
+                        </div>
+
+                        <!-- LOCATION -->
+                        <div class="detail-box">
+                            <label for="location">Location Lost</label>
+                            <input type="text" id="location" value="Yuchengco Building, Y403" readonly name="location">
                         </div>
                     </div>
 
-                    <hr>
-
-                    <div class="item-column-wrapper">
-                        <!-- COLUMN 1: DATE, TIME, LOCATION -->
-                        <div class="item-column">
-                            <!-- DATE FOUND -->
-                            <div class="detail-box">
-                                <label for="date-found">Estimated Date Found</label>
-                                <input type="date" id="date-found" value="2026-04-12" readonly name="date-found">
-                            </div>
-
-                            <!-- TIME FOUND -->
-                            <div class="detail-box">
-                                <label for="time-found">Estimated Time Found</label>
-                                <input type="time" id="time-found" value="16:15" readonly name="time-found">
-                            </div>
-
-                            <!-- LOCATION -->
-                            <div class="detail-box">
-                                <label for="location">Location Found</label>
-                                <input type="text" id="location" value="Yuchengco Building, Y403" readonly name="location">
-                            </div>
+                    <!-- COLUMN 2: USER DETAILS --- SUBMITTED ON, REPORT FROM, EMAIL -->
+                    <div class="item-column">
+                        <!-- SUBMITTED BY -->
+                        <div class="detail-box">
+                            <label for="submitted-by">Submitted By</label>
+                            <input type="text" id="submitted-by" value="Marc Lesley Quizon (ID 12456783)" readonly
+                                name="submitted-by"> <!-- ID: NAME OF STUDENT AND ID NUMBER-->
                         </div>
 
-                        <!-- COLUMN 2: USER DETAILS --- SUBMITTED ON, REPORT FROM, EMAIL -->
-                        <div class="item-column">
-                            <!-- SUBMITTED BY -->
-                            <div class="detail-box">
-                                <label for="submitted-by">Submitted By</label>
-                                <input type="text" id="submitted-by" value="Marc Lesley Quizon (ID 12456783)" readonly
-                                    name="submitted-by"> <!-- ID: NAME OF STUDENT AND ID NUMBER-->
-                            </div>
+                        <!-- CONTACT EMAIL -->
+                        <div class="detail-box">
+                            <label for="contact-email">Contact Email</label>
+                            <input type="email" id="contact-email" value="marc_lesley_quizon@dlsu.edu.ph" readonly
+                                name="contact-email">
+                        </div>
 
-                            <!-- CONTACT EMAIL -->
-                            <div class="detail-box">
-                                <label for="contact-email">Contact Email</label>
-                                <input type="email" id="contact-email" value="marc_lesley_quizon@dlsu.edu.ph" readonly
-                                    name="contact-email">
-                            </div>
-
-                            <!-- FILED ON -->
-                            <div class="detail-box">
-                                <label for="date-filed">Filed On</label>
-                                <input type="date" id="date-filed" value="2026-04-13" readonly name="date-filed">
-                            </div>
+                        <!-- FILED ON -->
+                        <div class="detail-box">
+                            <label for="date-filed">Filed On</label>
+                            <input type="date" id="date-filed" value="2026-04-13" readonly name="date-filed">
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-
-            
-        <div id="toast"></div>
-
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
         </div>
+        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+
+        
+    <div id="toast"></div>
+
+    <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    </div>
+
+
+    <div id="SidePanel_Iconsee">
+        <button id="closePanelBtn">close</button>
+        <h3>Information retrieved from database</h3>
+
+        <div id="SidePanel_ImgContainer">
+            <img class="ImgFromDB" alt="ImageItem" src="../../assets/ITEMS/1.png">
+        </div>
+        <!-- 🤔 FOR BACKEND: should show item details retrieved from database. Based on item ID in the claim request -->
+        <div class="LostDetails">
+            <h4>Black Oversize Hoodie</h4>
+            <!-- Item name -->
+            <h5>Date Found:</h5>
+            <p>4-12-25</p> <br>
+            <h5>Time Found:</h5>
+            <p>4:15pm</p> <br>
+            <h5>Location:</h5>
+            <p>Yuchengco Building, Y403</p> <br>
+        </div>
+        <br>
+        <h3>Proof of Ownership</h3>
+        <div id="SidePanel_ImgContainer">
+            <img class="ImgFromDB" alt="ImageItem" src="../../assets/IMG_ClaimRequest/hoodie_proof.png">
+        </div>
+        <div class="LostDetails">
+            <p>The hoodie is mine. I know that it is size XS and the brand is Gucci. The last perfume I used on the
+                hoodie is Bench Manny Pacquiao Power. You can smell the hoodie for extra proof</p>
+        </div>
+    </div>
 
     <div id="ExpandPanel_ImgItem" class="modal">
         <img class="modal-content" id="imgExpand">
     </div>
+
 </body>
+
 </html>

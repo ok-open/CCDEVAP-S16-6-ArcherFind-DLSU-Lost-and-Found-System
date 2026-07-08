@@ -1,3 +1,7 @@
+<?php
+    require_once "../../controllers/StaffAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -180,8 +184,9 @@
     <!-- CONTROLS -->
     <div class="controls-wrapper">
         <div class="title">
-            <h2>Evaluate Claim Requests</h2>
-            <p>Review submitted ownership details and credentials to verify if a claimant is the rightful owner of a found item.</p>
+            <h2>Review Lost Reports</h2>
+            <p>Cross-reference student-submitted missing item reports against current storage logs to find potential
+                matches.</p>
         </div>
 
         <div class="controls">
@@ -235,6 +240,7 @@
                         <span class="dot" onclick="currentSlide(2)"></span>
                         <span class="dot" onclick="currentSlide(3)"></span>
                         <span class="dot" onclick="currentSlide(4)"></span>
+
                     </div>
                 </div>
 
@@ -246,7 +252,7 @@
                     <div class="request-buttons-panel">
                         <!-- POSSIBLE MATCHES BUTTON -->
                         <button type="button" class="request-button openPanelBtn">
-                            Information and Proof
+                            Possible Matches
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M359.52-174.91q-84.11-33.44-138.88-104.21-54.77-70.77-65.77-160.88h91.76q8.76 51.8 38.16 94.49 29.41 42.68 74.73 69.68v100.92ZM503.11-71.87q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36v-236.41q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.19 15.3 8.2 24.49 22.87L671-384.3h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36Q848.35-71.87 820-71.87H503.11ZM140.24-515.22q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36V-820q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.2 15.3 8.19 24.49 22.86l19.61 29.42h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36-19.89 20.01-48.24 20.01H140.24ZM717.37-480q0-63.33-31.4-117.27-31.4-53.95-85.49-86.66v-100.68Q694.59-746.65 751.36-664q56.77 82.65 56.77 184h-90.76Z"/></svg>
                         </button><br>
                         <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
@@ -319,31 +325,63 @@
 
 
     <div id="SidePanel_Iconsee">
-        <button id="closePanelBtn">close</button>
-        <h3>Information retrieved from database</h3>
+        <button class="close" id="closePanelBtn">close</button>
+        <h2>Possible Matches</h2>
 
         <div id="SidePanel_ImgContainer">
-            <img class="ImgFromDB" alt="ImageItem" src="../../assets/ITEMS/1.png">
-        </div>
-        <!-- 🤔 FOR BACKEND: should show item details retrieved from database. Based on item ID in the claim request -->
-        <div class="LostDetails">
-            <h4>Black Oversize Hoodie</h4>
-            <!-- Item name -->
-            <h5>Date Found:</h5>
-            <p>4-12-25</p> <br>
-            <h5>Time Found:</h5>
-            <p>4:15pm</p> <br>
-            <h5>Location:</h5>
-            <p>Yuchengco Building, Y403</p> <br>
-        </div>
-        <br>
-        <h3>Proof of Ownership</h3>
-        <div id="SidePanel_ImgContainer">
-            <img class="ImgFromDB" alt="ImageItem" src="../../assets/IMG_ClaimRequest/hoodie_proof.png">
-        </div>
-        <div class="LostDetails">
-            <p>The hoodie is mine. I know that it is size XS and the brand is Gucci. The last perfume I used on the
-                hoodie is Bench Manny Pacquiao Power. You can smell the hoodie for extra proof</p>
+            <!-- 🤔 FOR BACKEND: ImgCard should show image matches depending on the Lost Item's name. Maybe a "contains" condition -->
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/1.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Oversize Hoodie</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/5.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie w/ Details</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/6.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Black Hoodie Straight Cut</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
+            <div class="ImgCard">
+                <img class="ImgMatches" alt="ImageItem" src="../../assets/ITEMS/7.png">
+                <div class="LostDetailsImgMatch hidden">
+                    <h2>Plain Black Hoodie</h2>
+                    <!-- Item name -->
+                    <h3>Date Found:</h3>
+                    <p>4-12-25</p>
+                    <h3>Time Found:</h3>
+                    <p>4:15pm</p>
+                    <h3>Location:</h3>
+                    <p>Yuchengco Building, Y403</p>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -1,3 +1,7 @@
+<?php
+    require_once "../../controllers/StaffAuth.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
