@@ -49,8 +49,9 @@
                         </button>
                         <div class="user-profile">
                             <p class="user-greeting">Welcome back,<br>
-                                <span class="name_of_user">[superlongname]</span>!
-                                <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                                <span class="name_of_user">
+                                    <?= htmlspecialchars($_SESSION["first_name"]) ?>
+                                </span>
                             </p>
                             <button type="button" class="manage-account" onclick="location.href='../../pages/student/student_manage-account'">Manage Account</button>
                             <div class="user-profile-container">
@@ -89,8 +90,9 @@
                 </button>
                 <div class="user-profile">
                     <p class="user-greeting">Welcome back,<br>
-                        <span class="name_of_user">[superlongname]</span>!
-                        <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                        <span class="name_of_user">
+                            <?= htmlspecialchars($_SESSION["first_name"]) ?>
+                        </span>
                     </p>
                     <button type="button" class="manage-account" onclick="location.href='../../pages/student/student_manage-account'">Manage Account</button>
                     <div class="user-profile-container">
