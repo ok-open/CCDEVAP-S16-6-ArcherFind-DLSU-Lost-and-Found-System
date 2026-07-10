@@ -6,67 +6,63 @@ document.addEventListener("DOMContentLoaded", () => {
     const confirmPass = document.getElementById("confirm-pass");
     const saveBtn = document.getElementById("saveBtn");
     const disableBtn = document.getElementById("disableBtn");
+    const passwordForm = document.getElementById("passwordForm");
 
     // CONFIRM NEW PASSWORD
-    if (saveBtn) {
-        saveBtn.addEventListener("click", async () => {
+    if (passwordForm) {
+        passwordForm.addEventListener("submit", (e) => {
+
             const current = currentPass.value.trim();
             const newVal = newPass.value.trim();
             const confirmVal = confirmPass.value.trim();
 
             // All fields required
             if (!current || !newVal || !confirmVal) {
-                showToast("⚠ Please fill out all password fields.", "var(--color-errorMsg)");
-                flagFields([currentPass, newPass, confirmPass].filter(f => !f.value.trim()));
+                e.preventDefault();
+
+                showToast(
+                    "⚠ Please fill out all password fields.",
+                    "var(--color-errorMsg)"
+                );
+
+                flagFields(
+                    [currentPass, newPass, confirmPass]
+                        .filter(field => !field.value.trim())
+                );
+
                 return;
             }
 
             // New + Confirm must match
             if (newVal !== confirmVal) {
-                showToast("⚠ New password and confirmation do not match.", "var(--color-errorMsg)");
+                e.preventDefault();
+
+                showToast(
+                    "⚠ New password and confirmation do not match.",
+                    "var(--color-errorMsg)"
+                );
+
                 flagFields([newPass, confirmPass]);
+
                 return;
             }
 
             // New must differ from Current
             if (newVal === current) {
-                showToast("⚠ New password must be different from current password.", "var(--color-errorMsg)");
+                e.preventDefault();
+
+                showToast(
+                    "⚠ New password must be different from current password.",
+                    "var(--color-errorMsg)"
+                );
+
                 flagFields([newPass]);
+
                 return;
             }
 
-            // Disable button while request is in flight
             saveBtn.disabled = true;
             saveBtn.textContent = "Saving...";
-
-            try {
-                // TODO: replace with real endpoint once backend is built
-                const response = await fetch("/api/account/password", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        currentPassword: current,
-                        newPassword: newVal
-                    })
-                });
-
-                if (!response.ok) {
-                    const errData = await response.json().catch(() => ({}));
-                    throw new Error(errData.message || "Failed to update password.");
-                }
-
-                showToast("✓ Password updated successfully.", "var(--color-successMsg)");
-                currentPass.value = "";
-                newPass.value = "";
-                confirmPass.value = "";
-
-            } catch (err) {
-                // Stub-friendly: backend doesn't exist yet, so network errors are expected for now
-                showToast(`⚠ ${err.message || "Something went wrong. Please try again."}`, "var(--color-errorMsg)");
-            } finally {
-                saveBtn.disabled = false;
-                saveBtn.textContent = "Confirm New Password";
-            }
         });
     }
 
@@ -94,4 +90,43 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 1500);
         });
     }
+});
+
+// SHOW TOASTS AFTER REDIRECT
+document.addEventListener("DOMContentLoaded", () => {
+
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get("success") === "password_updated") {
+        showToast("✓ Password updated successfully.");
+    }
+
+    if (params.get("error") === "empty_fields") {
+        showToast(
+            "⚠ Please fill out all password fields.",
+            "var(--color-errorMsg)"
+        );
+    }
+
+    if (params.get("error") === "password_mismatch") {
+        showToast(
+            "⚠ New password and confirmation do not match.",
+            "var(--color-errorMsg)"
+        );
+    }
+
+    if (params.get("error") === "wrong_password") {
+        showToast(
+            "⚠ Current password is incorrect.",
+            "var(--color-errorMsg)"
+        );
+    }
+
+    if (params.get("error") === "same_password") {
+        showToast(
+            "⚠ New password must be different from your current password.",
+            "var(--color-errorMsg)"
+        );
+    }
+
 });
