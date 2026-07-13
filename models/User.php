@@ -64,6 +64,21 @@ class User
     }
 
     /**
+     * Disable (soft delete) a user account.
+     */
+    public function disableAccount($userId)
+    {
+        $sql = "UPDATE users
+                SET deleted = '1'
+                WHERE user_id = :user_id";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":user_id", $userId);
+
+        return $stmt->execute();
+    }
+
+    /**
      * Check if an email already exists.
      */
     public function emailExists($email)

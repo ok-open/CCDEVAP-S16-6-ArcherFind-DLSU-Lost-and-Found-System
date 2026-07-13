@@ -232,11 +232,13 @@
                             <button id="saveBtn" class="save-btn" type="submit">
                                 Confirm New Password
                             </button>
-
-                            <button id="disableBtn" class="disable-btn" type="button">
-                                Disable Account
-                            </button>
                         </div>
+                    </form>
+
+                    <form id="disableAccountForm" action="../../controllers/DisableAccountController.php" method="POST">
+                        <button id="disableBtn" class="disable-btn" type="button">
+                            Disable Account
+                        </button>
                     </form>
                 </div>
             </section>

@@ -1,6 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     const error = document.body.dataset.error;
+    const params = new URLSearchParams(window.location.search);
+    const success = params.get("success");
+
+    // SUCCESS MESSAGE
+    if (success === "account_disabled") {
+        showToast(
+            "✓ Your account has been disabled successfully.",
+            "var(--color-successMsg)"
+        );
+        return;
+    }
 
     if (!error) return;
 
@@ -22,7 +33,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         case "account_not_found":
             showToast(
-            
                 "⚠ No account found with that email.",
                 "var(--color-errorMsg)"
             );

@@ -66,18 +66,23 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // DISABLE ACCOUNT (UI only, no backend yet)
+    // DISABLE ACCOUNT
     if (disableBtn) {
+
         disableBtn.addEventListener("click", () => {
+
             const confirmed = confirm(
-                "Are you sure you want to disable your account? This action cannot be undone."
+                "Are you sure you want to disable your ArcherFind account?\n\nThis action cannot be undone."
             );
 
-            if (!confirmed) return;
+            if (confirmed) {
+                document
+                    .getElementById("disableAccountForm")
+                    .submit();
+            }
 
-            // TODO: hook up to backend once disable-account endpoint exists
-            showToast("⚠ Account disabling is not yet available.", "var(--color-errorMsg)");
         });
+
     }
 
     // Helper: flash red border on invalid fields
@@ -126,6 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
         showToast(
             "⚠ New password must be different from your current password.",
             "var(--color-errorMsg)"
+        );
+    }
+
+    if (params.get("error") === "disable_failed") {
+    showToast(
+        "⚠ Unable to disable your account.",
+        "var(--color-errorMsg)"
         );
     }
 
