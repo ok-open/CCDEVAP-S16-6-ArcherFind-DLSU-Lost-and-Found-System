@@ -12,7 +12,7 @@ require_once "../models/User.php";
 */
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: ../index.php");
+    header("Location: ../pages/auth/register.php");
     exit();
 }
 
@@ -22,8 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 |--------------------------------------------------------------------------
 */
 
+$firstName = trim($_POST["first_name"] ?? "");
+$lastName = trim($_POST["last_name"] ?? "");
 $email = trim($_POST["email"] ?? "");
 $password = trim($_POST["password"] ?? "");
+$confirmPassword = trim($_POST["confirm_password"] ?? "");
 
 /*
 |--------------------------------------------------------------------------
@@ -31,8 +34,14 @@ $password = trim($_POST["password"] ?? "");
 |--------------------------------------------------------------------------
 */
 
-if (empty($email) || empty($password)) {
-    header("Location: ../index.php?error=empty_fields");
+if (
+    empty($firstName) ||
+    empty($lastName) ||
+    empty($email) ||
+    empty($password) ||
+    empty($confirmPassword)
+) {
+    header("Location: ../pages/auth/register.php?error=empty_fields");
     exit();
 }
 
@@ -45,74 +54,67 @@ if (empty($email) || empty($password)) {
 $email = strtolower($email);
 
 if (!str_ends_with($email, "@dlsu.edu.ph")) {
-    header("Location: ../index.php?error=invalid_email");
+    header("Location: ../pages/auth/register.php?error=invalid_email");
     exit();
 }
 
 /*
 |--------------------------------------------------------------------------
-| Find user
+| Validate passwords match
+|--------------------------------------------------------------------------
+*/
+
+if ($password !== $confirmPassword) {
+    header("Location: ../pages/auth/register.php?error=password_mismatch");
+    exit();
+}
+
+/*
+|--------------------------------------------------------------------------
+| Check if email already exists
 |--------------------------------------------------------------------------
 */
 
 $userModel = new User($conn);
-$user = $userModel->findByEmail($email);
 
-if (!$user) {
-    header("Location: ../index.php?error=account_not_found");
+if ($userModel->emailExists($email)) {
+    header("Location: ../pages/auth/register.php?error=email_exists");
     exit();
 }
 
 /*
 |--------------------------------------------------------------------------
-| Password Check
-| Password hashing is required for MP2
+| Hash password
 |--------------------------------------------------------------------------
 */
 
-if (!password_verify($password, $user["password_hash"])) {
-    header("Location: ../index.php?error=wrong_password");
+$hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+/*
+|--------------------------------------------------------------------------
+| Create account
+|--------------------------------------------------------------------------
+*/
+
+$created = $userModel->createUser(
+    $firstName,
+    $lastName,
+    $email,
+    $hashedPassword
+);
+
+if (!$created) {
+    header("Location: ../pages/auth/register.php?error=registration_failed");
     exit();
 }
 
 /*
 |--------------------------------------------------------------------------
-| Store Session
+| Success
 |--------------------------------------------------------------------------
 */
 
-$_SESSION["user_id"] = $user["user_id"];
-$_SESSION["first_name"] = $user["first_name"];
-$_SESSION["last_name"] = $user["last_name"];
-$_SESSION["email"] = $user["email"];
-$_SESSION["role"] = $user["role"];
-
-/*
-|--------------------------------------------------------------------------
-| Redirect based on role
-|--------------------------------------------------------------------------
-*/
-
-switch ($user["role"]) {
-
-    case "Student":
-        header("Location: ../pages/student/student_home.php");
-        break;
-
-    case "Staff":
-        header("Location: ../pages/staff/staff_dashboard.php");
-        break;
-
-    case "Admin":
-        header("Location: ../pages/admin/admin_dashboard.php");
-        break;
-
-    default:
-        session_destroy();
-        header("Location: ../index.php?error=unauthorized");
-        break;
-}
-
+header("Location: ../index.php?success=registered");
 exit();
 
 ?>

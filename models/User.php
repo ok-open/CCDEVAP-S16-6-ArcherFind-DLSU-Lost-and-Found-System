@@ -62,6 +62,59 @@ class User
 
         return $stmt->execute();
     }
+
+    /**
+     * Check if an email already exists.
+     */
+    public function emailExists($email)
+    {
+        $sql = "SELECT user_id
+                FROM users
+                WHERE email = :email
+                AND deleted = '0'
+                LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":email", $email);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Create a new student account.
+     */
+    public function createUser(
+        $firstName,
+        $lastName,
+        $email,
+        $passwordHash
+    )
+    {
+        $sql = "INSERT INTO users
+                (
+                    first_name,
+                    last_name,
+                    email,
+                    password_hash
+                )
+                VALUES
+                (
+                    :first_name,
+                    :last_name,
+                    :email,
+                    :password_hash
+                )";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindParam(":first_name", $firstName);
+        $stmt->bindParam(":last_name", $lastName);
+        $stmt->bindParam(":email", $email);
+        $stmt->bindParam(":password_hash", $passwordHash);
+
+        return $stmt->execute();
+    }
 }
 
 ?>

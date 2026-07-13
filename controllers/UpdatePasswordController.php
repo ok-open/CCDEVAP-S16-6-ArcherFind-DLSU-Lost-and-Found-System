@@ -84,7 +84,7 @@ if (!$user) {
 |--------------------------------------------------------------------------
 */
 
-if ($currentPassword !== $user["password_hash"]) {
+if (!password_verify($currentPassword, $user["password_hash"])) {
     header("Location: ../pages/student/student_manage-account.php?error=wrong_password");
     exit();
 }
@@ -95,7 +95,7 @@ if ($currentPassword !== $user["password_hash"]) {
 |--------------------------------------------------------------------------
 */
 
-if ($currentPassword === $newPassword) {
+if (password_verify($newPassword, $user["password_hash"])) {
     header("Location: ../pages/student/student_manage-account.php?error=same_password");
     exit();
 }
@@ -106,7 +106,9 @@ if ($currentPassword === $newPassword) {
 |--------------------------------------------------------------------------
 */
 
-$userModel->updatePassword($_SESSION["user_id"], $newPassword);
+$hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+
+$userModel->updatePassword($_SESSION["user_id"], $hashedPassword);
 
 /*
 |--------------------------------------------------------------------------

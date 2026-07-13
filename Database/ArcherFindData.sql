@@ -1,9 +1,9 @@
 INSERT INTO users (first_name, last_name, email, password_hash, role) VALUES
-('Marc', 'Quizon', 'marc_lesley_quizon@dlsu.edu.ph', '1234', 'Student'),
-('Angelo', 'Almeda', 'angelo_almeda@dlsu.edu.ph', '1234', 'Student'),
-('Carl', 'Crespo', 'carl_crespo@dlsu.edu.ph', '1234', 'Staff'),
-('Nathan', 'Saclolo', 'nathan_saclolo@dlsu.edu.ph', '1234', 'Staff'),
-('Daniel', 'Pamintuan', 'daniel_pamintuan@dlsu.edu.ph', '1234', 'Admin');
+('Marc', 'Quizon', 'marc_lesley_quizon@dlsu.edu.ph', '$2y$10$XFJqfJ2SZouRRDskL7g28uhcrS9Z6oh4J2KamzmFGBt9f7CJ/tPTy', 'Student'),
+('Angelo', 'Almeda', 'angelo_almeda@dlsu.edu.ph', '$2y$10$XFJqfJ2SZouRRDskL7g28uhcrS9Z6oh4J2KamzmFGBt9f7CJ/tPTy', 'Student'),
+('Carl', 'Crespo', 'carl_crespo@dlsu.edu.ph', '$2y$10$ww9SiZnuQrmlSY.a8Zb8w.wrLIF1PjARGSD1oh1YY.Ibop1UobG.S', 'Staff'),
+('Nathan', 'Saclolo', 'nathan_saclolo@dlsu.edu.ph', '$2y$10$ww9SiZnuQrmlSY.a8Zb8w.wrLIF1PjARGSD1oh1YY.Ibop1UobG.S', 'Staff'),
+('Daniel', 'Pamintuan', 'daniel_pamintuan@dlsu.edu.ph', '$2y$10$eFHiSLsoGVnD9CpYWHDrGuOWe1WmPTIKhvOFNbf.oNzGJUq73n1.6', 'Admin');
 
 INSERT INTO categories (name) VALUES
 ('Electronics'),

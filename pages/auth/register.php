@@ -11,6 +11,7 @@
     <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/global/toast.js" defer></script>
     <script src="../../javascript/auth/auth_account.js" defer></script>
+    <script src="../../javascript/auth/register.js" defer></script>
     <title>Login</title>
 </head>
 
@@ -38,41 +39,33 @@
                 <h2>Hello, Welcome!</h2>
 
                 <!-- LOGIN DETAILS (FLEX) -->
-                <form action="../../pages/student/student_home.html"> <!-- SHOULD BE CHANGED SOON DEPENDING ON LOGIN CREDENTIALS -->
+                <form action="../../controllers/RegisterController.php" method="POST"> <!-- SHOULD BE CHANGED SOON DEPENDING ON LOGIN CREDENTIALS -->
                     <div class="login-register-details">
                         <!-- Name -->
                         <div class="name">
                             <!-- First Name -->
                             <div class="form firstname">
                                 <label for="firstname">First name:</label>
-                                <input type="text" id="firstname" placeholder="John" maxlength="40" name="firstname">
+                                <input type="text" id="firstname" name="first_name" placeholder="John" maxlength="40" required>
                             </div>
                             <!-- Last Name -->
                             <div class="form lastname">
-                                <label for="id-num">Last name:</label>
-                                <input type="text" id="lastname" placeholder="Dela Cruz" maxlength="40" name="lastname">
+                                <label for="lastname">Last name:</label>
+                                <input type="text" id="lastname" name="last_name" placeholder="Dela Cruz" maxlength="40" required>
                             </div>
                         </div>
 
                         <!-- Email -->
                         <div class="form lastname">
                             <label for="email">Enter your DLSU email:</label>
-                            <input type="text" id="email" placeholder="john_dela_cruz@dlsu.edu.ph" maxlength="70"
-                                name="email">
-                        </div>
-
-                        <!-- ID Number Form-->
-                        <div class="form">
-                            <label for="id-num">ID Number:</label>
-                            <input type="text" id="id-num" inputmode="numeric" placeholder="xxxxxxxx" maxlength="12"
-                                name="id-num">
+                            <input type="email" id="email" name="email" placeholder="john_dela_cruz@dlsu.edu.ph" maxlength="70" required>
                         </div>
 
                         <!-- Choose password -->
                         <div class="form password-form">
                             <label for="pass">Choose a Password:</label>
                             <div class="password-input-wrapper">
-                                <input type="password" id="pass" name="pass" maxlength="20">
+                                <input type="password" id="pass" name="password" maxlength="20" required>
                                 <button type="button" class="see-pass" aria-label="Toggle password visibility">
                                     <!-- VISIBILITY OFF (eye closed) - shown when password is visible -->
                                     <svg class="eye-closed" xmlns="http://www.w3.org/2000/svg" height="24px"
@@ -94,7 +87,7 @@
                         <div class="form password-form">
                             <label for="confirm-pass">Confirm your Password:</label>
                             <div class="password-input-wrapper">
-                                <input type="password" id="confirm-pass" name="pass" maxlength="20">
+                                <input type="password" id="confirm-pass" name="confirm_password" maxlength="20" required>
                                 <button type="button" class="see-pass" aria-label="Toggle password visibility">
                                     <!-- VISIBILITY OFF (eye closed) - shown when password is visible -->
                                     <svg class="eye-closed" xmlns="http://www.w3.org/2000/svg" height="24px"
@@ -113,7 +106,7 @@
                         </div>
 
                         <!-- Login -->
-                        <button type="button" class="form-button" id="register-submit" onclick="location.href='../../index.html'">Register</button>
+                        <button type="submit" class="form-button" id="register-submit">Register</button>
                     </div>
                 </form>
 

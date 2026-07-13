@@ -79,7 +79,7 @@ $error = $_GET['error'] ?? '';
                 </form>
 
                 <!-- REGISTER -->
-                <p>Don't have an account? <a href="pages/auth/register.html">Register</a></p>
+                <p>Don't have an account? <a href="pages/auth/register.php">Register</a></p>
 
                 <!-- DARK MODE BUTTON -->
                 <div class="day-night">
