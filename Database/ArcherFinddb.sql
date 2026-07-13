@@ -167,8 +167,9 @@ CREATE TABLE items_update_log (
     new_status ENUM('In Storage', 'Claimed', 'Disposed') NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     
-    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE SET NULL,
+    FOREIGN KEY (item_id) REFERENCES items(item_id) ON DELETE SET NULL
 ) ;
+
 
 CREATE TABLE reports_update_log (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
