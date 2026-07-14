@@ -130,21 +130,6 @@ class User
 
         return $stmt->execute();
     }
-
-    public function sendContactMessage($userId, $inquiry, $message)
-    {
-        $sql = "INSERT INTO contacts_received
-                (student_id, inquiry, message)
-                VALUES (?, ?, ?)";
-
-        $stmt = $this->conn->prepare($sql);
-
-        return $stmt->execute([
-            $userId,
-            $inquiry,
-            $message
-        ]);
-    }
 }
 
 ?>

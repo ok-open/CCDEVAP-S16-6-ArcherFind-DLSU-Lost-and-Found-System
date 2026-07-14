@@ -3,7 +3,7 @@
 session_start();
 
 require_once "../db.php";
-require_once "../models/User.php";
+require_once "../models/Contact.php";
 
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
@@ -23,13 +23,17 @@ if ($inquiry === "" || $message === "") {
     exit();
 }
 
-$userModel = new User($conn);
+// Create Contact model
+$contactModel = new Contact($conn);
 
-if ($userModel->sendContactMessage(
+// Save message
+$success = $contactModel->sendContactMessage(
     $_SESSION["user_id"],
     $inquiry,
     $message
-)) {
+);
+
+if ($success) {
     header("Location: ../pages/student/student_contact.php?success=message_sent");
     exit();
 }

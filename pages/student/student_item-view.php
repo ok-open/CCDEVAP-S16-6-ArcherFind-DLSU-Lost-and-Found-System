@@ -1,5 +1,6 @@
 <?php
     require_once "../../controllers/StudentAuth.php";
+    require_once "../../controllers/StudentItemController.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="../../styles/global/navbar.css">
     <link rel="stylesheet" href="../../styles/student/student_item-view.css">
     <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="../../javascript/student/student_item-view.js" defer></script>
 </head>
 
 <body>
@@ -127,22 +129,22 @@
         <!-- CONTROLS -->
         <div class="controls-wrapper">
             <h2>Browse Surrendered Items</h2>
-            <div class="controls">
-                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+            <form class="controls" method="GET">
 
-                <select class="control-box sort-dropdown">
-                    <option>Sort: Name</option>
-                    <option>Sort: Recent</option>
+                <input type="text" name="search" class="control-box search-bar" placeholder="Search for an item..." value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
+
+                <select name="sort" class="control-box sort-dropdown">
+                    <option value="recent" <?= (($_GET['sort'] ?? 'recent') == 'recent') ? 'selected' : '' ?>>Sort: Recent</option>
+                    <option value="name" <?= (($_GET['sort'] ?? '') == 'name') ? 'selected' : '' ?>>Sort: Name</option>
                 </select>
 
-                <select class="control-box filter-dropdown">
-                    <option>Filter: All</option>
-                    <option>Electronics</option>
-                    <option>Miscellaneous</option>
-                    <option>Identity Documents</option>
-                    <option>Watch / Jewelry</option>
+                <select name="category" class="control-box filter-dropdown">
+                    <option value="">Filter: All</option>
+                    <?php foreach ($categories as $category): ?>
+                    <option value="<?= htmlspecialchars($category['name']) ?>" <?= (($_GET['category'] ?? '') == $category['name']) ? 'selected' : '' ?>> <?= htmlspecialchars($category['name']) ?></option>
+                    <?php endforeach; ?>
                 </select>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -150,45 +152,39 @@
     <!-- MAIN -->
     <main class="itemview-main">
         <div class="item-list">
-            <a href="../../pages/student/student_claim-form.html" class="item-card">
-                <img src="../../assets/ITEMS/2.png" alt="Item 1">
-            </a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card">
-                <img src="../../assets/ITEMS/1.png" alt="Item 2">
-            </a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card">
-                <img src="../../assets/ITEMS/Untitled design.png" alt="Item 2">
-            </a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
-            <a href="../../pages/student/student_claim-form.html" class="item-card"></a>
+
+        <?php if (!empty($items)): ?>
+
+            <?php foreach ($items as $item): ?>
+
+                <a
+                    href="student_claim-form.php?id=<?= $item['item_id'] ?>"
+                    class="item-card">
+
+                    <?php if (!empty($item['img_filepath'])): ?>
+
+                        <img
+                            src="<?= htmlspecialchars($item['img_filepath']) ?>"
+                            alt="<?= htmlspecialchars($item['name']) ?>">
+
+                    <?php else: ?>
+
+                        <img
+                            src="../../assets/ITEMS/default-item.png"
+                            alt="No Image">
+
+                    <?php endif; ?>
+
+                </a>
+
+            <?php endforeach; ?>
+
+        <?php else: ?>
+
+            <p>No surrendered items available.</p>
+
+        <?php endif; ?>
+
         </div>
     </main>
     </div>
