@@ -1,5 +1,6 @@
 <?php
     require_once "../../controllers/StudentAuth.php";
+    require_once "../../controllers/LocationController.php";
 ?>
 
 <!DOCTYPE html>
@@ -142,18 +143,21 @@
                 <div class="claim-location-row">
                     <div class="form-group">
                         <label>Building <span class="required">required field</span></label>
-                        <select class="claim-input">
-                            <option>Select Building</option>
-                            <option>Gokongwei Hall</option>
-                            <option>Andrew Gonzales Hall</option>
-                            <option>St. La Salle Hall</option>
-                        </select>
+                            <select class="claim-input" id="building_id" name="building_id" required>
+                                <option value="">Select Building</option>
+                                <?php foreach ($buildings as $building): ?>
+                                    <option
+                                        value="<?= $building["building_id"] ?>"
+                                        data-max-level="<?= $building["max_level"] ?>">
+                                        <?= htmlspecialchars($building["name"]) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                     </div>
 
                     <div class="form-group">
                         <label>Floor number <span class="required">required field</span></label>
-                        <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
-                        <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
+                        <input type="number" class="claim-input" id="floor_number" name="floor_number" min="1" required>                        <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
                         <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
                     </div>
                 </div>
@@ -161,22 +165,31 @@
                 <div class="claim-location-row">
                     <div class="form-group">
                         <label>Area <span class="required">at least one required</span></label>
-                        <select class="claim-input" name="area_id" required>
+                        <select class="claim-input" id="area_id" name="area_id">
                             <option value="">Select Area</option>
-                            <option value="1">Pericos Canteen</option>
-                            <option value="2">Study Lobby</option>
-                            <option value="3">Hallway</option>
-
+                            <?php foreach ($areas as $area): ?>
+                                <option
+                                    value="<?= $area["area_id"] ?>"
+                                    data-building="<?= $area["building_id"] ?>"
+                                    data-level="<?= $area["level"] ?>">
+                                    <?= htmlspecialchars($area["name"]) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input" name="room_id">
+                        <select class="claim-input" id="room_id" name="room_id">
                             <option value="">Select Room</option>
-                            <option value="1">G403</option>
-                            <option value="2">G301</option>
-                            <option value="3">G106</option>
+                            <?php foreach ($rooms as $room): ?>
+                                <option
+                                    value="<?= $room["room_id"] ?>"
+                                    data-building="<?= $room["building_id"] ?>"
+                                    data-level="<?= $room["level"] ?>">
+                                    <?= htmlspecialchars($room["name"]) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
