@@ -194,7 +194,7 @@
     <div class="requests-wrapper">
         <!-- REQUEST RECORD -->
         <?php if (empty($lossReports)): ?>
-    <div class="no-records" style="text-align: center; padding: 50px; color: #777;">
+    <div class="no-records" style="text-align: center; padding: 50px; color: #0c2100;">
         <h3>No Active Loss Reports Found</h3>
     </div>
 <?php else: ?>
@@ -371,6 +371,10 @@
     <input type="hidden" name="category" value="<?= htmlspecialchars($category) ?>">
     <input type="hidden" name="sort" value="<?= htmlspecialchars($sortBy) ?>">
 </form>
+
+    <div id="ExpandPanel_ImgItem" class="modal">
+        <img class="modal-content" id="imgExpand">
+    </div>
 </body>
 
 </html>

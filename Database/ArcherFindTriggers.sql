@@ -19,7 +19,8 @@ BEGIN
         
         -- This statement will trigger TRIGGER 2
         UPDATE items 
-        SET status = 'Claimed' 
+        SET status = 'Claimed', 
+			claimed_by = NEW.student_id
         WHERE item_id = NEW.item_id;
         
     END IF;

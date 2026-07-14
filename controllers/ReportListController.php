@@ -48,6 +48,7 @@ $reportModel = new Reports($conn);
 
 // 2. Fetch the filtered results
 $lossReports = $reportModel->getLossReports($search, $category, $sortBy);
+$claimRequests = $reportModel->getClaimRequests($search, $category, $sortBy);
 
 // 3. NEW: Check if the user clicked "Possible Matches" on a specific report
 $selectedReportId = $_GET['selected_report'] ?? null;

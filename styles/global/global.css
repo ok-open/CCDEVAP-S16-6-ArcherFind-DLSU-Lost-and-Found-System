@@ -62,6 +62,7 @@
     --logo-img-medium: clamp(3.125rem, 4.5vw + 1rem, 4.5rem);
     --logo-img-large: clamp(4.5rem, 7vw + 1rem, 7.5rem);
     --logo-img-xlarge: clamp(7.5rem, 10vw + 1.5rem, 13rem);
+    --logo-img-xxlarge: clamp(12rem, 15vw + 2rem, 22rem);
     /**************** LOGO IMAGES ****************/
 
     /**************** BACKGROUND IMAGES ****************/

@@ -401,7 +401,7 @@ p {
 
 /* Refers to the images in Claim Request Side Panel */
 #SidePanel_ImgContainer .ImgFromDB {
-    width: var(--logo-img-large);
+    width: var(--logo-img-xxlarge);
 }
 
 #SidePanel_ImgContainer {
