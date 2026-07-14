@@ -684,17 +684,17 @@ SELECT report_id, '../../assets/IMG_LostReport/8.png' FROM reports WHERE item_na
 -- Dynamically finds the right report_id using your unique item_names
 -- =========================================================================
 INSERT INTO reports_images (report_id, img_filepath)
-SELECT report_id, '../../assets/IMG_SurrenderForm/1.png' FROM reports WHERE item_name = 'Airpods 2' UNION ALL
-SELECT report_id, '../../assets/IMG_SurrenderForm/2.png' FROM reports WHERE item_name = 'Airpods 2' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender1.png' FROM reports WHERE item_name = 'Airpods 2' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender2.png' FROM reports WHERE item_name = 'Airpods 2' UNION ALL
 
-SELECT report_id, '../../assets/IMG_SurrenderForm/3.png' FROM reports WHERE item_name = 'Black Laptop case' UNION ALL
-SELECT report_id, '../../assets/IMG_SurrenderForm/4.png' FROM reports WHERE item_name = 'Black Laptop case' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender3.png' FROM reports WHERE item_name = 'Black Laptop case' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender4.png' FROM reports WHERE item_name = 'Black Laptop case' UNION ALL
 
-SELECT report_id, '../../assets/IMG_SurrenderForm/5.png' FROM reports WHERE item_name = 'DLSU ID lace' UNION ALL
-SELECT report_id, '../../assets/IMG_SurrenderForm/6.png' FROM reports WHERE item_name = 'DLSU ID lace' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender5.png' FROM reports WHERE item_name = 'DLSU ID lace' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender6.png' FROM reports WHERE item_name = 'DLSU ID lace' UNION ALL
 
-SELECT report_id, '../../assets/IMG_SurrenderForm/7.png' FROM reports WHERE item_name = 'Sunnies Eyeglasses' UNION ALL
-SELECT report_id, '../../assets/IMG_SurrenderForm/8.png' FROM reports WHERE item_name = 'Sunnies Eyeglasses' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender7.png' FROM reports WHERE item_name = 'Sunnies Eyeglasses' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender8.png' FROM reports WHERE item_name = 'Sunnies Eyeglasses' UNION ALL
 
-SELECT report_id, '../../assets/IMG_SurrenderForm/9.png'  FROM reports WHERE item_name = 'Student Beep Card' UNION ALL
-SELECT report_id, '../../assets/IMG_SurrenderForm/10.png' FROM reports WHERE item_name = 'Student Beep Card';
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender9.png'  FROM reports WHERE item_name = 'Student Beep Card' UNION ALL
+SELECT report_id, '../../assets/IMG_SurrenderForm/surrender10.png' FROM reports WHERE item_name = 'Student Beep Card';
