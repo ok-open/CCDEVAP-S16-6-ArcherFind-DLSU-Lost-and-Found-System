@@ -23,7 +23,7 @@
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
         <!-- LOGO (links to ADMIN DASHBOARD) -->
-        <button class="archerfind-logo" onclick="window.location.href='../../pages/staff/staff_dashboard.html'">
+        <button class="archerfind-logo" onclick="window.location.href='../../pages/staff/staff_dashboard.php'">
             <h1>ArcherFind</h1>
             <img class="logo" src="../../assets/LOGOS/AF-ORIGINAL.png" alt="ArcherFind logo">
         </button>
@@ -31,10 +31,10 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/staff/staff_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/staff/staff_claim-list.html">Claim Requests</a></li>
-                <li><a href="../../pages/staff/staff_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/staff/staff_surrender-list.html">Surrender Forms</a></li>
+                <li><a href="../../pages/staff/staff_dashboard.php">Dashboard</a></li>
+                <li><a href="../../pages/staff/staff_claim-list.php">Claim Requests</a></li>
+                <li><a href="../../pages/staff/staff_report-list.php">Lost Reports</a></li>
+                <li><a href="../../pages/staff/staff_surrender-list.php">Surrender Forms</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -49,7 +49,7 @@
                                 <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/staff/staff_manage-account.html'">Manage
+                                onclick="location.href='../../pages/staff/staff_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night">
@@ -89,10 +89,10 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/staff/staff_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/staff/staff_claim-list.html">Claim Requests</a></li>
-                <li><a href="../../pages/staff/staff_report-list.html" class="current-page">Lost Reports</a></li>
-                <li><a href="../../pages/staff/staff_surrender-list.html">Surrender Forms</a></li>
+                <li><a href="../../pages/staff/staff_dashboard.php">Dashboard</a></li>
+                <li><a href="../../pages/staff/staff_claim-list.php">Claim Requests</a></li>
+                <li><a href="../../pages/staff/staff_report-list.php" class="current-page">Lost Reports</a></li>
+                <li><a href="../../pages/staff/staff_surrender-list.php">Surrender Forms</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -107,7 +107,7 @@
                                 <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/staff/staff_manage-account.html'">Manage
+                                onclick="location.href='../../pages/staff/staff_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night">
@@ -157,30 +157,6 @@
         </nav>
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
-
-    <!-- <div class="MainHeader">
-        <h1>Verify Lost Items Reports</h1>
-        <div class="SearchContainer">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-    <div id="MainContainer">
-        <div id="SortBy">
-            <h2>Sort by</h2>
-            <form>
-                <input type="radio" name="SortOptions" value="mostRecent">
-                <label for="mostRecent">Most Recent first</label><br>
-                <input type="radio" name="SortOptions" value="leastRecent">
-                <label for="mostRecent">Least Recent first</label><br>
-                <input type="radio" name="SortOptions" value="itemA-Z">
-                <label for="itemA-Z">Item name A-Z</label><br>
-                <input type="radio" name="SortOptions" value="itemZ-A">
-                <label for="itemZ-A">Item name Z-A</label><br>
-                <input class="SortBtn" type="submit" value="Submit">
-                <button class="SortBtn">Reset</button>
-            </form>
-        </div> -->
-
     <!-- CONTROLS -->
     <div class="controls-wrapper">
         <div class="title">

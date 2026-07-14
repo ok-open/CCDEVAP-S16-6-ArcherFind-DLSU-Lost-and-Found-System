@@ -24,7 +24,7 @@
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
         <!-- LOGO (links to ADMIN DASHBOARD) -->
-        <button class="archerfind-logo" onclick="window.location.href='../../pages/admin/admin_dashboard.html'">
+        <button class="archerfind-logo" onclick="window.location.href='../../pages/admin/admin_dashboard.php'">
             <h1>ArcherFind</h1>
             <img class="logo" src="../../assets/LOGOS/AF-ORIGINAL.png" alt="ArcherFind logo">
         </button>
@@ -32,12 +32,12 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.php">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.php">Claim Requests</a></li>
                 <!-- DROPDOWN MENU -->
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-users.html" class="current-page">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_report-list.php">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_surrender-list.php">Surrender Forms</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.php" class="current-page">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -52,7 +52,7 @@
                                 <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/admin/admin_manage-account.html'">Manage
+                                onclick="location.href='../../pages/admin/admin_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night">
@@ -92,11 +92,11 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.php" class="current-page">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.php">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_report-list.php">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_surrender-list.php">Surrender Forms</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.php">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -111,7 +111,7 @@
                                 <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/admin/admin_manage-account.html'">Manage
+                                onclick="location.href='../../pages/admin/admin_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night">
