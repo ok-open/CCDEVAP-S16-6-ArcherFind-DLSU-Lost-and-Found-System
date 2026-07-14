@@ -19,7 +19,7 @@
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
-        <button class="archerfind-logo" onclick="window.location.href='student_home.html'">
+        <button class="archerfind-logo" onclick="window.location.href='student_home.php'">
             <h1>ArcherFind</h1>
             <img class="logo" src="../../assets/LOGOS/AF-ORIGINAL.png" alt="ArcherFind logo">
         </button>
@@ -27,17 +27,17 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_home.php">Home</a></li>
+                <li><a href="../../pages/student/student_about.php">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
                     <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html" class="current-page">Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
+                        <li><a href="../../pages/student/student_item-view.php" class="current-page">Report Lost</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.php">Report Found</a></li>
                     </ul>
                 </li>
-                <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
+                <li><a href="../../pages/student/student_contact.php">Contact Us</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -70,17 +70,17 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_home.php">Home</a></li>
+                <li><a href="../../pages/student/student_about.php">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
                     <a class="active current-page">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html" class="current-page">> Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
+                        <li><a href="../../pages/student/student_item-view.php" class="current-page">> Report Lost</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.php">> Report Found</a></li>
                     </ul>
                 </li>
-                <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
+                <li><a href="../../pages/student/student_contact.php">Contact Us</a></li>
             </ul>
 
             <!-- user profile -->
@@ -122,7 +122,7 @@
 
     <div class="report-and-controls">
         <!-- SIDEBAR -->
-        <button class="form-button" onclick="location.href='student_report-item.html'">
+        <button class="form-button" onclick="location.href='student_report-item.php'">
             Report Your Lost Item
         </button>
 
@@ -151,7 +151,7 @@
     <div class="claim-wrapper">
         <!-- <section class="claim-toolbar">
 
-            <button class="report-btn" onclick="location.href='student_report-item.html'">
+            <button class="report-btn" onclick="location.href='student_report-item.php'">
                 Report Your Lost Item
             </button>
 
