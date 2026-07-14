@@ -1,5 +1,7 @@
 <?php
     require_once "../../controllers/StaffAuth.php";
+    require_once "../../controllers/ReportListController.php";
+
 ?>
 
 <!DOCTYPE html>
@@ -157,29 +159,35 @@
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
     <!-- CONTROLS -->
-    <div class="controls-wrapper">
+    <form method="GET" action="" class="controls-wrapper">
         <div class="title">
-            <h2>Verify Surrendered Items</h2>
-            <p>Inspect and validate items found on campus by the community before officially publishing them to the public catalog.</p>
+            <h2>Evaluate Claim Requests</h2>
+            <p>Review submitted ownership details and credentials to verify if a claimant is the rightful owner of a found item.</p>
         </div>
 
         <div class="controls">
-            <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+            <!-- Search bar (maps to 'search' query param) -->
+            <input type="text" name="search" placeholder="Search for an item..." 
+                class="control-box search-bar" 
+                value="<?= htmlspecialchars($_GET['search'] ?? '') ?>">
 
-            <select class="control-box sort-dropdown">
-                <option>Sort: Name</option>
-                <option>Sort: Recent</option>
+            <!-- Sort Dropdown (maps to 'sort' query param) -->
+            <select name="sort" class="control-box sort-dropdown" onchange="this.form.submit()">
+                <option value="recent" <?= (($_GET['sort'] ?? '') === 'recent') ? 'selected' : '' ?>>Sort: Recent</option>
+                <option value="name" <?= (($_GET['sort'] ?? '') === 'name') ? 'selected' : '' ?>>Sort: Name</option>
             </select>
 
-            <select class="control-box filter-dropdown">
-                <option>Filter: All</option>
-                <option>Electronics</option>
-                <option>Miscellaneous</option>
-                <option>Identity Documents</option>
-                <option>Watch / Jewelry</option>
+            <!-- Filter Dropdown (maps to 'category' query param) -->
+            <select name="category" class="control-box filter-dropdown" onchange="this.form.submit()">
+                <option value="">Filter: All</option>
+                <?php foreach ($categories as $cat): ?>
+                    <option value="<?= htmlspecialchars($cat['name']) ?>" <?= (($_GET['category'] ?? '') === $cat['name']) ? 'selected' : '' ?>> 
+                        <?= htmlspecialchars($cat['name']) ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </div>
-    </div>
+    </form>
 
     <!-- <div id="MainHeader">
         <h1>Verify Surrender Forms</h1>
@@ -205,117 +213,137 @@
         </div> -->
 
         <!-- REQUESTS -->
-        <div class="requests-wrapper">
-            <!-- REQUEST RECORD -->
-            <div class="request-record">
-                <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
+    <div class="requests-wrapper">
+        <!-- REQUEST RECORD -->
+        <?php if (empty($surrenderForms)): ?>
+    <div class="no-records" style="text-align: center; padding: 50px; color: #777;">
+        <h3>No Active Surrender Forms Found</h3>
+    </div>
+<?php else: ?>
+    <?php foreach ($surrenderForms as $recordIndex => $report): ?>
+        <?php 
+            // 1. Separate the comma-delimited image paths into an array
+            $imagePaths = !empty($report['image_paths']) ? explode(',', $report['image_paths']) : [];
+        ?>
+        <div class="request-record">
+            <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
                 <div class="request-image">
-                    <!-- Full-width images with number and caption text -->
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/1.png">
-                    </div>
+                    <?php if (!empty($imagePaths)): ?>
+                        <!-- Full-width images dynamically grouped by record index -->
+                        <?php foreach ($imagePaths as $imgIndex => $path): ?>
+                            <!-- Note the class "slide-group-<?= $recordIndex ?>" -->
+                            <div class="mySlides fade slide-group-<?= $recordIndex ?>" style="display: <?= $imgIndex === 0 ? 'block' : 'none'; ?>">
+                                <img class="ImgItem" src="<?= htmlspecialchars($path) ?>" alt="Item Image">
+                            </div>
+                        <?php endforeach; ?>
 
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/2.png">
-                    </div>
+                        <!-- Next and previous buttons (Passing the recordIndex to plusSlides) -->
+                        <a class="prev" onclick="plusSlides(-1, <?= $recordIndex ?>)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1, <?= $recordIndex ?>)">&#10095;</a>
 
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/3.png">
-                    </div>
+                        <!-- The dots/circles (Passing the recordIndex to currentSlide) -->
+                        <div style="text-align:center">
+                            <?php foreach ($imagePaths as $imgIndex => $path): ?>
+                                <!-- Note the class "dot-group-<?= $recordIndex ?>" -->
+                                <span class="dot dot-group-<?= $recordIndex ?> <?= $imgIndex === 0 ? 'active-img' : '' ?>" 
+                                    onclick="currentSlide(<?= $imgIndex + 1 ?>, <?= $recordIndex ?>)"></span>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <!-- Fallback placeholder if the report has no photos -->
+                        <div class="mySlides fade" style="display: block;">
+                            <img class="ImgItem" src="../../assets/placeholder-item.png" alt="No Image Uploaded">
+                        </div>
+                    <?php endif; ?>
+                </div>
 
-                    <div class="mySlides fade">
-                        <img class="ImgItem" src="../../assets/ITEMS/4.png">
-                    </div>
-
-                    <!-- Next and previous buttons -->
-                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-                    <!-- The dots/circles -->
-                    <div style="text-align:center">
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
-                        <span class="dot" onclick="currentSlide(3)"></span>
-                        <span class="dot" onclick="currentSlide(4)"></span>
+            <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
+            <div class="request-item-details">
+                <!-- ITEM NAME -->
+                <div class="item-name">
+                    <h2><?= htmlspecialchars($report['item_name']) ?></h2>
+                    <div class="request-buttons-panel">                        
+                        <!-- RESOLVE BUTTON -->
+                        <button type="button" class="request-button accept-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
+                            Mark as Resolved
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
+                        </button><br>
+                        
+                        <!-- CLOSE BUTTON -->
+                        <button type="button" class="request-button reject-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'close')">
+                            Close Report
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
+                        </button><br>
                     </div>
                 </div>
 
+                <hr>
 
+                <div class="item-column-wrapper">
+                    <!-- COLUMN 1: DATE, TIME, LOCATION -->
+                    <div class="item-column">
+                        <!-- DATE LOST -->
+                        <div class="detail-box">
+                            <label>Estimated Date Found</label>
+                            <input type="date" value="<?= htmlspecialchars($report['date_found']) ?>" readonly>
+                        </div>
 
-                <!-------------------------------- REQUEST ITEM DETAILS -------------------------------->
-                <div class="request-item-details">
-                    <!-- ITEM NAME -->
-                    <div class="item-name">
-                        <h2>Black Oversize Hoodie</h2>
-                        <div class="request-buttons-panel">
-                            <!-- POSSIBLE MATCHES BUTTON -->
-                            <button type="button" class="request-button accept-btn" onclick="onResolveLostReport()">
-                                Mark as Resolved
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
-                            </button><br>
-                            <button type="button" class="request-button reject-btn" onclick="onCloseLostReport()">
-                                Close Report
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
-                            </button><br>
+                        <!-- TIME LOST -->
+                        <div class="detail-box">
+                            <label>Estimated Time Found</label>
+                            <!-- Format standard military time (HH:MM:SS) to (HH:MM AM/PM) if you wish, or keep raw value -->
+                            <input type="time" value="<?= htmlspecialchars(date('H:i', strtotime($report['time_found']))) ?>" readonly>
+                        </div>
+
+                        <!-- LOCATION -->
+                        <div class="detail-box">
+                            <label>Location Found</label>
+                            <input type="text" value="<?= htmlspecialchars($report['location_found']) ?>" readonly>
                         </div>
                     </div>
 
-                    <hr>
-
-                    <div class="item-column-wrapper">
-                        <!-- COLUMN 1: DATE, TIME, LOCATION -->
-                        <div class="item-column">
-                            <!-- DATE FOUND -->
-                            <div class="detail-box">
-                                <label for="date-found">Estimated Date Found</label>
-                                <input type="date" id="date-found" value="2026-04-12" readonly name="date-found">
-                            </div>
-
-                            <!-- TIME FOUND -->
-                            <div class="detail-box">
-                                <label for="time-found">Estimated Time Found</label>
-                                <input type="time" id="time-found" value="16:15" readonly name="time-found">
-                            </div>
-
-                            <!-- LOCATION -->
-                            <div class="detail-box">
-                                <label for="location">Location Found</label>
-                                <input type="text" id="location" value="Yuchengco Building, Y403" readonly name="location">
-                            </div>
+                    <!-- COLUMN 2: USER DETAILS -->
+                    <div class="item-column">
+                        <!-- SUBMITTED BY -->
+                        <div class="detail-box">
+                            <label>Submitted By</label>
+                            <!-- Dynamic integration of the report's student information -->
+                            <input type="text" value="<?= htmlspecialchars($report['student_name'] . '') ?>" readonly>
                         </div>
 
-                        <!-- COLUMN 2: USER DETAILS --- SUBMITTED ON, REPORT FROM, EMAIL -->
-                        <div class="item-column">
-                            <!-- SUBMITTED BY -->
-                            <div class="detail-box">
-                                <label for="submitted-by">Submitted By</label>
-                                <input type="text" id="submitted-by" value="Marc Lesley Quizon (ID 12456783)" readonly
-                                    name="submitted-by"> <!-- ID: NAME OF STUDENT AND ID NUMBER-->
-                            </div>
+                        <!-- CONTACT EMAIL -->
+                        <div class="detail-box">
+                            <label>Contact Email</label>
+                            <input type="email" value="<?= htmlspecialchars($report['student_email']) ?>" readonly>
+                        </div>
 
-                            <!-- CONTACT EMAIL -->
-                            <div class="detail-box">
-                                <label for="contact-email">Contact Email</label>
-                                <input type="email" id="contact-email" value="marc_lesley_quizon@dlsu.edu.ph" readonly
-                                    name="contact-email">
-                            </div>
-
-                            <!-- FILED ON -->
-                            <div class="detail-box">
-                                <label for="date-filed">Filed On</label>
-                                <input type="date" id="date-filed" value="2026-04-13" readonly name="date-filed">
-                            </div>
+                        <!-- FILED ON -->
+                        <div class="detail-box">
+                            <label>Filed On</label>
+                            <input type="date" value="<?= htmlspecialchars($report['filed_on']) ?>" readonly>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
-
-            
-        <div id="toast"></div>
-
-        <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
         </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+        
+    <div id="toast"></div>
+
+    <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    </div>
+
+    <form id="statusActionForm" method="POST" style="display: none;">
+        <input type="hidden" name="report_id" id="formReportId">
+        <input type="hidden" name="action" id="formAction">
+        
+        <!-- Preserves current filter states upon submission -->
+        <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+        <input type="hidden" name="category" value="<?= htmlspecialchars($category) ?>">
+        <input type="hidden" name="sort" value="<?= htmlspecialchars($sortBy) ?>">
+    </form>
 
     <div id="ExpandPanel_ImgItem" class="modal">
         <img class="modal-content" id="imgExpand">

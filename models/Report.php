@@ -7,7 +7,99 @@ class Reports{
     {
         $this->conn = $database;
     }
+
+    /**
+     * Gets the most recently inserted item ID for a specific surrendered_by user
+     */
+    public function getLastInsertedItem($studentId) {
+        $sql = "SELECT item_id FROM items 
+                WHERE surrendered_by = :student_id 
+                ORDER BY item_id DESC LIMIT 1";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':student_id', $studentId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ? $result['item_id'] : null;
+    }
+
+    /**
+     * Inserts a new image reference for a physical item
+     */
+    public function insertItemImage($itemId, $filePath) {
+        $sql = "INSERT INTO items_images (item_id, img_filepath) VALUES (:item_id, :img_filepath)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':item_id', $itemId, PDO::PARAM_INT);
+        $stmt->bindParam(':img_filepath', $filePath, PDO::PARAM_STR);
+        return $stmt->execute();
+    }
     
+    public function getSurrenderForms($search = '', $category = '', $sortBy = 'recent')
+    {
+    // 1. Base SQL Query (Aggregated safely via isolated Subquery)
+    $sql = "SELECT 
+                r.report_id,
+                r.item_name,
+                DATE(r.when_found) AS date_found,
+                TIME(r.when_found) AS time_found,
+                DATE(r.created_at) AS filed_on,
+                CONCAT(u.first_name, ' ', u.last_name) AS student_name,
+                u.email AS student_email,               
+                COALESCE(rms.name, ars.name, 'Unknown Location') AS location_found,
+                
+                -- SAFELY FETCH IMAGES WITHOUT ROW COLLAPSE
+                (SELECT GROUP_CONCAT(ri.img_filepath ORDER BY ri.image_id ASC SEPARATOR ',') 
+                 FROM reports_images ri 
+                 WHERE ri.report_id = r.report_id) AS image_paths
+
+            FROM reports r
+            INNER JOIN users u 
+                ON r.student_id = u.user_id
+            LEFT JOIN rooms rms 
+                ON r.room_id = rms.room_id
+            LEFT JOIN areas ars 
+                ON r.area_id = ars.area_id
+            LEFT JOIN categories cat 
+                ON r.category_id = cat.category_id
+            WHERE r.type = 'Surrender Form' 
+              AND r.status = 'Active'
+              AND r.deleted = '0'";
+
+    // 2. Append Dynamic WHERE Conditions
+    if (!empty($search)) {
+        $sql .= " AND r.item_name LIKE :search";
+    }
+
+    if (!empty($category)) {
+        $sql .= " AND cat.name = :category";
+    }
+
+    // NO GLOBAL GROUP BY REQUIRED ANYMORE!
+
+    // 3. Dynamic ORDER BY
+    if ($sortBy === 'name') {
+        $sql .= " ORDER BY r.item_name ASC";
+    } else {
+        // Default to 'recent'
+        $sql .= " ORDER BY r.created_at DESC";
+    }
+
+    // 4. Prepare & Bind parameters
+    $stmt = $this->conn->prepare($sql);
+
+    if (!empty($search)) {
+        $searchParam = "%" . $search . "%";
+        $stmt->bindParam(':search', $searchParam);
+    }
+
+    if (!empty($category)) {
+        $stmt->bindParam(':category', $category);
+    }
+
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
     /**
      * Retrieves Active Claim Requests along with matching found item inventory details,
      * proof of ownership texts, and claimant uploads.
