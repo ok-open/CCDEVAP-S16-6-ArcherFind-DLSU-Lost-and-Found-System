@@ -87,4 +87,43 @@ class Item
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getItemById($itemId)
+    {
+        $sql = "
+            SELECT
+                i.item_id,
+                i.name,
+                i.description,
+                c.name AS category,
+                b.name AS brand,
+
+                (
+                    SELECT img_filepath
+                    FROM items_images
+                    WHERE item_id = i.item_id
+                    LIMIT 1
+                ) AS img_filepath
+
+            FROM items i
+
+            LEFT JOIN categories c
+                ON i.category_id = c.category_id
+
+            LEFT JOIN brands b
+                ON i.brand_id = b.brand_id
+
+            WHERE
+                i.item_id = :item_id
+                AND i.deleted = '0'
+            LIMIT 1
+        ";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(":item_id", $itemId, PDO::PARAM_INT);
+
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

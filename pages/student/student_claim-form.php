@@ -1,5 +1,6 @@
 <?php
     require_once "../../controllers/StudentAuth.php";
+    require_once "../../controllers/StudentClaimController.php";    
 ?>
 
 <!DOCTYPE html>
@@ -173,30 +174,29 @@
         <section class="claim-content">
 
             <div class="claim-image upload-box">
-                <img src="../../assets/ITEMS/Untitled design.png" class="preview-image" alt="Item Image">
+                <img src="<?= htmlspecialchars($item["img_filepath"] ?: "../../assets/ITEMS/no-image.png") ?>" class="preview-image" alt="<?= htmlspecialchars($item["name"]) ?>">
             </div>
 
             <div class="claim-details">
 
                 <div class="claim-block">
                     <h3>Item Name</h3>
-                    <p>Charger</p>
+                    <p><?= htmlspecialchars($item["name"]) ?></p>
                 </div>
 
                 <div class="claim-block">
                     <h3>Category</h3>
-                    <p>Electronics</p>
+                    <p><?= htmlspecialchars($item["category"]) ?></p>
                 </div>
 
                 <div class="claim-block">
                     <h3>Description</h3>
                     <p>
-                        White charging cable found near a classroom.
-                        Item appears to be in good condition with no visible damage.
+                        <?= nl2br(htmlspecialchars($item["description"])) ?>
                     </p>
                 </div>
 
-                <button class="claim-btn" onclick="location.href='student_claim-request.html'">
+                <button class="claim-btn" onclick="location.href='student_claim-request.php?id=<?= $item['item_id'] ?>'">
                     Send Claim Request
                 </button>
             </div>

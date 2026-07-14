@@ -156,35 +156,19 @@
         <?php if (!empty($items)): ?>
 
             <?php foreach ($items as $item): ?>
-
-                <a
-                    href="student_claim-form.php?id=<?= $item['item_id'] ?>"
-                    class="item-card">
-
+                <a href="student_claim-form.php?id=<?= $item['item_id'] ?>" class="item-card">
                     <?php if (!empty($item['img_filepath'])): ?>
-
-                        <img
-                            src="<?= htmlspecialchars($item['img_filepath']) ?>"
-                            alt="<?= htmlspecialchars($item['name']) ?>">
-
+                        <img src="<?= htmlspecialchars($item['img_filepath']) ?>" alt="<?= htmlspecialchars($item['name']) ?>">
                     <?php else: ?>
-
-                        <img
-                            src="../../assets/ITEMS/default-item.png"
-                            alt="No Image">
-
+                        <img src="../../assets/ITEMS/default-item.png" alt="No Image">
                     <?php endif; ?>
-
                 </a>
-
             <?php endforeach; ?>
-
         <?php else: ?>
 
             <p>No surrendered items available.</p>
 
         <?php endif; ?>
-
         </div>
     </main>
     </div>
