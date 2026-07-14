@@ -440,16 +440,3 @@
 </body>
 
 </html>
-
-<?php
-// 1. Locate the selected claim request from your main array
-$selectedClaim = null;
-if (!empty($selectedReportId)) {
-    foreach ($claimRequests as $req) { // assuming $claimRequests holds the records in this controller
-        if ($req['report_id'] == $selectedReportId) {
-            $selectedClaim = $req;
-            break;
-        }
-    }
-}
-?>
