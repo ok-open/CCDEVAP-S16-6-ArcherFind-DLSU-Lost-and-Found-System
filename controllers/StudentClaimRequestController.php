@@ -5,34 +5,29 @@ session_start();
 require_once "../db.php";
 require_once "../models/Reports.php";
 
-
 if (!isset($_SESSION["user_id"])) {
     header("Location: ../index.php");
     exit();
 }
-
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
     header("Location: ../pages/student/student_claim-request.php");
     exit();
 }
 
-
 if (empty($_POST["item_id"])) {
-
     header("Location: ../pages/student/student_home.php?error=noitem");
     exit();
-
 }
-
 
 $itemId = $_POST["item_id"];
 
-
-
+// ======================================================
 // GET ITEM INFORMATION
+// ======================================================
+
 $itemQuery = "
-    SELECT 
+    SELECT
         name,
         description,
         category_id,
@@ -41,70 +36,55 @@ $itemQuery = "
     WHERE item_id = :item_id
 ";
 
-
 $stmt = $conn->prepare($itemQuery);
-
 $stmt->bindParam(":item_id", $itemId);
-
 $stmt->execute();
-
 
 $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
-
 if (!$item) {
-
     header("Location: ../pages/student/student_home.php?error=itemnotfound");
     exit();
-
 }
-
-
 
 $itemName = $item["name"];
 $itemDescription = $item["description"];
 $categoryId = $item["category_id"];
 $brandId = $item["brand_id"];
 
-
-
+// ======================================================
 // LOCATION
+// ======================================================
 
 $roomId = !empty($_POST["room_id"])
     ? $_POST["room_id"]
     : null;
 
-
 $areaId = !empty($_POST["area_id"])
     ? $_POST["area_id"]
     : null;
 
-
-
+// ======================================================
 // LOST DATE + TIME
+// ======================================================
 
 $whenLost = null;
 
 if (!empty($_POST["date_lost"]) && !empty($_POST["time_lost"])) {
-
     $whenLost = $_POST["date_lost"] . " " . $_POST["time_lost"];
-
 }
 
-
-
-// STUDENT PROVIDED DESCRIPTION
+// ======================================================
+// DESCRIPTION
+// ======================================================
 
 $details = trim($_POST["description"] ?? "");
 
-
-
-
+// ======================================================
 // CREATE REPORT
+// ======================================================
 
 $reportModel = new Reports($conn);
-
 
 $result = $reportModel->createReport(
     $_SESSION["user_id"],
@@ -120,26 +100,84 @@ $result = $reportModel->createReport(
     "Claim request"
 );
 
-
-
 if ($result) {
+
+    // Get the newly created report ID
+    $reportId = $conn->lastInsertId();
+
+    // ==================================================
+    // OPTIONAL IMAGE UPLOAD
+    // ==================================================
+
+    if (
+        isset($_FILES["proof_image"]) &&
+        $_FILES["proof_image"]["error"] === UPLOAD_ERR_OK
+    ) {
+
+        $allowedTypes = [
+            "image/jpeg",
+            "image/png",
+            "image/jpg",
+            "image/webp"
+        ];
+
+        if (in_array($_FILES["proof_image"]["type"], $allowedTypes)) {
+
+            $uploadDirectory = "../assets/IMG_ClaimRequest/";
+
+            if (!is_dir($uploadDirectory)) {
+                mkdir($uploadDirectory, 0777, true);
+            }
+
+            $extension = pathinfo(
+                $_FILES["proof_image"]["name"],
+                PATHINFO_EXTENSION
+            );
+
+            $filename = uniqid("claim_", true) . "." . $extension;
+
+            $destination = $uploadDirectory . $filename;
+
+            if (move_uploaded_file($_FILES["proof_image"]["tmp_name"], $destination)) {
+
+                $imagePath = "assets/IMG_ClaimRequest/" . $filename;
+
+                $imageQuery = "
+                    INSERT INTO reports_images
+                    (
+                        report_id,
+                        img_filepath
+                    )
+                    VALUES
+                    (
+                        :report_id,
+                        :img_filepath
+                    )
+                ";
+
+                $imageStmt = $conn->prepare($imageQuery);
+
+                $imageStmt->bindParam(":report_id", $reportId);
+                $imageStmt->bindParam(":img_filepath", $imagePath);
+
+                $imageStmt->execute();
+            }
+        }
+    }
 
     header(
         "Location: ../pages/student/student_claim-request.php?id="
-        .$itemId
-        ."&success=submitted"
+        . $itemId .
+        "&success=submitted"
     );
 
     exit();
-
 }
-
-
 
 header(
     "Location: ../pages/student/student_claim-request.php?id="
-    .$itemId
-    ."&error=failed"
+    . $itemId .
+    "&error=failed"
 );
 
 exit();
