@@ -219,7 +219,7 @@
         <!-- REQUEST RECORD -->
         <?php if (empty($claimRequests)): ?>
     <div class="no-records" style="text-align: center; padding: 50px; color: #777;">
-        <h3>No Active Loss Reports Found</h3>
+        <h3>No Active Claim Requests Found</h3>
     </div>
 <?php else: ?>
     <?php foreach ($claimRequests as $recordIndex => $report): ?>
