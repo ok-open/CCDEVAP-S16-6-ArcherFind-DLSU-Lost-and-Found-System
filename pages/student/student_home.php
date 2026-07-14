@@ -18,7 +18,7 @@
 <body>
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header id="home-header">
-        <button class="archerfind-logo" onclick="window.location.href='student_home.html'">
+        <button class="archerfind-logo" onclick="window.location.href='student_home.php'">
             <h1>ArcherFind</h1>
             <img class="logo" src="../../assets/LOGOS/AF-ORIGINAL.png" alt="ArcherFind logo">
         </button>
@@ -26,17 +26,17 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/student/student_home.html" class="current-page">Home</a></li>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_home.php" class="current-page">Home</a></li>
+                <li><a href="../../pages/student/student_about.php">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
                     <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html">Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html">Report Found</a></li>
+                        <li><a href="../../pages/student/student_item-view.php">Report Lost</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.php">Report Found</a></li>
                     </ul>
                 </li>
-                <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
+                <li><a href="../../pages/student/student_contact.php">Contact Us</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -69,17 +69,17 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/student/student_home.html" class="current-page">Home</a></li>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
+                <li><a href="../../pages/student/student_home.php" class="current-page">Home</a></li>
+                <li><a href="../../pages/student/student_about.php">About</a></li>
                 <!-- DROPDOWN MENU -->
                 <li class="dropdown">
                     <a class="active">Lost and Found<i class="arrow down"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="../../pages/student/student_item-view.html">> Report Lost</a></li>
-                        <li><a href="../../pages/student/student_surrender-form.html">> Report Found</a></li>
+                        <li><a href="../../pages/student/student_item-view.php">> Report Lost</a></li>
+                        <li><a href="../../pages/student/student_surrender-form.php">> Report Found</a></li>
                     </ul>
                 </li>
-                <li><a href="../../pages/student/student_contact.html">Contact Us</a></li>
+                <li><a href="../../pages/student/student_contact.php">Contact Us</a></li>
             </ul>
 
             <!-- user profile -->
@@ -133,12 +133,12 @@
             </div>
 
             <div class="intro-buttons">
-                <button type="button" class="green-button" onclick="location.href='student_item-view.html'">
+                <button type="button" class="green-button" onclick="location.href='student_item-view.php'">
                     Lost something?
                     <p>Browse surrendered items or report a lost belonging!
                     </p>
                 </button>
-                <button type="button" class="green-button" onclick="location.href='student_surrender-form.html'">
+                <button type="button" class="green-button" onclick="location.href='student_surrender-form.php'">
                     Found something?
                     <p>Fill out a form to surrender the item that you found!</p>
                 </button>
@@ -182,7 +182,7 @@
 
         <!-- ABOUT THE WEBSITE BUTTON -->
         <section class="about_button">
-            <button class="outline-green-button" type="button" onclick="location.href='student_about.html'">About the
+            <button class="outline-green-button" type="button" onclick="location.href='student_about.php'">About the
                 Website</button>
         </section>
     </div>
@@ -192,14 +192,14 @@
         <h3>Connections</h3>
         <div class="connections-container">
             <ul>
-                <li><a href="../../pages/student/student_home.html">Home</a></li>
-                <li><a href="../../pages/student/student_contact.html">Contact</a></li>
-                <li><a href="../../pages/student/student_faq.html">F.A.Q</a></li>
+                <li><a href="../../pages/student/student_home.php">Home</a></li>
+                <li><a href="../../pages/student/student_contact.php">Contact</a></li>
+                <li><a href="../../pages/student/student_faq.php">F.A.Q</a></li>
             </ul>
 
             <ul>
-                <li><a href="../../pages/student/student_about.html">About</a></li>
-                <li><a href="../../pages/student/student_dashboard.html">Dashboard</a></li>
+                <li><a href="../../pages/student/student_about.php">About</a></li>
+                <li><a href="../../pages/student/student_dashboard.php">Dashboard</a></li>
                 <li><a onclick="if(confirm('WARNING: Clicking this link will take you to an external website: https://www.dlsu.edu.ph. This will exit you out of the ArcherFind Website. Continue?')) return true;"
                         href="https://www.dlsu.edu.ph">DLSU Website</a></li>
             </ul>
@@ -211,7 +211,7 @@
                         <path
                             d="M158.57-160q-32.52 0-56.21-23.69-23.69-23.7-23.69-56.21v-480.2q0-32.51 23.69-56.21Q126.05-800 158.57-800h642.86q32.52 0 56.21 23.69 23.69 23.7 23.69 56.21v480.2q0 32.51-23.69 56.21Q833.95-160 801.43-160H158.57ZM480-453.51 146.26-668.36v428.46q0 5.39 3.46 8.85t8.85 3.46h642.86q5.39 0 8.85-3.46t3.46-8.85v-428.46L480-453.51Zm0-67.57 331.03-211.33H149.64L480-521.08ZM140.92-668.36v-64.05 492.51q4 5.39 8.13 8.85 4.13 3.46 9.52 3.46h-17.65v-440.77Z" />
                     </svg>
-                    <a href="../../pages/student/student_contact.html">Write us!</a>
+                    <a href="../../pages/student/student_contact.php">Write us!</a>
                 </div>
             </div>
         </div>
