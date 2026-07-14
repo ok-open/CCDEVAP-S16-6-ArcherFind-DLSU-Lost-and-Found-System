@@ -123,18 +123,19 @@
     <div class="claim-wrapper">
         <h2 class="claim-title">Request to Claim an Item</h2>
 
-        <form class="claim-form">
+        <form class="claim-form" method="POST" enctype="multipart/form-data" action="../../controllers/StudentClaimRequestController.php">            
+            <input type="hidden" name="item_id" value="<?= htmlspecialchars($_GET['id'] ?? '') ?>">
             <div class="claim-left">
                 <h3 class="claim-section-title">Student Information</h3>
 
                 <div class="form-group">
                     <label>Student Name</label>
-                    <input type="text" class="claim-input" value="Juan Dela Cruz" readonly>
+                    <input type="text"  class="claim-input"  value="<?= htmlspecialchars($_SESSION['first_name'] . " " . $_SESSION['last_name']) ?>" readonly>
                 </div>
 
                 <div class="form-group">
                     <label>Student Email</label>
-                    <input type="email" class="claim-input" value="juan_delacruz@dlsu.edu.ph" readonly>
+                    <input type="email" class="claim-input"  value="<?= htmlspecialchars($_SESSION['email']) ?>"  readonly>
                 </div>
 
                 <h3 class="claim-section-title">Where was this lost?</h3>
@@ -160,21 +161,22 @@
                 <div class="claim-location-row">
                     <div class="form-group">
                         <label>Area <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Area</option>
-                            <option>Pericos Canteen</option>
-                            <option>Study Lobby</option>
-                            <option>Hallway</option>
+                        <select class="claim-input" name="area_id" required>
+                            <option value="">Select Area</option>
+                            <option value="1">Pericos Canteen</option>
+                            <option value="2">Study Lobby</option>
+                            <option value="3">Hallway</option>
+
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Room</option>
-                            <option>G403</option>
-                            <option>G301</option>
-                            <option>G106</option>
+                        <select class="claim-input" name="room_id">
+                            <option value="">Select Room</option>
+                            <option value="1">G403</option>
+                            <option value="2">G301</option>
+                            <option value="3">G106</option>
                         </select>
                     </div>
                 </div>
@@ -183,12 +185,12 @@
                 <div class="claim-date-row">
                     <div class="form-group">
                         <label>Date Lost <span class="required">required field</span></label>
-                        <input type="date" class="claim-input">
+                        <input type="date" class="claim-input" name="date_lost" required>
                     </div>
 
                     <div class="form-group">
                         <label>Time Lost <span class="required">required field</span></label>
-                        <input type="time" class="claim-input">
+                        <input type="time" class="claim-input" name="time_lost" required>
                     </div>
                 </div>
             </div>
@@ -201,7 +203,7 @@
                     </label>
 
                 <label class="upload-box">
-                    <input type="file" accept="image/*">
+                    <input type="file"  name="proof_image" accept="image/*">
 
                     <span class="upload-text">Click to Upload Image</span>
 
@@ -213,7 +215,8 @@
                     <label>
                         Describe Features <span class="required">required</span>
                     </label>
-                    <textarea class="claim-input claim-textarea" placeholder="Include details like scratches, stickers..."></textarea>
+
+                    <textarea class="claim-input claim-textarea" name="description" placeholder="Include details like scratches, stickers..."required></textarea>
                 </div>
 
                 <button type="submit" class="claim-submit-btn">

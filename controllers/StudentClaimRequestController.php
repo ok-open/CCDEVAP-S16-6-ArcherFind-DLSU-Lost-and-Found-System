@@ -1,0 +1,147 @@
+<?php
+
+session_start();
+
+require_once "../db.php";
+require_once "../models/Reports.php";
+
+
+if (!isset($_SESSION["user_id"])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    header("Location: ../pages/student/student_claim-request.php");
+    exit();
+}
+
+
+if (empty($_POST["item_id"])) {
+
+    header("Location: ../pages/student/student_home.php?error=noitem");
+    exit();
+
+}
+
+
+$itemId = $_POST["item_id"];
+
+
+
+// GET ITEM INFORMATION
+$itemQuery = "
+    SELECT 
+        name,
+        description,
+        category_id,
+        brand_id
+    FROM items
+    WHERE item_id = :item_id
+";
+
+
+$stmt = $conn->prepare($itemQuery);
+
+$stmt->bindParam(":item_id", $itemId);
+
+$stmt->execute();
+
+
+$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+
+if (!$item) {
+
+    header("Location: ../pages/student/student_home.php?error=itemnotfound");
+    exit();
+
+}
+
+
+
+$itemName = $item["name"];
+$itemDescription = $item["description"];
+$categoryId = $item["category_id"];
+$brandId = $item["brand_id"];
+
+
+
+// LOCATION
+
+$roomId = !empty($_POST["room_id"])
+    ? $_POST["room_id"]
+    : null;
+
+
+$areaId = !empty($_POST["area_id"])
+    ? $_POST["area_id"]
+    : null;
+
+
+
+// LOST DATE + TIME
+
+$whenLost = null;
+
+if (!empty($_POST["date_lost"]) && !empty($_POST["time_lost"])) {
+
+    $whenLost = $_POST["date_lost"] . " " . $_POST["time_lost"];
+
+}
+
+
+
+// STUDENT PROVIDED DESCRIPTION
+
+$details = trim($_POST["description"] ?? "");
+
+
+
+
+// CREATE REPORT
+
+$reportModel = new Reports($conn);
+
+
+$result = $reportModel->createReport(
+    $_SESSION["user_id"],
+    $itemName,
+    $itemDescription,
+    $categoryId,
+    $brandId,
+    $itemId,
+    $roomId,
+    $areaId,
+    $whenLost,
+    $details,
+    "Claim request"
+);
+
+
+
+if ($result) {
+
+    header(
+        "Location: ../pages/student/student_claim-request.php?id="
+        .$itemId
+        ."&success=submitted"
+    );
+
+    exit();
+
+}
+
+
+
+header(
+    "Location: ../pages/student/student_claim-request.php?id="
+    .$itemId
+    ."&error=failed"
+);
+
+exit();
+
+?>
