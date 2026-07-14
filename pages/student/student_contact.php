@@ -12,8 +12,10 @@
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
     <link rel="stylesheet" href="../../styles/student/student_contact.css">
+    <link rel="stylesheet" href="../../styles/global/toast.css">
     <script src="../../javascript/global/navbar.js" defer></script>
-    <script src="../../javascript/student/student_faq.js" defer></script>
+    <script src="../../javascript/global/toast.js" defer></script>
+    <script src="../../javascript/student/student_contact.js" defer></script>
 </head>
 
 <body>
@@ -154,22 +156,34 @@
         </section>
 
         <section class="contact-form">
-            <div class="contact-form-details">
-                <input type="text" class="user-info" value="Logged in as John Dela Cruz (ID: 12345678)" readonly>
-                <select class="inquiry-type">
+            <form class="contact-form-details" action="../../controllers/ContactController.php" method="POST">
+                <input type="text" class="user-info" value="Logged in as <?= htmlspecialchars($_SESSION['first_name'] . ' ' . $_SESSION['last_name']) ?> (<?= htmlspecialchars($_SESSION['email']) ?>)" readonly>
+                <select class="inquiry-type" name="inquiry_type" required>
                     <option value="" disabled selected>Select an inquiry</option>
-                    <option value="claim">Issue with claiming an item</option>
-                    <option value="report">Issue with reporting an item</option>
-                    <option value="account">Account / Verification issues</option>
-                    <option value="other">General inquiry / Feedback</option>
+
+                    <option value="Issue with claiming an item">
+                        Issue with claiming an item
+                    </option>
+
+                    <option value="Issue with reporting an item">
+                        Issue with reporting an item
+                    </option>
+
+                    <option value="Account / Verification issues">
+                        Account / Verification issues
+                    </option>
+
+                    <option value="General inquiry / Feedback">
+                        General inquiry / Feedback
+                    </option>
                 </select>
 
-                <textarea class="comment" placeholder="Comment"></textarea>
+                <textarea class="comment" name="message" placeholder="Describe your concern..." required></textarea>
 
-                <button type="button" class="form-button send-msg" onclick="('SEND MESSAGE')">Submit message</button>
+                <button type="submit" class="form-button send-msg">Submit Message</button>
                 <!-- TODO: CODE FOR SUBMIT MESSAGE GOES HERE -->
-                <button type="button" class="form-button faq" onclick="location.href='student_faq.html'">F.A.Q</button>
-            </div>
+                <button type="button" class="form-button faq" onclick="location.href='student_faq.php'">F.A.Q</button>
+            </form>
         </section>
 
     </div>
@@ -208,6 +222,8 @@
         De La Salle University - College of Computer Studies - Department of Information Technology<br>
         2026 © AY2526T3. CCDEVAP - Web Application and Development. All Rights Reserved.
     </footer>
+
+    <div id="toast"></div>
 </body>
 
 </html>

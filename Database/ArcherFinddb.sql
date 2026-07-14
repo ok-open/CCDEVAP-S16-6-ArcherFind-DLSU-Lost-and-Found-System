@@ -149,12 +149,15 @@ CREATE TABLE reports_images (
 
 CREATE TABLE contacts_received (
     message_id INT AUTO_INCREMENT PRIMARY KEY,
-    report_id INT NOT NULL,
-    student_id INT,
-    inquiry  ENUM('Issue with claiming an item', 'Issue with reporting an item', 'Account / Verification issues', 'General inquiry / Feedback') NOT NULL,
-    status ENUM('Active', 'Closed') NOT NULL DEFAULT 'Active',
-    FOREIGN KEY (student_id) REFERENCES users(user_id) ON DELETE CASCADE
-) ;
+    student_id INT NOT NULL,
+    inquiry ENUM('Issue with claiming an item', 'Issue with reporting an item', 'Account / Verification issues', 'General inquiry / Feedback') NOT NULL,
+    message TEXT NOT NULL,
+    status ENUM('Active','Closed') DEFAULT 'Active',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (student_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE
+);
 
 -- =========================================================================
 -- 4. AUDIT LOG TABLES
