@@ -55,7 +55,7 @@
                                 </span>
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/student/student_manage-account'">Manage
+                                onclick="location.href='../../pages/student/student_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night"><button type="button">
@@ -113,8 +113,8 @@
                         </span>
                     </p>
                     <button type="button" class="manage-account"
-                        onclick="location.href='../../pages/student/student_manage-account'"
-                        onclick="location.href='../../pages/student/student_manage-account'">Manage Account</button>
+                        onclick="location.href='../../pages/student/student_manage-account.php'"
+                        onclick="location.href='../../pages/student/student_manage-account.php'">Manage Account</button>
                     <div class="user-profile-container">
                         <div class="day-night"><button type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
