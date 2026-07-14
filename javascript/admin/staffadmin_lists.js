@@ -13,6 +13,26 @@ if (document.getElementById('SidePanel_Iconsee')) {
 }
 // JAVASCRIPT FOR TOGGLING THE SIDE PANEL WHEN ICON_SEE IS CLICKED
 
+// Toggles the details panel inside an image card on click
+function toggleDetails(cardElement) {
+    const details = cardElement.querySelector(".LostDetailsImgMatch");
+    if (details) {
+        details.classList.toggle("hidden");
+    }
+}
+
+//* Dynamically fills and submits the hidden status action form
+function submitStatusAction(reportId, action) {
+    const actionText = action === 'resolve' ? 'Resolve' : 'Close';
+    const confirmMessage = `Are you sure you want to mark this report as ${actionText}?`;
+    
+    if (confirm(confirmMessage)) {
+        document.getElementById('formReportId').value = reportId;
+        document.getElementById('formAction').value = action;
+        document.getElementById('statusActionForm').submit();
+    }
+}
+
 //JAVASCRIPT FOR EXPANDING THE IMAGE
 const modal = document.getElementById("ExpandPanel_ImgItem");
 const largeImg = document.getElementById("imgExpand");
@@ -45,33 +65,56 @@ const images = document.querySelectorAll('.ImgMatches');
 //JAVASCRIPT FOR DROPDOWN INFO IN IMAGE MATCHES
 
 //JAVASCRIPT FOR CAROUSELL IMAGE
-let slideIndex = 1;
-showSlides(slideIndex);
+// staffadmin_lists.js
 
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+// Keeps track of the active slide index for each individual record (e.g., { "0": 1, "1": 3 })
+let slideIndices = {};
+
+// Next/previous controls (We pass the record index 'group' and the step 'n')
+function plusSlides(n, group) {
+  if (slideIndices[group] === undefined) {
+    slideIndices[group] = 1;
+  }
+  showSlides(slideIndices[group] += n, group);
 }
 
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
+// Thumbnail/dot controls
+function currentSlide(n, group) {
+  showSlides(slideIndices[group] = n, group);
 }
 
-function showSlides(n) {
+function showSlides(n, group) {
   let i;
-  let slides = document.getElementsByClassName("mySlides");
-  let dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
+  // Target only the slides and dots belonging to this specific record index group
+  let slides = document.getElementsByClassName("slide-group-" + group);
+  let dots = document.getElementsByClassName("dot-group-" + group);
+  
+  // If there are no images for this group, exit early
+  if (slides.length === 0) return;
+
+  if (slideIndices[group] === undefined) {
+    slideIndices[group] = 1;
+  }
+
+  // Wrap around logic
+  if (n > slides.length) { slideIndices[group] = 1; }
+  if (n < 1) { slideIndices[group] = slides.length; }
+
+  // Hide all slides in this group
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
+
+  // Deactivate all dots in this group
   for (i = 0; i < dots.length; i++) {
     dots[i].className = dots[i].className.replace(" active-img", "");
   }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active-img";
+
+  // Show the active slide and dot for this group
+  slides[slideIndices[group] - 1].style.display = "block";
+  if (dots[slideIndices[group] - 1]) {
+    dots[slideIndices[group] - 1].className += " active-img";
+  }
 }
 //JAVASCRIPT FOR CAROUSELL IMAGE
 
