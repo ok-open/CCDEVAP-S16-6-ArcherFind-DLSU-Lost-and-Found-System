@@ -1,5 +1,6 @@
 <?php
     require_once "../../controllers/StudentAuth.php";
+    require_once "../../controllers/LocationController.php";
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +12,13 @@
     <title>ArcherFind - Surrender Found Item</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
+    <link rel="stylesheet" href="../../styles/global/modal.css">
     <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/global/image.js" defer></script>
-    <script src="../../javascript/student/student_submit-item.js" defer></script>
+    <script src="../../javascript/global/toast.js" defer></script>
+    <script src="../../javascript/global/modal.js" defer></script>
+    <script src="../../javascript/student/submit-item.js" defer></script>
 </head>
 
 <body>
@@ -120,7 +124,6 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-
     <div class="surrender-wrapper">
         <div class="form-title">
             <h2>Can't find the item you're looking for? Submit a missing item report.</h2>
@@ -129,7 +132,7 @@
         </div>
 
         <!-- REPORT AN ITEM FORM -->
-        <form class="form-wrapper">
+        <form class="form-wrapper" method="POST" enctype="multipart/form-data" action="../../controllers/StudentReportItemController.php">
             <!-- LEFT SIDE -->
             <section class="form-left">
                 <!-- QUESTION TITLE: What item are you looking for? -->
@@ -139,7 +142,7 @@
                         <label for="name">
                             Item Name<span class="required">required field</span>
                         </label>
-                        <input type="text" id="name">
+                        <input type="text" id="name" name="name" required>
                     </div>
 
                     <!-- FORM ROW: Category === Brand -->
@@ -149,28 +152,28 @@
                             <label for="category">
                                 Category<span class="required">required field</span>
                             </label>
-                            <select id="category">
-                                <option>Select Category</option>
-                                <option>Electronics</option>
-                                <option>Identity Documents</option>
-                                <option>Watch / Jewelry</option>
-                                <option>Miscellaneous</option>
+                            <select id="category" name="category_id" required>
+                                <option value="">Select Category</option>
+                                <option value="1">Electronics</option>
+                                <option value="2">Identity Documents</option>
+                                <option value="3">Watch / Jewelry</option>
+                                <option value="4">Miscellaneous</option>
                             </select>
                         </div>
 
                         <!-- QUESTION: Brand of the Item -->
                         <div class="question-box">
-                            <label for="brand-id">
+                            <label for="brand">
                                 Brand<span class="required">required field</span>
                             </label>
-                            <input type="text">
+                            <input type="text" id="brand" name="brand" required>
                         </div>
                     </div>
 
                     <!-- DESCRIPTION TEXT AREA -->
                     <div class="question-box">
                         <label for="description">Description</label>
-                        <textarea></textarea>
+                        <textarea id="description" name="description"></textarea>
                     </div>
                 </div>
 
@@ -183,44 +186,48 @@
                         <!-- QUESTION: Building -->
                         <div class="question-box">
                             <label>Building <span class="required">required field</span></label>
-                            <select>
-                                <option>Select Building</option>
-                                <option>Gokongwei Hall</option>
-                                <option>Andrew Gonzales Hall</option>
-                                <option>St. La Salle Hall</option>
+                            <select id="building_id" name="building_id" required>
+                                <option value="">Select Building</option>
+                                <?php foreach ($buildings as $building): ?>
+                                    <option value="<?= $building["building_id"] ?>" data-max-level="<?= $building["max_level"] ?>">
+                                        <?= htmlspecialchars($building["name"]) ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <!-- QUESTION: Room number -->
                         <div class="question-box">
                             <label>Floor number <span class="required">required field</span></label>
-                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
-                            <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
-                            <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
+                            <input type="number" id="floor_number" name="floor_number" min="1" required>
                         </div>
                     </div>
 
+                    <!-- QUESTION: Area -->
                     <div class="form-row">
-                        <!-- QUESTION: Area -->
                         <div class="question-box">
                             <label>Area <span class="required">at least one required</span></label>
-                            <select class="claim-input">
-                                <option>Select Area</option>
-                                <option>Pericos Canteen</option>
-                                <option>Study Lobby</option>
-                                <option>Hallway</option>
+                            <select id="area_id" name="area_id">
+                                <option value="">Select Area</option>
+                                <?php foreach ($areas as $area): ?>
+                                    <option value="<?= $area["area_id"] ?>" data-building="<?= $area["building_id"] ?>" data-level="<?= $area["level"] ?>">
+                                        <?= htmlspecialchars($area["name"]) ?>
+                                    </option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <!-- QUESTION: Room number -->
                         <div class="question-box">
                             <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Room</option>
-                            <option>G403</option>
-                            <option>G301</option>
-                            <option>G106</option>
-                        </select>
+                            <select id="room_id" name="room_id">
+                                <option value="">Select Room</option>
+                                <?php foreach ($rooms as $room): ?>
+                                    <option value="<?= $room["room_id"] ?>" data-building="<?= $room["building_id"] ?>" data-level="<?= $room["level"] ?>">
+                                        <?= htmlspecialchars($room["name"]) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -238,7 +245,7 @@
                                 Date Last Seen
                                 <span class="required">required field</span>
                             </label>
-                            <input type="date">
+                            <input type="date" name="when_found" required>
                         </div>
 
                         <!-- QUESTION: Estimated Time-->
@@ -247,7 +254,7 @@
                                 Estimated Time
                                 <span class="required">required field</span>
                             </label>
-                            <input type="time">
+                            <input type="time" name="when_found_time" required>
                         </div>
                     </div>
                 </div>
@@ -258,7 +265,7 @@
 
                 <!-- UPLOAD AN IMAGE -->
                 <label class="upload-box">
-                    <input type="file" accept="image/*">
+                    <input type="file" name="image" accept="image/*">
                     <span class="upload-text">Click to Upload Image</span>
                     <img class="preview-image" alt="">
                 </label>
@@ -270,6 +277,16 @@
             </section>
         </form>
     </div>
+    <div id="confirm-modal" class="confirm-modal" hidden>
+        <div class="confirm-modal-content">
+            <p id="confirm-modal-text"></p>
+            <div class="confirm-modal-actions">
+                <button type="button" id="confirm-modal-cancel" class="form-button no-button">Cancel</button>
+                <button type="button" id="confirm-modal-yes" class="form-button yes-button">Yes</button>
+            </div>
+        </div>
+    </div>
+
     <div id="toast"></div>
 </body>
 

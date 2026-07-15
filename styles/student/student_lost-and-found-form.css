@@ -152,7 +152,8 @@ label {
     z-index: 9999;
 }
 
-#toast.show {
+#toast.show,
+#toast.show-toast {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

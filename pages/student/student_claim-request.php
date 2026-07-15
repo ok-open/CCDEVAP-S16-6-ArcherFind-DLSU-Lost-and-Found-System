@@ -20,9 +20,12 @@
 
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
+    <link rel="stylesheet" href="../../styles/global/modal.css">
     <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/global/image.js" defer></script>
+    <script src="../../javascript/global/toast.js" defer></script>
+    <script src="../../javascript/global/modal.js" defer></script>
     <script src="../../javascript/student/student_claim-request.js" defer></script>
 </head>
 
@@ -248,6 +251,19 @@
             </section>
         </form>
     </div>
+
+    <!-- MODAL TO CONFIRM -->
+    <div id="confirm-modal" class="confirm-modal" hidden>
+        <div class="confirm-modal-content">
+            <p id="confirm-modal-text"></p>
+            <div class="confirm-modal-actions">
+                <button type="button" id="confirm-modal-cancel" class="form-button no-button">Cancel</button>
+                <button type="button" id="confirm-modal-yes" class="form-button yes-button">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
     <div id="toast"></div>
 </body>
 </html>

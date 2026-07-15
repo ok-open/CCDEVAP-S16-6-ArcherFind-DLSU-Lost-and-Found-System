@@ -11,46 +11,29 @@ if (!isset($_SESSION["user_id"])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    header("Location: ../pages/student/student_claim-request.php");
+    header("Location: ../pages/student/student_report-item.php");
     exit();
 }
 
-if (empty($_POST["item_id"])) {
-    header("Location: ../pages/student/student_home.php?error=noitem");
+if (empty($_POST["name"])) {
+    header("Location: ../pages/student/student_report-item.php?error=noitem");
     exit();
 }
-
-$itemId = $_POST["item_id"];
 
 // ======================================================
-// GET ITEM INFORMATION
+// ITEM INFORMATION
 // ======================================================
 
-$itemQuery = "
-    SELECT
-        name,
-        description,
-        category_id,
-        brand_id
-    FROM items
-    WHERE item_id = :item_id
-";
+$itemName = trim($_POST["name"]);
+$itemDescription = trim($_POST["description"] ?? "");
+$categoryId = !empty($_POST["category_id"]) ? $_POST["category_id"] : null;
 
-$stmt = $conn->prepare($itemQuery);
-$stmt->bindParam(":item_id", $itemId);
-$stmt->execute();
-
-$item = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if (!$item) {
-    header("Location: ../pages/student/student_home.php?error=itemnotfound");
-    exit();
+// Brand is text input, so we set it to null and include brand info in description
+$brandInput = trim($_POST["brand"] ?? "");
+if ($brandInput) {
+    $itemDescription = $brandInput . (!empty($itemDescription) ? " - " . $itemDescription : "");
 }
-
-$itemName = $item["name"];
-$itemDescription = $item["description"];
-$categoryId = $item["category_id"];
-$brandId = $item["brand_id"];
+$brandId = null;
 
 // ======================================================
 // LOCATION
@@ -65,20 +48,14 @@ $areaId = !empty($_POST["area_id"])
     : null;
 
 // ======================================================
-// LOST DATE + TIME
+// FOUND DATE + TIME
 // ======================================================
 
-$whenLost = null;
+$whenFound = null;
 
-if (!empty($_POST["date_lost"]) && !empty($_POST["time_lost"])) {
-    $whenLost = $_POST["date_lost"] . " " . $_POST["time_lost"];
+if (!empty($_POST["when_found"]) && !empty($_POST["when_found_time"])) {
+    $whenFound = $_POST["when_found"] . " " . $_POST["when_found_time"];
 }
-
-// ======================================================
-// DESCRIPTION
-// ======================================================
-
-$details = trim($_POST["description"] ?? "");
 
 // ======================================================
 // CREATE REPORT
@@ -92,12 +69,12 @@ $result = $reportModel->createReport(
     $itemDescription,
     $categoryId,
     $brandId,
-    $itemId,
+    null,
     $roomId,
     $areaId,
-    $whenLost,
-    $details,
-    "Claim request"
+    $whenFound,
+    "",
+    "Surrender Form"
 );
 
 if ($result) {
@@ -110,8 +87,8 @@ if ($result) {
     // ==================================================
 
     if (
-        isset($_FILES["proof_image"]) &&
-        $_FILES["proof_image"]["error"] === UPLOAD_ERR_OK
+        isset($_FILES["image"]) &&
+        $_FILES["image"]["error"] === UPLOAD_ERR_OK
     ) {
 
         $allowedTypes = [
@@ -121,26 +98,26 @@ if ($result) {
             "image/webp"
         ];
 
-        if (in_array($_FILES["proof_image"]["type"], $allowedTypes)) {
+        if (in_array($_FILES["image"]["type"], $allowedTypes)) {
 
-            $uploadDirectory = "../assets/IMG_ClaimRequest/";
+            $uploadDirectory = "../assets/IMG_SurrenderForm/";
 
             if (!is_dir($uploadDirectory)) {
                 mkdir($uploadDirectory, 0777, true);
             }
 
             $extension = pathinfo(
-                $_FILES["proof_image"]["name"],
+                $_FILES["image"]["name"],
                 PATHINFO_EXTENSION
             );
 
-            $filename = uniqid("claim_", true) . "." . $extension;
+            $filename = uniqid("surrender_", true) . "." . $extension;
 
             $destination = $uploadDirectory . $filename;
 
-            if (move_uploaded_file($_FILES["proof_image"]["tmp_name"], $destination)) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $destination)) {
 
-                $imagePath = "assets/IMG_ClaimRequest/" . $filename;
+                $imagePath = "assets/IMG_SurrenderForm/" . $filename;
 
                 $imageQuery = "
                     INSERT INTO reports_images
@@ -166,18 +143,14 @@ if ($result) {
     }
 
     header(
-        "Location: ../pages/student/student_claim-request.php?id="
-        . $itemId .
-        "&success=submitted&item=" . urlencode($itemName)
+        "Location: ../pages/student/student_report-item.php?success=submitted&item=" . urlencode($itemName)
     );
 
     exit();
 }
 
 header(
-    "Location: ../pages/student/student_claim-request.php?id="
-    . $itemId .
-    "&error=failed"
+    "Location: ../pages/student/student_report-item.php?error=failed"
 );
 
 exit();

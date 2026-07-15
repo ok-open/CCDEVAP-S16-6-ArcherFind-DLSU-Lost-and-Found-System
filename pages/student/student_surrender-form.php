@@ -1,5 +1,6 @@
 <?php
     require_once "../../controllers/StudentAuth.php";
+    require_once "../../controllers/LocationController.php";
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +12,13 @@
     <title>ArcherFind - Surrender Found Item</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
+    <link rel="stylesheet" href="../../styles/global/modal.css">
     <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/global/image.js" defer></script>
-    <script src="../../javascript/student/student_submit-item.js" defer></script>
+    <script src="../../javascript/global/toast.js" defer></script>
+    <script src="../../javascript/global/modal.js" defer></script>
+    <script src="../../javascript/student/submit-item.js" defer></script>
 </head>
 
 <body>
@@ -127,8 +131,25 @@
                 rightful owner.</p>
         </div>
 
+        <?php
+        if (isset($_GET["success"])) {
+            $itemName = isset($_GET["item"]) ? trim($_GET["item"]) : "";
+            $successMessage = $itemName
+                ? 'Surrender form for "' . addslashes($itemName) . '" was submitted successfully!'
+                : 'Your surrender form has been submitted successfully!';
+            echo '<script>document.addEventListener("DOMContentLoaded", function() { if (typeof showToast === "function") { showToast(' . json_encode($successMessage, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT) . ', "#4CAF50", 6000); } });</script>';
+        }
+
+        if (isset($_GET["error"])) {
+            $errorMessage = $_GET["error"] === "noitem"
+                ? "Item name is required"
+                : "Failed to submit your surrender form. Please try again.";
+            echo '<script>document.addEventListener("DOMContentLoaded", function() { if (typeof showToast === "function") { showToast("' . addslashes($errorMessage) . '", "var(--color-errorMsg)", 6000); } });</script>';
+        }
+        ?>
+
         <!-- SURRENDER FORM -->
-        <form class="form-wrapper">
+        <form class="form-wrapper" method="POST" enctype="multipart/form-data" action="../../controllers/StudentSurrenderController.php">
             <!-- LEFT SIDE -->
             <section class="form-left">
                 <!-- QUESTION TITLE: What item was lost? -->
@@ -138,7 +159,7 @@
                         <label for="name">
                             Item Name<span class="required">required field</span>
                         </label>
-                        <input type="text" id="name">
+                        <input type="text" id="name" name="name" required>
                     </div>
 
                     <!-- FORM ROW: Category === Brand -->
@@ -148,12 +169,12 @@
                             <label for="category">
                                 Category<span class="required">required field</span>
                             </label>
-                            <select id="category">
-                                <option>Select Category</option>
-                                <option>Electronics</option>
-                                <option>Identity Documents</option>
-                                <option>Watch / Jewelry</option>
-                                <option>Miscellaneous</option>
+                            <select id="category" name="category_id" required>
+                                <option value="">Select Category</option>
+                                <option value="1">Electronics</option>
+                                <option value="2">Identity Documents</option>
+                                <option value="3">Watch / Jewelry</option>
+                                <option value="4">Miscellaneous</option>
                             </select>
                         </div>
 
@@ -162,14 +183,14 @@
                             <label for="brand-id">
                                 Brand<span class="required">required field</span>
                             </label>
-                            <input type="text">
+                            <input type="text" name="brand">
                         </div>
                     </div>
 
                     <!-- DESCRIPTION TEXT AREA -->
                     <div class="question-box">
                         <label for="description">Description</label>
-                        <textarea></textarea>
+                        <textarea name="description"></textarea>
                     </div>
                 </div>
 
@@ -182,18 +203,18 @@
                         <!-- QUESTION: Building -->
                         <div class="question-box">
                             <label>Building <span class="required">required field</span></label>
-                            <select>
-                                <option>Select Building</option>
-                                <option>Gokongwei Hall</option>
-                                <option>Andrew Gonzales Hall</option>
-                                <option>St. La Salle Hall</option>
+                            <select name="building_id">
+                                <option value="">Select Building</option>
+                                <?php foreach ($buildings as $building): ?>
+                                    <option value="<?= $building["building_id"] ?>"><?= htmlspecialchars($building["name"]) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <!-- QUESTION: Floor number -->
                         <div class="question-box">
                             <label>Floor number <span class="required">required field</span></label>
-                            <input type="number" class="claim-input" id="claim-input" name="floorNum" min="1" max="20">
+                            <input type="number" class="claim-input" id="claim-input" name="floor_number" min="1" max="20">
                             <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
                             <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
                         </div>
@@ -203,22 +224,22 @@
                         <!-- QUESTION: Area -->
                         <div class="question-box">
                             <label>Area <span class="required">at least one required</span></label>
-                            <select class="claim-input">
-                                <option>Select Area</option>
-                                <option>Pericos Canteen</option>
-                                <option>Study Lobby</option>
-                                <option>Hallway</option>
+                            <select class="claim-input" name="area_id">
+                                <option value="">Select Area</option>
+                                <?php foreach ($areas as $area): ?>
+                                    <option value="<?= $area["area_id"] ?>"><?= htmlspecialchars($area["name"]) ?></option>
+                                <?php endforeach; ?>
                             </select>
                         </div>
 
                         <!-- QUESTION: Room number -->
                         <div class="question-box">
                             <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input">
-                            <option>Select Room</option>
-                            <option>G403</option>
-                            <option>G301</option>
-                            <option>G106</option>
+                        <select class="claim-input" name="room_id">
+                            <option value="">Select Room</option>
+                            <?php foreach ($rooms as $room): ?>
+                                <option value="<?= $room["room_id"] ?>"><?= htmlspecialchars($room["name"]) ?></option>
+                            <?php endforeach; ?>
                         </select>
                         </div>
                     </div>
@@ -237,7 +258,7 @@
                                 Date Lost
                                 <span class="required">required field</span>
                             </label>
-                            <input type="date">
+                            <input type="date" name="when_found" required>
                         </div>
 
                         <!-- QUESTION: Time Lost-->
@@ -246,7 +267,7 @@
                                 Time Lost
                                 <span class="required">required field</span>
                             </label>
-                            <input type="time">
+                            <input type="time" name="when_found_time" required>
                         </div>
                     </div>
                 </div>
@@ -257,7 +278,7 @@
 
                 <!-- UPLOAD AN IMAGE -->
                 <label class="upload-box">
-                    <input type="file" accept="image/*">
+                    <input type="file" name="image" accept="image/*">
                     <span class="upload-text">Click to Upload Image</span>
                     <img class="preview-image" alt="">
                 </label>
@@ -269,6 +290,17 @@
             </section>
         </form>
     </div>
+
+    <div id="confirm-modal" class="confirm-modal" hidden>
+        <div class="confirm-modal-content">
+            <p id="confirm-modal-text"></p>
+            <div class="confirm-modal-actions">
+                <button type="button" id="confirm-modal-cancel" class="form-button">Cancel</button>
+                <button type="button" id="confirm-modal-yes" class="form-button submit-button">Yes</button>
+            </div>
+        </div>
+    </div>
+
     <div id="toast"></div>
 </body>
 
