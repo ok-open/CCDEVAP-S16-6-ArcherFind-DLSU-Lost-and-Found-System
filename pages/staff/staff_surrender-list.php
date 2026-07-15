@@ -14,7 +14,6 @@
     <title>Verify Surrender Forms</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
     <link rel="stylesheet" href="../../styles/global/staffadmin_lists.css">
     <link rel="stylesheet" href="../../styles/global/toast.css">
     <script src="../../javascript/global/toast.js" defer></script>
@@ -36,7 +35,7 @@
                 <li><a href="../../pages/staff/staff_dashboard.php">Dashboard</a></li>
                 <li><a href="../../pages/staff/staff_claim-list.php">Claim Requests</a></li>
                 <li><a href="../../pages/staff/staff_report-list.php">Lost Reports</a></li>
-                <li><a href="../../pages/staff/staff_surrender-list.php">Surrender Forms</a></li>
+                <li><a href="../../pages/staff/staff_surrender-list.php" class="current-page">Surrender Forms</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -99,8 +98,8 @@
             <ul class="nav-links">
                 <li><a href="../../pages/staff/staff_dashboard.php">Dashboard</a></li>
                 <li><a href="../../pages/staff/staff_claim-list.php">Claim Requests</a></li>
-                <li><a href="../../pages/staff/staff_report-list.php" class="current-page">Lost Reports</a></li>
-                <li><a href="../../pages/staff/staff_surrender-list.php">Surrender Forms</a></li>
+                <li><a href="../../pages/staff/staff_report-list.php">Lost Reports</a></li>
+                <li><a href="../../pages/staff/staff_surrender-list.php" class="current-page">Surrender Forms</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
