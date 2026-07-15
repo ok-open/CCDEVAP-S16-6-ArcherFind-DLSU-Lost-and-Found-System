@@ -10,6 +10,12 @@ if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
 
 $itemModel = new Item($conn);
 
+$search = trim($_GET["search"] ?? "");
+$category = trim($_GET["category"] ?? "");
+$sort = $_GET["sort"] ?? "recent";
+
+$categories = $itemModel->getCategories();
+
 $item = $itemModel->getItemById($_GET["id"]);
 
 if (!$item) {

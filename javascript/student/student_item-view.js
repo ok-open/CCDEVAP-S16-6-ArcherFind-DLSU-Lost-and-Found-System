@@ -3,9 +3,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!form) return;
 
+    const search = form.querySelector("[name='search']");
     const sort = form.querySelector("[name='sort']");
     const category = form.querySelector("[name='category']");
+    let searchTimeout;
 
-    sort.addEventListener("change", () => form.submit());
-    category.addEventListener("change", () => form.submit());
+    if (search) {
+        search.addEventListener("input", () => {
+            window.clearTimeout(searchTimeout);
+            searchTimeout = window.setTimeout(() => form.requestSubmit(), 250);
+        });
+    }
+
+    sort.addEventListener("change", () => form.requestSubmit());
+    category.addEventListener("change", () => form.requestSubmit());
 });

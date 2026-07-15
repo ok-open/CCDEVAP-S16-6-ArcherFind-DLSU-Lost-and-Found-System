@@ -130,22 +130,21 @@
         <!-- CONTROLS -->
         <div class="controls-wrapper">
             <h2>Browse Surrendered Items</h2>
-            <div class="controls">
-                <input type="text" placeholder="Search for an item..." class="control-box search-bar">
+            <form class="controls" method="GET" action="student_item-view.php">
+                <input type="text" name="search" placeholder="Search for an item..." class="control-box search-bar" value="<?= htmlspecialchars($search) ?>">
 
-                <select class="control-box sort-dropdown">
-                    <option>Sort: Name</option>
-                    <option>Sort: Recent</option>
+                <select name="sort" class="control-box sort-dropdown">
+                    <option value="recent" <?= $sort === 'recent' ? 'selected' : '' ?>>Sort: Recent</option>
+                    <option value="name" <?= $sort === 'name' ? 'selected' : '' ?>>Sort: Name</option>
                 </select>
 
-                <select class="control-box filter-dropdown">
-                    <option>Filter: All</option>
-                    <option>Electronics</option>
-                    <option>Miscellaneous</option>
-                    <option>Identity Documents</option>
-                    <option>Watch / Jewelry</option>
+                <select name="category" class="control-box filter-dropdown">
+                    <option value="">Filter: All</option>
+                    <?php foreach ($categories as $categoryOption): ?>
+                        <option value="<?= htmlspecialchars($categoryOption['name']) ?>" <?= $category === $categoryOption['name'] ? 'selected' : '' ?>><?= htmlspecialchars($categoryOption['name']) ?></option>
+                    <?php endforeach; ?>
                 </select>
-            </div>
+            </form>
         </div>
     </div>
 
