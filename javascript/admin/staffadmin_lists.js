@@ -13,15 +13,6 @@ if (document.getElementById('SidePanel_Iconsee')) {
 }
 
 // 2. TOGGLE THE POSSIBLE MATCH ITEM'S DETAIL IN REPORT-LIST
-const images = document.querySelectorAll('.ImgMatches');
-
-    images.forEach((img) =>{
-        img.addEventListener('click', function(){
-            const detailsBox = this.parentElement.querySelector('.LostDetailsImgMatch');
-            detailsBox.classList.toggle('hidden');
-        })
-    })
-//TODO: details are not showing
 function toggleDetails(cardElement) {
     const details = cardElement.querySelector(".LostDetailsImgMatch");
     if (details) {
