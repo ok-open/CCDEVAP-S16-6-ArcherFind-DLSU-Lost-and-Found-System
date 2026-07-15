@@ -1,6 +1,8 @@
 <?php   
     require_once "../../controllers/AdminAuth.php";
-    require_once "../../controllers/ReportListController.php";
+    require_once "../../controllers/ReportListController.php"; //Starts the controller
+    //some variables are red underline due to being undefined, this is because it is initialized in the controller
+    //it will still work
 
 ?>
 
@@ -161,10 +163,11 @@
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
     <!-- CONTROLS -->
+    <!-- GET function to retrieve the input from the staff-->
     <form method="GET" action="" class="controls-wrapper">
         <div class="title">
-            <h2>Evaluate Claim Requests</h2>
-            <p>Review submitted ownership details and credentials to verify if a claimant is the rightful owner of a found item.</p>
+            <h2>Review Surrender Forms</h2>
+            <p>Review surrendered item details and verify if suitable to add to official list of items</p>
         </div>
 
         <div class="controls">
@@ -182,6 +185,7 @@
             <!-- Filter Dropdown (maps to 'category' query param) -->
             <select name="category" class="control-box filter-dropdown" onchange="this.form.submit()">
                 <option value="">Filter: All</option>
+                <!-- The dropdown options are added dynamically with categories from the database -->
                 <?php foreach ($categories as $cat): ?>
                     <option value="<?= htmlspecialchars($cat['name']) ?>" <?= (($_GET['category'] ?? '') === $cat['name']) ? 'selected' : '' ?>> 
                         <?= htmlspecialchars($cat['name']) ?>
@@ -191,49 +195,29 @@
         </div>
     </form>
 
-    <!-- <div id="MainHeader">
-        <h1>Verify Surrender Forms</h1>
-        <div class="SearchContainer">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-    <div id="MainContainer">
-        <div id="SortBy">
-            <h2>Sort by</h2>
-            <form>
-                <input type="radio" name="SortOptions" value="mostRecent">
-                <label for="mostRecent">Most Recent first</label><br>
-                <input type="radio" name="SortOptions" value="leastRecent">
-                <label for="mostRecent">Least Recent first</label><br>
-                <input type="radio" name="SortOptions" value="itemA-Z">
-                <label for="itemA-Z">Item name A-Z</label><br>
-                <input type="radio" name="SortOptions" value="itemZ-A">
-                <label for="itemZ-A">Item name Z-A</label><br>
-                <input class="SortBtn" type="submit" value="Submit">
-                <button class="SortBtn">Reset</button>
-            </form>
-        </div> -->
-
         <!-- REQUESTS -->
     <div class="requests-wrapper">
         <!-- REQUEST RECORD -->
-        <?php if (empty($surrenderForms)): ?>
+        <?php if (empty($surrenderForms)): ?> <!-- 1. Check first if there are active claim requests -->
     <div class="no-records" style="text-align: center; padding: 50px; color: #777;">
         <h3>No Active Surrender Forms Found</h3>
     </div>
-<?php else: ?>
-    <?php foreach ($surrenderForms as $recordIndex => $report): ?>
-        <?php 
-            // 1. Separate the comma-delimited image paths into an array
-            $imagePaths = !empty($report['image_paths']) ? explode(',', $report['image_paths']) : [];
-        ?>
+    <!-- 2. If there is active, then begin loop to display each record-->
+    <!-- Each record is stored in $report -->
+    <?php else: ?>
+        <?php foreach ($surrenderForms as $recordIndex => $report): ?>
+            <?php 
+                // 3. Separate the comma-delimited image paths into an array
+                $imagePaths = !empty($report['image_paths']) ? explode(',', $report['image_paths']) : [];
+            ?>
         <div class="request-record">
             <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
                 <div class="request-image">
                     <?php if (!empty($imagePaths)): ?>
                         <!-- Full-width images dynamically grouped by record index -->
                         <?php foreach ($imagePaths as $imgIndex => $path): ?>
-                            <!-- Note the class "slide-group-<?= $recordIndex ?>" -->
+                            <!-- Note the class "slide-group-$recordIndex" the recordIndex indicates which record the image belongs to-->
+                            <!-- 4. Generate the div for each image slide -->
                             <div class="mySlides fade slide-group-<?= $recordIndex ?>" style="display: <?= $imgIndex === 0 ? 'block' : 'none'; ?>">
                                 <img class="ImgItem" src="<?= htmlspecialchars($path) ?>" alt="Item Image">
                             </div>
@@ -266,6 +250,7 @@
                     <h2><?= htmlspecialchars($report['item_name']) ?></h2>
                     <div class="request-buttons-panel">                        
                         <!-- RESOLVE BUTTON -->
+                        <!-- Toast messages show for short time only due to refresh of page -->
                         <button type="button" class="request-button accept-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
                             Mark as Resolved
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
@@ -293,7 +278,7 @@
                         <!-- TIME LOST -->
                         <div class="detail-box">
                             <label>Estimated Time Found</label>
-                            <!-- Format standard military time (HH:MM:SS) to (HH:MM AM/PM) if you wish, or keep raw value -->
+                            <!-- Formats time to Hour, Minute, PM/AM -->
                             <input type="time" value="<?= htmlspecialchars(date('H:i', strtotime($report['time_found']))) ?>" readonly>
                         </div>
 
@@ -334,7 +319,7 @@
         
     <div id="toast"></div>
 
-    <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    <!-- This groups information for 1 record -->
     </div>
 
     <form id="statusActionForm" method="POST" style="display: none;">
