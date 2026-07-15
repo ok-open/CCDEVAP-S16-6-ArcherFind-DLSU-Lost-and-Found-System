@@ -1,40 +1,56 @@
+
+// CURRENT USER
+
 const currentUser = {
     first_name: "Dan",
     role: "Admin"
 };
 
-// Name print test
-document.getElementById("username").textContent =
-    currentUser.first_name;
+// Display logged in user's name
+document.getElementById("username").textContent = currentUser.first_name;
 
-const modal = document.getElementById("reportModal");
+// COLORS
+
 const root = document.documentElement;
-const primaryColor = getComputedStyle(root).getPropertyValue('--color-primary').trim();
-const secondaryColor = getComputedStyle(root).getPropertyValue('--color-secondary').trim();
+const primaryColor = getComputedStyle(root)
+    .getPropertyValue('--color-primary')
+    .trim();
+
+const secondaryColor = getComputedStyle(root)
+    .getPropertyValue('--color-secondary')
+    .trim();
+
+
 
 // USER CHART
-const ctx = document.getElementById('userChart');
-new Chart(ctx, {
-    type: 'doughnut',
+
+
+const userCanvas = document.getElementById("userChart");
+
+const userChart = new Chart(userCanvas, {
+    type: "doughnut",
     data: {
-        labels: ['Students', 'Staff', 'Admin',],
+        labels: ["Students", "Staff", "Admin"],
         datasets: [{
-            data: [100, 10, 5]
+            data: [0, 0, 0]
         }]
-    }, options: {
+    },
+    options: {
         responsive: true
     }
 });
 
 // ITEM REPORT PIE CHART
-const itemReportChart = document.getElementById('itemReportChart');
-new Chart(itemReportChart, {
-    type: 'pie',
+
+const itemReportCanvas = document.getElementById("itemReportChart");
+
+const itemReportChart = new Chart(itemReportCanvas, {
+    type: "pie",
     data: {
-        labels: ['Loss Item Reports', 'Claim Requests', 'Surrender Reports'],
+        labels: ["Loss Item Reports", "Claim Requests", "Surrender Reports"],
         datasets: [{
-            data: [162, 85, 68],
-            backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+            data: [0, 0, 0],
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
         }]
     },
     options: {
@@ -44,87 +60,97 @@ new Chart(itemReportChart, {
                 color: secondaryColor,
                 font: {
                     family: '"DM Sans", sans-serif',
-                    weight: '450',
+                    weight: "450",
                     size: 14
                 },
-
-                anchor: 'center',
-                align: 'center',
+                anchor: "center",
+                align: "center",
                 formatter: (value, ctx) => {
                     const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                    const percentage = '(' + (value * 100 / sum).toFixed(1) + '%' + ')';
-                    return [value, percentage];
-                },
+                    if (sum === 0) {
+                            return "";
+                        }
 
-            },
-            legend: {
-                position: 'bottom'
-            }
-        }
-    },
-    plugins: [ChartDataLabels]
-});
-
-
-// INVENTORY STATUS PIE CHART
-const inventoryChart = document.getElementById('inventoryChart');
-new Chart(inventoryChart, {
-    type: 'pie',
-    data: {
-        labels: ['In Storage', 'Claimed', 'Disposed'],
-        datasets: [{
-            data: [42, 21, 8],
-            backgroundColor: ['#32e8ee', '#2897e1', '#FFCE56']
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            datalabels: {
-                color: secondaryColor,
-                font: {
-                    family: '"DM Sans", sans-serif',
-                    weight: '450',
-                    size: 14
-                },
-                formatter: (value, ctx) => {
-                    const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
-                    const percentage = '(' + (value * 100 / sum).toFixed(1) + '%' + ')';
-                    return [value, percentage];
+                        const percentage = "(" + (value * 100 / sum).toFixed(1) + "%)";
+                        return [value, percentage];
                 }
             },
             legend: {
-                position: 'bottom'
+                position: "bottom"
             }
         }
     },
     plugins: [ChartDataLabels]
 });
 
-// Line graph
-const lineChartCanvas = document.getElementById('lineChart');
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-const data = {
-    labels: months,
-    datasets: [{
-        label: 'T Reports Per month',
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: primaryColor,
-        backgroundColor: 'rgba(75, 192, 192, 0.1)',
-        tension: 0.1,
-        borderWidth: 2
-    }]
-};
+// INVENTORY STATUS PIE CHART
 
-new Chart(lineChartCanvas, {
-    type: 'line',
-    data: data,
+const inventoryCanvas = document.getElementById("inventoryChart");
+
+const inventoryChart = new Chart(inventoryCanvas, {
+    type: "pie",
+    data: {
+        labels: ["In Storage", "Claimed", "Disposed"],
+        datasets: [{
+            data: [0, 0, 0],
+            backgroundColor: ["#32e8ee", "#2897e1", "#FFCE56"]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+                color: secondaryColor,
+                font: {
+                    family: '"DM Sans", sans-serif',
+                    weight: "450",
+                    size: 14
+                },
+                formatter: (value, ctx) => {
+                    const sum = ctx.dataset.data.reduce((a, b) => a + b, 0);
+                    if (sum === 0) {
+                            return "";
+                        }
+
+                        const percentage = "(" + (value * 100 / sum).toFixed(1) + "%)";
+                        return [value, percentage];
+                }
+            },
+            legend: {
+                position: "bottom"
+            }
+        }
+    },
+    plugins: [ChartDataLabels]
+});
+
+// MONTHLY REPORTS LINE CHART
+
+const lineCanvas = document.getElementById("lineChart");
+
+const monthlyChart = new Chart(lineCanvas, {
+    type: "line",
+    data: {
+        labels: [
+                    "Jan", "Feb", "Mar", "Apr",
+                    "May", "Jun", "Jul", "Aug",
+                    "Sep", "Oct", "Nov", "Dec"
+                ],
+        datasets: [{
+            label: "Reports Per Month",
+            data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            fill: false,
+            borderColor: primaryColor,
+            backgroundColor: "rgba(75,192,192,0.1)",
+            tension: 0.1,
+            borderWidth: 2
+        }]
+    },
     options: {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top'
+                position: "top"
             }
         },
         scales: {
@@ -135,28 +161,209 @@ new Chart(lineChartCanvas, {
     }
 });
 
-// FOR FREQUENCY OF LOST ITEMS
-initLostItemChart('lostItemFreqChart', 'Lost Item Frequency');
+// LOST ITEM LOCATION CHART
 
-// button
-document.getElementById("generateReportBtn").addEventListener("click", () => {
-    modal.style.display = "flex";
+const lostItemCanvas = document.getElementById("lostItemFreqChart");
+
+const lostItemChart = new Chart(lostItemCanvas, {
+    type: "bar",
+    data: {
+        labels: [],
+        datasets: [{
+            label: "Lost Item Frequency",
+            data: [],
+            borderWidth: 1,
+            backgroundColor: "rgba(61, 87, 65, 0.2)",
+            borderColor: "rgba(61, 87, 65, 0.8)"
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
 });
 
-document.getElementById("cancelBtn").addEventListener("click", () => {
-    modal.style.display = "none";
-});
+// FILTER CONTROLS
 
-document.getElementById("generateBtn").addEventListener("click", () => {
-    const fromDate = document.getElementById("fromDate").value;
-    const toDate = document.getElementById("toDate").value;
+const fromDateInput = document.getElementById("from-date");
+const toDateInput = document.getElementById("to-date");
+const resetButton = document.getElementById("resetFilterBtn");
 
-    if (!fromDate || !toDate) {
-        alert("Please select both dates.");
+fromDateInput.addEventListener("change", applyDateFilter);
+toDateInput.addEventListener("change", applyDateFilter);
+
+resetButton.addEventListener("click", resetDashboard);
+
+// FUNCTIONS
+
+async function applyDateFilter() {
+
+    console.log("Filter triggered!");
+
+    if (!fromDateInput.value || !toDateInput.value) {
+        console.log("Missing dates");
         return;
     }
 
-    localStorage.setItem("reportFrom", fromDate);
-    localStorage.setItem("reportTo", toDate);
-    window.location.href = "../../pages/admin/admin_generated-report.html";
-});
+    console.log("From:", fromDateInput.value);
+    console.log("To:", toDateInput.value);
+
+    try {
+
+        const response = await fetch(
+            `../../models/dashboard_filter.php?from=${fromDateInput.value}&to=${toDateInput.value}`
+        );
+
+        console.log("HTTP Status:", response.status);
+
+        const data = await response.json();
+
+        console.log("PHP Response:", data);
+
+        if (data.success) {
+
+        itemReportChart.data.datasets[0].data = data.itemReports;
+        itemReportChart.update();
+
+        inventoryChart.data.datasets[0].data = data.inventoryStatus;
+        inventoryChart.update();
+
+        document.getElementById("totalItems").textContent = data.totalItems;
+        document.getElementById("analyticsTotalItems").textContent = data.totalItems;
+
+        document.getElementById("totalReports").textContent = data.totalReports;
+        document.getElementById("analyticsTotalReports").textContent = data.totalReports;
+
+        lostItemChart.data.labels = data.locationLabels;
+        lostItemChart.data.datasets[0].data = data.locationData;
+        lostItemChart.update();
+
+        monthlyChart.data.datasets[0].data = data.monthlyReports;
+        monthlyChart.update();
+
+        document.getElementById("claimSuccessRate").textContent =
+        data.claimSuccessRate + "% Success Rate";
+
+        document.getElementById("claimSuccessDetails").textContent =
+            data.acceptedClaims + " / " +
+            data.totalClaims +
+            " Claim Requests Accepted";
+
+        document.getElementById("itemDisposalRate").textContent =
+        data.itemDisposalRate + "% Items Disposed";
+
+        document.getElementById("itemDisposalDetails").textContent =
+            data.disposedItems + " / " +
+            data.totalDisposalItems +
+            " Items Disposed";
+
+        document.getElementById("lossMatchTime").textContent =
+        data.resolutionTimes.lossMatch + " days";
+
+        document.getElementById("surrenderApprovalTime").textContent =
+        data.resolutionTimes.surrenderApproval + " days";
+
+        document.getElementById("claimVerificationTime").textContent =
+        data.resolutionTimes.claimVerification + " days";
+
+        console.log("Charts updated!");
+
+        } else {
+
+            console.log("PHP returned success = false");
+
+        }
+
+    }
+    catch (error) {
+
+        console.error("Fetch Error:", error);
+
+    }
+
+}
+
+async function loadDashboardSummary() {
+
+    try {
+
+        const response = await fetch("../../models/dashboard_summary.php");
+
+        const data = await response.json();
+
+        console.log("Dashboard Summary:", data);
+
+        if (data.success) {
+            document.getElementById("totalUsers").textContent = data.totalUsers;
+            document.getElementById("studentCount").textContent = data.students;
+             document.getElementById("staffCount").textContent = data.staff;
+             document.getElementById("adminCount").textContent = data.admins;
+             document.getElementById("analyticsTotalReports").textContent = data.totalReports;
+             document.getElementById("analyticsTotalItems").textContent = data.totalItems;
+             document.getElementById("totalReports").textContent = data.totalReports;
+             itemReportChart.data.datasets[0].data = data.itemReports;
+             itemReportChart.update();
+                 userChart.data.datasets[0].data = [
+                    data.students,
+                    data.staff,
+                    data.admins
+                ];
+
+                userChart.update();
+            inventoryChart.data.datasets[0].data = data.inventoryStatus;
+            inventoryChart.update();
+
+            document.getElementById("totalItems").textContent = data.totalItems;
+            document.getElementById("analyticsTotalItems").textContent = data.totalItems;
+            monthlyChart.data.datasets[0].data = data.monthlyReports;
+            monthlyChart.update();
+
+            lostItemChart.data.labels = data.locationLabels;
+            lostItemChart.data.datasets[0].data = data.locationData;
+            lostItemChart.update();
+            document.getElementById("lossMatchTime").textContent =
+            data.resolutionTimes.lossMatch + " days";
+
+            document.getElementById("surrenderApprovalTime").textContent =
+            data.resolutionTimes.surrenderApproval + " days";
+
+            document.getElementById("claimVerificationTime").textContent =
+            data.resolutionTimes.claimVerification + " days";
+            document.getElementById("claimSuccessRate").textContent =
+            data.claimSuccessRate + "% Success Rate";
+
+            document.getElementById("claimSuccessDetails").textContent =
+            data.acceptedClaims + " / " +
+            data.totalClaims +
+            " Claim Requests Accepted";
+            document.getElementById("itemDisposalRate").textContent =
+            data.itemDisposalRate + "% Items Disposed";
+
+             document.getElementById("itemDisposalDetails").textContent =
+                data.disposedItems + " / " +
+                data.totalDisposalItems +
+                " Items Disposed";
+        }
+
+    } catch (error) {
+        console.error("Dashboard Summary Error:", error);
+    }
+
+}
+
+loadDashboardSummary();
+
+    async function resetDashboard() {
+
+    fromDateInput.value = "";
+    toDateInput.value = "";
+
+    await loadDashboardSummary();
+
+    console.log("Dashboard reset"); //debug
+}
