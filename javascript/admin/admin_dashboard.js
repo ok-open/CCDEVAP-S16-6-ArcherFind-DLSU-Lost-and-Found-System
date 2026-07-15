@@ -1,7 +1,4 @@
 
-// Display logged in user's name
-document.getElementById("username").textContent = currentUser.first_name;
-
 // COLORS
 
 const root = document.documentElement;
