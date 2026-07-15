@@ -1,74 +1,217 @@
-$(document).ready(function () {
-    var data = [
-        { lastname: "Almeda", firstname: "Angelo Florence", idnum: "12413356", email: "angelo_florence_almeda@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Santos", firstname: "Miguel", idnum: "12310001", email: "miguel_santos@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Reyes", firstname: "Andrea", idnum: "12310002", email: "andrea_reyes@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Garcia", firstname: "John Paul", idnum: "12310003", email: "johnpaul_garcia@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Cruz", firstname: "Samantha", idnum: "12310004", email: "samantha_cruz@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Mendoza", firstname: "Joshua", idnum: "12310005", email: "joshua_mendoza@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Torres", firstname: "Nicole", idnum: "12310006", email: "nicole_torres@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Villanueva", firstname: "Mark", idnum: "12310007", email: "mark_villanueva@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Ramos", firstname: "Patricia", idnum: "12310008", email: "patricia_ramos@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Flores", firstname: "Kevin", idnum: "12310009", email: "kevin_flores@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Navarro", firstname: "Angela", idnum: "12310010", email: "angela_navarro@dlsu.edu.ph", userlevel: "Student" },
-        { lastname: "Aquino", firstname: "Daniel", idnum: "12310011", email: "daniel_aquino@dlsu.edu.ph", userlevel: "Staff" },
-        { lastname: "Lim", firstname: "Christine", idnum: "12310012", email: "christine_lim@dlsu.edu.ph", userlevel: "Staff" },
-        { lastname: "Tan", firstname: "Jerome", idnum: "12310013", email: "jerome_tan@dlsu.edu.ph", userlevel: "Staff" },
-        { lastname: "Co", firstname: "Melissa", idnum: "12310014", email: "melissa_co@dlsu.edu.ph", userlevel: "Staff" },
-        { lastname: "Chua", firstname: "Vincent", idnum: "12310015", email: "vincent_chua@dlsu.edu.ph", userlevel: "Staff" },
-        { lastname: "Lee", firstname: "Karen", idnum: "12310016", email: "karen_lee@dlsu.edu.ph", userlevel: "Admin" },
-        { lastname: "Go", firstname: "Richard", idnum: "12310017", email: "richard_go@dlsu.edu.ph", userlevel: "Admin" },
-        { lastname: "Ong", firstname: "Sophia", idnum: "12310018", email: "sophia_ong@dlsu.edu.ph", userlevel: "Admin" },
-        { lastname: "Sy", firstname: "Matthew", idnum: "12310019", email: "matthew_sy@dlsu.edu.ph", userlevel: "Admin" }
-    ];
+$(document).ready(async function () {
+
+    let data = [];
+
+    try {
+        const response = await fetch("../../models/manage_users.php");
+        const result = await response.json();
+
+        if (result.success) {
+            data = result.users;
+        } else {
+            console.error("Failed to load users:", result.message);
+        }
+
+    } catch (error) {
+        console.error("User Fetch Error:", error);
+    }
 
     var table = $('#manageUsersTable').DataTable({
         data: data,
         columns: [
-            { data: 'lastname' },
-            { data: 'firstname' },
-            { data: 'idnum' },
-            { data: 'email' },
-            { data: 'userlevel' },
-            {
-                data: null, // no actual data field, we're generating HTML
-                orderable: false, // don't let users sort by this column
-                searchable: false, // exclude from search bar matching
-                render: function (data, type, row) {
-                    return `
-                        <button class="function-button edit-btn" data-id="${row.idnum}">Edit</button>
-                        <button class="function-button delete-btn" data-id="${row.idnum}">Delete</button>
-                    `;
-                }
+        { data: 'last_name' },
+        { data: 'first_name' },
+        { data: 'user_id' },
+        { data: 'email' },
+        { data: 'role' },
+        {
+            data: null,
+            orderable: false,
+            searchable: false,
+            render: function (data, type, row) {
+                return `
+                    <button class="function-button edit-btn" data-id="${row.user_id}">Edit</button>
+                    <button class="function-button delete-btn" data-id="${row.user_id}">Delete</button>
+                `;
             }
-        ],
+        }
+     ], 
         dom: 'lrtip'
     });
 
-    // EDIT BUTTON CLICK
-    $('#manageUsersTable tbody').on('click', '.edit-btn', function () {
-        var id = $(this).data('id');
-        console.log('Edit user with ID:', id);
-        // TODO: open edit modal, or redirect to an edit page, etc.
-        alert('Edit Account');
+    // ADD USER BUTTON CLICK
+    $('#addUserBtn').on('click', async function () {
+
+        const firstName = prompt("First Name:");
+        if (firstName === null) return;
+
+        const lastName = prompt("Last Name:");
+        if (lastName === null) return;
+
+        const email = prompt("DLSU Email:");
+        if (email === null) return;
+
+        const password = prompt("Password:");
+        if (password === null) return;
+
+        const role = prompt("Role (Student, Staff, Admin):", "Student");
+        if (role === null) return;
+
+        try {
+
+            const response = await fetch("../../models/add_user.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    password: password,
+                    role: role
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                table.row.add({
+                    user_id: result.user_id,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email.toLowerCase(),
+                    role: role
+                }).draw(false);
+
+                alert("Account added successfully.");
+
+            } else {
+                alert("Failed to add account: " + result.message);
+            }
+
+        } catch (error) {
+            console.error("Add User Error:", error);
+            alert("An error occurred while adding the account.");
+        }
+
     });
 
-    // DELETE BUTTON CLICK
-    $('#manageUsersTable tbody').on('click', '.delete-btn', function () {
-        var id = $(this).data('id');
-        console.log('Delete user with ID:', id);
-        // TODO: confirm deletion, then call backend DELETE endpoint
-        alert('Delete Account');
+    // EDIT BUTTON CLICK
+    $('#manageUsersTable tbody').on('click', '.edit-btn', async function () {
+
+        const button = $(this);
+        const row = table.row(button.closest('tr'));
+        const user = row.data();
+
+        const firstName = prompt("First Name:", user.first_name);
+        if (firstName === null) return;
+
+        const lastName = prompt("Last Name:", user.last_name);
+        if (lastName === null) return;
+
+        const email = prompt("Email:", user.email);
+        if (email === null) return;
+
+        const role = prompt(
+            "Role (Student, Staff, Admin):",
+            user.role
+        );
+
+        if (role === null) return;
+
+        try {
+
+            const response = await fetch("../../models/update_user.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: user.user_id,
+                    first_name: firstName,
+                    last_name: lastName,
+                    email: email,
+                    role: role
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                user.first_name = firstName;
+                user.last_name = lastName;
+                user.email = email;
+                user.role = role;
+
+                row.data(user).draw(false);
+
+                alert("Account updated successfully.");
+
+            } else {
+                alert("Failed to update account: " + result.message);
+            }
+
+        } catch (error) {
+            console.error("Update User Error:", error);
+            alert("An error occurred while updating the account.");
+        }
+
+    });
+
+   // DELETE BUTTON CLICK
+    $('#manageUsersTable tbody').on('click', '.delete-btn', async function () {
+
+        const button = $(this);
+        const id = button.data('id');
+
+        const confirmed = confirm(
+            "Are you sure you want to delete this account?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        try {
+
+            const response = await fetch("../../models/delete_user.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    user_id: id
+                })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                table.row(button.closest('tr')).remove().draw();
+
+                alert("Account deleted successfully.");
+            } else {
+                alert("Failed to delete account: " + result.message);
+            }
+
+        } catch (error) {
+            console.error("Delete User Error:", error);
+            alert("An error occurred while deleting the account.");
+        }
+
     });
 
 
     // map sortField values to actual column indices
     var columnMap = {
-        firstname: 1,
-        lastname: 0,
-        idnum: 2,
-        userlevel: 4
-    };
+            firstname: 1,
+            lastname: 0,
+            idnum: 2,
+            userlevel: 4
+        };
 
     var currentDirection = 'asc'; // track current sort direction
 
