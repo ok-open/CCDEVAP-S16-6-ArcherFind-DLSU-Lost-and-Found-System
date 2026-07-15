@@ -1,5 +1,3 @@
-LocationController.php
-
 <?php
 
 require_once "../../db.php";

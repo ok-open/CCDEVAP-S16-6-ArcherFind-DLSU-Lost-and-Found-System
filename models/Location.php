@@ -1,5 +1,3 @@
-Location.php
-
 <?php
 
 class Location

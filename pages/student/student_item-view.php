@@ -123,7 +123,7 @@
     <div class="report-and-controls">
         <!-- SIDEBAR -->
         <button class="form-button" onclick="location.href='student_report-item.php'">
-            Report Your Lost Item
+            My Item is not here!
         </button>
 
         <!-- CONTROLS -->
@@ -162,6 +162,9 @@
                     <?php else: ?>
                         <img src="../../assets/ITEMS/default-item.png" alt="No Image">
                     <?php endif; ?>
+                    <div class="item-name-overlay">
+                        <p><?= htmlspecialchars($item['name']) ?></p>
+                    </div>
                 </a>
             <?php endforeach; ?>
         <?php else: ?>

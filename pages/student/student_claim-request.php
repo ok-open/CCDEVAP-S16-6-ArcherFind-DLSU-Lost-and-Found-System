@@ -1,6 +1,14 @@
 <?php
     require_once "../../controllers/StudentAuth.php";
     require_once "../../controllers/LocationController.php";
+    require_once "../../models/Item.php";
+    
+    // Fetch item details
+    $item = null;
+    if (isset($_GET['id'])) {
+        $itemModel = new Item($conn);
+        $item = $itemModel->getItemById($_GET['id']);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -12,7 +20,7 @@
 
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/student/student_claim-request.css">
+    <link rel="stylesheet" href="../../styles/student/student_lost-and-found-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
     <script src="../../javascript/global/image.js" defer></script>
     <script src="../../javascript/student/student_claim-request.js" defer></script>
@@ -121,121 +129,123 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
-    <div class="claim-wrapper">
-        <h2 class="claim-title">Request to Claim an Item</h2>
+    <div class="surrender-wrapper">
+        <div class="form-title">
+            <h2>Request to claim the item: <span class="student-claim-request-title"><?= $item ? htmlspecialchars($item["name"]): "N/A" ?></span></h2>
+            <h4 class="student-claim-request-description">Item description: <?= $item ? htmlspecialchars($item["description"]) : "Item description" ?></h4>
+        </div>
 
-        <form class="claim-form" method="POST" enctype="multipart/form-data" action="../../controllers/StudentClaimRequestController.php">            
+        <form class="form-wrapper" method="POST" enctype="multipart/form-data" action="../../controllers/StudentClaimRequestController.php">            
             <input type="hidden" name="item_id" value="<?= htmlspecialchars($_GET['id'] ?? '') ?>">
-            <div class="claim-left">
-                <h3 class="claim-section-title">Student Information</h3>
+            
+            <!-- LEFT SIDE -->
+            <section class="form-left">
+                <!-- STUDENT INFORMATION -->
+                <div class="question-box-wrapper">
+                    <h4>Student Information</h4>
+                    
+                    <div class="form-row">
+                        <div class="question-box">
+                            <label>Student Name</label>
+                            <input type="text" value="<?= htmlspecialchars($_SESSION['first_name'] . " " . $_SESSION['last_name']) ?>" readonly>
+                        </div>
 
-                <div class="form-group">
-                    <label>Student Name</label>
-                    <input type="text"  class="claim-input"  value="<?= htmlspecialchars($_SESSION['first_name'] . " " . $_SESSION['last_name']) ?>" readonly>
+                        <div class="question-box">
+                            <label>Student Email</label>
+                            <input type="email" value="<?= htmlspecialchars($_SESSION['email']) ?>" readonly>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label>Student Email</label>
-                    <input type="email" class="claim-input"  value="<?= htmlspecialchars($_SESSION['email']) ?>"  readonly>
-                </div>
-
-                <h3 class="claim-section-title">Where was this lost?</h3>
-                <div class="claim-location-row">
-                    <div class="form-group">
-                        <label>Building <span class="required">required field</span></label>
-                            <select class="claim-input" id="building_id" name="building_id" required>
+                <!-- WHERE WAS THIS LOST -->
+                <div class="question-box-wrapper">
+                    <h4>Where was this lost?</h4>
+                    
+                    <div class="form-row">
+                        <div class="question-box">
+                            <label>Building <span class="required">required field</span></label>
+                            <select id="building_id" name="building_id" required>
                                 <option value="">Select Building</option>
                                 <?php foreach ($buildings as $building): ?>
-                                    <option
-                                        value="<?= $building["building_id"] ?>"
-                                        data-max-level="<?= $building["max_level"] ?>">
+                                    <option value="<?= $building["building_id"] ?>" data-max-level="<?= $building["max_level"] ?>">
                                         <?= htmlspecialchars($building["name"]) ?>
                                     </option>
                                 <?php endforeach; ?>
                             </select>
+                        </div>
+
+                        <div class="question-box">
+                            <label>Floor number <span class="required">required field</span></label>
+                            <input type="number" id="floor_number" name="floor_number" min="1" required>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Floor number <span class="required">required field</span></label>
-                        <input type="number" class="claim-input" id="floor_number" name="floor_number" min="1" required>                        <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
-                        <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
-                    </div>
-                </div>
+                    <div class="form-row">
+                        <div class="question-box">
+                            <label>Area <span class="required">at least one required</span></label>
+                            <select id="area_id" name="area_id">
+                                <option value="">Select Area</option>
+                                <?php foreach ($areas as $area): ?>
+                                    <option value="<?= $area["area_id"] ?>" data-building="<?= $area["building_id"] ?>" data-level="<?= $area["level"] ?>">
+                                        <?= htmlspecialchars($area["name"]) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
 
-                <div class="claim-location-row">
-                    <div class="form-group">
-                        <label>Area <span class="required">at least one required</span></label>
-                        <select class="claim-input" id="area_id" name="area_id">
-                            <option value="">Select Area</option>
-                            <?php foreach ($areas as $area): ?>
-                                <option
-                                    value="<?= $area["area_id"] ?>"
-                                    data-building="<?= $area["building_id"] ?>"
-                                    data-level="<?= $area["level"] ?>">
-                                    <?= htmlspecialchars($area["name"]) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input" id="room_id" name="room_id">
-                            <option value="">Select Room</option>
-                            <?php foreach ($rooms as $room): ?>
-                                <option
-                                    value="<?= $room["room_id"] ?>"
-                                    data-building="<?= $room["building_id"] ?>"
-                                    data-level="<?= $room["level"] ?>">
-                                    <?= htmlspecialchars($room["name"]) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
+                        <div class="question-box">
+                            <label>Room <span class="required">at least one required</span></label>
+                            <select id="room_id" name="room_id">
+                                <option value="">Select Room</option>
+                                <?php foreach ($rooms as $room): ?>
+                                    <option value="<?= $room["room_id"] ?>" data-building="<?= $room["building_id"] ?>" data-level="<?= $room["level"] ?>">
+                                        <?= htmlspecialchars($room["name"]) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <h3 class="claim-section-title">When was this lost?</h3>
-                <div class="claim-date-row">
-                    <div class="form-group">
-                        <label>Date Lost <span class="required">required field</span></label>
-                        <input type="date" class="claim-input" name="date_lost" required>
-                    </div>
+                <!-- WHEN WAS THIS LOST -->
+                <div class="question-box-wrapper">
+                    <h4>When was this lost?</h4>
+                    
+                    <div class="form-row">
+                        <div class="question-box">
+                            <label>Date Lost <span class="required">required field</span></label>
+                            <input type="date" name="date_lost" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Time Lost <span class="required">required field</span></label>
-                        <input type="time" class="claim-input" name="time_lost" required>
+                        <div class="question-box">
+                            <label>Time Lost <span class="required">required field</span></label>
+                            <input type="time" name="time_lost" required>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <div class="claim-right">
-                <h3 class="claim-section-title">Item Verification</h3>
-                <div class="form-group">
-                    <label>
-                        Upload Proof of Ownership <span class="optional">optional</span>
-                    </label>
-
+            <!-- RIGHT SIDE -->
+            <section class="form-right">
+                <!-- UPLOAD PROOF OF OWNERSHIP -->
                 <label class="upload-box">
-                    <input type="file"  name="proof_image" accept="image/*">
-
+                    <input type="file" name="proof_image" accept="image/*">
                     <span class="upload-text">Click to Upload Image</span>
-
                     <img class="preview-image" alt="">
                 </label>
-                </div>
 
-                <div class="form-group">
-                    <label>
-                        Describe Features <span class="required">required</span>
-                    </label>
+                <!-- DESCRIBE FEATURES -->
+                <label>
+                    Describe Features
+                    <span class="required">required</span>
+                </label>
+                <textarea name="description" placeholder="Include details like scratches, stickers..." required></textarea>
 
-                    <textarea class="claim-input claim-textarea" name="description" placeholder="Include details like scratches, stickers..."required></textarea>
-                </div>
-
-                <button type="submit" class="claim-submit-btn">
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" class="form-button submit-button">
                     Submit Claim Request
                 </button>
-            </div>
+            </section>
         </form>
     </div>
     <div id="toast"></div>

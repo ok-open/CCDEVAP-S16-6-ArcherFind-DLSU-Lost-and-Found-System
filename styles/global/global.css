@@ -286,6 +286,12 @@ select:focus {
     outline: none;
 }
 
+/* READ ONLY */
+input[readonly] {
+    background-color: var(--color-secondary-hover);
+    cursor: not-allowed;
+}
+
 /* ----------------- CHECKBOXES & RADIOS ----------------- */
 input[type="checkbox"],
 input[type="radio"],

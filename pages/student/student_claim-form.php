@@ -123,7 +123,7 @@
     <div class="report-and-controls">
         <!-- SIDEBAR -->
         <button class="form-button" onclick="location.href='student_report-item.php'">
-            Report Your Lost Item
+            My Item is not here!
         </button>
 
         <!-- CONTROLS -->
@@ -149,28 +149,6 @@
     </div>
 
     <div class="claim-wrapper">
-        <!-- <section class="claim-toolbar">
-
-            <button class="report-btn" onclick="location.href='student_report-item.php'">
-                Report Your Lost Item
-            </button>
-
-            <input type="text" placeholder="Search for item..." class="search-bar">
-
-            <select class="sort-dropdown">
-                <option>Sort: Name</option>
-                <option>Sort: Recent</option>
-            </select>
-
-            <select class="filter-dropdown">
-                <option>Filter: All</option>
-                <option>Electronics</option>
-                <option>Miscellaneous</option>
-                <option>Identity Documents</option>
-                <option>Watch / Jewelry</option>
-            </select>
-        </section> -->
-
         <section class="claim-content">
 
             <div class="claim-image upload-box">

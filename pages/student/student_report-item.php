@@ -123,8 +123,8 @@
 
     <div class="surrender-wrapper">
         <div class="form-title">
-            <h2>Can't Find Your Belonging? Submit a missing item report.</h2>
-            <p>If you didn't see your item in our gallery, log its details here. We will monitor incoming surrenders and
+            <h2>Can't find the item you're looking for? Submit a missing item report.</h2>
+            <p>If you didn't see your item in our list, log its details here. We will monitor incoming surrenders and
                 notify you if a match is found.</p>
         </div>
 
@@ -135,8 +135,9 @@
                 <!-- QUESTION TITLE: What item are you looking for? -->
                 <div class="question-box-wrapper">
                     <div class="question-box">
+                        <h4>What item are you looking for?</h4>
                         <label for="name">
-                            <h4>What item are you looking for?</h4><span class="required">required field</span>
+                            Item Name<span class="required">required field</span>
                         </label>
                         <input type="text" id="name">
                     </div>
