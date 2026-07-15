@@ -1,65 +1,70 @@
 /**************** WRAPPER ****************/
-.account-wrapper{
+.account-wrapper {
     padding: var(--space-medium) var(--space-xlarge);
     display: flex;
     justify-content: center;
 }
 
 /**************** LAYOUT ****************/
-.account-layout{
+.account-layout {
     width: 100%;
     max-width: 800px;
-
+    flex-direction: column;
     display: flex;
     justify-content: center;
 }
 
 /**************** FORM ****************/
-.account-form{
+.account-form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--space-small);
 }
 
 /**************** NAME ROW ****************/
-.row.two-cols{
+.row.two-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-small);
 }
 
 /**************** INPUTS ****************/
-.form-group{
+.form-group {
     display: flex;
     flex-direction: column;
     gap: var(--space-tiny);
+    padding: var(--space-tiny) 0;
 }
 
-.form-group label{
+.form-group label {
     font-weight: 600;
 }
 
-.tag{
+.tag {
     font-size: 0.7rem;
-    background: gold;
+    background: var(--color-required);
     padding: 2px 6px;
     border-radius: 6px;
     margin-left: 8px;
 }
 
-.full{
+.full {
     width: 100%;
 }
 
 /**************** BUTTONS ****************/
-.button-stack{
+.button-stack {
+    padding-top: var(--space-medium);
     display: flex;
     flex-direction: column;
     gap: var(--space-small);
 }
 
-.save-btn{
+.save-btn, .disable-btn {
+    width: 100%;
+}
+
+.save-btn {
     background-color: var(--color-successMsg);
     color: var(--color-complement);
 
@@ -72,11 +77,11 @@
     transition: 0.2s ease;
 }
 
-.save-btn:hover{
+.save-btn:hover {
     background-color: color-mix(in srgb, var(--color-successMsg) 85%, black);
 }
 
-.disable-btn{
+.disable-btn {
     background-color: var(--color-errorMsg);
     color: var(--color-complement);
 
@@ -89,7 +94,7 @@
     transition: 0.2s ease;
 }
 
-.disable-btn:hover{
+.disable-btn:hover {
     background-color: color-mix(in srgb, var(--color-errorMsg) 85%, black);
 }
 
@@ -123,16 +128,26 @@
 }
 
 /* password hidden (default) - show open eye */
-.see-pass svg:first-child { display: block; }
-.see-pass svg:last-child { display: none; }
+.see-pass svg:first-child {
+    display: block;
+}
+
+.see-pass svg:last-child {
+    display: none;
+}
 
 /* password visible - show closed eye */
-.see-pass.active svg:last-child { display: block; }
-.see-pass.active svg:first-child { display: none; }
+.see-pass.active svg:last-child {
+    display: block;
+}
+
+.see-pass.active svg:first-child {
+    display: none;
+}
 
 
 /**************** TOAST ****************/
-#toast{
+#toast {
     position: fixed;
     top: 100px;
     right: 30px;
@@ -146,7 +161,7 @@
 
     font-weight: 600;
 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 
     opacity: 0;
     visibility: hidden;
@@ -158,41 +173,41 @@
     z-index: 9999;
 }
 
-#toast.show{
+#toast.show {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
 
 /**************** MOBILE VIEW ****************/
-@media (max-width: 900px){
+@media (max-width: 900px) {
 
-    .account-wrapper{
+    .account-wrapper {
         padding-top: 80px;
     }
 
-    .account-layout{
+    .account-layout {
         max-width: 100%;
     }
 
-    .row.two-cols{
+    .row.two-cols {
         grid-template-columns: 1fr;
     }
 
-    .account-form h2{
+    .account-form h2 {
         font-size: 1.6rem;
         text-align: left;
     }
 
     .save-btn,
-    .disable-btn{
+    .disable-btn {
         width: 100%;
     }
 }
 
-@media (max-width: 600px){
+@media (max-width: 600px) {
 
-    #toast{
+    #toast {
         top: 80px;
         left: 50%;
         right: auto;
@@ -205,7 +220,7 @@
         text-align: center;
     }
 
-    #toast.show{
+    #toast.show {
         transform: translate(-50%, 0);
     }
 }
