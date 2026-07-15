@@ -15,7 +15,7 @@
     <title>Verify Lost Item Reports Requests</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
+     
     <link rel="stylesheet" href="../../styles/global/staffadmin_lists.css">
     <link rel="stylesheet" href="../../styles/global/toast.css">
     <script src="../../javascript/global/toast.js" defer></script>

@@ -10,7 +10,7 @@
     <title>ArcherFind - Manage Staff</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
-    <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
+     
     <link rel="stylesheet" href="../../styles/admin/admin_manage-staff.css">
     <script src="../../javascript/global/navbar.js" defer></script>
 
