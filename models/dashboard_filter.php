@@ -1,13 +1,39 @@
 <?php
+
+session_start();
+
 header('Content-Type: application/json');
+
+if (
+    !isset($_SESSION["user_id"]) ||
+    !isset($_SESSION["role"]) ||
+    !in_array($_SESSION["role"], ["Admin", "Staff"])
+) {
+    http_response_code(403);
+
+    echo json_encode([
+        "success" => false,
+        "message" => "Unauthorized."
+    ]);
+
+    exit;
+}
 
 require_once("../db.php");
 
-if (!isset($_GET['from']) || !isset($_GET['to'])) {
+if (
+    !isset($_GET["from"]) ||
+    !isset($_GET["to"]) ||
+    empty($_GET["from"]) ||
+    empty($_GET["to"])
+) {
+    http_response_code(400);
+
     echo json_encode([
         "success" => false,
         "message" => "Missing dates."
     ]);
+
     exit;
 }
 
