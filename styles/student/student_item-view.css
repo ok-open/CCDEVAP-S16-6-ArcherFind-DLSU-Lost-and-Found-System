@@ -112,7 +112,7 @@ select.control-box {
     right: 0;
     background: var(--color-secondary-glass);
     padding: var(--space-small);
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.2s ease-out;
     border-radius: 0 0 var(--radius-medium) var(--radius-medium);
 }
@@ -130,9 +130,9 @@ select.control-box {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-.item-card:hover .item-name-overlay {
+/* .item-card:hover .item-name-overlay {
     opacity: 1;
-}
+} */
 
 .user-icon {
     width: 30px;

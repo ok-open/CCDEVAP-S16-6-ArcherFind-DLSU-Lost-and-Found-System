@@ -123,7 +123,7 @@
     <div class="report-and-controls">
         <!-- SIDEBAR -->
         <button class="form-button" onclick="location.href='student_report-item.php'">
-            My Item is not here!
+            Can't find your item? Click here!
         </button>
 
         <!-- CONTROLS -->

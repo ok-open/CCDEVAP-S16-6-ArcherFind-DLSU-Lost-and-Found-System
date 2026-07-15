@@ -62,6 +62,7 @@ if (!empty($_POST["when_found"]) && !empty($_POST["when_found_time"])) {
 // ======================================================
 
 $reportModel = new Reports($conn);
+$reportType = "Loss Report";
 
 $result = $reportModel->createReport(
     $_SESSION["user_id"],
@@ -74,7 +75,7 @@ $result = $reportModel->createReport(
     $areaId,
     $whenFound,
     "",
-    "Surrender Form"
+    $reportType
 );
 
 if ($result) {

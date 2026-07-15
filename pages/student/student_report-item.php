@@ -18,7 +18,7 @@
     <script src="../../javascript/global/image.js" defer></script>
     <script src="../../javascript/global/toast.js" defer></script>
     <script src="../../javascript/global/modal.js" defer></script>
-    <script src="../../javascript/student/submit-item.js" defer></script>
+    <script src="../../javascript/student/student_report-item.js" defer></script>
 </head>
 
 <body>

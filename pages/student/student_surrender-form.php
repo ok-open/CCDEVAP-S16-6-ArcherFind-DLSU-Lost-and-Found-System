@@ -18,7 +18,7 @@
     <script src="../../javascript/global/image.js" defer></script>
     <script src="../../javascript/global/toast.js" defer></script>
     <script src="../../javascript/global/modal.js" defer></script>
-    <script src="../../javascript/student/submit-item.js" defer></script>
+    <script src="../../javascript/student/student_surrender-form.js" defer></script>
 </head>
 
 <body>
@@ -131,23 +131,6 @@
                 rightful owner.</p>
         </div>
 
-        <?php
-        if (isset($_GET["success"])) {
-            $itemName = isset($_GET["item"]) ? trim($_GET["item"]) : "";
-            $successMessage = $itemName
-                ? 'Surrender form for "' . addslashes($itemName) . '" was submitted successfully!'
-                : 'Your surrender form has been submitted successfully!';
-            echo '<script>document.addEventListener("DOMContentLoaded", function() { if (typeof showToast === "function") { showToast(' . json_encode($successMessage, JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT) . ', "#4CAF50", 6000); } });</script>';
-        }
-
-        if (isset($_GET["error"])) {
-            $errorMessage = $_GET["error"] === "noitem"
-                ? "Item name is required"
-                : "Failed to submit your surrender form. Please try again.";
-            echo '<script>document.addEventListener("DOMContentLoaded", function() { if (typeof showToast === "function") { showToast("' . addslashes($errorMessage) . '", "var(--color-errorMsg)", 6000); } });</script>';
-        }
-        ?>
-
         <!-- SURRENDER FORM -->
         <form class="form-wrapper" method="POST" enctype="multipart/form-data" action="../../controllers/StudentSurrenderController.php">
             <!-- LEFT SIDE -->
@@ -183,7 +166,7 @@
                             <label for="brand-id">
                                 Brand<span class="required">required field</span>
                             </label>
-                            <input type="text" name="brand">
+                            <input type="text" name="brand" id="brand" required>
                         </div>
                     </div>
 
@@ -203,10 +186,12 @@
                         <!-- QUESTION: Building -->
                         <div class="question-box">
                             <label>Building <span class="required">required field</span></label>
-                            <select name="building_id">
+                            <select id="building_id" name="building_id" required>
                                 <option value="">Select Building</option>
                                 <?php foreach ($buildings as $building): ?>
-                                    <option value="<?= $building["building_id"] ?>"><?= htmlspecialchars($building["name"]) ?></option>
+                                    <option value="<?= $building["building_id"] ?>" data-max-level="<?= htmlspecialchars((string) $building["max_level"]) ?>">
+                                        <?= htmlspecialchars($building["name"]) ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -214,7 +199,7 @@
                         <!-- QUESTION: Floor number -->
                         <div class="question-box">
                             <label>Floor number <span class="required">required field</span></label>
-                            <input type="number" class="claim-input" id="claim-input" name="floor_number" min="1" max="20">
+                            <input type="number" class="claim-input" id="floor_number" name="floor_number" min="1" max="20" required>
                             <!-- FOR BACKEND: the max="", based on the building selected you will retrieve the max floor field -->
                             <!-- This floorNum input is not submitted with the form/report, it is just to filter the selection dropdown for area and room -->
                         </div>
@@ -224,10 +209,12 @@
                         <!-- QUESTION: Area -->
                         <div class="question-box">
                             <label>Area <span class="required">at least one required</span></label>
-                            <select class="claim-input" name="area_id">
+                            <select id="area_id" class="claim-input" name="area_id">
                                 <option value="">Select Area</option>
                                 <?php foreach ($areas as $area): ?>
-                                    <option value="<?= $area["area_id"] ?>"><?= htmlspecialchars($area["name"]) ?></option>
+                                    <option value="<?= $area["area_id"] ?>" data-building="<?= $area["building_id"] ?>" data-level="<?= $area["level"] ?>">
+                                        <?= htmlspecialchars($area["name"]) ?>
+                                    </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -235,10 +222,12 @@
                         <!-- QUESTION: Room number -->
                         <div class="question-box">
                             <label>Room <span class="required">at least one required</span></label>
-                        <select class="claim-input" name="room_id">
+                        <select id="room_id" class="claim-input" name="room_id">
                             <option value="">Select Room</option>
                             <?php foreach ($rooms as $room): ?>
-                                <option value="<?= $room["room_id"] ?>"><?= htmlspecialchars($room["name"]) ?></option>
+                                <option value="<?= $room["room_id"] ?>" data-building="<?= $room["building_id"] ?>" data-level="<?= $room["level"] ?>">
+                                    <?= htmlspecialchars($room["name"]) ?>
+                                </option>
                             <?php endforeach; ?>
                         </select>
                         </div>
@@ -295,8 +284,8 @@
         <div class="confirm-modal-content">
             <p id="confirm-modal-text"></p>
             <div class="confirm-modal-actions">
-                <button type="button" id="confirm-modal-cancel" class="form-button">Cancel</button>
-                <button type="button" id="confirm-modal-yes" class="form-button submit-button">Yes</button>
+                <button type="button" id="confirm-modal-cancel" class="form-button no-button">Cancel</button>
+                <button type="button" id="confirm-modal-yes" class="form-button yes-button">Yes</button>
             </div>
         </div>
     </div>
