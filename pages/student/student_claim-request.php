@@ -230,11 +230,11 @@
 
             <!-- RIGHT SIDE -->
             <section class="form-right">
-                <!-- UPLOAD PROOF OF OWNERSHIP -->
+                <!-- UPLOAD PROOF OF OWNERSHIP (up to 4 images) -->
                 <label class="upload-box">
-                    <input type="file" name="proof_image" accept="image/*">
-                    <span class="upload-text">Click to Upload Image</span>
-                    <img class="preview-image" alt="">
+                    <input type="file" name="images[]" accept="image/*" multiple>
+                    <span class="upload-text">Upload up to 4 images </span>
+                    <div class="preview-container"></div>
                 </label>
 
                 <!-- DESCRIBE FEATURES -->

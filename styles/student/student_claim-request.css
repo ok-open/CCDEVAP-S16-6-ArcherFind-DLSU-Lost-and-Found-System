@@ -104,6 +104,34 @@
     display: none;
 }
 
+.preview-container {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.preview-container .preview-thumb {
+    width: calc(50% - 8px);
+    height: calc(50% - 8px);
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.upload-text {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .required {
     background-color: var(--color-required);
     padding: 2px 6px;
