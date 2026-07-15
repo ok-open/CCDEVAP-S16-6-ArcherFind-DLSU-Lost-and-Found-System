@@ -3,7 +3,7 @@ $(document).ready(async function () {
     let data = [];
 
     try {
-        const response = await fetch("../../models/manage_users.php");
+        const response = await fetch("../../controllers/ManageUsersController.php?action=list");
         const result = await response.json();
 
         if (result.success) {
@@ -59,7 +59,7 @@ $(document).ready(async function () {
 
         try {
 
-            const response = await fetch("../../models/add_user.php", {
+            const response = await fetch("../../controllers/ManageUsersController.php?action=add", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -123,7 +123,7 @@ $(document).ready(async function () {
 
         try {
 
-            const response = await fetch("../../models/update_user.php", {
+            const response = await fetch("../../controllers/ManageUsersController.php?action=update", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -177,7 +177,7 @@ $(document).ready(async function () {
 
         try {
 
-            const response = await fetch("../../models/delete_user.php", {
+            const response = await fetch("../../controllers/ManageUsersController.php?action=delete", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

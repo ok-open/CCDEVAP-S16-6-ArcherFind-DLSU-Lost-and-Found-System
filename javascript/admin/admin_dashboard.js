@@ -1,4 +1,14 @@
 
+// CURRENT USER
+
+const currentUser = {
+    first_name: "Dan",
+    role: "Admin"
+};
+
+// Display logged in user's name
+document.getElementById("username").textContent = currentUser.first_name;
+
 // COLORS
 
 const root = document.documentElement;
@@ -205,9 +215,7 @@ async function applyDateFilter() {
 
     try {
 
-        const response = await fetch(
-            `../../models/dashboard_filter.php?from=${fromDateInput.value}&to=${toDateInput.value}`
-        );
+        const response = await fetch(`../../controllers/DashboardController.php?from=${fromDateInput.value}&to=${toDateInput.value}`);
 
         console.log("HTTP Status:", response.status);
 
@@ -282,7 +290,7 @@ async function loadDashboardSummary() {
 
     try {
 
-        const response = await fetch("../../models/dashboard_summary.php");
+        const response = await fetch("../../controllers/DashboardController.php");
 
         const data = await response.json();
 
