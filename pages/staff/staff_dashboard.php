@@ -169,11 +169,11 @@
                                 </div>
 
                                 <div class="view-dashboard">
-                                    <button type="button">
+                                    <button type="button"
+                                        onclick="location.href='../../pages/staff/staff_dashboard.php'">
                                         View Dashboard
                                     </button>
                                 </div>
-
                             </div>
 
                         </div>
