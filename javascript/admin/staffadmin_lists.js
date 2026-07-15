@@ -1,4 +1,4 @@
-// JAVASCRIPT FOR TOGGLING THE SIDE PANEL WHEN ICON_SEE IS CLICKED
+// 1. JAVASCRIPT FOR TOGGLING THE SIDE PANEL WHEN ICON_SEE IS CLICKED
 if (document.getElementById('SidePanel_Iconsee')) { 
     //This is needed for surrenderList.html toast message to work
     //It doesn't have a side panel, so we check first if there is a side panel to avoid null object
@@ -11,9 +11,17 @@ if (document.getElementById('SidePanel_Iconsee')) {
     });
     closePanelBtn.addEventListener('click', () => {sidePanel.classList.remove('open')});
 }
-// JAVASCRIPT FOR TOGGLING THE SIDE PANEL WHEN ICON_SEE IS CLICKED
 
-// Toggles the details panel inside an image card on click
+// 2. TOGGLE THE POSSIBLE MATCH ITEM'S DETAIL IN REPORT-LIST
+const images = document.querySelectorAll('.ImgMatches');
+
+    images.forEach((img) =>{
+        img.addEventListener('click', function(){
+            const detailsBox = this.parentElement.querySelector('.LostDetailsImgMatch');
+            detailsBox.classList.toggle('hidden');
+        })
+    })
+//TODO: details are not showing
 function toggleDetails(cardElement) {
     const details = cardElement.querySelector(".LostDetailsImgMatch");
     if (details) {
@@ -21,7 +29,7 @@ function toggleDetails(cardElement) {
     }
 }
 
-//* Dynamically fills and submits the hidden status action form
+// 3. CONFIRMATION MESSAGE BEFORE RESOLVE OR CLOSE REPORT
 function submitStatusAction(reportId, action) {
     const actionText = action === 'resolve' ? 'Resolve' : 'Close';
     const confirmMessage = `Are you sure you want to mark this report as ${actionText}?`;
@@ -33,7 +41,7 @@ function submitStatusAction(reportId, action) {
     }
 }
 
-//JAVASCRIPT FOR EXPANDING THE IMAGE
+// 4. JAVASCRIPT FOR EXPANDING THE IMAGE
 const modal = document.getElementById("ExpandPanel_ImgItem");
 const largeImg = document.getElementById("imgExpand");
 const allImages = document.querySelectorAll(".ImgItem");
@@ -51,22 +59,8 @@ modal.onclick = function(event) {
         modal.style.display = "none";
     }
 }
-//JAVASCRIPT FOR EXPANDING THE IMAGE
 
-//JAVASCRIPT FOR DROPDOWN INFO IN IMAGE MATCHES
-const images = document.querySelectorAll('.ImgMatches');
-
-    images.forEach((img) =>{
-        img.addEventListener('click', function(){
-            const detailsBox = this.parentElement.querySelector('.LostDetailsImgMatch');
-            detailsBox.classList.toggle('hidden');
-        })
-    })
-//JAVASCRIPT FOR DROPDOWN INFO IN IMAGE MATCHES
-
-//JAVASCRIPT FOR CAROUSELL IMAGE
-// staffadmin_lists.js
-
+// 4. JAVASCRIPT FOR THE IMAGE CAROUSELL
 // Keeps track of the active slide index for each individual record (e.g., { "0": 1, "1": 3 })
 let slideIndices = {};
 
@@ -116,7 +110,6 @@ function showSlides(n, group) {
     dots[slideIndices[group] - 1].className += " active-img";
   }
 }
-//JAVASCRIPT FOR CAROUSELL IMAGE
 
 //JAVASCRIPT FOR TOAST MESSAGES
 /*

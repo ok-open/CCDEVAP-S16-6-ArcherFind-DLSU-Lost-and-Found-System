@@ -3,7 +3,6 @@
 -- Example: When staff clicks "Mark as Resolved" or "Close Report" on the Claim Requests, Lost Reports, or Surrender Forms Page
 -- BACKEND CODE: Just need to do UPDATE reports SET status = 'Resolved' WHERE report_id = 12;
 DELIMITER $$
-
 CREATE TRIGGER log_ReportStatusChange
 AFTER UPDATE ON reports
 FOR EACH ROW

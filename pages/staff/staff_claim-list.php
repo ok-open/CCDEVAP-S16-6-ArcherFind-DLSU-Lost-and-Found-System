@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verify Lost Item Reports Requests</title>
+    <title>Verify Claim Requests</title>
     <link rel="stylesheet" href="../../styles/global/global.css">
     <link rel="stylesheet" href="../../styles/global/navbar.css">
     <link rel="stylesheet" href="../../styles/admin/navbar-admin.css">
@@ -214,7 +214,7 @@
                     <?php if (!empty($imagePaths)): ?>
                         <!-- Full-width images dynamically grouped by record index -->
                         <?php foreach ($imagePaths as $imgIndex => $path): ?>
-                            <!-- Note the class "slide-group-$recordIndex" -->
+                            <!-- Note the class "slide-group-$recordIndex" the recordIndex indicates which record the image belongs to-->
                             <!-- 4. Generate the div for each image slide -->
                             <div class="mySlides fade slide-group-<?= $recordIndex ?>" style="display: <?= $imgIndex === 0 ? 'block' : 'none'; ?>">
                                 <img class="ImgItem" src="<?= htmlspecialchars($path) ?>" alt="Item Image">
@@ -228,7 +228,7 @@
                         <!-- The dots/circles (Passing the recordIndex to currentSlide) -->
                         <div style="text-align:center">
                             <?php foreach ($imagePaths as $imgIndex => $path): ?>
-                                <!-- Note the class "dot-group-<?= $recordIndex ?>" -->
+                                <!-- Note the class "dot-group-$recordIndex" -->
                                 <span class="dot dot-group-<?= $recordIndex ?> <?= $imgIndex === 0 ? 'active-img' : '' ?>" 
                                     onclick="currentSlide(<?= $imgIndex + 1 ?>, <?= $recordIndex ?>)"></span>
                             <?php endforeach; ?>
@@ -247,7 +247,7 @@
                 <div class="item-name">
                     <h2><?= htmlspecialchars($report['claim_item_name']) ?></h2>
                     <div class="request-buttons-panel">
-                        <!-- POSSIBLE MATCHES BUTTON -->
+                        <!-- INFORMATION AND PROOF BUTTON -->
                         <a href="?selected_report=<?= $report['report_id'] ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($category) ?>&sort=<?= urlencode($sortBy) ?>" 
                             class="request-button openPanelBtn" 
                             style="text-decoration: none; display: inline-flex; align-items: center;">

@@ -54,9 +54,9 @@ class Reports{
         }
     }
 
-    /**
-     * Gets the most recently inserted item ID for a specific surrendered_by user
-     */
+    // 1. Gets the most recently inserted item ID for a specific surrendered_by user
+    // USED WHEN A SURRENDER FORM IS ACCEPTED, and the surrendered item is added to the ITEMS table
+    
     public function getLastInsertedItem($studentId) {
         $sql = "SELECT item_id FROM items 
                 WHERE surrendered_by = :student_id 
@@ -68,9 +68,8 @@ class Reports{
         return $result ? $result['item_id'] : null;
     }
 
-    /**
-     * Inserts a new image reference for a physical item
-     */
+    // 2. Inserts a new image reference for a physical item
+    // USED WHEN A SURRENDER FORM IS ACCEPTED, and the surrendered item's image is added to the ITEMS_IMAGES table
     public function insertItemImage($itemId, $filePath) {
         $sql = "INSERT INTO items_images (item_id, img_filepath) VALUES (:item_id, :img_filepath)";
         $stmt = $this->conn->prepare($sql);
@@ -79,6 +78,7 @@ class Reports{
         return $stmt->execute();
     }
     
+    // 3. Gets the Surrender Forms, includes all the images, location, and user details
     public function getSurrenderForms($search = '', $category = '', $sortBy = 'recent')
     {
     // 1. Base SQL Query (Aggregated safely via isolated Subquery)
@@ -92,7 +92,7 @@ class Reports{
                 u.email AS student_email,               
                 COALESCE(rms.name, ars.name, 'Unknown Location') AS location_found,
                 
-                -- SAFELY FETCH IMAGES WITHOUT ROW COLLAPSE
+                -- Fetch image paths, concat and separated for the multiple paths. The paths are split up in the view
                 (SELECT GROUP_CONCAT(ri.img_filepath ORDER BY ri.image_id ASC SEPARATOR ',') 
                  FROM reports_images ri 
                  WHERE ri.report_id = r.report_id) AS image_paths
@@ -110,16 +110,14 @@ class Reports{
               AND r.status = 'Active'
               AND r.deleted = '0'";
 
-    // 2. Append Dynamic WHERE Conditions
+    // 2. Append Dynamic WHERE Conditions, for the search bar
     if (!empty($search)) {
         $sql .= " AND r.item_name LIKE :search";
     }
 
-    if (!empty($category)) {
+    if (!empty($category)) { // for the chosen category
         $sql .= " AND cat.name = :category";
     }
-
-    // NO GLOBAL GROUP BY REQUIRED ANYMORE!
 
     // 3. Dynamic ORDER BY
     if ($sortBy === 'name') {
@@ -151,10 +149,8 @@ class Reports{
     return $rows;
 }
 
-    /**
-     * Retrieves Active Claim Requests along with matching found item inventory details,
-     * proof of ownership texts, and claimant uploads.
-     */
+    // 4. Gets Active Claim Requests with the matching found item inventory details, 
+    // proof of ownership texts, and claimant uploads.
     public function getClaimRequests($search = '', $category = '', $sortBy = 'recent')
     {
         $sql = "SELECT 
@@ -252,8 +248,7 @@ class Reports{
     }
 
 
-    // Retrieving Active Loss Reports
-    // Retrieving Active Loss Reports with Dynamic Filters
+    // 5. Gets Active Loss Reports
     public function getLossReports($search = '', $category = '', $sortBy = 'recent')
     {
         // 1. Base SQL Query (We left join the categories table to match by category name)
@@ -324,62 +319,65 @@ class Reports{
         return $rows;
     }
 
-    public function getPossibleMatches($itemName) {
-    // 1. Clean and split the item name into individual search terms (words)
-    // Example: "Black Oversize Hoodie" -> ['Black', 'Oversize', 'Hoodie']
-    $words = preg_split('/\s+/', trim($itemName));
-    $words = array_filter($words, function($word) {
-        // Filter out short/common stop words like "a", "an", "the", "with", "of" 
-        return strlen($word) > 3; 
-    });
+    // 6. Get Possible Matches of an item based on NAME, for Loss Reports
+    public function getPossibleMatches($itemName) 
+    {
+        // 1. Clean and split the item name into individual search terms (words)
+        // Example: "Black Oversize Hoodie" -> ['Black', 'Oversize', 'Hoodie']
+        $words = preg_split('/\s+/', trim($itemName));
+        $words = array_filter($words, function($word) {
+            // Filter out short/common stop words like "a", "an", "the", "with", "of" 
+            return strlen($word) > 3; 
+        });
 
-    // If no valid search words remain, default back to the entire string
-    if (empty($words)) {
-        $words = [$itemName];
+        // If no valid search words remain, default back to the entire string
+        if (empty($words)) {
+            $words = [$itemName];
+        }
+
+        // 2. Build dynamic SQL with OR conditions for each keyword
+        $sql = "SELECT 
+                    i.item_id,
+                    i.name AS item_name,
+                    i.description,
+                    COALESCE(rms.name, ars.name, 'Unknown Location') AS location_found,
+                    i.when_found,
+                    -- Get the first image associated with this item as its thumbnail
+                    (SELECT img_filepath 
+                    FROM items_images 
+                    WHERE item_id = i.item_id 
+                    LIMIT 1) AS primary_image
+                FROM items i
+                LEFT JOIN rooms rms ON i.room_id = rms.room_id
+                LEFT JOIN areas ars ON i.area_id = ars.area_id
+                WHERE i.status = 'In Storage' ";
+
+        // Append keyword matching constraints
+        $conditions = [];
+        foreach ($words as $index => $word) {
+            $conditions[] = "i.name LIKE :word_" . $index;
+        }
+
+        if (!empty($conditions)) {
+            $sql .= " AND (" . implode(" OR ", $conditions) . ")";
+        }
+
+        // Order matches by relevance (approximate: sorting newer items first)
+        $sql .= " ORDER BY i.when_found DESC LIMIT 10;";
+
+        $stmt = $this->conn->prepare($sql);
+
+        // 3. Bind each keyword parameter safely
+        foreach ($words as $index => $word) {
+            $paramValue = "%" . $word . "%";
+            $stmt->bindValue(":word_" . $index, $paramValue);
+        }
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // 2. Build dynamic SQL with OR conditions for each keyword
-    $sql = "SELECT 
-                i.item_id,
-                i.name AS item_name,
-                i.description,
-                COALESCE(rms.name, ars.name, 'Unknown Location') AS location_found,
-                i.when_found,
-                -- Get the first image associated with this item as its thumbnail
-                (SELECT img_filepath 
-                 FROM items_images 
-                 WHERE item_id = i.item_id 
-                 LIMIT 1) AS primary_image
-            FROM items i
-            LEFT JOIN rooms rms ON i.room_id = rms.room_id
-            LEFT JOIN areas ars ON i.area_id = ars.area_id
-            WHERE i.status = 'In Storage' ";
-
-    // Append keyword matching constraints
-    $conditions = [];
-    foreach ($words as $index => $word) {
-        $conditions[] = "i.name LIKE :word_" . $index;
-    }
-
-    if (!empty($conditions)) {
-        $sql .= " AND (" . implode(" OR ", $conditions) . ")";
-    }
-
-    // Order matches by relevance (approximate: sorting newer items first)
-    $sql .= " ORDER BY i.when_found DESC LIMIT 10;";
-
-    $stmt = $this->conn->prepare($sql);
-
-    // 3. Bind each keyword parameter safely
-    foreach ($words as $index => $word) {
-        $paramValue = "%" . $word . "%";
-        $stmt->bindValue(":word_" . $index, $paramValue);
-    }
-
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
+    //7. get the categories
     public function getCategories()
     {
         $sql = "
@@ -397,6 +395,7 @@ class Reports{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //8. Resolves a Report
     public function resolveReport($reportId, $staffId) {
         $sql = "UPDATE reports 
                 SET status = 'Resolved', 
@@ -411,6 +410,7 @@ class Reports{
         return $stmt->execute();
     }
 
+    //9. Closes a report
     public function closeReport($reportId, $staffId) {
         $sql = "UPDATE reports 
                 SET status = 'Closed', 

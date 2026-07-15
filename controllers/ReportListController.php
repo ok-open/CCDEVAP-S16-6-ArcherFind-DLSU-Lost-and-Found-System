@@ -7,23 +7,24 @@ error_reporting(E_ALL);
 require_once "../../db.php";
 require_once "../../models/Report.php";
 
-// Start session if not already started to get the current staff user ID
-if (session_status() === PHP_SESSION_NONE) {
+// Start session to get the current staff user ID
+if (session_status() === PHP_SESSION_NONE) { //In case the session started already
     session_start();
 }
 
-// Assuming your login flow stores the logged-in user's ID in $_SESSION['user_id']
+// the logged-in user's ID in $_SESSION['user_id']
 $staffId = $_SESSION['user_id'] ?? 1; // Fallback to 1 for testing if session is not active yet
 
-$reportModel = new Reports($conn);
+$reportModel = new Reports($conn); //Create a Model with the connection, to perform the functions in the model
 
-// ------------------- NEW: HANDLE STATUS UPDATES (POST) -------------------
+// 1. TO HANDLE SURRENDER FORMS RESOLVE AND CLOSE. It will move the image from the IMG_SurrenderForm folder to the ITEMS Folder
+// Ensure you have allowed permission for vscode, check the txt file in controllers (permissionfile.txt) for the sudo command
+
 // 1. Accept both POST and GET requests dynamically
 $reportId = $_REQUEST['report_id'] ?? null;
 $action = $_REQUEST['action'] ?? null;
-
 if ($reportId && $action) {
-    // Fetch details of the report before resolving it
+    // 2.. Fetch details of the report before resolving it
     $sql = "SELECT type, student_id FROM reports WHERE report_id = :report_id";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':report_id', $reportId, PDO::PARAM_INT);
@@ -31,48 +32,50 @@ if ($reportId && $action) {
     $reportData = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($action === 'resolve' || $action === 'Resolved') {
+        //2. Once verified to resolved, run the resolveReport function
         // This fires TRIGGER 3, creating the new record in the `items` table
         $reportModel->resolveReport($reportId, $staffId);
 
-        // Handle Surrender Form Image Transfer
-        if ($reportData && $reportData['type'] === 'Surrender Form') {
+        // 3. Handle Surrender Form Image Transfer
+        if ($reportData && $reportData['type'] === 'Surrender Form') {// 4. check ensure it is a Surrender Form
             $studentId = $reportData['student_id'];
             
-            // Retrieve the newly created item_id (inserted by Trigger 3)
+            // 5. Retrieve the newly created item_id (inserted by Trigger 3)
             $newItemId = $reportModel->getLastInsertedItem($studentId);
             
             if ($newItemId) {
-                // Fetch all existing report images for this Surrender Form
+                // 6. Fetch all existing report images record for this Surrender Form
                 $imgSql = "SELECT img_filepath FROM reports_images WHERE report_id = :report_id";
                 $imgStmt = $conn->prepare($imgSql);
                 $imgStmt->bindParam(':report_id', $reportId, PDO::PARAM_INT);
                 $imgStmt->execute();
                 $images = $imgStmt->fetchAll(PDO::FETCH_ASSOC);
 
+                // 7. Renaming of the file path
                 foreach ($images as $img) {
-                    $rawDatabasePath = $img['img_filepath']; // e.g., "../../assets/IMG_SurrenderForm/surrender7.png"
-                    $fileName = basename($rawDatabasePath); // e.g., "surrender7.png"
+                    $rawDatabasePath = $img['img_filepath']; // 8. Get raw file path, ex. "../../assets/IMG_SurrenderForm/surrender7.png"
+                    $fileName = basename($rawDatabasePath); // 9. Get filename only, ex. "surrender7.png"
 
-                    // Absolute Project Root Directory on disk
+                    // 10. Get the Absolute Project Root Directory on disk
                     $projectRoot = dirname(__DIR__); 
 
                     // Absolute paths (no relative backtracking) for filesystem operations
-                    $cleanSourceRelative = str_replace('../../', '', $rawDatabasePath); 
-                    $absoluteSourcePath = $projectRoot . '/' . $cleanSourceRelative;
-                    $absoluteTargetPath = $projectRoot . '/assets/ITEMS/' . $fileName;
-                    $targetDirectory = $projectRoot . '/assets/ITEMS/';
+                    $cleanSourceRelative = str_replace('../../', '', $rawDatabasePath); //11. remove the backtrailing paths, replace with a space
+                    $absoluteSourcePath = $projectRoot . '/' . $cleanSourceRelative; //12. add the root path, a dash, and the "assets/IMG_SurrenderForm/surrender7.png"
+                    $absoluteTargetPath = $projectRoot . '/assets/ITEMS/' . $fileName; //13. Add the root path, target folder, and the file name
+                    $targetDirectory = $projectRoot . '/assets/ITEMS/'; // 14. the target directory
 
-                    // Ensure target directory exists on disk
+                    // 15. Check target directory exists on disk
                     if (!is_dir($targetDirectory)) {
-                        mkdir($targetDirectory, 0777, true);
+                        mkdir($targetDirectory, 0777, true); //sysad stuff read, write permissions
                     }
 
-                    // Perform the physical copy on disk
-                    if (file_exists($absoluteSourcePath)) {
-                        if (copy($absoluteSourcePath, $absoluteTargetPath)) {
-                            // Save with relative "../../" format for frontend template display
+                    //16. Perform the physical COPY AND PASTE on disk
+                    if (file_exists($absoluteSourcePath)) { 
+                        if (copy($absoluteSourcePath, $absoluteTargetPath)) {//17. Copies the image to the target folder
+                            // 18. Save with relative "../../" format for frontend template display
                             $dbRelativePath = "../../assets/ITEMS/" . $fileName;
-                            $reportModel->insertItemImage($newItemId, $dbRelativePath);
+                            $reportModel->insertItemImage($newItemId, $dbRelativePath); // 19. Insert new record in items_images table with the new file path
                         } else {
                             error_log("ArcherFind Error: PHP copy() failed from $absoluteSourcePath to $absoluteTargetPath");
                         }
@@ -82,7 +85,7 @@ if ($reportId && $action) {
                 }
             }
         }
-    } elseif ($action === 'close' || $action === 'Closed') {
+    } elseif ($action === 'close' || $action === 'Closed') { //For close reports, we just close the status. And the item is not added to the official ITEMS table
         $reportModel->closeReport($reportId, $staffId);
     }
 
@@ -107,12 +110,12 @@ $claimRequests = $reportModel->getClaimRequests($search, $category, $sortBy);
 $surrenderForms = $reportModel->getSurrenderForms($search, $category, $sortBy);
 
 
-// 3. NEW: Check if the user clicked "Possible Matches" on a specific report
-$selectedReportId = $_GET['selected_report'] ?? null;
+// 3. Check if the user clicked "Information and Proof" on a specific report
+$selectedReportId = $_GET['selected_report'] ?? null; // if from claim-list.php the value stops here
 $possibleMatches = [];
 $selectedReportName = "";
 
-if ($selectedReportId) {
+if ($selectedReportId) {//if from "Possible Matches" on report-list.php, that id is used to find possible matches based on NAME
     // Locate the selected report in our current array to get its item_name
     foreach ($lossReports as $report) {
         if ($report['report_id'] == $selectedReportId) {

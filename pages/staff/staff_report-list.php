@@ -1,6 +1,8 @@
 <?php
     require_once "../../controllers/StaffAuth.php";
-    require_once "../../controllers/ReportListController.php";
+    require_once "../../controllers/ReportListController.php";//Starts the controller
+    //some variables are red underline due to being undefined, this is because it is initialized in the controller
+    //it will still work
 
 ?>
 
@@ -160,6 +162,7 @@
     </header>
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
     <!-- CONTROLS -->
+    <!-- GET function to retrieve the input from the staff-->
     <form method="GET" action="" class="controls-wrapper">
         <div class="title">
             <h2>Review Lost Reports</h2>
@@ -181,6 +184,7 @@
             <!-- Filter Dropdown (maps to 'category' query param) -->
             <select name="category" class="control-box filter-dropdown" onchange="this.form.submit()">
                 <option value="">Filter: All</option>
+                <!-- The dropdown options are added dynamically with categories from the database -->
                 <?php foreach ($categories as $cat): ?>
                     <option value="<?= htmlspecialchars($cat['name']) ?>" <?= (($_GET['category'] ?? '') === $cat['name']) ? 'selected' : '' ?>> 
                         <?= htmlspecialchars($cat['name']) ?>
@@ -193,14 +197,16 @@
     <!-- REQUESTS -->
     <div class="requests-wrapper">
         <!-- REQUEST RECORD -->
-        <?php if (empty($lossReports)): ?>
+        <?php if (empty($lossReports)): ?><!-- 1. Check first if there are active loss reports -->
     <div class="no-records" style="text-align: center; padding: 50px; color: #0c2100;">
         <h3>No Active Loss Reports Found</h3>
     </div>
+    <!-- 2. If there is active, then begin loop to display each record-->
+    <!-- Each record is stored in $report -->
 <?php else: ?>
     <?php foreach ($lossReports as $recordIndex => $report): ?>
         <?php 
-            // 1. Separate the comma-delimited image paths into an array
+            // 3. Separate the comma-delimited image paths into an array
             $imagePaths = !empty($report['image_paths']) ? explode(',', $report['image_paths']) : [];
         ?>
         <div class="request-record">
@@ -209,7 +215,8 @@
                     <?php if (!empty($imagePaths)): ?>
                         <!-- Full-width images dynamically grouped by record index -->
                         <?php foreach ($imagePaths as $imgIndex => $path): ?>
-                            <!-- Note the class "slide-group-<?= $recordIndex ?>" -->
+                            <!-- Note the class "slide-group-$recordIndex" the recordIndex indicates which record the image belongs to-->
+                            <!-- 4. Generate the div for each image slide -->
                             <div class="mySlides fade slide-group-<?= $recordIndex ?>" style="display: <?= $imgIndex === 0 ? 'block' : 'none'; ?>">
                                 <img class="ImgItem" src="<?= htmlspecialchars($path) ?>" alt="Item Image">
                             </div>
@@ -222,7 +229,7 @@
                         <!-- The dots/circles (Passing the recordIndex to currentSlide) -->
                         <div style="text-align:center">
                             <?php foreach ($imagePaths as $imgIndex => $path): ?>
-                                <!-- Note the class "dot-group-<?= $recordIndex ?>" -->
+                                <!-- Note the class "dot-group-$recordIndex" -->
                                 <span class="dot dot-group-<?= $recordIndex ?> <?= $imgIndex === 0 ? 'active-img' : '' ?>" 
                                     onclick="currentSlide(<?= $imgIndex + 1 ?>, <?= $recordIndex ?>)"></span>
                             <?php endforeach; ?>
@@ -249,14 +256,15 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M359.52-174.91q-84.11-33.44-138.88-104.21-54.77-70.77-65.77-160.88h91.76q8.76 51.8 38.16 94.49 29.41 42.68 74.73 69.68v100.92ZM503.11-71.87q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36v-236.41q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.19 15.3 8.2 24.49 22.87L671-384.3h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36Q848.35-71.87 820-71.87H503.11ZM140.24-515.22q-28.35 0-48.36-20.01-20.01-20.01-20.01-48.36V-820q0-28.35 20.01-48.24t48.36-19.89h91.35q17.15 0 32.44 8.2 15.3 8.19 24.49 22.86l19.61 29.42h149q28.35 0 48.24 19.89t19.89 48.24v175.93q0 28.35-19.89 48.36-19.89 20.01-48.24 20.01H140.24ZM717.37-480q0-63.33-31.4-117.27-31.4-53.95-85.49-86.66v-100.68Q694.59-746.65 751.36-664q56.77 82.65 56.77 184h-90.76Z"/></svg>
                         </a>
                         
-                        <!-- RESOLVE BUTTON -->
-                        <button type="button" class="request-button accept-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
+                        <!-- RESOLVE BUTTON  -->
+                        <!-- Toast messages show for short time only due to refresh of page -->
+                        <button type="button" class="request-button accept-btn" onclick="onResolveLostReport(), submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
                             Mark as Resolved
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
                         </button><br>
                         
                         <!-- CLOSE BUTTON -->
-                        <button type="button" class="request-button reject-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'close')">
+                        <button type="button" class="request-button reject-btn" onclick="onCloseLostReport(), submitStatusAction(<?= $report['report_id'] ?>, 'close')">
                             Close Report
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
                         </button><br>
@@ -277,7 +285,7 @@
                         <!-- TIME LOST -->
                         <div class="detail-box">
                             <label>Estimated Time Lost</label>
-                            <!-- Format standard military time (HH:MM:SS) to (HH:MM AM/PM) if you wish, or keep raw value -->
+                            <!-- Formats time to Hour, Minute, PM/AM -->
                             <input type="time" value="<?= htmlspecialchars(date('H:i', strtotime($report['time_lost']))) ?>" readonly>
                         </div>
 
@@ -318,59 +326,60 @@
         
     <div id="toast"></div>
 
-    <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    <!-- This groups information for 1 record.-->
     </div>
 
 
     <!-- PHP checks if a report was selected to automatically apply the display class on reload -->
-<div id="SidePanel_Iconsee" class="<?= !empty($selectedReportId) ? 'open' : '' ?>" style="<?= empty($selectedReportId) ? 'display: none;' : 'display: block;' ?>">
-    
-    <!-- Close Button: Simply redirects back to the page without a selected_report ID -->
-    <a href="?search=<?= urlencode($search) ?>&category=<?= urlencode($category) ?>&sort=<?= urlencode($sortBy) ?>" class="close" id="closePanelBtn" style="text-decoration: none; text-align: center;">close</a>
-    
-    <h2>Possible Matches</h2>
+    <!-- /selectedReportID gets its value when the user clicks "POSSIBLE MATCHES", the selected_report goes to the controller -->
+    <div id="SidePanel_Iconsee" class="<?= !empty($selectedReportId) ? 'open' : '' ?>" style="<?= empty($selectedReportId) ? 'display: none;' : 'display: block;' ?>">
+        
+        <!-- Close Button: Simply redirects back to the page without a selected_report ID -->
+        <a href="?search=<?= urlencode($search) ?>&category=<?= urlencode($category) ?>&sort=<?= urlencode($sortBy) ?>" class="close" id="closePanelBtn" style="text-decoration: none; text-align: center;">close</a>
+        
+        <h2>Possible Matches</h2>
 
-    <div id="SidePanel_ImgContainer">
-        <?php if (!empty($possibleMatches)): ?>
-            <?php foreach ($possibleMatches as $match): ?>
-                <?php 
-                    $imgSrc = !empty($match['primary_image']) ? $match['primary_image'] : '../../assets/placeholder-item.png'; 
-                ?>
-                <!-- Standard HTML cards containing details -->
-                <div class="ImgCard" onclick="toggleDetails(this)">
-                    <img class="ImgMatches" alt="ImageItem" src="<?= htmlspecialchars($imgSrc) ?>">
-                    
-                    <div class="LostDetailsImgMatch hidden">
-                        <h2><?= htmlspecialchars($match['item_name']) ?></h2>
-                        <h3>Description:</h3>
-                        <p><?= htmlspecialchars($match['description'] ?: 'No description provided') ?></p>
-                        <h3>Date Found:</h3>
-                        <p><?= htmlspecialchars(date('Y-m-d', strtotime($match['when_found']))) ?></p>
-                        <h3>Time Found:</h3>
-                        <p><?= htmlspecialchars(date('h:i A', strtotime($match['when_found']))) ?></p>
-                        <h3>Location:</h3>
-                        <p><?= htmlspecialchars($match['location_found']) ?></p>
+        <!-- After the controller, and the model function (getPossibleMatches), $possibleMatches contains the Item records that match -->
+        <div id="SidePanel_ImgContainer">
+            <?php if (!empty($possibleMatches)): ?>
+                <?php foreach ($possibleMatches as $match): ?>
+                    <?php 
+                        $imgSrc = !empty($match['primary_image']) ? $match['primary_image'] : '../../assets/placeholder-item.png'; 
+                    ?>
+                    <!-- Standard HTML cards containing details -->
+                    <div class="ImgCard" onclick="toggleDetails(this)">
+                        <img class="ImgMatches" alt="ImageItem" src="<?= htmlspecialchars($imgSrc) ?>">
+                        
+                        <div class="LostDetailsImgMatch hidden">
+                            <h2><?= htmlspecialchars($match['item_name']) ?></h2>
+                            <h3>Description:</h3>
+                            <p><?= htmlspecialchars($match['description'] ?: 'No description provided') ?></p>
+                            <h3>Date Found:</h3>
+                            <p><?= htmlspecialchars(date('Y-m-d', strtotime($match['when_found']))) ?></p>
+                            <h3>Time Found:</h3>
+                            <p><?= htmlspecialchars(date('h:i A', strtotime($match['when_found']))) ?></p>
+                            <h3>Location:</h3>
+                            <p><?= htmlspecialchars($match['location_found']) ?></p>
+                        </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p style="color: #0c2100; padding: 20px; text-align: center;">No current storage matches found.</p>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p style="color: #0c2100; padding: 20px; text-align: center;">No current storage matches found.</p>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 
-<!-- =========================================================================
-     HIDDEN FORM FOR STATUS ACTIONS (Place this anywhere near bottom of file)
-     ========================================================================= -->
-<form id="statusActionForm" method="POST" style="display: none;">
-    <input type="hidden" name="report_id" id="formReportId">
-    <input type="hidden" name="action" id="formAction">
-    
-    <!-- Preserves current filter states upon submission -->
-    <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
-    <input type="hidden" name="category" value="<?= htmlspecialchars($category) ?>">
-    <input type="hidden" name="sort" value="<?= htmlspecialchars($sortBy) ?>">
-</form>
+    <!-- HIDDEN FORM FOR STATUS ACTIONS -->
+    <!-- this form submits the report ID, and wether we are "Resolve" or "Close" the report to the Controller -->
+    <form id="statusActionForm" method="POST" style="display: none;">
+        <input type="hidden" name="report_id" id="formReportId">
+        <input type="hidden" name="action" id="formAction">
+        
+        <!-- Preserves current filter states upon submission -->
+        <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
+        <input type="hidden" name="category" value="<?= htmlspecialchars($category) ?>">
+        <input type="hidden" name="sort" value="<?= htmlspecialchars($sortBy) ?>">
+    </form>
 
     <div id="ExpandPanel_ImgItem" class="modal">
         <img class="modal-content" id="imgExpand">
