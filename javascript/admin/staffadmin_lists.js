@@ -23,7 +23,7 @@ function toggleDetails(cardElement) {
 // 3. CONFIRMATION MESSAGE BEFORE RESOLVE OR CLOSE REPORT
 function submitStatusAction(reportId, action) {
     const actionText = action === 'resolve' ? 'Resolve' : 'Close';
-    const confirmMessage = `Are you sure you want to mark this report as ${actionText}?`;
+    const confirmMessage = `Do you wish to mark this report as '${actionText}?'`;
     
     if (confirm(confirmMessage)) {
         document.getElementById('formReportId').value = reportId;
