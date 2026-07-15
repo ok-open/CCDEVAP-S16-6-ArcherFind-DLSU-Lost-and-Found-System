@@ -103,7 +103,13 @@ class Item
                     FROM items_images
                     WHERE item_id = i.item_id
                     LIMIT 1
-                ) AS img_filepath
+                ) AS img_filepath,
+
+                (
+                    SELECT GROUP_CONCAT(img_filepath ORDER BY image_id SEPARATOR ',')
+                    FROM items_images
+                    WHERE item_id = i.item_id
+                ) AS image_paths
 
             FROM items i
 

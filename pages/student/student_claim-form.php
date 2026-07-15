@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../styles/global/navbar.css">
     <link rel="stylesheet" href="../../styles/student/student_claim-form.css">
     <script src="../../javascript/global/navbar.js" defer></script>
+    <script src="../../javascript/student/student_claim-form.js" defer></script>
 </head>
 
 <body>
@@ -149,10 +150,33 @@
     </div>
 
     <div class="claim-wrapper">
+        <?php $imagePaths = !empty($item["image_paths"]) ? explode(',', $item["image_paths"]) : []; ?>
         <section class="claim-content">
 
             <div class="claim-image upload-box">
-                <img src="<?= htmlspecialchars($item["img_filepath"] ?: "../../assets/ITEMS/no-image.png") ?>" class="preview-image" alt="<?= htmlspecialchars($item["name"]) ?>">
+                <?php if (!empty($imagePaths)): ?>
+                    <?php foreach ($imagePaths as $imgIndex => $path): ?>
+                        <div class="mySlides fade slide-group-0" style="display: <?= $imgIndex === 0 ? 'block' : 'none'; ?>">
+                            <img src="<?= htmlspecialchars($path) ?>" class="preview-image" alt="<?= htmlspecialchars($item["name"]) ?> image <?= $imgIndex + 1 ?>">
+                        </div>
+                    <?php endforeach; ?>
+
+                    <?php if (count($imagePaths) > 1): ?>
+                        <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+
+                        <div class="carousel-dots">
+                            <?php foreach ($imagePaths as $imgIndex => $path): ?>
+                                <span class="dot dot-group-0 <?= $imgIndex === 0 ? 'active-img' : '' ?>"
+                                    onclick="currentSlide(<?= $imgIndex + 1 ?>, 0)"></span>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                <?php else: ?>
+                    <div class="mySlides fade slide-group-0" style="display: block;">
+                        <img src="<?= htmlspecialchars($item["img_filepath"] ?: "../../assets/ITEMS/no-image.png") ?>" class="preview-image" alt="<?= htmlspecialchars($item["name"]) ?>">
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="claim-details">

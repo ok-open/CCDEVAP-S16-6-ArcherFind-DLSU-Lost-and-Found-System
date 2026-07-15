@@ -129,16 +129,87 @@ select.control-box {
     border: 2px solid var(--color-primary-dark);
 }
 
+.mySlides {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
 .claim-image .preview-image {
-    position: absolute;
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: var(--color-primary);
+    background-color: var(--color-secondary-glass);
+    font-weight: 700;
+    font-size: 18px;
+    transition: 0.2s ease;
+    user-select: none;
+    transform: translateY(-50%);
+}
+
+.prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.carousel-dots {
+    position: absolute;
+    left: 50%;
+    bottom: var(--space-small);
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.2s ease;
+}
+
+.active-img,
+.dot:hover {
+    background-color: var(--color-primary);
+}
+
+.fade {
+    animation: fade 0.4s ease;
+}
+
+@keyframes fade {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
 .claim-details {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: var(--space-medium);
 }
 
