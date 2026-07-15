@@ -305,9 +305,7 @@ async function applyDateFilter() {
 
     try {
 
-        const response = await fetch(
-            `../../models/dashboard_filter.php?from=${fromDateInput.value}&to=${toDateInput.value}`
-        );
+        const response = await fetch(`../../controllers/DashboardController.php?from=${fromDateInput.value}&to=${toDateInput.value}`);
 
         const data = await response.json();
 
@@ -434,9 +432,7 @@ async function loadDashboardSummary() {
 
     try {
 
-        const response = await fetch(
-            "../../models/dashboard_summary.php"
-        );
+        const response = await fetch("../../controllers/DashboardController.php");
 
         const data = await response.json();
 
