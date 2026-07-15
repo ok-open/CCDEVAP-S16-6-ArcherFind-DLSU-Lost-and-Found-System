@@ -1,3 +1,10 @@
+<?php
+    require_once "../../controllers/AdminAuth.php";
+    require_once "../../controllers/ReportListController.php";//Starts the controller
+    //some variables are red underline due to being undefined, this is because it is initialized in the controller
+    //it will still work
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,7 +42,7 @@
     <!------------------------ NAVIGATION BAR / HEADER ------------------------>
     <header>
         <!-- LOGO (links to ADMIN DASHBOARD) -->
-        <button class="archerfind-logo" onclick="window.location.href='../../pages/admin/admin_dashboard.html'">
+        <button class="archerfind-logo" onclick="window.location.href='../../pages/admin/admin_dashboard.php'">
             <h1>ArcherFind</h1>
             <img class="logo" src="../../assets/LOGOS/AF-ORIGINAL.png" alt="ArcherFind logo">
         </button>
@@ -43,12 +50,12 @@
         <!-- NAVBAR OPTIONS -->
         <nav class="navbar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.php" class="current-page">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.php">Claim Requests</a></li>
                 <!-- DROPDOWN MENU -->
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_report-list.php">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_surrender-list.php">Surrender Forms</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.php">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -59,11 +66,12 @@
                         </button>
                         <div class="user-profile">
                             <p class="user-greeting">Welcome back,<br>
-                                <span class="name_of_user">[superlongname]</span>!
-                                <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
+                                <span class="name_of_user">
+                                    <?= htmlspecialchars($_SESSION["first_name"]) ?>
+                                </span>
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/admin/admin_manage-account.html'">Manage
+                                onclick="location.href='../../pages/admin/admin_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night">
@@ -103,11 +111,11 @@
         <!-- SIDEBAR OPTIONS -->
         <nav class="sidebar">
             <ul class="nav-links">
-                <li><a href="../../pages/admin/admin_dashboard.html" class="current-page">Dashboard</a></li>
-                <li><a href="../../pages/admin/admin_claim-list.html">Claim Requests</a></li>
-                <li><a href="../../pages/admin/admin_report-list.html">Lost Reports</a></li>
-                <li><a href="../../pages/admin/admin_surrender-list.html">Surrender Forms</a></li>
-                <li><a href="../../pages/admin/admin_manage-users.html">Manage Users</a></li>
+                <li><a href="../../pages/admin/admin_dashboard.php" class="current-page">Dashboard</a></li>
+                <li><a href="../../pages/admin/admin_claim-list.php">Claim Requests</a></li>
+                <li><a href="../../pages/admin/admin_report-list.php">Lost Reports</a></li>
+                <li><a href="../../pages/admin/admin_surrender-list.php">Surrender Forms</a></li>
+                <li><a href="../../pages/admin/admin_manage-users.php">Manage Users</a></li>
                 <li>
                     <!-- user profile -->
                     <div class="user-button"><button type="button">
@@ -122,7 +130,7 @@
                                 <!-- TODO: TO BE ADJUSTED DEPENDING ON NAME OF USER-->
                             </p>
                             <button type="button" class="manage-account"
-                                onclick="location.href='../../pages/admin/admin_manage-account.html'">Manage
+                                onclick="location.href='../../pages/admin/admin_manage-account.php'">Manage
                                 Account</button>
                             <div class="user-profile-container">
                                 <div class="day-night">
