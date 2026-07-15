@@ -85,7 +85,12 @@
                                         </svg>Log Out
                                     </button>
                                 </div>
-                                <div class="view-dashboard"><button type="button">View Dashboard</button></div>
+                                <div class="view-dashboard">
+                                    <button type="button"
+                                        onclick="location.href='../../pages/admin/admin_dashboard.php'">
+                                        View Dashboard
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,7 +149,12 @@
                                         </svg>Log Out
                                     </button>
                                 </div>
-                                <div class="view-dashboard"><button type="button">View Dashboard</button></div>
+                                <div class="view-dashboard">
+                                    <button type="button"
+                                        onclick="location.href='../../pages/admin/admin_dashboard.php'">
+                                        View Dashboard
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
