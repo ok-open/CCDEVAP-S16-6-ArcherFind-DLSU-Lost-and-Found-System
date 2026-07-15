@@ -130,6 +130,100 @@ class User
 
         return $stmt->execute();
     }
+
+     /**
+     * Get all active users.
+     */
+public function getAllUsers()
+    {
+        $sql = "SELECT
+                    user_id,
+                    first_name,
+                    last_name,
+                    email,
+                    role
+                FROM users
+                WHERE deleted = '0'
+                ORDER BY last_name ASC";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    /**
+ * Create a user with a specified role.
+ */
+public function createManagedUser(
+    $firstName,
+    $lastName,
+    $email,
+    $passwordHash,
+    $role
+) {
+    $sql = "INSERT INTO users
+            (
+                first_name,
+                last_name,
+                email,
+                password_hash,
+                role
+            )
+            VALUES
+            (
+                :first_name,
+                :last_name,
+                :email,
+                :password_hash,
+                :role
+            )";
+
+    $stmt = $this->conn->prepare($sql);
+
+    return $stmt->execute([
+        ":first_name" => $firstName,
+        ":last_name" => $lastName,
+        ":email" => $email,
+        ":password_hash" => $passwordHash,
+        ":role" => $role
+    ]);
 }
 
-?>
+ /**
+ * Update a managed user's account information.
+ */
+public function updateManagedUser(
+    $userId,
+    $firstName,
+    $lastName,
+    $email,
+    $role
+) {
+    $sql = "UPDATE users
+            SET first_name = :first_name,
+                last_name = :last_name,
+                email = :email,
+                role = :role
+            WHERE user_id = :user_id
+            AND deleted = '0'";
+
+    $stmt = $this->conn->prepare($sql);
+
+    return $stmt->execute([
+        ":first_name" => $firstName,
+        ":last_name" => $lastName,
+        ":email" => $email,
+        ":role" => $role,
+        ":user_id" => $userId
+    ]);
+}   
+
+    /**
+     * Get the ID of the last inserted user.
+     */
+public function getLastInsertId()
+    {
+        return $this->conn->lastInsertId();
+    }
+}
