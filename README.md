@@ -1,7 +1,7 @@
 DATABASE SETUP
 
-There are 3 Main SQL files. ArcherFinddb.sql (CREATE TABLE statments), ArcherFinddata.sql (INSERT statements sample data), ArcherFindTriggers.sql (Database Triggers)
-1. Firstly run them in this order, ArcherFindDB.sql, ArcherFinddata.sql, then ArcherFindTriggers.sql on MySQLWorkbench
+There are 3 Main SQL files. ArcherFinddb.sql (CREATE TABLE statments), CCDEVAP-S16-6-ArcherFind-DLSU-Lost-and-Found-System.sql (INSERT statements sample data), ArcherFindTriggers.sql (Database Triggers)
+1. Firstly run them in this order, ArcherFindDB.sql, CCDEVAP-S16-6-ArcherFind-DLSU-Lost-and-Found-System.sql, then ArcherFindTriggers.sql on MySQLWorkbench
 2. Secondly, check db.php and ensure that the details match the details of your database connection
 3. Thirdly, ensure that your file contains the sample data images. These can be found in the assets folder
 
