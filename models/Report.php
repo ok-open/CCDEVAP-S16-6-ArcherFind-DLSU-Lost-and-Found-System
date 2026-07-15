@@ -8,6 +8,52 @@ class Reports{
         $this->conn = $database;
     }
 
+    private function normalizeImagePath($path)
+    {
+        if (empty($path)) {
+            return $path;
+        }
+
+        $trimmedPath = trim($path);
+
+        if (preg_match('#^(https?:)?//#', $trimmedPath) || strpos($trimmedPath, 'data:') === 0) {
+            return $trimmedPath;
+        }
+
+        if (strpos($trimmedPath, '../../') === 0) {
+            return $trimmedPath;
+        }
+
+        if (strpos($trimmedPath, 'assets/') === 0 || preg_match('~^(?:\.\/|\.\.\/)+assets~', $trimmedPath)) {
+            return '../../' . ltrim($trimmedPath, './');
+        }
+
+        return $trimmedPath;
+    }
+
+    private function normalizeImageValue($value)
+    {
+        if (empty($value)) {
+            return $value;
+        }
+
+        $paths = explode(',', $value);
+        $normalizedPaths = array_map(function ($path) {
+            return $this->normalizeImagePath($path);
+        }, $paths);
+
+        return implode(',', $normalizedPaths);
+    }
+
+    private function normalizeImageFields(array &$row)
+    {
+        foreach (['image_paths', 'found_item_image', 'proof_images'] as $field) {
+            if (isset($row[$field]) && $row[$field] !== null) {
+                $row[$field] = $this->normalizeImageValue($row[$field]);
+            }
+        }
+    }
+
     /**
      * Gets the most recently inserted item ID for a specific surrendered_by user
      */
@@ -97,7 +143,12 @@ class Reports{
 
     $stmt->execute();
 
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($rows as &$row) {
+        $this->normalizeImageFields($row);
+    }
+
+    return $rows;
 }
 
     /**
@@ -193,7 +244,11 @@ class Reports{
         }
 
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as &$row) {
+            $this->normalizeImageFields($row);
+        }
+        return $rows;
     }
 
 
@@ -261,7 +316,12 @@ class Reports{
 
         $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($rows as &$row) {
+            $this->normalizeImageFields($row);
+        }
+
+        return $rows;
     }
 
     public function getPossibleMatches($itemName) {

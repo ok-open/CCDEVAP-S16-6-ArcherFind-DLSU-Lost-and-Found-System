@@ -101,7 +101,7 @@ if ($result) {
 
         if (in_array($_FILES["image"]["type"], $allowedTypes)) {
 
-            $uploadDirectory = "../assets/IMG_SurrenderForm/";
+            $uploadDirectory = dirname(__DIR__) . '/assets/IMG_SurrenderForm/';
 
             if (!is_dir($uploadDirectory)) {
                 mkdir($uploadDirectory, 0777, true);
@@ -118,7 +118,7 @@ if ($result) {
 
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $destination)) {
 
-                $imagePath = "assets/IMG_SurrenderForm/" . $filename;
+                $imagePath = "../../assets/IMG_SurrenderForm/" . $filename;
 
                 $imageQuery = "
                     INSERT INTO reports_images
