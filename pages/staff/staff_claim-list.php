@@ -1,7 +1,8 @@
 <?php
     require_once "../../controllers/StaffAuth.php";
-    require_once "../../controllers/ReportListController.php";
-
+    require_once "../../controllers/ReportListController.php"; //Starts the controller
+    //some variables are red underline due to being undefined, this is because it is initialized in the controller
+    //it will still work
 ?>
 
 <!DOCTYPE html>
@@ -158,32 +159,9 @@
             </div>
         </nav>
     </header>
-    <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
-
-    <!-- <div class="MainHeader">
-        <h1>Verify Lost Items Reports</h1>
-        <div class="SearchContainer">
-            <input type="text" placeholder="Search">
-        </div>
-    </div>
-    <div id="MainContainer">
-        <div id="SortBy">
-            <h2>Sort by</h2>
-            <form>
-                <input type="radio" name="SortOptions" value="mostRecent">
-                <label for="mostRecent">Most Recent first</label><br>
-                <input type="radio" name="SortOptions" value="leastRecent">
-                <label for="mostRecent">Least Recent first</label><br>
-                <input type="radio" name="SortOptions" value="itemA-Z">
-                <label for="itemA-Z">Item name A-Z</label><br>
-                <input type="radio" name="SortOptions" value="itemZ-A">
-                <label for="itemZ-A">Item name Z-A</label><br>
-                <input class="SortBtn" type="submit" value="Submit">
-                <button class="SortBtn">Reset</button>
-            </form>
-        </div> -->
-
+   
     <!-- CONTROLS -->
+    <!-- GET function to retrieve the input from the staff-->
     <form method="GET" action="" class="controls-wrapper">
         <div class="title">
             <h2>Evaluate Claim Requests</h2>
@@ -205,6 +183,7 @@
             <!-- Filter Dropdown (maps to 'category' query param) -->
             <select name="category" class="control-box filter-dropdown" onchange="this.form.submit()">
                 <option value="">Filter: All</option>
+                <!-- The dropdown options are added dynamically with categories from the database -->
                 <?php foreach ($categories as $cat): ?>
                     <option value="<?= htmlspecialchars($cat['name']) ?>" <?= (($_GET['category'] ?? '') === $cat['name']) ? 'selected' : '' ?>> 
                         <?= htmlspecialchars($cat['name']) ?>
@@ -217,23 +196,26 @@
     <!-- REQUESTS -->
     <div class="requests-wrapper">
         <!-- REQUEST RECORD -->
-        <?php if (empty($claimRequests)): ?>
-    <div class="no-records" style="text-align: center; padding: 50px; color: #777;">
-        <h3>No Active Claim Requests Found</h3>
-    </div>
-<?php else: ?>
-    <?php foreach ($claimRequests as $recordIndex => $report): ?>
-        <?php 
-            // 1. Separate the comma-delimited image paths into an array
-            $imagePaths = !empty($report['found_item_image']) ? explode(',', $report['found_item_image']) : [];
-        ?>
+        <?php if (empty($claimRequests)): ?> <!-- 1. Check first if there are active claim requests -->
+        <div class="no-records" style="text-align: center; padding: 50px; color: #777;">
+            <h3>No Active Claim Requests Found</h3>
+        </div>
+        <!-- 2. If there is active, then begin loop to display each record-->
+        <!-- Each record is stored in $report -->
+        <?php else: ?> 
+            <?php foreach ($claimRequests as $recordIndex => $report): ?>
+                <?php 
+                    // 3. Separate the comma-delimited image paths into an array
+                    $imagePaths = !empty($report['found_item_image']) ? explode(',', $report['found_item_image']) : [];
+                ?>
         <div class="request-record">
             <!-------------------------------- REQUEST IMAGE ( CAROUSEL ) -------------------------------->
                 <div class="request-image">
                     <?php if (!empty($imagePaths)): ?>
                         <!-- Full-width images dynamically grouped by record index -->
                         <?php foreach ($imagePaths as $imgIndex => $path): ?>
-                            <!-- Note the class "slide-group-<?= $recordIndex ?>" -->
+                            <!-- Note the class "slide-group-$recordIndex" -->
+                            <!-- 4. Generate the div for each image slide -->
                             <div class="mySlides fade slide-group-<?= $recordIndex ?>" style="display: <?= $imgIndex === 0 ? 'block' : 'none'; ?>">
                                 <img class="ImgItem" src="<?= htmlspecialchars($path) ?>" alt="Item Image">
                             </div>
@@ -274,13 +256,14 @@
                         </a>
                         
                         <!-- RESOLVE BUTTON -->
-                        <button type="button" class="request-button accept-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
+                        <!-- Toast messages show for short time only due to refresh of page -->
+                        <button type="button" class="request-button accept-btn" onclick="onAcceptRequest(), submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
                             Mark as Resolved
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
                         </button><br>
                         
                         <!-- CLOSE BUTTON -->
-                        <button type="button" class="request-button reject-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'close')">
+                        <button type="button" class="request-button reject-btn" onclick="onRejectRequest(), submitStatusAction(<?= $report['report_id'] ?>, 'close')">
                             Close Report
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
                         </button><br>
@@ -301,7 +284,7 @@
                         <!-- TIME LOST -->
                         <div class="detail-box">
                             <label>Estimated Time Lost</label>
-                            <!-- Format standard military time (HH:MM:SS) to (HH:MM AM/PM) if you wish, or keep raw value -->
+                            <!-- Formats time to Hour, Minute, PM/AM -->
                             <input type="time" value="<?= htmlspecialchars(date('H:i', strtotime($report['time_lost']))) ?>" readonly>
                         </div>
 
@@ -341,23 +324,23 @@
 
         
     <div id="toast"></div>
-
-    <!-- This groups information for 1 record. Once db is applied, repeat this through loop -->
+    <!-- This groups information for 1 record. -->
     </div>
 
     <?php
     // 1. Locate the selected claim request from your main array
     $selectedClaim = null;
+    //selectedReportID gets its value when the user clicks "Information and Proof", the selected_report goes to the controller
     if (!empty($selectedReportId)) {
-        foreach ($claimRequests as $req) { // assuming $claimRequests holds the records in this controller
+        foreach ($claimRequests as $req) { //Loop through the retrieved records, and get the record selected based on the ID
             if ($req['report_id'] == $selectedReportId) {
                 $selectedClaim = $req;
                 break;
             }
         }
     }
+    // selectedClaim now contains the info of the chosen record
     ?>
-
     <!-- Only show/display the panel if a claim has been selected -->
     <div id="SidePanel_Iconsee" class="<?= !empty($selectedClaim) ? 'open' : '' ?>" style="<?= empty($selectedClaim) ? 'display: none;' : 'display: block;' ?>">
         
@@ -366,9 +349,7 @@
         class="close" id="closePanelBtn" style="text-decoration: none; text-align: center;">close</a>
 
         <?php if ($selectedClaim): ?>
-            <!-- ==========================================
-                SECTION A: FOUND ITEM DETAILS (FROM DATABASE)
-                ========================================== -->
+            <!-- SECTION A: FOUND ITEM DETAILS (FROM DATABASE) -->
             <h3>Information retrieved from database</h3>
 
             <div class="LostDetails">
@@ -386,9 +367,7 @@
 
             <br>
             
-            <!-- ==========================================
-                SECTION B: PROOF OF OWNERSHIP
-                ========================================== -->
+            <!--  SECTION B: PROOF OF OWNERSHIP -->
             <h3>Proof of Ownership</h3>
             
             <!-- Render Claimant's Uploaded Proof Images -->
@@ -420,9 +399,8 @@
         <?php endif; ?>
     </div>
 
-    <!-- =========================================================================
-     HIDDEN FORM FOR STATUS ACTIONS (Place this anywhere near bottom of file)
-     ========================================================================= -->
+    <!-- HIDDEN FORM FOR STATUS ACTIONS -->
+    <!-- this form submits the report ID, and wether we are "Resolve" or "Close" the report to the Controller -->
     <form id="statusActionForm" method="POST" style="display: none;">
         <input type="hidden" name="report_id" id="formReportId">
         <input type="hidden" name="action" id="formAction">
