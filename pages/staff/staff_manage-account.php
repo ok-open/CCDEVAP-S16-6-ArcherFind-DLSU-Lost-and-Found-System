@@ -157,12 +157,12 @@
     <!-------------------- END OF NAVIGATION BAR / HEADER --------------------->
 
     <!-- ACCOUNT PAGE -->
-        <div class="account-wrapper">
-            <section class="account-layout">
+    <div class="account-wrapper">
+        <section class="account-layout">
 
-                <!-- FORM -->
-                <div class="account-form">
-
+            <!-- FORM -->
+            <div class="account-form">
+                <form id="passwordForm" action="../../controllers/UpdatePasswordController.php" method="POST">
                     <h2>Manage Account</h2>
 
                     <!-- FIRST & LAST NAME -->
@@ -170,53 +170,62 @@
                         <!-- FIRST NAME -->
                         <div class="form-group">
                             <label>First Name <span class="tag">READ ONLY</span></label>
-                            <input type="text" value="John" readonly>
+                            <input type="text" value="<?= htmlspecialchars($_SESSION['first_name']) ?>" readonly>
                         </div>
                         <!-- LAST NAME -->
                         <div class="form-group">
                             <label>Last Name <span class="tag">READ ONLY</span></label>
-                            <input type="text" value="Doe" readonly>
+                            <input type="text" value="<?= htmlspecialchars($_SESSION['last_name']) ?>" readonly>
                         </div>
                     </div>
 
                     <!-- ID NUMBER & EMAIL -->
-                    <div class="row two-cols">
-                        <!-- FIRST NAME -->
-                        <div class="form-group">
-                            <label>Email<span class="tag">READ ONLY</span></label>
-                            <input type="text" value="john_doe@dlsu.edu.ph" readonly>
-                        </div>
-                        <!-- LAST NAME -->
-                        <div class="form-group">
-                            <label>ID Number<span class="tag">READ ONLY</span></label>
-                            <input type="text" value="12345678" readonly>
-                        </div>
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label>Email<span class="tag">READ ONLY</span></label>
+                        <input type="text" value="<?= htmlspecialchars($_SESSION['email']) ?>" readonly>
                     </div>
 
                     <!-- CURRENT PASSWORD  -->
                     <div class="form-group full">
                         <label for="pass">Current Password:</label>
                         <div class="password-input-wrapper">
-                            <input type="password" id="current-pass" name="pass" maxlength="20">
+                            <input type="password" id="current-pass" name="current_password" maxlength="20" required>
                             <button type="button" class="see-pass" aria-label="Toggle password visibility">
                                 <!-- VISIBILITY OFF (eye closed) - shown when password is visible -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"> <path d="m789.13-53.13-163.7-161.94q-34.52 11.24-70.5 16.86-35.97 5.62-74.93 5.62-152.67 0-272.71-84.93Q87.26-362.46 32.59-500q20.76-52.52 53-98.86 32.24-46.34 72.76-83.29L49.3-792.72l58.63-58.63 739.59 739.83-58.39 58.39ZM480-320q9.8 0 18.35-.88 8.54-.88 18.35-3.64L304.04-536.7q-2.52 9.81-3.28 18.47-.76 8.66-.76 18.23 0 75 52.5 127.5T480-320Zm299.65 20.63L646.2-432.07q6.52-15.8 10.16-32.94Q660-482.15 660-500q0-75-52.5-127.5T480-680q-18.33 0-34.99 3.64-16.66 3.64-32.94 10.93L304.09-773.41q41-17 84.95-25.5 43.96-8.5 90.96-8.5 152.43 0 272.47 84.69Q872.5-638.02 927.41-500q-23 59.48-60.98 110.93-37.97 51.46-86.78 89.7ZM577.67-500.59l-98-98q22.98-4.04 42.06 3.55 19.07 7.58 32.97 22.47 13.89 14.9 20.07 34.09 6.19 19.2 2.9 37.89Z" /> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px">
+                                    <path
+                                        d="m789.13-53.13-163.7-161.94q-34.52 11.24-70.5 16.86-35.97 5.62-74.93 5.62-152.67 0-272.71-84.93Q87.26-362.46 32.59-500q20.76-52.52 53-98.86 32.24-46.34 72.76-83.29L49.3-792.72l58.63-58.63 739.59 739.83-58.39 58.39ZM480-320q9.8 0 18.35-.88 8.54-.88 18.35-3.64L304.04-536.7q-2.52 9.81-3.28 18.47-.76 8.66-.76 18.23 0 75 52.5 127.5T480-320Zm299.65 20.63L646.2-432.07q6.52-15.8 10.16-32.94Q660-482.15 660-500q0-75-52.5-127.5T480-680q-18.33 0-34.99 3.64-16.66 3.64-32.94 10.93L304.09-773.41q41-17 84.95-25.5 43.96-8.5 90.96-8.5 152.43 0 272.47 84.69Q872.5-638.02 927.41-500q-23 59.48-60.98 110.93-37.97 51.46-86.78 89.7ZM577.67-500.59l-98-98q22.98-4.04 42.06 3.55 19.07 7.58 32.97 22.47 13.89 14.9 20.07 34.09 6.19 19.2 2.9 37.89Z" />
+                                </svg>
                                 <!-- VISIBILITY ON (eye open) - shown when password is hidden -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"> <path d="M480-320q75 0 127.5-52.5T660-500t-52.5-127.5T480-680t-127.5 52.5T300-500t52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500t31.5-76.5T480-608t76.5 31.5T588-500t-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T32-500q60-127 180-208.5T480-790t268 81.5T928-500q-60 127-180 208.5T480-200Z" /> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px">
+                                    <path
+                                        d="M480-320q75 0 127.5-52.5T660-500t-52.5-127.5T480-680t-127.5 52.5T300-500t52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500t31.5-76.5T480-608t76.5 31.5T588-500t-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T32-500q60-127 180-208.5T480-790t268 81.5T928-500q-60 127-180 208.5T480-200Z" />
+                                </svg>
                             </button>
                         </div>
-                    </div>  
+                    </div>
 
                     <!-- NEW PASSWORD  -->
                     <div class="form-group full">
                         <label for="pass">New Password:</label>
                         <div class="password-input-wrapper">
-                            <input type="password" id="new-pass" name="pass" maxlength="20">
-                            <button type="button" class="see-pass" aria-label="Toggle password visibility">
+                            <input type="password" id="new-pass" name="new_password" maxlength="20" required> <button
+                                type="button" class="see-pass" aria-label="Toggle password visibility">
                                 <!-- VISIBILITY OFF (eye closed) - shown when password is visible -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"> <path d="m789.13-53.13-163.7-161.94q-34.52 11.24-70.5 16.86-35.97 5.62-74.93 5.62-152.67 0-272.71-84.93Q87.26-362.46 32.59-500q20.76-52.52 53-98.86 32.24-46.34 72.76-83.29L49.3-792.72l58.63-58.63 739.59 739.83-58.39 58.39ZM480-320q9.8 0 18.35-.88 8.54-.88 18.35-3.64L304.04-536.7q-2.52 9.81-3.28 18.47-.76 8.66-.76 18.23 0 75 52.5 127.5T480-320Zm299.65 20.63L646.2-432.07q6.52-15.8 10.16-32.94Q660-482.15 660-500q0-75-52.5-127.5T480-680q-18.33 0-34.99 3.64-16.66 3.64-32.94 10.93L304.09-773.41q41-17 84.95-25.5 43.96-8.5 90.96-8.5 152.43 0 272.47 84.69Q872.5-638.02 927.41-500q-23 59.48-60.98 110.93-37.97 51.46-86.78 89.7ZM577.67-500.59l-98-98q22.98-4.04 42.06 3.55 19.07 7.58 32.97 22.47 13.89 14.9 20.07 34.09 6.19 19.2 2.9 37.89Z" /> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px">
+                                    <path
+                                        d="m789.13-53.13-163.7-161.94q-34.52 11.24-70.5 16.86-35.97 5.62-74.93 5.62-152.67 0-272.71-84.93Q87.26-362.46 32.59-500q20.76-52.52 53-98.86 32.24-46.34 72.76-83.29L49.3-792.72l58.63-58.63 739.59 739.83-58.39 58.39ZM480-320q9.8 0 18.35-.88 8.54-.88 18.35-3.64L304.04-536.7q-2.52 9.81-3.28 18.47-.76 8.66-.76 18.23 0 75 52.5 127.5T480-320Zm299.65 20.63L646.2-432.07q6.52-15.8 10.16-32.94Q660-482.15 660-500q0-75-52.5-127.5T480-680q-18.33 0-34.99 3.64-16.66 3.64-32.94 10.93L304.09-773.41q41-17 84.95-25.5 43.96-8.5 90.96-8.5 152.43 0 272.47 84.69Q872.5-638.02 927.41-500q-23 59.48-60.98 110.93-37.97 51.46-86.78 89.7ZM577.67-500.59l-98-98q22.98-4.04 42.06 3.55 19.07 7.58 32.97 22.47 13.89 14.9 20.07 34.09 6.19 19.2 2.9 37.89Z" />
+                                </svg>
                                 <!-- VISIBILITY ON (eye open) - shown when password is hidden -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"> <path d="M480-320q75 0 127.5-52.5T660-500t-52.5-127.5T480-680t-127.5 52.5T300-500t52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500t31.5-76.5T480-608t76.5 31.5T588-500t-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T32-500q60-127 180-208.5T480-790t268 81.5T928-500q-60 127-180 208.5T480-200Z" /> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px">
+                                    <path
+                                        d="M480-320q75 0 127.5-52.5T660-500t-52.5-127.5T480-680t-127.5 52.5T300-500t52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500t31.5-76.5T480-608t76.5 31.5T588-500t-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T32-500q60-127 180-208.5T480-790t268 81.5T928-500q-60 127-180 208.5T480-200Z" />
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -225,32 +234,41 @@
                     <div class="form-group full">
                         <label for="pass">Confirm Password:</label>
                         <div class="password-input-wrapper">
-                            <input type="password" id="confirm-pass" name="pass" maxlength="20">
+                            <input type="password" id="confirm-pass" name="confirm_password" maxlength="20" required>
                             <button type="button" class="see-pass" aria-label="Toggle password visibility">
                                 <!-- VISIBILITY OFF (eye closed) - shown when password is visible -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"> <path d="m789.13-53.13-163.7-161.94q-34.52 11.24-70.5 16.86-35.97 5.62-74.93 5.62-152.67 0-272.71-84.93Q87.26-362.46 32.59-500q20.76-52.52 53-98.86 32.24-46.34 72.76-83.29L49.3-792.72l58.63-58.63 739.59 739.83-58.39 58.39ZM480-320q9.8 0 18.35-.88 8.54-.88 18.35-3.64L304.04-536.7q-2.52 9.81-3.28 18.47-.76 8.66-.76 18.23 0 75 52.5 127.5T480-320Zm299.65 20.63L646.2-432.07q6.52-15.8 10.16-32.94Q660-482.15 660-500q0-75-52.5-127.5T480-680q-18.33 0-34.99 3.64-16.66 3.64-32.94 10.93L304.09-773.41q41-17 84.95-25.5 43.96-8.5 90.96-8.5 152.43 0 272.47 84.69Q872.5-638.02 927.41-500q-23 59.48-60.98 110.93-37.97 51.46-86.78 89.7ZM577.67-500.59l-98-98q22.98-4.04 42.06 3.55 19.07 7.58 32.97 22.47 13.89 14.9 20.07 34.09 6.19 19.2 2.9 37.89Z" /> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px">
+                                    <path
+                                        d="m789.13-53.13-163.7-161.94q-34.52 11.24-70.5 16.86-35.97 5.62-74.93 5.62-152.67 0-272.71-84.93Q87.26-362.46 32.59-500q20.76-52.52 53-98.86 32.24-46.34 72.76-83.29L49.3-792.72l58.63-58.63 739.59 739.83-58.39 58.39ZM480-320q9.8 0 18.35-.88 8.54-.88 18.35-3.64L304.04-536.7q-2.52 9.81-3.28 18.47-.76 8.66-.76 18.23 0 75 52.5 127.5T480-320Zm299.65 20.63L646.2-432.07q6.52-15.8 10.16-32.94Q660-482.15 660-500q0-75-52.5-127.5T480-680q-18.33 0-34.99 3.64-16.66 3.64-32.94 10.93L304.09-773.41q41-17 84.95-25.5 43.96-8.5 90.96-8.5 152.43 0 272.47 84.69Q872.5-638.02 927.41-500q-23 59.48-60.98 110.93-37.97 51.46-86.78 89.7ZM577.67-500.59l-98-98q22.98-4.04 42.06 3.55 19.07 7.58 32.97 22.47 13.89 14.9 20.07 34.09 6.19 19.2 2.9 37.89Z" />
+                                </svg>
                                 <!-- VISIBILITY ON (eye open) - shown when password is hidden -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"> <path d="M480-320q75 0 127.5-52.5T660-500t-52.5-127.5T480-680t-127.5 52.5T300-500t52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500t31.5-76.5T480-608t76.5 31.5T588-500t-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T32-500q60-127 180-208.5T480-790t268 81.5T928-500q-60 127-180 208.5T480-200Z" /> </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960"
+                                    width="24px">
+                                    <path
+                                        d="M480-320q75 0 127.5-52.5T660-500t-52.5-127.5T480-680t-127.5 52.5T300-500t52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500t31.5-76.5T480-608t76.5 31.5T588-500t-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T32-500q60-127 180-208.5T480-790t268 81.5T928-500q-60 127-180 208.5T480-200Z" />
+                                </svg>
                             </button>
                         </div>
                     </div>
+            </div>
 
-                    
+            <!-- BUTTONS -->
+            <div class="button-stack">
+                <button id="saveBtn" class="save-btn" type="submit">
+                    Confirm New Password
+                </button>
+                </form>
 
-                    <!-- BUTTONS -->
-                    <div class="button-stack">
-                        <button id="saveBtn" class="save-btn">
-                            Confirm New Password
-                        </button>
-
-                        <button id="disableBtn" class="disable-btn">
-                            Disable Account
-                        </button>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <div id="toast"></div>
+                <form id="disableAccountForm" action="../../controllers/DisableAccountController.php" method="POST">
+                    <button id="disableBtn" class="disable-btn" type="button">
+                        Disable Account
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div id="toast"></div>
 
 </body>
 </html>
