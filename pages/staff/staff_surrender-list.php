@@ -249,13 +249,13 @@
                     <div class="request-buttons-panel">                        
                         <!-- RESOLVE BUTTON -->
                         <!-- Toast messages show for short time only due to refresh of page -->
-                        <button type="button" class="request-button accept-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
+                        <button type="button" class="request-button accept-btn" onclick="onAcceptSurrender(), submitStatusAction(<?= $report['report_id'] ?>, 'resolve')">
                             Mark as Resolved
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M423.28-291.22 708.87-576.8l-62.46-62.7-223.13 223.13L312.15-527.5l-62.45 62.7 173.58 173.58ZM480-71.87q-84.91 0-159.34-32.12-74.44-32.12-129.5-87.17-55.05-55.06-87.17-129.5Q71.87-395.09 71.87-480t32.12-159.34q32.12-74.44 87.17-129.5 55.06-55.05 129.5-87.17 74.43-32.12 159.34-32.12t159.34 32.12q74.44 32.12 129.5 87.17 55.05 55.06 87.17 129.5 32.12 74.43 32.12 159.34t-32.12 159.34q-32.12 74.44-87.17 129.5-55.06 55.05-129.5 87.17Q564.91-71.87 480-71.87Z"/></svg>
                         </button><br>
                         
                         <!-- CLOSE BUTTON -->
-                        <button type="button" class="request-button reject-btn" onclick="submitStatusAction(<?= $report['report_id'] ?>, 'close')">
+                        <button type="button" class="request-button reject-btn" onclick="onRejectSurrender(), submitStatusAction(<?= $report['report_id'] ?>, 'close')">
                             Close Report
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M376.72-296.65 480-399.93l103.28 103.28 60.07-60.07L540.07-460l103.28-103.28-60.07-60.07L480-520.07 376.72-623.35l-60.07 60.07L419.93-460 316.65-356.72l60.07 60.07Zm-99.35 184.78q-37.78 0-64.39-26.61t-26.61-64.39v-514.5h-45.5v-91H354.5v-45.5h250.52v45.5h214.11v91h-45.5v514.5q0 37.78-26.61 64.39t-64.39 26.61H277.37Z"/></svg>
                         </button><br>
